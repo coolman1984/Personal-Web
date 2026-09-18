@@ -1,5 +1,5 @@
 /** حقول الإدخال. المواصفات: docs/DESIGN.md §5.7 */
-import type { ComponentProps, ReactNode } from "react";
+import { cloneElement, isValidElement, type ComponentProps, type ReactElement, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const fieldBase = cn(
@@ -29,6 +29,20 @@ export function FieldWrap({
   children,
   className,
 }: WrapProps) {
+  const errorId = `${htmlFor}-error`;
+  const hintId = `${htmlFor}-hint`;
+
+  // بنحقن `aria-invalid` و`aria-describedby` على عنصر الإدخال تلقائيًا،
+  // عشان رسالة الخطأ (خصوصًا اللي راجعة من السيرفر) توصل لقارئ الشاشة —
+  // من غير ما نطلب من كل فورم يكررها يدويًا مع كل حقل.
+  const field =
+    isValidElement(children) && (error || hint)
+      ? cloneElement(children as ReactElement<ComponentProps<"input">>, {
+          "aria-invalid": error ? true : undefined,
+          "aria-describedby": error ? errorId : hint ? hintId : undefined,
+        })
+      : children;
+
   return (
     <div className={cn("flex flex-col gap-2", className)}>
       <label htmlFor={htmlFor} className="text-sm font-semibold text-fg">
@@ -39,13 +53,19 @@ export function FieldWrap({
           </span>
         )}
       </label>
-      {children}
+      {field}
       {error ? (
-        <p className="text-[13px] font-medium text-[oklch(0.55_0.2_25)] dark:text-[oklch(0.75_0.19_25)]">
+        <p
+          id={errorId}
+          role="alert"
+          className="text-[13px] font-medium text-[oklch(0.55_0.2_25)] dark:text-[oklch(0.75_0.19_25)]"
+        >
           {error}
         </p>
       ) : hint ? (
-        <p className="text-[13px] text-fg-subtle">{hint}</p>
+        <p id={hintId} className="text-[13px] text-fg-subtle">
+          {hint}
+        </p>
       ) : null}
     </div>
   );

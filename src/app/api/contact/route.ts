@@ -42,7 +42,7 @@ export async function POST(req: Request) {
 
     if (resendKey && to) {
       // ── إرسال فعلي عبر Resend ──────────────────────────────
-      await fetch("https://api.resend.com/emails", {
+      const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${resendKey}`,
@@ -63,6 +63,14 @@ export async function POST(req: Request) {
           ].join("\n"),
         }),
       });
+
+      // ⚠️ لازم نتأكّد إن Resend فعلًا قبل الرسالة — لو رفضها (مفتاح غلط،
+      // حد يومي...) وإحنا رجّعنا "وصلت" للزائر، الرسالة بتضيع من غير ما
+      // حد يحس. لو فشل هنا، بيقع في catch تحت ويرجّع رسالة واضحة.
+      if (!res.ok) {
+        const detail = await res.text().catch(() => "");
+        throw new Error(`Resend رفض الرسالة (${res.status}): ${detail}`);
+      }
     } else {
       // مفيش مفتاح — نسجّل على السيرفر عشان ما نضيّعش الرسالة
       console.info("[contact] رسالة جديدة (الإيميل مش متظبّط):", {

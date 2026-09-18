@@ -22,6 +22,7 @@ import { methodPillars, comparison } from "@/content/method";
 import { stats } from "@/content/stats";
 import { timeline } from "@/content/timeline";
 import { quizQuestions, quizResults, maxQuizScore } from "@/content/quiz";
+import { readingTime } from "@/lib/utils";
 import type {
   Article,
   ComparisonRow,
@@ -139,14 +140,21 @@ export async function getProjectCategories(): Promise<string[]> {
 // المقالات
 // ═══════════════════════════════════════════════════════════
 
+// المصدر الخام مفيهوش `readingMinutes` — بنحسبها هنا من طول المقال
+// الفعلي، عشان ترجع صح تلقائيًا لو حد غيّر المحتوى وما حدّثش رقم يدوي.
+const articlesWithReadingTime: Article[] = articles.map((a) => ({
+  ...a,
+  readingMinutes: readingTime(a.body),
+}));
+
 export async function getAllArticles(): Promise<Article[]> {
-  return [...articles].sort(
+  return [...articlesWithReadingTime].sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
   );
 }
 
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
-  return articles.find((a) => a.slug === slug) ?? null;
+  return articlesWithReadingTime.find((a) => a.slug === slug) ?? null;
 }
 
 export async function getFeaturedArticles(limit = 3): Promise<Article[]> {

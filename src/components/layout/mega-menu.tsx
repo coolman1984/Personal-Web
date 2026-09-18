@@ -24,7 +24,7 @@ export function MegaMenu({ open, levels, coursesByLevel, onNavigate }: MegaMenuP
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute top-full start-1/2 z-50 w-[min(42rem,calc(100vw-3rem))] -translate-x-1/2 pt-3"
+          className="absolute top-full start-1/2 z-50 w-[min(42rem,calc(100vw-3rem))] ltr:-translate-x-1/2 rtl:translate-x-1/2 pt-3"
         >
           <div className="overflow-hidden rounded-[20px] border border-line glass p-6 shadow-lift">
             <div className="grid gap-5 md:grid-cols-3">

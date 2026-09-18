@@ -22,7 +22,7 @@ export function Aurora({ className }: { className?: string }) {
         }}
       />
       <div
-        className="absolute bottom-[-10%] left-1/2 size-[420px] -translate-x-1/2 rounded-full opacity-12 blur-[130px] dark:opacity-25"
+        className="absolute inset-x-0 bottom-[-10%] mx-auto size-[420px] rounded-full opacity-12 blur-[130px] dark:opacity-25"
         style={{
           background: "radial-gradient(circle, oklch(0.76 0.14 80), transparent 70%)",
           animation: "aurora 22s ease-in-out 14s infinite alternate",

@@ -8,6 +8,7 @@ import { useHotkey } from "@/hooks/use-hotkey";
 import { site } from "@/content/site";
 import { Navbar } from "./navbar";
 import { CommandPalette } from "./command-palette";
+import { ExitIntentModal } from "./exit-intent-modal";
 import type { Course, Level, SearchItem } from "@/types";
 
 interface SiteShellProps {
@@ -31,6 +32,7 @@ export function SiteShell({ levels, coursesByLevel, searchIndex, children }: Sit
       {site.features.commandPalette && (
         <CommandPalette open={searchOpen} onClose={closeSearch} items={searchIndex} />
       )}
+      {site.features.exitIntent && site.features.newsletter && <ExitIntentModal />}
     </>
   );
 }

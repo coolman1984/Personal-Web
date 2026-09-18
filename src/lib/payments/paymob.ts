@@ -5,7 +5,8 @@
  *   1. سجّل حساب تاجر على paymob.com
  *   2. خُد PAYMOB_API_KEY و PAYMOB_INTEGRATION_ID و PAYMOB_HMAC_SECRET
  *   3. كمّل الدوال التلاتة تحت (التسلسل موضّح في التعليقات)
- *   4. خلّي site.features.payments = true
+ *   4. غيّر `enabled` تحت من `false` لـ `Boolean(apiKey && integrationId)`
+ *   5. خلّي site.features.payments = true
  */
 import { createHmac, timingSafeEqual } from "node:crypto";
 import type { CheckoutInput, CheckoutResult, PaymentEvent, PaymentProvider } from "./types";
@@ -17,7 +18,12 @@ const hmacSecret = process.env.PAYMOB_HMAC_SECRET;
 export const paymobProvider: PaymentProvider = {
   id: "paymob",
   label: "فيزا · فودافون كاش (Paymob)",
-  enabled: Boolean(apiKey && integrationId),
+  // ⚠️ متسبّهاش `Boolean(apiKey && integrationId)` — `createCheckout` تحت
+  // لسه استب فاضي. لو خلّيتها كده وحد حطّ المفاتيح وفعّل
+  // `site.features.payments`، كل محاولة حجز هترجع فشل (502) من غير أي
+  // تحذير واضح، وده بيقفل قناة البيع كلها بصمت. خلّيها `false` لحد ما
+  // تخلّص الخطوة ٣ فعلًا.
+  enabled: false,
 
   async createCheckout(input: CheckoutInput): Promise<CheckoutResult> {
     if (!apiKey || !integrationId) {

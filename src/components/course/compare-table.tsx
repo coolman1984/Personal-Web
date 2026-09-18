@@ -4,16 +4,25 @@ import { accentFor } from "@/lib/tokens";
 import { cn, formatNumber } from "@/lib/utils";
 import { getIcon } from "@/lib/icon";
 import { Button } from "@/components/ui/button";
+import type { Level } from "@/types";
 
 export async function CompareTable() {
   const [levels, counts] = await Promise.all([getAllLevels(), getCourseCountByLevel()]);
 
-  const rows: { label: string; get: (i: number) => string }[] = [
-    { label: "الجملة", get: (i) => levels[i]!.tagline },
-    { label: "عدد الكورسات", get: (i) => `${formatNumber(counts[levels[i]!.id] ?? 0)} كورسات` },
-    { label: "محتاج برمجة؟", get: (i) => ["لأ خالص", "أساسيات Python", "Python بمستوى جيد"][i]! },
-    { label: "الأنسب لـ", get: (i) => levels[i]!.audience[0]! },
-    { label: "أهم مخرج", get: (i) => levels[i]!.outcomes[0]! },
+  // ⚠️ كل خلية بتتحسب من بيانات المستوى نفسه (`content/levels.ts`) بمعرّفه
+  // (`level.id`)، مش برقم موضعه في المصفوفة — لو اتضاف مستوى رابع أو
+  // اتغيّر ترتيبهم، الجدول بيفضل صح من غير ما نلمس الملف ده.
+  const rows: { label: string; get: (level: Level) => string }[] = [
+    { label: "الجملة", get: (level) => level.tagline },
+    {
+      label: "عدد الكورسات",
+      get: (level) => `${formatNumber(counts[level.id] ?? 0)} كورسات`,
+    },
+    // أول عنصر في `prerequisites` بيلخّص المطلوب قبل ما تبدأ — نفس المعنى
+    // المقصود هنا بالظبط.
+    { label: "محتاج برمجة؟", get: (level) => level.prerequisites[0] ?? "—" },
+    { label: "الأنسب لـ", get: (level) => level.audience[0] ?? "—" },
+    { label: "أهم مخرج", get: (level) => level.outcomes[0] ?? "—" },
   ];
 
   return (
@@ -57,12 +66,12 @@ export async function CompareTable() {
               >
                 {row.label}
               </th>
-              {levels.map((level, i) => (
+              {levels.map((level) => (
                 <td
                   key={level.id}
                   className="border-t border-line p-4 align-top text-[14px] leading-snug text-fg-muted"
                 >
-                  {row.get(i)}
+                  {row.get(level)}
                 </td>
               ))}
             </tr>
