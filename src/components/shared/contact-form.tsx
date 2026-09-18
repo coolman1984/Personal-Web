@@ -5,6 +5,7 @@ import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FieldWrap, Input, Select, Textarea } from "@/components/ui/field";
 import { useToast } from "@/components/ui/toast";
+import { track } from "@/lib/analytics";
 import type { ApiResponse } from "@/types";
 
 const subjects = [
@@ -38,6 +39,7 @@ export function ContactForm({ defaultSubject }: { defaultSubject?: string }) {
       const data = (await res.json()) as ApiResponse;
 
       if (data.ok) {
+        track("submit_contact");
         push(data.message, "success");
         setSent(true);
         e.currentTarget.reset();

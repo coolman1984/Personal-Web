@@ -22,7 +22,11 @@ function TestimonialCard({ t }: { t: Testimonial }) {
         <div className="min-w-0 flex-1">
           <p className="truncate text-sm font-extrabold text-fg">{t.name}</p>
           <p className="truncate text-[12px] text-fg-subtle">
-            {t.role} · {levelShortLabel[t.level]}
+            {t.role}
+            <span aria-hidden className="mx-1.5 opacity-60">
+              ·
+            </span>
+            {levelShortLabel[t.level]}
           </p>
         </div>
         <Rating value={t.rating} />

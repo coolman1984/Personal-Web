@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowLeft, ArrowRight, RotateCcw } from "lucide-react";
 import { resolveQuizResult } from "@/lib/queries";
+import { track } from "@/lib/analytics";
 import { accentFor, levelShortLabel } from "@/lib/tokens";
 import { cn, formatNumber } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -33,6 +34,7 @@ export function QuizRunner({
   }, [result, courses]);
 
   function choose(value: number) {
+    if (step === 0) track("start_quiz");
     const next = [...answers];
     next[step] = value;
     setAnswers(next);
@@ -40,6 +42,8 @@ export function QuizRunner({
       setStep(step + 1);
     } else {
       setDone(true);
+      const total_ = next.reduce((s, v) => s + v, 0);
+      track("finish_quiz", { score: total_, level: resolveQuizResult(total_).level });
     }
   }
 

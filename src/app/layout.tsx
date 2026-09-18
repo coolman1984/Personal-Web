@@ -19,6 +19,8 @@ import { BackToTop } from "@/components/layout/back-to-top";
 import { WhatsAppFab } from "@/components/layout/whatsapp-fab";
 import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 import { JsonLd } from "@/components/shared/json-ld";
+import { ExitIntentModal } from "@/components/shared/exit-intent-modal";
+import { AnalyticsScripts } from "@/components/layout/analytics-scripts";
 
 const display = Tajawal({
   subsets: ["arabic", "latin"],
@@ -89,9 +91,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               <BackToTop />
               <WhatsAppFab />
               <MobileCtaBar />
+              <ExitIntentModal />
             </SiteShell>
           </ToastProvider>
         </ThemeProvider>
+        <AnalyticsScripts />
       </body>
     </html>
   );

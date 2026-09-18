@@ -16,6 +16,7 @@ import { Accordion } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/shared/page-hero";
 import { JsonLd } from "@/components/shared/json-ld";
+import { FactRow } from "@/components/shared/fact-row";
 import { ShareButtons } from "@/components/shared/share-buttons";
 import { Reveal } from "@/components/motion/reveal";
 import { LevelBadge } from "@/components/course/level-badge";
@@ -161,13 +162,21 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
               <section>
                 <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
                   <h2 className="text-2xl font-extrabold text-fg">المنهج بالتفصيل</h2>
-                  <p className="text-[13px] text-fg-subtle">
-                    <span className="ltr-nums">{formatNumber(course.curriculum.length)}</span> وحدات
-                    {" · "}
-                    <span className="ltr-nums">{formatNumber(totalLessons)}</span> درس
-                    {" · "}
-                    <span className="ltr-nums">{formatNumber(totalHours)}</span> ساعة
-                  </p>
+                  <FactRow
+                    className="text-[13px] text-fg-subtle"
+                    items={[
+                      <>
+                        <span className="ltr-nums">{formatNumber(course.curriculum.length)}</span>{" "}
+                        وحدات
+                      </>,
+                      <>
+                        <span className="ltr-nums">{formatNumber(totalLessons)}</span> درس
+                      </>,
+                      <>
+                        <span className="ltr-nums">{formatNumber(totalHours)}</span> ساعة
+                      </>,
+                    ]}
+                  />
                 </div>
                 <Curriculum modules={course.curriculum} />
               </section>

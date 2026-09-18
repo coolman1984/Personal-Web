@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/field";
 import { useToast } from "@/components/ui/toast";
+import { track } from "@/lib/analytics";
 
 export function NewsletterForm({ className }: { className?: string }) {
   const [email, setEmail] = useState("");
@@ -23,7 +24,10 @@ export function NewsletterForm({ className }: { className?: string }) {
       });
       const data = (await res.json()) as { ok: boolean; message: string };
       push(data.message, data.ok ? "success" : "error");
-      if (data.ok) setEmail("");
+      if (data.ok) {
+        track("subscribe_newsletter");
+        setEmail("");
+      }
     } catch {
       push("فيه حاجة مش مظبوطة. جرّب تاني، أو كلّمني على واتساب.", "error");
     } finally {

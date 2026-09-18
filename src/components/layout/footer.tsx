@@ -97,7 +97,11 @@ export function Footer() {
       <div className="border-t border-line">
         <div className="container-x flex flex-col items-center justify-between gap-3 py-6 text-[13px] text-fg-subtle sm:flex-row">
           <p>
-            © {year} {site.name} · كل الحقوق محفوظة
+            © {year} {site.name}
+            <span aria-hidden className="mx-1.5 opacity-60">
+              ·
+            </span>
+            كل الحقوق محفوظة
           </p>
           <ul className="flex items-center gap-4">
             <li>
