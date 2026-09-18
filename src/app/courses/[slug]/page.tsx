@@ -1,7 +1,16 @@
 /** صفحة الكورس التفصيلية. */
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { ArrowLeft, Check, CircleDot, Package, Sparkles, Wrench } from "lucide-react";
+import {
+  ArrowLeft,
+  BookMarked,
+  Check,
+  CircleDot,
+  Package,
+  Radio,
+  Sparkles,
+  Wrench,
+} from "lucide-react";
 import {
   getAllCourses,
   getCourseBySlug,
@@ -118,6 +127,11 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
       >
         <div className="flex flex-wrap items-center gap-2">
           <LevelBadge level={course.level} size="md" />
+          {course.kind === "mini" && (
+            <Badge tone="gold" size="md">
+              ميني كورس
+            </Badge>
+          )}
           <Badge tone="neutral" size="md">
             {course.duration}
           </Badge>
@@ -136,6 +150,15 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
           ))}
         </div>
         <p className={cn("text-[17px] font-bold", accent.text)}>{course.tagline}</p>
+        {course.promise && (
+          <p className="flex items-start gap-2.5 rounded-2xl border border-gold-500/25 bg-gold-500/8 p-4 text-[15px] leading-snug text-fg-muted">
+            <Package className="mt-0.5 size-4.5 shrink-0 text-gold-600 dark:text-gold-300" aria-hidden />
+            <span>
+              <span className="font-extrabold text-fg">هتخرج بـ: </span>
+              {course.promise}
+            </span>
+          </p>
+        )}
       </PageHero>
 
       <div className="container-x pb-8">
@@ -147,6 +170,51 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                 <p className="text-[16px] leading-[2] text-fg-muted">{course.description}</p>
               </div>
             </Reveal>
+
+            {/* نموذج التسليم — بيوضّح إيه مباشر وإيه مراجعة */}
+            {course.delivery && (
+              <Reveal>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="rounded-[20px] border border-brand-500/25 bg-brand-500/6 p-6">
+                    <h3 className="mb-2 flex items-center gap-2.5 text-base font-extrabold text-fg">
+                      <Radio className="size-5 text-brand-500" aria-hidden />
+                      الشرح — مباشر معايا
+                    </h3>
+                    <p className="text-[14.5px] leading-[1.9] text-fg-muted">
+                      {course.delivery.live}
+                    </p>
+                    <p className="mt-3 text-[13px] leading-snug text-fg-subtle">
+                      التطبيق بيتعمل على ملفك إنت، مش على تمرين جاهز.
+                    </p>
+                  </div>
+
+                  <div className="rounded-[20px] border border-gold-500/25 bg-gold-500/6 p-6">
+                    <h3 className="mb-3 flex items-center gap-2.5 text-base font-extrabold text-fg">
+                      <BookMarked className="size-5 text-gold-600 dark:text-gold-300" aria-hidden />
+                      المراجعة — على الموقع
+                    </h3>
+                    <ul className="flex flex-col gap-2">
+                      {course.delivery.review.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-2 text-[13.5px] leading-snug text-fg-muted"
+                        >
+                          <Check
+                            className="mt-0.5 size-3.5 shrink-0 text-gold-600 dark:text-gold-300"
+                            strokeWidth={3}
+                            aria-hidden
+                          />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-3 text-[13px] leading-snug text-fg-subtle">
+                      بتتفتح بعد الحجز، وبتفضل معاك.
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            )}
 
             <Reveal>
               <PointList

@@ -9,6 +9,7 @@ import {
   getFaqs,
   getFeaturedArticles,
   getFeaturedCourses,
+  getMiniCourses,
   getFeaturedProjects,
   getMethodPillars,
   getPricingTiers,
@@ -24,6 +25,7 @@ import { Ladder } from "@/components/sections/ladder";
 import { Levels } from "@/components/sections/levels";
 import { Method } from "@/components/sections/method";
 import { FeaturedCourses } from "@/components/sections/featured-courses";
+import { MiniCourses } from "@/components/sections/mini-courses";
 import { WhyDifferent } from "@/components/sections/why-different";
 import { Projects } from "@/components/sections/projects";
 import { Testimonials } from "@/components/sections/testimonials";
@@ -42,6 +44,7 @@ export default async function HomePage() {
     stats,
     pillars,
     featuredCourses,
+    miniCourses,
     comparison,
     projects,
     testimonials,
@@ -55,6 +58,7 @@ export default async function HomePage() {
     getStats(),
     getMethodPillars(),
     getFeaturedCourses(6),
+    getMiniCourses(),
     getComparison(),
     getFeaturedProjects(6),
     getTestimonials(),
@@ -70,6 +74,7 @@ export default async function HomePage() {
       <Stats stats={stats} />
       <Ladder />
       <Levels levels={levels} courseCounts={courseCounts} />
+      <MiniCourses courses={miniCourses} />
       <Method pillars={pillars} />
       <FeaturedCourses courses={featuredCourses} />
       <WhyDifferent rows={comparison} />

@@ -21,6 +21,8 @@
 | ٣ | `docs/DESIGN.md` | كل قرار بصري بالمقاس والرقم |
 | ٤ | `docs/CONTENT.md` | كل النصوص ونبرة الكتابة |
 | ٥ | `docs/ROADMAP.md` | خطة التوسّع بعدين |
+| ٦ | `docs/SOURCE-MATERIAL.md` | المادة الأصلية — ممنوع تخترع محتوى مش فيها |
+| ٧ | `docs/MEMBERSHIP-PLAN.md` | خطة الحسابات والوصول المدفوع (المرحلة الجاية) |
 
 **قاعدة الأولوية عند التعارض:**
 `DESIGN.md` (للبصريات) > `PLAN.md` (للبنية) > الكود الموجود.
@@ -124,6 +126,8 @@ export function CourseCard({ course, size = "md", className }: CourseCardProps) 
 | ترتيب سكاشن الرئيسية | `src/app/page.tsx` |
 | الهيدر / الفوتر | `src/components/layout/` |
 | تفعيل/تعطيل ميزة | `src/content/site.ts` → `features` |
+| نوع الكورس (ميني/عادي/برنامج) | `src/content/courses.ts` → `kind` |
+| وعد الميني كورس ونموذج تسليمه | `src/content/courses.ts` → `promise` و`delivery` |
 | إعدادات SEO العامة | `src/lib/seo.ts` |
 | بوابة الدفع | `src/lib/payments/` |
 

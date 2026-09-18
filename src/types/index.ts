@@ -64,6 +64,14 @@ export type CourseStatus = "متاح" | "الأماكن محدودة" | "قري�
 
 export type CourseFormat = "أونلاين مباشر" | "تسجيلات" | "حضوري" | "فردي";
 
+/**
+ * نوع الكورس — بيحدّد إزاي بيتعرض وفين.
+ *  • mini    → ميني كورس: نتيجة واحدة محدّدة، ٣-٦ ساعات، سعر صغير
+ *  • course  → كورس عادي: موضوع كامل
+ *  • program → البرنامج الشامل: المسار كله
+ */
+export type CourseKind = "mini" | "course" | "program";
+
 export interface CourseFaq {
   question: string;
   answer: string;
@@ -76,6 +84,7 @@ export interface Course {
   summary: string;
   description: string;
   level: LevelId;
+  kind: CourseKind;
   duration: string;
   sessions: number;
   hours: number;
@@ -100,6 +109,20 @@ export interface Course {
   /** عدد الأماكن المتبقية — للضغط النفسي الصادق */
   seatsLeft?: number;
   icon: string;
+
+  /**
+   * نموذج التسليم — بيوضّح إيه اللي مباشر وإيه اللي مراجعة على الموقع.
+   * المرجع: docs/MEMBERSHIP-PLAN.md §1
+   */
+  delivery?: {
+    /** وصف الجزء المباشر: "٤ جلسات × ٩٠ دقيقة" */
+    live: string;
+    /** مادة المراجعة اللي بتتفتح بعد الدفع */
+    review: string[];
+  };
+
+  /** الوعد في جملة واحدة — بيظهر بارز في الميني كورسات */
+  promise?: string;
 }
 
 // ═══════════════════════════════════════════════════════════

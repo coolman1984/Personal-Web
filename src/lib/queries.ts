@@ -84,6 +84,17 @@ export async function getRelatedCourses(slug: string, limit = 3): Promise<Course
   return [...sameLevel, ...others].slice(0, limit);
 }
 
+/** الميني كورسات — نتيجة واحدة محدّدة، تسليم مختلط */
+export async function getMiniCourses(): Promise<Course[]> {
+  return courses.filter((c) => c.kind === "mini");
+}
+
+/** الكورسات الكاملة والبرنامج الشامل — من غير الميني */
+export async function getFullCourses(): Promise<Course[]> {
+  const all = await getAllCourses();
+  return all.filter((c) => c.kind !== "mini");
+}
+
 /** إجمالي عدد الساعات في كل الكورسات — بيستخدم في الأرقام */
 export async function getTotalHours(): Promise<number> {
   return courses.reduce((sum, c) => sum + c.hours, 0);

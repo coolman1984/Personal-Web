@@ -1,6 +1,6 @@
 /** كارت الكورس. المواصفات الكاملة بالمقاسات: docs/DESIGN.md §5.3 */
 import Link from "next/link";
-import { ArrowLeft, BookOpen, Clock, Users } from "lucide-react";
+import { ArrowLeft, BookOpen, Clock, PackageCheck, Users, Zap } from "lucide-react";
 import { getIcon } from "@/lib/icon";
 import { accentFor } from "@/lib/tokens";
 import { cn, discountPercent, formatNumber, formatPrice } from "@/lib/utils";
@@ -33,7 +33,14 @@ export function CourseCard({
       <div className="flex h-full flex-col p-6">
         {/* الصف العلوي: المستوى والحالة */}
         <div className="mb-5 flex items-center justify-between gap-2">
-          <LevelBadge level={course.level} />
+          <span className="flex items-center gap-1.5">
+            <LevelBadge level={course.level} />
+            {course.kind === "mini" && (
+              <Badge tone="gold" size="sm" icon={<Zap />}>
+                ميني
+              </Badge>
+            )}
+          </span>
           <Badge tone={statusTone[course.status]} size="sm">
             {course.status}
           </Badge>
@@ -57,9 +64,23 @@ export function CourseCard({
             {course.title}
           </Link>
         </h3>
-        <p className="mb-5 line-clamp-3 text-sm leading-[1.8] text-fg-muted">
+        <p className="mb-4 line-clamp-2 text-sm leading-[1.8] text-fg-muted">
           {course.tagline}
         </p>
+
+        {/* الوعد — بيظهر في الميني كورسات بس، لأنه مخرج واحد واضح */}
+        {course.promise && (
+          <p className="mb-4 flex items-start gap-2 rounded-xl border border-gold-500/22 bg-gold-500/8 p-3 text-[12.5px] leading-snug text-fg-muted">
+            <PackageCheck
+              className="mt-0.5 size-3.5 shrink-0 text-gold-600 dark:text-gold-300"
+              aria-hidden
+            />
+            <span>
+              <span className="font-bold text-fg">هتخرج بـ: </span>
+              {course.promise}
+            </span>
+          </p>
+        )}
 
         {/* الميتا */}
         <ul className="mb-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-fg-subtle">

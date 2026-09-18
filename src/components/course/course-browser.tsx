@@ -21,13 +21,14 @@ const sortLabels: Record<SortKey, string> = {
 };
 
 export function CourseBrowser({ courses }: { courses: Course[] }) {
-  const [level, setLevel] = useState<LevelId | "all">("all");
+  const [level, setLevel] = useState<LevelId | "all" | "mini">("all");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<SortKey>("default");
 
   const tabs: TabItem[] = useMemo(
     () => [
       { value: "all", label: "الكل", count: courses.length },
+      { value: "mini", label: "ميني", count: courses.filter((c) => c.kind === "mini").length },
       { value: "beginner", label: "مبتدئ", count: courses.filter((c) => c.level === "beginner").length },
       { value: "intermediate", label: "متوسط", count: courses.filter((c) => c.level === "intermediate").length },
       { value: "advanced", label: "متقدّم", count: courses.filter((c) => c.level === "advanced").length },
@@ -38,7 +39,8 @@ export function CourseBrowser({ courses }: { courses: Course[] }) {
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
     let list = courses.filter((c) => {
-      const matchLevel = level === "all" || c.level === level;
+      const matchLevel =
+        level === "all" || (level === "mini" ? c.kind === "mini" : c.level === level);
       const matchQuery =
         !q ||
         [c.title, c.tagline, c.summary, ...c.keywords, ...c.tools]
@@ -67,7 +69,7 @@ export function CourseBrowser({ courses }: { courses: Course[] }) {
         <Tabs
           tabs={tabs}
           value={level}
-          onChange={(v) => setLevel(v as LevelId | "all")}
+          onChange={(v) => setLevel(v as LevelId | "all" | "mini")}
           layoutId="browser-tab"
         />
         <div className="flex flex-col gap-3 sm:flex-row">
