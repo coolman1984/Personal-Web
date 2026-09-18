@@ -4,6 +4,7 @@
  */
 import { ArrowLeft, Clock, PackageCheck, Users, Zap } from "lucide-react";
 import Link from "next/link";
+import { site } from "@/content/site";
 import { getIcon } from "@/lib/icon";
 import { accentFor } from "@/lib/tokens";
 import { cn, formatNumber, formatPrice } from "@/lib/utils";
@@ -95,8 +96,15 @@ export function MiniCourses({ courses }: { courses: Course[] }) {
                   </ul>
 
                   <div className="mt-auto flex items-end justify-between gap-3 border-t border-line pt-6">
-                    <span className="ltr-nums text-2xl font-extrabold text-fg">
-                      {formatPrice(course.price)}
+                    <span
+                      className={cn(
+                        "font-extrabold text-fg",
+                        site.features.showPrices ? "ltr-nums text-2xl" : "text-base",
+                      )}
+                    >
+                      {site.features.showPrices
+                        ? formatPrice(course.price)
+                        : site.priceHidden.label}
                     </span>
                     <span className="flex items-center gap-1.5 text-sm font-bold text-gold-600 dark:text-gold-300">
                       التفاصيل
@@ -112,11 +120,11 @@ export function MiniCourses({ courses }: { courses: Course[] }) {
 
       <Reveal delay={0.16} className="mt-10">
         <p className="mx-auto max-w-2xl text-center text-[14.5px] leading-[1.9] text-fg-muted">
-          الميني كورس بيحلّ مشكلة.{" "}
+          الميني كورس بيحلّ مشكلة واحدة.{" "}
           <Link href="/courses/ai-essentials" className="font-bold text-fg underline underline-offset-4">
             البرنامج الشامل
           </Link>{" "}
-          بيبني نظام عمل كامل — وأرخص من إنك تاخد الميني كورسات كلها.
+          بيبني نظام عمل كامل — وبيطلع أوفر من إنك تاخد الميني كورسات واحد واحد.
         </p>
       </Reveal>
     </section>

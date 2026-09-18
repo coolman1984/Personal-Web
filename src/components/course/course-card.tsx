@@ -4,6 +4,7 @@ import { ArrowLeft, BookOpen, Clock, PackageCheck, Users, Zap } from "lucide-rea
 import { getIcon } from "@/lib/icon";
 import { accentFor } from "@/lib/tokens";
 import { cn, discountPercent, formatNumber, formatPrice } from "@/lib/utils";
+import { site } from "@/content/site";
 import { Badge } from "@/components/ui/badge";
 import { Rating } from "@/components/ui/rating";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
@@ -107,10 +108,18 @@ export function CourseCard({
         {/* السعر والزر — mt-auto عشان الكروت تتساوى */}
         <div className="mt-auto flex items-end justify-between gap-3 border-t border-line pt-5">
           <div className="flex flex-col">
-            <span className="ltr-nums text-xl font-extrabold text-fg">
-              {formatPrice(course.price)}
-            </span>
-            {course.price.compareAt && (
+            {site.features.showPrices ? (
+              <>
+                <span className="ltr-nums text-xl font-extrabold text-fg">
+                  {formatPrice(course.price)}
+                </span>
+              </>
+            ) : (
+              <span className="text-[15px] font-bold text-fg">
+                {site.priceHidden.label}
+              </span>
+            )}
+            {site.features.showPrices && course.price.compareAt && (
               <span className="mt-1 flex items-center gap-2">
                 <span className="ltr-nums text-[13px] text-fg-subtle line-through">
                   {formatNumber(course.price.compareAt)}

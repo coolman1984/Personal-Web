@@ -9,7 +9,7 @@ import { CompareTable } from "@/components/course/compare-table";
 import { FinalCta } from "@/components/sections/final-cta";
 
 export const metadata = buildMetadata({
-  title: "الأسعار والباقات",
+  title: "الباقات",
   description:
     "كورس واحد، أو البرنامج الشامل من ٨ مستويات، أو تدريب مؤسسي مفصّل على عمليات شركتك. كل باقة بمميزاتها والأنسب لمين.",
   path: "/pricing",
@@ -17,7 +17,7 @@ export const metadata = buildMetadata({
 
 const crumbs = [
   { label: "الرئيسية", href: "/" },
-  { label: "الأسعار", href: "/pricing" },
+  { label: "الباقات", href: "/pricing" },
 ];
 
 export default async function PricingPage() {
@@ -28,10 +28,10 @@ export default async function PricingPage() {
       <JsonLd data={[breadcrumbJsonLd(crumbs), faqJsonLd(payFaqs)]} />
       <PageHero
         crumbs={crumbs}
-        eyebrow="الأسعار"
+        eyebrow="الباقات"
         eyebrowTone="gold"
-        title="تسعير واضح... من غير مفاجآت"
-        description="الأسعار المعروضة للأفراد. التدريب المؤسسي والفردي المكثّف ليهم تسعير خاص حسب حجم الفريق وعدد الجلسات."
+        title="اختار الشكل اللي يناسبك"
+        description="تلات طرق تشتغل معايا بيها: كورس واحد، أو البرنامج الشامل، أو تدريب مفصّل على عمليات شركتك. السعر بيتحدّد بعد ما نتكلّم — عشان يبقى مبني على حالتك مش على قايمة."
       />
       <Pricing tiers={tiers} />
       <section className="container-x pb-14 md:pb-20">

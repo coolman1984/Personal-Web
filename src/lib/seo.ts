@@ -116,7 +116,9 @@ export function courseJsonLd(course: Course) {
       courseWorkload: `PT${course.hours}H`,
       inLanguage: "ar",
     },
-    ...(course.price.amount > 0
+    // ⚠️ ما نحطّش سعر في البيانات المنظّمة لو مش معروض على الصفحة —
+    //    جوجل بيعتبر ده تضليلًا وبيعاقب عليه
+    ...(site.features.showPrices && course.price.amount > 0
       ? {
           offers: {
             "@type": "Offer",

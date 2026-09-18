@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Search } from "lucide-react";
 import { Tabs, type TabItem } from "@/components/ui/tabs";
 import { Select, Input } from "@/components/ui/field";
+import { site } from "@/content/site";
 import { EmptyState } from "@/components/shared/empty-state";
 import { CourseCard } from "./course-card";
 import { formatNumber } from "@/lib/utils";
@@ -19,6 +20,11 @@ const sortLabels: Record<SortKey, string> = {
   "hours-asc": "المدة: الأقصر",
   "hours-desc": "المدة: الأطول",
 };
+
+/** خيارات الترتيب المتاحة — بنشيل السعر لو الأسعار مخفية */
+const visibleSortKeys = (Object.keys(sortLabels) as SortKey[]).filter(
+  (k) => site.features.showPrices || !k.startsWith("price"),
+);
 
 export function CourseBrowser({ courses }: { courses: Course[] }) {
   const [level, setLevel] = useState<LevelId | "all" | "mini">("all");
@@ -99,9 +105,9 @@ export function CourseBrowser({ courses }: { courses: Course[] }) {
             onChange={(e) => setSort(e.target.value as SortKey)}
             className="sm:w-52"
           >
-            {Object.entries(sortLabels).map(([k, v]) => (
+            {visibleSortKeys.map((k) => (
               <option key={k} value={k}>
-                {v}
+                {sortLabels[k]}
               </option>
             ))}
           </Select>

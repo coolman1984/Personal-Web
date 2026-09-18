@@ -55,27 +55,38 @@ export function PriceBox({
   return (
     <aside className="lg:sticky lg:top-24">
       <div className="rounded-[24px] border border-line bg-surface p-6 shadow-soft ring-gradient">
-        {/* السعر */}
-        <div className="flex items-end gap-3">
-          <span className="ltr-nums text-[2.25rem] font-black leading-none text-fg">
-            {formatPrice(course.price)}
-          </span>
-          {course.price.compareAt && (
-            <span className="ltr-nums pb-1 text-sm text-fg-subtle line-through">
-              {formatNumber(course.price.compareAt)}
-            </span>
-          )}
-        </div>
-        <div className="mt-2 flex flex-wrap items-center gap-2">
-          {course.price.note && (
-            <span className="text-[13px] text-fg-subtle">{course.price.note}</span>
-          )}
-          {discount && (
-            <Badge tone="gold" size="sm">
-              خصم <span className="ltr-nums">{formatNumber(discount)}٪</span>
-            </Badge>
-          )}
-        </div>
+        {/* السعر — بيختفي لو site.features.showPrices = false */}
+        {site.features.showPrices ? (
+          <>
+            <div className="flex items-end gap-3">
+              <span className="ltr-nums text-[2.25rem] font-black leading-none text-fg">
+                {formatPrice(course.price)}
+              </span>
+              {course.price.compareAt && (
+                <span className="ltr-nums pb-1 text-sm text-fg-subtle line-through">
+                  {formatNumber(course.price.compareAt)}
+                </span>
+              )}
+            </div>
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              {course.price.note && (
+                <span className="text-[13px] text-fg-subtle">{course.price.note}</span>
+              )}
+              {discount && (
+                <Badge tone="gold" size="sm">
+                  خصم <span className="ltr-nums">{formatNumber(discount)}٪</span>
+                </Badge>
+              )}
+            </div>
+          </>
+        ) : (
+          <div>
+            <p className="text-xl font-extrabold text-fg">{site.priceHidden.label}</p>
+            <p className="mt-2 text-[13.5px] leading-relaxed text-fg-muted">
+              {site.priceHidden.hint}
+            </p>
+          </div>
+        )}
 
         {/* الحقائق */}
         <ul className="mt-6 flex flex-col gap-3 border-y border-line py-5">
@@ -106,7 +117,11 @@ export function PriceBox({
             fullWidth
             variant={soldOut ? "secondary" : "primary"}
           >
-            {soldOut ? "سجّل في قائمة الانتظار" : "احجز مكانك"}
+            {soldOut
+              ? "سجّل في قائمة الانتظار"
+              : site.features.showPrices
+                ? "احجز مكانك"
+                : site.priceHidden.cta}
           </Button>
           <Button
             href={whatsappLink(

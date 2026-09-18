@@ -2,6 +2,7 @@
 /** الباقات بمبدّل فردي/مجموعة. المواصفات: docs/DESIGN.md §12.11 */
 import { useState } from "react";
 import { Check, X } from "lucide-react";
+import { site } from "@/content/site";
 import { accentClasses } from "@/lib/tokens";
 import { cn, formatNumber, formatPrice } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -12,15 +13,20 @@ import type { PricingTier } from "@/types";
 
 export function Pricing({ tiers }: { tiers: PricingTier[] }) {
   const [group, setGroup] = useState(false);
-  const hasGroupPricing = tiers.some((t) => t.groupPrice);
+  const showPrices = site.features.showPrices;
+  const hasGroupPricing = showPrices && tiers.some((t) => t.groupPrice);
 
   return (
     <section id="pricing" className="container-x py-14 md:py-24">
       <SectionHeading
-        eyebrow="الأسعار"
+        eyebrow={showPrices ? "الأسعار" : "الباقات"}
         eyebrowTone="gold"
         title="اختار اللي يناسبك"
-        description="الأسعار للأفراد. التدريب المؤسسي ليه تسعير خاص حسب حجم الفريق."
+        description={
+          showPrices
+            ? "الأسعار للأفراد. التدريب المؤسسي ليه تسعير خاص حسب حجم الفريق."
+            : "كل باقة وإيه اللي فيها. السعر بيتحدّد حسب حالتك وحجم الفريق — كلّمني وهرشّحلك الأنسب."
+        }
       >
         {hasGroupPricing && (
           <div className="mt-4 inline-flex items-center gap-1 rounded-full border border-line bg-surface-2 p-1">
@@ -74,18 +80,26 @@ export function Pricing({ tiers }: { tiers: PricingTier[] }) {
                 <h3 className="text-xl font-extrabold text-fg">{tier.name}</h3>
                 <p className={cn("mt-1 text-sm font-bold", accent.text)}>{tier.tagline}</p>
 
-                <div className="mt-6 flex items-end gap-2">
-                  <span className="ltr-nums text-[clamp(2rem,4vw,3rem)] font-black leading-none text-fg">
-                    {formatPrice(price)}
-                  </span>
-                  {price.compareAt && (
-                    <span className="ltr-nums pb-1 text-sm text-fg-subtle line-through">
-                      {formatNumber(price.compareAt)}
-                    </span>
-                  )}
-                </div>
-                {price.note && (
-                  <p className="mt-1.5 text-[13px] text-fg-subtle">{price.note}</p>
+                {showPrices ? (
+                  <>
+                    <div className="mt-6 flex items-end gap-2">
+                      <span className="ltr-nums text-[clamp(2rem,4vw,3rem)] font-black leading-none text-fg">
+                        {formatPrice(price)}
+                      </span>
+                      {price.compareAt && (
+                        <span className="ltr-nums pb-1 text-sm text-fg-subtle line-through">
+                          {formatNumber(price.compareAt)}
+                        </span>
+                      )}
+                    </div>
+                    {price.note && (
+                      <p className="mt-1.5 text-[13px] text-fg-subtle">{price.note}</p>
+                    )}
+                  </>
+                ) : (
+                  <p className="mt-6 text-[17px] font-extrabold text-fg">
+                    {site.priceHidden.label}
+                  </p>
                 )}
 
                 <p className="mt-5 rounded-xl bg-surface-2 p-3 text-[13px] leading-snug text-fg-muted">
@@ -117,12 +131,12 @@ export function Pricing({ tiers }: { tiers: PricingTier[] }) {
 
                 <div className="mt-auto pt-7">
                   <Button
-                    href={tier.ctaHref}
+                    href={showPrices ? tier.ctaHref : "/contact"}
                     variant={tier.highlighted ? "primary" : "secondary"}
                     size="lg"
                     fullWidth
                   >
-                    {tier.ctaLabel}
+                    {showPrices ? tier.ctaLabel : site.priceHidden.cta}
                   </Button>
                 </div>
               </article>

@@ -298,7 +298,7 @@ const staticPages: SearchItem[] = [
   },
   {
     id: "page-pricing",
-    title: "الأسعار والباقات",
+    title: "الباقات",
     description: "كورس واحد · البرنامج الشامل · تدريب مؤسسي",
     href: "/pricing",
     kind: "page",

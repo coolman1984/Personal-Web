@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowLeft } from "lucide-react";
 import { getIcon } from "@/lib/icon";
+import { site } from "@/content/site";
 import { cn, formatPrice } from "@/lib/utils";
 import { accentFor, levelShortLabel } from "@/lib/tokens";
 import type { Course, Level } from "@/types";
@@ -68,9 +69,11 @@ export function MegaMenu({ open, levels, coursesByLevel, onNavigate }: MegaMenuP
                             className="flex items-center justify-between gap-2 rounded-lg px-2 py-1.5 text-[13px] text-fg-muted transition-colors hover:bg-surface-2 hover:text-fg"
                           >
                             <span className="line-clamp-1">{course.title}</span>
-                            <span className="ltr-nums shrink-0 text-[11px] font-bold text-fg-subtle">
-                              {formatPrice(course.price)}
-                            </span>
+                            {site.features.showPrices && (
+                              <span className="ltr-nums shrink-0 text-[11px] font-bold text-fg-subtle">
+                                {formatPrice(course.price)}
+                              </span>
+                            )}
                           </Link>
                         </li>
                       ))}

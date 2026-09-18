@@ -90,12 +90,18 @@ export default async function EnrollPage({ params }: { params: Promise<{ slug: s
               ))}
             </ul>
 
-            <div className="mt-5 flex items-end justify-between gap-3">
-              <span className="text-sm text-fg-subtle">الإجمالي</span>
-              <span className="ltr-nums text-2xl font-black text-fg">
-                {formatPrice(course.price)}
-              </span>
-            </div>
+            {site.features.showPrices ? (
+              <div className="mt-5 flex items-end justify-between gap-3">
+                <span className="text-sm text-fg-subtle">الإجمالي</span>
+                <span className="ltr-nums text-2xl font-black text-fg">
+                  {formatPrice(course.price)}
+                </span>
+              </div>
+            ) : (
+              <p className="mt-5 rounded-xl bg-surface-2 p-3 text-[13.5px] leading-relaxed text-fg-muted">
+                {site.priceHidden.hint}
+              </p>
+            )}
 
             <ul className="mt-5 flex flex-col gap-2">
               {site.guarantees.map((g) => (
