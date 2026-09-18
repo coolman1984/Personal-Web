@@ -1,0 +1,369 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ═══════════════════════════════════════════════════════════════════
+   نظام التصميم — رموز التصميم (Design Tokens)
+   كل الألوان بصيغة OKLCH عشان تدرّجاتها تبقى نظيفة وطبيعية للعين
+   ═══════════════════════════════════════════════════════════════════ */
+@theme {
+  --font-display: "Tajawal", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* اللون الأساسي — بنفسجي نيلي راقي */
+  --color-brand-50: oklch(0.97 0.02 288);
+  --color-brand-100: oklch(0.94 0.04 288);
+  --color-brand-200: oklch(0.88 0.08 288);
+  --color-brand-300: oklch(0.8 0.12 288);
+  --color-brand-400: oklch(0.71 0.17 288);
+  --color-brand-500: oklch(0.63 0.21 288);
+  --color-brand-600: oklch(0.55 0.23 288);
+  --color-brand-700: oklch(0.47 0.21 288);
+  --color-brand-800: oklch(0.39 0.17 288);
+  --color-brand-900: oklch(0.31 0.13 288);
+  --color-brand-950: oklch(0.21 0.09 288);
+
+  /* اللون المساعد — فيروزي هادي */
+  --color-aqua-300: oklch(0.86 0.1 197);
+  --color-aqua-400: oklch(0.78 0.13 197);
+  --color-aqua-500: oklch(0.7 0.15 197);
+  --color-aqua-600: oklch(0.6 0.14 197);
+
+  /* لمسة ذهبية للفخامة */
+  --color-gold-300: oklch(0.89 0.1 85);
+  --color-gold-400: oklch(0.83 0.13 85);
+  --color-gold-500: oklch(0.76 0.14 80);
+  --color-gold-600: oklch(0.66 0.13 76);
+
+  /* حبر الخلفية الداكنة */
+  --color-ink-800: oklch(0.22 0.02 270);
+  --color-ink-900: oklch(0.16 0.018 270);
+  --color-ink-950: oklch(0.11 0.015 270);
+  --color-ink-1000: oklch(0.07 0.012 270);
+
+  --radius-4xl: 2rem;
+  --radius-5xl: 2.75rem;
+
+  --shadow-glow: 0 0 60px -12px oklch(0.63 0.21 288 / 0.5);
+  --shadow-soft: 0 2px 8px -2px oklch(0.2 0.02 270 / 0.08), 0 12px 32px -8px oklch(0.2 0.02 270 / 0.12);
+  --shadow-lift: 0 4px 16px -4px oklch(0.2 0.02 270 / 0.12), 0 24px 64px -16px oklch(0.2 0.02 270 / 0.2);
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-aurora: aurora 22s ease-in-out infinite alternate;
+  --animate-shimmer: shimmer 2.6s linear infinite;
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-spin-slow: spin 18s linear infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-18px) rotate(2deg); }
+  }
+  @keyframes aurora {
+    0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.55; }
+    50% { transform: translate3d(4%, -6%, 0) scale(1.15); opacity: 0.8; }
+    100% { transform: translate3d(-5%, 5%, 0) scale(1.05); opacity: 0.6; }
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(50%); }
+  }
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 oklch(0.63 0.21 288 / 0.45); }
+    70% { box-shadow: 0 0 0 18px oklch(0.63 0.21 288 / 0); }
+    100% { box-shadow: 0 0 0 0 oklch(0.63 0.21 288 / 0); }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   المتغيّرات الدلالية — الوضع الفاتح والداكن
+   ═══════════════════════════════════════════════════════════════════ */
+:root {
+  --bg: oklch(0.99 0.004 95);
+  --bg-subtle: oklch(0.97 0.007 95);
+  --surface: oklch(1 0 0);
+  --surface-2: oklch(0.975 0.006 288);
+  --border: oklch(0.9 0.008 288);
+  --border-strong: oklch(0.83 0.014 288);
+  --fg: oklch(0.2 0.02 270);
+  --fg-muted: oklch(0.47 0.016 270);
+  --fg-subtle: oklch(0.6 0.014 270);
+  --primary: oklch(0.55 0.23 288);
+  --primary-fg: oklch(0.99 0 0);
+  --ring: oklch(0.63 0.21 288 / 0.55);
+  --glass: oklch(1 0 0 / 0.72);
+  --glass-border: oklch(1 0 0 / 0.5);
+  --shadow-color: oklch(0.45 0.05 288 / 0.1);
+}
+
+.dark {
+  --bg: oklch(0.11 0.015 270);
+  --bg-subtle: oklch(0.14 0.017 270);
+  --surface: oklch(0.16 0.018 270);
+  --surface-2: oklch(0.2 0.02 272);
+  --border: oklch(0.28 0.022 272);
+  --border-strong: oklch(0.38 0.03 274);
+  --fg: oklch(0.96 0.005 90);
+  --fg-muted: oklch(0.73 0.014 270);
+  --fg-subtle: oklch(0.6 0.016 270);
+  --primary: oklch(0.71 0.17 288);
+  --primary-fg: oklch(0.12 0.02 270);
+  --ring: oklch(0.71 0.17 288 / 0.6);
+  --glass: oklch(0.18 0.02 270 / 0.6);
+  --glass-border: oklch(1 0 0 / 0.09);
+  --shadow-color: oklch(0 0 0 / 0.5);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-primary: var(--primary);
+  --color-primary-fg: var(--primary-fg);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   الأساسيات
+   ═══════════════════════════════════════════════════════════════════ */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-feature-settings: "kern", "liga", "calt";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  ::selection {
+    background: oklch(0.63 0.21 288 / 0.28);
+    color: var(--fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar { width: 11px; height: 11px; }
+  ::-webkit-scrollbar-track { background: var(--bg-subtle); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 999px;
+    border: 3px solid var(--bg-subtle);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+  /* الأرقام دايمًا من الشمال لليمين حتى جوّه نص عربي */
+  .ltr-nums { direction: ltr; unicode-bidi: isolate; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   أدوات مخصّصة
+   ═══════════════════════════════════════════════════════════════════ */
+@utility container-x {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  max-width: 80rem;
+  @media (min-width: 768px) { padding-inline: 2rem; }
+}
+
+@utility glass {
+  background: var(--glass);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(
+    115deg,
+    var(--color-brand-400) 0%,
+    var(--color-aqua-400) 45%,
+    var(--color-gold-400) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility text-gradient-soft {
+  background-image: linear-gradient(120deg, var(--color-fg) 20%, var(--color-brand-400) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* إطار متدرّج رفيع — سر الشكل الراقي */
+@utility ring-gradient {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      140deg,
+      oklch(0.71 0.17 288 / 0.55),
+      oklch(0.7 0.15 197 / 0.25) 40%,
+      transparent 70%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+@utility noise {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0.035;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@utility grid-bg {
+  background-image:
+    linear-gradient(to left, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 78%);
+}
+
+@utility dots-bg {
+  background-image: radial-gradient(var(--border-strong) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 10%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 10%, transparent 75%);
+}
+
+@utility shine {
+  background-image: linear-gradient(
+    100deg,
+    transparent 20%,
+    oklch(1 0 0 / 0.28) 45%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+@utility card-hover {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.45s ease;
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lift);
+    border-color: var(--border-strong);
+  }
+}
+
+@utility balance { text-wrap: balance; }
+
+/* شريط تقدّم القراءة */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+@utility prose-ar {
+  color: var(--fg-muted);
+  line-height: 2.05;
+  font-size: 1.0625rem;
+
+  & h2 {
+    color: var(--fg);
+    font-size: 1.625rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  & h3 {
+    color: var(--fg);
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  & p { margin-bottom: 1.25rem; }
+  & ul { margin-bottom: 1.25rem; padding-inline-start: 1.5rem; list-style: disc; }
+  & ol { margin-bottom: 1.25rem; padding-inline-start: 1.5rem; list-style: decimal; }
+  & li { margin-bottom: 0.5rem; }
+  & strong { color: var(--fg); font-weight: 700; }
+  & a { color: var(--primary); text-decoration: underline; text-underline-offset: 4px; }
+  & blockquote {
+    border-inline-start: 3px solid var(--primary);
+    padding-inline-start: 1.25rem;
+    font-style: normal;
+    color: var(--fg);
+    margin: 1.75rem 0;
+  }
+  & code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: var(--surface-2);
+    padding: 0.15em 0.4em;
+    border-radius: 6px;
+    direction: ltr;
+    display: inline-block;
+  }
+}
