@@ -7,9 +7,9 @@
    كل الألوان بصيغة OKLCH عشان تدرّجاتها تبقى نظيفة وطبيعية للعين
    ═══════════════════════════════════════════════════════════════════ */
 @theme {
-  --font-display: "Tajawal", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: var(--font-tajawal), "Tajawal", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-plex-ar), "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
 
   /* اللون الأساسي — بنفسجي نيلي راقي */
   --color-brand-50: oklch(0.97 0.02 288);
