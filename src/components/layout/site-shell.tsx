@@ -16,10 +16,22 @@ interface SiteShellProps {
   levels: Level[];
   coursesByLevel: Record<string, Course[]>;
   searchIndex: SearchItem[];
+  /** حالة الحساب — بتتجاب على السيرفر في layout.tsx */
+  userEmail: string | null;
+  isAdmin: boolean;
+  authEnabled: boolean;
   children: ReactNode;
 }
 
-export function SiteShell({ levels, coursesByLevel, searchIndex, children }: SiteShellProps) {
+export function SiteShell({
+  levels,
+  coursesByLevel,
+  searchIndex,
+  userEmail,
+  isAdmin,
+  authEnabled,
+  children,
+}: SiteShellProps) {
   const [searchOpen, setSearchOpen] = useState(false);
   const openSearch = useCallback(() => {
     setSearchOpen(true);
@@ -31,7 +43,14 @@ export function SiteShell({ levels, coursesByLevel, searchIndex, children }: Sit
 
   return (
     <>
-      <Navbar levels={levels} coursesByLevel={coursesByLevel} onOpenSearch={openSearch} />
+      <Navbar
+        levels={levels}
+        coursesByLevel={coursesByLevel}
+        onOpenSearch={openSearch}
+        userEmail={userEmail}
+        isAdmin={isAdmin}
+        authEnabled={authEnabled}
+      />
       {children}
       {site.features.commandPalette && (
         <CommandPalette open={searchOpen} onClose={closeSearch} items={searchIndex} />

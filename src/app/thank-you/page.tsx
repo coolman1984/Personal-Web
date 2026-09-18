@@ -15,6 +15,7 @@ export const metadata = buildMetadata({
 });
 
 const steps = [
+  "سجّل دخولك على الموقع بنفس الإيميل اللي حجزت بيه — هفتحلك المواد عليه",
   "هتواصل معاك خلال ٢٤ ساعة لتأكيد الحجز وموعد المجموعة",
   "هبعتلك الأدلة والمواد قبل الجلسة الأولى",
   "جهّز ملف Excel حقيقي من شغلك (غير سرّي) — هنشتغل عليه طول الكورس",
@@ -54,7 +55,15 @@ export default async function ThankYouPage({
           </p>
         )}
 
-        <div className="mt-10 w-full max-w-lg rounded-[24px] border border-line bg-surface p-6 text-start shadow-soft">
+        <div className="mt-8 w-full max-w-lg rounded-2xl border border-gold-500/25 bg-gold-500/8 p-4 text-center">
+          <p className="text-[14px] leading-relaxed text-fg-muted">
+            <span className="font-extrabold text-fg">مهم: </span>
+            سجّل دخولك بنفس الإيميل اللي حجزت بيه. لو حسابك على جوجل بإيميل تاني،
+            كلّمني وهظبّطها في دقيقة.
+          </p>
+        </div>
+
+        <div className="mt-6 w-full max-w-lg rounded-[24px] border border-line bg-surface p-6 text-start shadow-soft">
           <h2 className="mb-4 text-base font-extrabold text-fg">الخطوات الجاية</h2>
           <ol className="flex flex-col gap-3.5">
             {steps.map((step, i) => (
@@ -83,8 +92,8 @@ export default async function ThankYouPage({
           >
             كلّمني على واتساب
           </Button>
-          <Button href="/articles" variant="secondary" size="lg">
-            اقرا مقال لحد ما نبدأ
+          <Button href="/login" variant="secondary" size="lg">
+            سجّل دخولك دلوقتي
           </Button>
         </div>
       </div>

@@ -1,12 +1,19 @@
 /** صندوق السعر اللاصق في صفحة الكورس. المواصفات: docs/DESIGN.md §9.2 */
-import { CalendarDays, Check, Clock, GraduationCap, Users } from "lucide-react";
+import { ArrowLeft, CalendarDays, Check, Clock, GraduationCap, Users } from "lucide-react";
 import { site } from "@/content/site";
 import { cn, discountPercent, formatNumber, formatPrice, whatsappLink } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { Course } from "@/types";
 
-export function PriceBox({ course }: { course: Course }) {
+export function PriceBox({
+  course,
+  enrolled = false,
+}: {
+  course: Course;
+  /** المتدرّب الحالي مفتوحله الكورس ده؟ */
+  enrolled?: boolean;
+}) {
   const discount = discountPercent(course.price);
   const soldOut = course.status === "مكتمل";
 
@@ -19,6 +26,31 @@ export function PriceBox({ course }: { course: Course }) {
       ? [{ icon: CalendarDays, label: "أقرب مجموعة", value: course.nextCohort }]
       : []),
   ];
+
+  // المتدرّب المشترك ما يشوفش سعرًا ولا زر حجز — يشوف طريقه للمراجعة
+  if (enrolled) {
+    return (
+      <aside className="lg:sticky lg:top-24">
+        <div className="rounded-[24px] border border-[oklch(0.58_0.15_150/0.3)] bg-[oklch(0.58_0.15_150/0.07)] p-6 shadow-soft">
+          <Badge tone="success" size="md" className="mb-4">
+            إنت مشترك في الكورس ده
+          </Badge>
+          <p className="text-[14.5px] leading-[1.9] text-fg-muted">
+            مواد المراجعة مفتوحة ليك — البرومبتات والقوالب وقوايم المراجعة.
+          </p>
+          <Button
+            href={`/my/${course.slug}`}
+            size="lg"
+            fullWidth
+            className="mt-5"
+            iconAfter={<ArrowLeft />}
+          >
+            افتح المراجعة
+          </Button>
+        </div>
+      </aside>
+    );
+  }
 
   return (
     <aside className="lg:sticky lg:top-24">

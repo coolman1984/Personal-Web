@@ -13,15 +13,27 @@ import { Logo } from "./logo";
 import { MegaMenu } from "./mega-menu";
 import { ThemeToggle } from "./theme-toggle";
 import { MobileNav } from "./mobile-nav";
+import { UserMenu } from "./user-menu";
 import type { Course, Level } from "@/types";
 
 interface NavbarProps {
   levels: Level[];
   coursesByLevel: Record<string, Course[]>;
   onOpenSearch: () => void;
+  /** إيميل المستخدم الحالي — null لو مش داخل */
+  userEmail: string | null;
+  isAdmin: boolean;
+  authEnabled: boolean;
 }
 
-export function Navbar({ levels, coursesByLevel, onOpenSearch }: NavbarProps) {
+export function Navbar({
+  levels,
+  coursesByLevel,
+  onOpenSearch,
+  userEmail,
+  isAdmin,
+  authEnabled,
+}: NavbarProps) {
   const scrolled = useScrolledPast(20);
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -113,7 +125,8 @@ export function Navbar({ levels, coursesByLevel, onOpenSearch }: NavbarProps) {
               </button>
             )}
             <ThemeToggle />
-            <Button href="/quiz" size="md" className="hidden sm:inline-flex">
+            {authEnabled && <UserMenu email={userEmail} isAdmin={isAdmin} />}
+            <Button href="/quiz" size="md" className="hidden md:inline-flex">
               حدّد مستواك
             </Button>
             <button

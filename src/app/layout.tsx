@@ -9,6 +9,9 @@ import "./globals.css";
 import { site } from "@/content/site";
 import { buildMetadata, personJsonLd, organizationJsonLd } from "@/lib/seo";
 import { getAllLevels, getCoursesByLevel, getSearchIndex } from "@/lib/queries";
+import { getUserEmail } from "@/lib/supabase/server";
+import { isAdmin } from "@/lib/access";
+import { authEnabled } from "@/lib/supabase/config";
 
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import { ToastProvider } from "@/components/ui/toast";
@@ -70,6 +73,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   ]);
   const searchIndex = await getSearchIndex();
 
+  // حالة الحساب — بتتجاب مرة واحدة على السيرفر وبتتمرّر للهيدر
+  const userEmail = authEnabled ? await getUserEmail() : null;
+  const admin = userEmail ? await isAdmin() : false;
+
   return (
     <html
       lang="ar"
@@ -86,6 +93,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               levels={levels}
               coursesByLevel={{ beginner, intermediate, advanced }}
               searchIndex={searchIndex}
+              userEmail={userEmail}
+              isAdmin={admin}
+              authEnabled={authEnabled}
             >
               <main id="main">{children}</main>
               <Footer />

@@ -30,6 +30,7 @@ import { ShareButtons } from "@/components/shared/share-buttons";
 import { Reveal } from "@/components/motion/reveal";
 import { LevelBadge } from "@/components/course/level-badge";
 import { PriceBox } from "@/components/course/price-box";
+import { hasAccess } from "@/lib/access";
 import { Curriculum } from "@/components/course/curriculum";
 import { CourseCard } from "@/components/course/course-card";
 import { absoluteUrl } from "@/lib/utils";
@@ -97,9 +98,10 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
   const course = await getCourseBySlug(slug);
   if (!course) notFound();
 
-  const [level, related] = await Promise.all([
+  const [level, related, enrolled] = await Promise.all([
     getLevelById(course.level),
     getRelatedCourses(slug, 3),
+    hasAccess(slug),
   ]);
 
   const accent = accentFor(course.level);
@@ -325,7 +327,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
           </div>
 
           {/* العمود الجانبي */}
-          <PriceBox course={course} />
+          <PriceBox course={course} enrolled={enrolled} />
         </div>
       </div>
 
