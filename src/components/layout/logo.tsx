@@ -14,9 +14,9 @@ export function Logo({ className }: { className?: string }) {
         <span className="relative z-1">{site.initials}</span>
         <span className="absolute inset-0 shine opacity-0 transition-opacity group-hover:opacity-100" />
       </span>
-      <span className="flex flex-col leading-none">
+      <span className="flex flex-col gap-1 leading-none">
         <span className="text-[15px] font-extrabold text-fg">{site.shortName}</span>
-        <span className="mt-0.5 text-[10.5px] font-medium text-fg-subtle">
+        <span className="text-[10.5px] font-medium leading-none text-fg-subtle">
           كورسات الذكاء الاصطناعي
         </span>
       </span>

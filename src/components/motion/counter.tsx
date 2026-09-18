@@ -14,9 +14,11 @@ interface CounterProps {
 export function Counter({ value, suffix, decimals = 0, className }: CounterProps) {
   const { ref, value: current } = useCounter(value);
   return (
-    <span ref={ref} className={cn("ltr-nums tabular-nums", className)}>
-      {formatNumber(current, decimals)}
-      {suffix}
+    <span ref={ref} className={cn("inline-flex items-baseline gap-1", className)}>
+      {/* الرقم معزول كنطاق أرقام، واللاحقة العربية بره النطاق
+          عشان تفضل على شمال الرقم زي ما المفروض في RTL */}
+      <span className="ltr-nums tabular-nums">{formatNumber(current, decimals)}</span>
+      {suffix && <span>{suffix}</span>}
     </span>
   );
 }

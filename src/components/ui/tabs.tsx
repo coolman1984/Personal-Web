@@ -1,7 +1,7 @@
 "use client";
 /** تبويبات بمؤشّر متحرّك. المواصفات: docs/DESIGN.md §5.9 */
 import { motion } from "motion/react";
-import { cn } from "@/lib/utils";
+import { cn, formatNumber } from "@/lib/utils";
 
 export interface TabItem {
   value: string;
@@ -51,7 +51,9 @@ export function Tabs({ tabs, value, onChange, layoutId = "tab-pill", className }
             <span className="relative z-1">
               {tab.label}
               {typeof tab.count === "number" && (
-                <span className="ms-1.5 text-[11px] text-fg-subtle ltr-nums">({tab.count})</span>
+                <span className="ms-1.5 text-[11px] text-fg-subtle">
+                  <span className="ltr-nums">{formatNumber(tab.count)}</span>
+                </span>
               )}
             </span>
           </button>
