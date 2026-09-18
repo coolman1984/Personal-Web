@@ -49,6 +49,8 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export const viewport: Viewport = {
+  // ألوان شريط المتصفّح على الموبايل — استثناء مقصود من قاعدة «ممنوع ألوان خام»:
+  // بتتقري قبل تحميل الـCSS. القيم = `--bg` النهاري والليلي (docs/DESIGN.md §2).
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#fdfdfb" },
     { media: "(prefers-color-scheme: dark)", color: "#0d0e14" },

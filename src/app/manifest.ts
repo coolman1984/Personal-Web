@@ -9,6 +9,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: site.tagline,
     start_url: "/",
     display: "standalone",
+    // لون خام هنا استثناء مقصود: المتصفّح بيقرا الملف ده قبل ما يحمّل أي CSS،
+    // فمش بيفهم متغيّرات `globals.css`. القيمة = `--bg` الليلي (docs/DESIGN.md §2).
     background_color: "#0d0e14",
     theme_color: "#0d0e14",
     lang: "ar",

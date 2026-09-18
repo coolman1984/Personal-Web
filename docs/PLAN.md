@@ -1010,69 +1010,70 @@ type AnalyticsEvent =
 
 ### المرحلة 1 — التخطيط ✅ (خلصت)
 - [x] `docs/PLAN.md`
-- [ ] `docs/DESIGN.md`
-- [ ] `docs/CONTENT.md`
-- [ ] `docs/ROADMAP.md`
-- [ ] `CLAUDE.md` + `README.md`
+- [x] `docs/DESIGN.md`
+- [x] `docs/CONTENT.md`
+- [x] `docs/ROADMAP.md`
+- [x] `CLAUDE.md` + `README.md`
 
-### المرحلة 2 — الأنواع والمحتوى
-- [ ] `src/types/index.ts` — كل الأنواع
-- [ ] `src/content/site.ts` + `navigation.ts`
-- [ ] `src/content/levels.ts` — المستويات التلاتة
-- [ ] `src/content/courses.ts` — 6 كورسات على الأقل (2 لكل مستوى)
-- [ ] باقي ملفات المحتوى
-- [ ] `src/lib/queries.ts` — دوال الجلب
+### المرحلة 2 — الأنواع والمحتوى ✅ (خلصت)
+- [x] `src/types/index.ts` — كل الأنواع
+- [x] `src/content/site.ts` + `navigation.ts`
+- [x] `src/content/levels.ts` — المستويات التلاتة
+- [x] `src/content/courses.ts` — 6 كورسات على الأقل (2 لكل مستوى)
+- [x] باقي ملفات المحتوى
+- [x] `src/lib/queries.ts` — دوال الجلب
 - **معيار القبول:** `npm run typecheck` يعدّي بدون أخطاء
 
-### المرحلة 3 — الأدوات الأساسية
-- [ ] `src/lib/utils.ts`
-- [ ] `src/lib/seo.ts`
-- [ ] `src/hooks/*`
-- [ ] `src/components/ui/*` (كل اللبنات)
-- [ ] `src/components/motion/*`
+### المرحلة 3 — الأدوات الأساسية ✅ (خلصت)
+- [x] `src/lib/utils.ts`
+- [x] `src/lib/seo.ts`
+- [x] `src/hooks/*`
+- [x] `src/components/ui/*` (كل اللبنات)
+- [x] `src/components/motion/*`
 - **معيار القبول:** كل مكوّن يشتغل لوحده، و`typecheck` نضيف
 
-### المرحلة 4 — الهيكل العام
-- [ ] `src/app/layout.tsx` — RTL + خطوط + ثيم
-- [ ] `components/layout/navbar.tsx` + `mobile-nav.tsx`
-- [ ] `components/layout/footer.tsx`
-- [ ] `theme-toggle` / `scroll-progress` / `back-to-top` / `whatsapp-fab`
+### المرحلة 4 — الهيكل العام ✅ (خلصت)
+- [x] `src/app/layout.tsx` — RTL + خطوط + ثيم
+- [x] `components/layout/navbar.tsx` + `mobile-nav.tsx`
+- [x] `components/layout/footer.tsx`
+- [x] `theme-toggle` / `scroll-progress` / `back-to-top` / `whatsapp-fab`
 - **معيار القبول:** `npm run build` ينجح، والهيدر والفوتر ظاهرين
 
-### المرحلة 5 — الصفحة الرئيسية
-- [ ] الـ15 سكشن بالترتيب المذكور في §7.2
+### المرحلة 5 — الصفحة الرئيسية ✅ (خلصت)
+- [x] الـ15 سكشن بالترتيب المذكور في §7.2
 - **معيار القبول:** الصفحة كاملة، متجاوبة، والحركات شغّالة
 
-### المرحلة 6 — الصفحات الداخلية
-- [ ] `/courses` + `/courses/[slug]`
-- [ ] `/levels/[level]`
-- [ ] `/about` / `/pricing` / `/roadmap`
-- [ ] `/projects` + `/projects/[slug]`
-- [ ] `/articles` + `/articles/[slug]`
-- [ ] `/faq` / `/contact` / `/quiz`
-- [ ] `/enroll/[slug]` / `/thank-you`
-- [ ] الصفحات القانونية
+### المرحلة 6 — الصفحات الداخلية ✅ (خلصت)
+- [x] `/courses` + `/courses/[slug]`
+- [x] `/levels/[level]`
+- [x] `/about` / `/pricing` / `/roadmap`
+- [x] `/projects` + `/projects/[slug]`
+- [x] `/articles` + `/articles/[slug]`
+- [x] `/faq` / `/contact` / `/quiz`
+- [x] `/enroll/[slug]` / `/thank-you`
+- [x] الصفحات القانونية
 - **معيار القبول:** كل رابط في الموقع شغّال، مفيش 404
 
-### المرحلة 7 — التفاعل المتقدّم
-- [ ] `CommandPalette` (⌘K)
-- [ ] `ExitIntentModal`
-- [ ] الفورمات + الـAPI routes
-- [ ] طبقة الدفع (mock شغّالة)
+### المرحلة 7 — التفاعل المتقدّم ✅ (خلصت)
+- [x] `CommandPalette` (⌘K)
+- [x] `ExitIntentModal`
+- [x] الفورمات + الـAPI routes
+- [x] طبقة الدفع (mock شغّالة)
 - **معيار القبول:** كل فورم بيتحقّق وبيرد برسالة عربية
 
-### المرحلة 8 — SEO والتلميع
-- [ ] `sitemap.ts` / `robots.ts` / `manifest.ts`
-- [ ] `opengraph-image.tsx`
-- [ ] JSON-LD في كل صفحة مناسبة
-- [ ] مراجعة الوصولية
-- [ ] مراجعة التجاوب على 320 / 768 / 1024 / 1440 / 1920
+### المرحلة 8 — SEO والتلميع ✅ (خلصت)
+- [x] `sitemap.ts` / `robots.ts` / `manifest.ts`
+- [x] صورة المشاركة — ملف ثابت `public/og-default.png` مولَّد بـ`scripts/generate-og.mjs`
+      بدل `opengraph-image.tsx` الديناميكي، لأن محرّك `next/og` لسه ما بيوصّلش حروف العربية ببعض
+- [x] JSON-LD في كل صفحة مناسبة
+- [x] مراجعة الوصولية
+- [x] مراجعة التجاوب على 320 / 768 / 1024 / 1440 / 1920 — متفحوصة بمتصفّح حقيقي على ٢٠ صفحة، مفيش تمرير أفقي
 - **معيار القبول:** `npm run build` نضيف + مراجعة بصرية
 
-### المرحلة 9 — التسليم
-- [ ] تحديث `README.md` بخطوات النشر
-- [ ] commit + push على الفرع
-- [ ] تقرير للمستخدم بالعربي
+### المرحلة 9 — التسليم ✅ (خلصت)
+- [x] تحديث `README.md` بخطوات النشر
+- [x] commit + push على الفرع
+- [x] تقرير للمستخدم بالعربي
 
 ---
 
