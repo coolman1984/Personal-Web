@@ -5,7 +5,10 @@
  */
 import type { Article } from "@/types";
 
-export const articles: Article[] = [
+// ⚠️ ما فيهاش `readingMinutes` — بتتحسب أوتوماتيك من طول المقال الحقيقي
+// في `lib/queries.ts` (دالة `readingTime`)، عشان ما تفضلش رقم يدوي ممكن
+// يتنسى تحديثه لما المحتوى يتغيّر.
+export const articles: Omit<Article, "readingMinutes">[] = [
   {
     slug: "prompt-equation",
     title: "المعادلة اللي بتحكم أي طلب ناجح",
@@ -14,7 +17,6 @@ export const articles: Article[] = [
     category: "الصياغة",
     tags: ["برومبت", "أساسيات", "إنتاجية"],
     publishedAt: "2026-09-01",
-    readingMinutes: 6,
     featured: true,
     relatedCourse: "prompt-to-system",
     body: [
@@ -88,7 +90,6 @@ export const articles: Article[] = [
     category: "الأنظمة",
     tags: ["أنظمة", "أتمتة", "متقدّم"],
     publishedAt: "2026-08-20",
-    readingMinutes: 7,
     featured: true,
     relatedCourse: "integrated-system",
     body: [
@@ -145,7 +146,6 @@ export const articles: Article[] = [
     category: "لوحات المعلومات",
     tags: ["إكسل", "بيانات", "عملي"],
     publishedAt: "2026-08-05",
-    readingMinutes: 5,
     featured: true,
     relatedCourse: "excel-to-dashboard",
     body: [
@@ -193,7 +193,6 @@ export const articles: Article[] = [
     category: "الوكلاء",
     tags: ["وكلاء", "حوكمة", "متقدّم"],
     publishedAt: "2026-07-18",
-    readingMinutes: 6,
     featured: false,
     relatedCourse: "digital-team",
     body: [
@@ -238,7 +237,6 @@ export const articles: Article[] = [
     category: "العقل الثاني",
     tags: ["معرفة", "تنظيم", "مبتدئ"],
     publishedAt: "2026-07-02",
-    readingMinutes: 5,
     featured: false,
     relatedCourse: "second-brain",
     body: [
@@ -274,7 +272,6 @@ export const articles: Article[] = [
     category: "الأتمتة",
     tags: ["بايثون", "أتمتة", "متوسط"],
     publishedAt: "2026-06-15",
-    readingMinutes: 6,
     featured: false,
     relatedCourse: "python-work-tools",
     body: [

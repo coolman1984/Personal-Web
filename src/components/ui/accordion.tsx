@@ -73,7 +73,11 @@ export function Accordion({
             <div
               id={`panel-${item.id}`}
               role="region"
-              hidden={!isOpen}
+              // `hidden` بيفرض `display:none` (من preflight Tailwind)، وده كان
+              // بيمنع حركة `grid-template-rows` من الأساس — القفل بيحصل فجأة
+              // من غير أي انتقال. `inert` بيقفل التفاعل والوصولية للمحتوى
+              // المقفول من غير ما يكسر الـCSS transition.
+              inert={!isOpen}
               className={cn(
                 "grid transition-[grid-template-rows] duration-350 ease-[cubic-bezier(0.16,1,0.3,1)]",
                 isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",

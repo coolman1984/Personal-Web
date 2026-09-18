@@ -26,11 +26,23 @@ export function rateLimit(key: string): { allowed: boolean; retryAfterSeconds: n
   return { allowed: true, retryAfterSeconds: 0 };
 }
 
-/** بيستخرج عنوان الزائر من هيدرز البروكسي */
+/**
+ * بيستخرج عنوان الزائر من هيدرز البروكسي.
+ *
+ * ⚠️ `x-forwarded-for` سلسلة بيبنيها كل بروكسي في الطريق، والقيمة الأولى
+ * فيها هي اللي الزائر نفسه بيبعتها — يعني أي حد يقدر يزوّرها ويتحايل على
+ * حد الطلبات بمجرد ما يغيّر الهيدر. القيمة اللي نقدر نوثق فيها هي آخر
+ * وحدة، اللي البروكسي المباشر (Vercel وغيره) هو اللي ضافها، مش الزائر.
+ * لو منشورين على Vercel، `x-vercel-forwarded-for` أوثق من الكل لأن
+ * Vercel بيحط فيها القيمة الحقيقية دايمًا ومش بيسيب الزائر يغيّرها.
+ */
 export function clientKey(req: Request): string {
+  const vercelIp = req.headers.get("x-vercel-forwarded-for");
+  if (vercelIp) return vercelIp.trim();
+
   const fwd = req.headers.get("x-forwarded-for");
-  const ip = fwd?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "unknown";
-  return ip;
+  const lastHop = fwd?.split(",").pop()?.trim();
+  return lastHop || req.headers.get("x-real-ip") || "unknown";
 }
 
 /** تنظيف دوري بسيط عشان الخريطة ما تكبرش بلا حدود */

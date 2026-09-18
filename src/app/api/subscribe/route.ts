@@ -36,9 +36,17 @@ export async function POST(req: Request) {
     const audienceId = process.env.MAILCHIMP_AUDIENCE_ID;
 
     if (apiKey && audienceId) {
-      // مفتاح Mailchimp بينتهي بـ-usX اللي هي منطقة السيرفر
-      const dc = apiKey.split("-")[1];
-      await fetch(`https://${dc}.api.mailchimp.com/3.0/lists/${audienceId}/members`, {
+      // مفتاح Mailchimp بينتهي بـ-usX اللي هي منطقة السيرفر (مثلًا -us21)
+      const dc = apiKey.split("-").pop();
+      if (!dc || dc === apiKey) {
+        // المفتاح مش بالشكل المتوقّع — منادي دومين "undefined" غلط تمامًا،
+        // فبنوقف هنا ونسجّل تحذير واضح بدل ما نضيع الطلب بصمت.
+        throw new Error(
+          `MAILCHIMP_API_KEY بشكل غير متوقّع — لازم ينتهي بـ"-usX" (منطقة السيرفر)`,
+        );
+      }
+
+      const res = await fetch(`https://${dc}.api.mailchimp.com/3.0/lists/${audienceId}/members`, {
         method: "POST",
         headers: {
           Authorization: `Basic ${Buffer.from(`any:${apiKey}`).toString("base64")}`,
@@ -46,6 +54,15 @@ export async function POST(req: Request) {
         },
         body: JSON.stringify({ email_address: result.data.email, status: "subscribed" }),
       });
+
+      // "Member Exists" (٤٠٠) معناها الإيميل مشترك أصلًا — ده نجاح من وجهة
+      // نظر الزائر، مش خطأ. أي رفض تاني لازم يوصلنا كخطأ حقيقي.
+      if (!res.ok) {
+        const detail = (await res.json().catch(() => null)) as { title?: string } | null;
+        if (detail?.title !== "Member Exists") {
+          throw new Error(`Mailchimp رفض الاشتراك (${res.status}): ${detail?.title ?? "?"}`);
+        }
+      }
     } else {
       console.info("[subscribe] اشتراك جديد (القائمة البريدية مش متظبّطة):", result.data.email);
     }

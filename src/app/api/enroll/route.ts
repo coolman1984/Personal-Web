@@ -48,7 +48,7 @@ export async function POST(req: Request) {
     const to = process.env.CONTACT_TO_EMAIL;
 
     if (resendKey && to) {
-      await fetch("https://api.resend.com/emails", {
+      const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -66,6 +66,13 @@ export async function POST(req: Request) {
           ].join("\n"),
         }),
       });
+
+      // حجز من غير إشعار بيوصلنا = عميل واثق إن حجزه اتسجّل وإحنا مش
+      // واخدين بالنا. لازم نلقط الرفض هنا قبل ما نقول للزائر "تمام".
+      if (!res.ok) {
+        const detail = await res.text().catch(() => "");
+        throw new Error(`Resend رفض إشعار الحجز (${res.status}): ${detail}`);
+      }
     } else {
       console.info("[enroll] حجز جديد:", { reference, course: course.slug });
     }

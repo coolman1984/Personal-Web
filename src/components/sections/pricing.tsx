@@ -64,7 +64,7 @@ export function Pricing({ tiers }: { tiers: PricingTier[] }) {
                 )}
               >
                 {tier.badge && (
-                  <span className="absolute -top-3 start-1/2 -translate-x-1/2">
+                  <span className="absolute -top-3 start-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2">
                     <Badge tone="gold" size="md">
                       {tier.badge}
                     </Badge>
