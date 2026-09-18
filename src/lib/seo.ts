@@ -4,6 +4,12 @@ import { site } from "@/content/site";
 import { absoluteUrl, siteUrl } from "@/lib/utils";
 import type { Article, Course, Faq } from "@/types";
 
+/**
+ * صورة المشاركة — ملف ثابت مولَّد بـ`node scripts/generate-og.mjs`.
+ * مش ديناميكية لأن محرّك next/og لسه ما بيدعمش تشكيل الحروف العربية.
+ */
+const OG_IMAGE = "/og-default.png";
+
 interface MetaInput {
   title: string;
   description: string;
@@ -42,12 +48,14 @@ export function buildMetadata({
       description,
       siteName: site.name,
       locale: site.locale,
+      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: site.name }],
       ...(publishedAt ? { publishedTime: publishedAt } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
+      images: [OG_IMAGE],
     },
   };
 }

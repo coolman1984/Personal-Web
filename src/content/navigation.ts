@@ -75,16 +75,6 @@ export const footerNav: { title: string; links: NavItem[] }[] = [
   },
 ];
 
-/** أسماء أيقونات lucide لكل شبكة اجتماعية */
-export const socialIcons: Record<string, string> = {
-  linkedin: "Linkedin",
-  youtube: "Youtube",
-  x: "Twitter",
-  facebook: "Facebook",
-  github: "Github",
-  telegram: "Send",
-};
-
 export const socialLabels: Record<string, string> = {
   linkedin: "لينكدإن",
   youtube: "يوتيوب",

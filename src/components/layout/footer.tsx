@@ -2,8 +2,8 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { site } from "@/content/site";
-import { footerNav, socialIcons, socialLabels } from "@/content/navigation";
-import { getIcon } from "@/lib/icon";
+import { footerNav, socialLabels } from "@/content/navigation";
+import { socialIconMap, type SocialKey } from "@/components/shared/social-icons";
 import { NewsletterForm } from "@/components/shared/newsletter-form";
 import { Logo } from "./logo";
 
@@ -38,8 +38,8 @@ export function Footer() {
 
             <ul className="flex flex-wrap gap-2">
               {Object.entries(site.social).map(([key, href]) => {
-                if (!href) return null;
-                const Icon = getIcon(socialIcons[key]);
+                const Icon = socialIconMap[key as SocialKey];
+                if (!href || !Icon) return null;
                 return (
                   <li key={key}>
                     <a
