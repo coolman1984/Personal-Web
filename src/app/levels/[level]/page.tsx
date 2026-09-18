@@ -96,7 +96,7 @@ export default async function LevelPage({ params }: { params: Promise<{ level: s
 
       <PageHero
         crumbs={crumbs}
-        eyebrow={`المستوى ${level.order} من ٣`}
+        eyebrow={`المستوى ${formatNumber(level.order)} من ٣`}
         eyebrowTone={accent === accentFor("beginner") ? "aqua" : undefined}
         title={level.label}
         description={level.description}

@@ -5,7 +5,8 @@
  *   1. npm i stripe
  *   2. حطّ STRIPE_SECRET_KEY و STRIPE_WEBHOOK_SECRET في .env
  *   3. فُكّ التعليق عن الكود تحت
- *   4. خلّي site.features.payments = true
+ *   4. غيّر `enabled` تحت من `false` لـ `Boolean(secretKey)`
+ *   5. خلّي site.features.payments = true
  */
 import type { CheckoutInput, CheckoutResult, PaymentEvent, PaymentProvider } from "./types";
 
@@ -14,7 +15,11 @@ const secretKey = process.env.STRIPE_SECRET_KEY;
 export const stripeProvider: PaymentProvider = {
   id: "stripe",
   label: "بطاقة ائتمان (Stripe)",
-  enabled: Boolean(secretKey),
+  // ⚠️ متسبّهاش `Boolean(secretKey)` — `createCheckout` تحت لسه استب فاضي.
+  // لو خلّيتها كده وحد حطّ المفتاح وفعّل `site.features.payments`، كل
+  // محاولة حجز هترجع فشل (502) من غير أي تحذير واضح، وده بيقفل قناة
+  // البيع كلها بصمت. خلّيها `false` لحد ما تخلّص الخطوة ٣ فعلًا.
+  enabled: false,
 
   async createCheckout(input: CheckoutInput): Promise<CheckoutResult> {
     if (!secretKey) {

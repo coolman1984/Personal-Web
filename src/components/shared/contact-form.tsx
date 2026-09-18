@@ -24,10 +24,13 @@ export function ContactForm({ defaultSubject }: { defaultSubject?: string }) {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    // لازم نحفظ مرجع الفورم هنا، لأن React بيصفّر `currentTarget` بعد
+    // ما الحدث يخلص — استخدامه بعد `await` بيرمي خطأ وقت التشغيل.
+    const form = e.currentTarget;
     setLoading(true);
     setErrors({});
 
-    const fd = new FormData(e.currentTarget);
+    const fd = new FormData(form);
     const payload = Object.fromEntries(fd.entries());
 
     try {
@@ -42,7 +45,7 @@ export function ContactForm({ defaultSubject }: { defaultSubject?: string }) {
         track("submit_contact");
         push(data.message, "success");
         setSent(true);
-        e.currentTarget.reset();
+        form.reset();
       } else {
         setErrors(data.errors ?? {});
         push(data.message, "error");

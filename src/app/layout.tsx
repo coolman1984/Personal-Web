@@ -19,7 +19,6 @@ import { BackToTop } from "@/components/layout/back-to-top";
 import { WhatsAppFab } from "@/components/layout/whatsapp-fab";
 import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 import { JsonLd } from "@/components/shared/json-ld";
-import { ExitIntentModal } from "@/components/shared/exit-intent-modal";
 import { AnalyticsScripts } from "@/components/layout/analytics-scripts";
 
 const display = Tajawal({
@@ -51,6 +50,8 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export const viewport: Viewport = {
+  // ألوان شريط المتصفّح على الموبايل — استثناء مقصود من قاعدة «ممنوع ألوان خام»:
+  // بتتقري قبل تحميل الـCSS. القيم = `--bg` النهاري والليلي (docs/DESIGN.md §2).
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#fdfdfb" },
     { media: "(prefers-color-scheme: dark)", color: "#0d0e14" },
@@ -91,7 +92,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               <BackToTop />
               <WhatsAppFab />
               <MobileCtaBar />
-              <ExitIntentModal />
             </SiteShell>
           </ToastProvider>
         </ThemeProvider>
