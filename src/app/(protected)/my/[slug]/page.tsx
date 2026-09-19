@@ -87,13 +87,13 @@ export default async function CourseReviewPage({
         <div className="grid gap-10 lg:grid-cols-[1.7fr_1fr] lg:items-start">
           <div className="flex flex-col gap-10">
             {course.slug === "excel-automation" && (
-              <section className="rounded-2xl border border-brand-500/20 bg-brand-500/[0.06] p-6 sm:p-7">
+              <section className="card-inst p-6 sm:p-7">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <p className="text-[12px] font-bold text-brand-600 dark:text-brand-300">المعمل العملي الكامل</p>
+                    <p className="eyebrow">المعمل العملي الكامل</p>
                     <h2 className="mt-1 text-xl font-extrabold text-fg">من أربع ملفات إلى تقرير كامل بزر واحد</h2>
                     <p className="mt-2 max-w-2xl text-[13.5px] leading-7 text-fg-muted">
-                      شرح ذاتي خطوة بخطوة: الملفات، الربط، أخطاء البيانات، البرومبتات، بناء VBA، الاختبارات، وسجل التشغيل. ارجع له في أي وقت حتى بعد انتهاء الكورس.
+                      شرح ذاتي خطوة بخطوة مع حزمة ملفات التدريب للتحميل: الربط، أخطاء البيانات، البرومبتات، بناء VBA، الاختبارات، وسجل التشغيل. ارجع له في أي وقت حتى بعد انتهاء الكورس.
                     </p>
                   </div>
                   <Button href={`/my/${course.slug}/guide`} variant="primary" size="md">
