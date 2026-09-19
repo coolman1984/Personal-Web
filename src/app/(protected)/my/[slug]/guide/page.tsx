@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   ArrowRight, BookOpenCheck, CheckCircle2, FileSpreadsheet, ShieldCheck,
-  Sparkles, TriangleAlert, Wand2, Workflow, Target, Bug, Gauge, Code2
+  Sparkles, TriangleAlert, Wand2, Workflow, Target, Bug, Gauge, Code2, Download, PackageOpen
 } from "lucide-react";
 import { hasAccess } from "@/lib/access";
 import { Button } from "@/components/ui/button";
@@ -169,7 +169,7 @@ const prompts = [
 
 function Prompt({ title, why, text }: { title: string; why: string; text: string }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-soft">
+    <div className="overflow-hidden rounded-lg border border-line bg-surface shadow-soft">
       <div className="border-b border-line bg-bg-subtle px-5 py-4">
         <h3 className="font-extrabold text-fg">{title}</h3>
         <p className="mt-1 text-[13px] leading-relaxed text-fg-muted">{why}</p>
@@ -185,19 +185,19 @@ export default async function ExcelAutomationGuidePage() {
 
   return (
     <main>
-      <section className="border-b border-line bg-bg-subtle">
+      <section className="band-navy dark border-b border-gold-500/20">
         <div className="container-x py-12">
-          <Link href="/my/excel-automation" className="mb-6 inline-flex items-center gap-2 text-[13px] text-fg-subtle hover:text-fg">
+          <Link href="/my/excel-automation" className="mb-6 inline-flex items-center gap-2 text-[13px] text-white/70 transition-colors hover:text-gold-400">
             <ArrowRight className="size-4" /> ارجع للكورس
           </Link>
           <div className="max-w-4xl">
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-gold-500/25 bg-gold-500/10 px-3 py-1.5 text-[12px] font-bold text-gold-700 dark:text-gold-300">
+            <span className="eyebrow mb-4 inline-flex items-center gap-2">
               <Sparkles className="size-3.5" /> المعمل العملي الكامل
             </span>
-            <h1 className="text-[clamp(2rem,5vw,3.6rem)] font-black leading-[1.15] text-fg">
+            <h1 className="text-[clamp(2rem,4.2vw+0.5rem,3.75rem)] font-black leading-[1.28] text-white">
               من أربع ملفات مبعثرة إلى تقرير كامل بزر واحد
             </h1>
-            <p className="mt-5 max-w-3xl text-[16px] leading-8 text-fg-muted">
+            <p className="mt-5 max-w-3xl text-[16px] leading-8 text-white/75">
               الصفحة دي معمولة علشان ترجع لها حتى بعد شهور وتقدر تعيد المشروع من الصفر. امشِ بالترتيب، ما تقفزش للكود، وما تعتبرش إن الأتمتة نجحت لمجرد إن الملف اتفتح من غير رسالة خطأ.
             </p>
           </div>
@@ -206,7 +206,7 @@ export default async function ExcelAutomationGuidePage() {
 
       <div className="container-x py-12">
         <div className="mx-auto max-w-5xl space-y-14">
-          <section className="rounded-3xl border border-brand-500/20 bg-brand-500/[0.06] p-6 sm:p-8">
+          <section className="rounded-lg border border-brand-500/20 bg-brand-500/[0.06] p-6 sm:p-8">
             <div className="flex gap-4">
               <Target className="mt-1 size-6 shrink-0 text-brand-500" />
               <div>
@@ -219,21 +219,51 @@ export default async function ExcelAutomationGuidePage() {
             </div>
           </section>
 
+          <section className="card-inst p-6 sm:p-8">
+            <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+              <div className="max-w-2xl">
+                <p className="eyebrow">ملفات المعمل</p>
+                <h2 className="mt-2 text-2xl font-extrabold text-fg">نزّل حزمة التدريب قبل ما تبدأ</h2>
+                <div className="rule-gold mt-3" />
+                <p className="mt-4 text-[14px] leading-7 text-fg-muted">
+                  الحزمة فيها ملفات المبيعات والمنتجات والعملاء والتعديلات، ملف المتدرب، نسخة الحل للمدرب، دليل الشرح، وحزمة البرومبتات. فكّ الضغط في فولدر مستقل واشتغل على نسخة.
+                </p>
+              </div>
+              <div className="flex shrink-0 flex-col gap-2 sm:flex-row lg:flex-col">
+                <Button
+                  href="/training/excel-automation/Excel_Automation_Mini_Course_Training_Pack.zip"
+                  variant="primary"
+                  size="md"
+                  icon={<Download />}
+                  download
+                >
+                  نزّل الحزمة كاملة
+                </Button>
+                <span className="text-center text-[11.5px] text-fg-subtle">ملف واحد مضغوط • نسخة تدريب صناعية</span>
+              </div>
+            </div>
+            <div className="mt-6 grid gap-3 sm:grid-cols-3">
+              <div className="rounded-lg border border-line bg-bg-subtle p-4"><PackageOpen className="mb-2 size-4 text-gold-700 dark:text-gold-400" /><p className="font-bold text-fg">٤ ملفات مصادر</p><p className="mt-1 text-[12.5px] text-fg-muted">بيانات مترابطة ومشاكل مقصودة.</p></div>
+              <div className="rounded-lg border border-line bg-bg-subtle p-4"><FileSpreadsheet className="mb-2 size-4 text-gold-700 dark:text-gold-400" /><p className="font-bold text-fg">ملف المتدرب</p><p className="mt-1 text-[12.5px] text-fg-muted">ابدأ منه وابنِ الحل بنفسك.</p></div>
+              <div className="rounded-lg border border-line bg-bg-subtle p-4"><ShieldCheck className="mb-2 size-4 text-gold-700 dark:text-gold-400" /><p className="font-bold text-fg">حل مرجعي ودليل</p><p className="mt-1 text-[12.5px] text-fg-muted">للمراجعة بعد المحاولة والاختبار.</p></div>
+            </div>
+          </section>
+
           <section>
             <div className="mb-6 flex items-center gap-3">
-              <FileSpreadsheet className="size-6 text-aqua-500" />
+              <FileSpreadsheet className="size-6 text-gold-700 dark:text-gold-400" />
               <h2 className="text-2xl font-extrabold text-fg">١. افهم الملفات قبل ما تلمس أي معادلة</h2>
             </div>
             <div className="grid gap-4 md:grid-cols-2">
               {files.map(([name, role, desc]) => (
-                <div key={name} className="rounded-2xl border border-line bg-surface p-5 shadow-soft">
+                <div key={name} className="rounded-lg border border-line bg-surface p-5 shadow-soft">
                   <p dir="ltr" className="font-mono text-[12px] font-bold text-brand-600 dark:text-brand-300">{name}</p>
                   <h3 className="mt-2 font-extrabold text-fg">{role}</h3>
                   <p className="mt-2 text-[13.5px] leading-7 text-fg-muted">{desc}</p>
                 </div>
               ))}
             </div>
-            <div className="mt-5 rounded-2xl border border-gold-500/25 bg-gold-500/[0.07] p-5">
+            <div className="mt-5 rounded-lg border border-gold-500/25 bg-gold-500/[0.07] p-5">
               <p className="font-bold text-fg">قبل ما تبدأ</p>
               <p className="mt-2 text-[14px] leading-7 text-fg-muted">حط الملفات الأربعة وملف المتدرب في فولدر واحد جديد. خُد نسخة احتياطية منه. اشتغل دائمًا على النسخة. ما تعدلش ملفات المصدر علشان “تسهّل” الحل، لأن الحفاظ على المصدر جزء من التمرين.</p>
             </div>
@@ -246,8 +276,8 @@ export default async function ExcelAutomationGuidePage() {
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               {stages.map(([n,t,d]) => (
-                <div key={n} className="flex gap-4 rounded-2xl border border-line bg-surface p-5">
-                  <span className="ltr-nums grid size-9 shrink-0 place-items-center rounded-xl bg-brand-500/10 font-black text-brand-600 dark:text-brand-300">{n}</span>
+                <div key={n} className="flex gap-4 rounded-lg border border-line bg-surface p-5">
+                  <span className="ltr-nums grid size-9 shrink-0 place-items-center rounded-lg bg-brand-500/10 font-black text-brand-600 dark:text-brand-300">{n}</span>
                   <div><h3 className="font-extrabold text-fg">{t}</h3><p className="mt-2 text-[13.5px] leading-7 text-fg-muted">{d}</p></div>
                 </div>
               ))}
@@ -261,13 +291,13 @@ export default async function ExcelAutomationGuidePage() {
             </div>
             <div className="space-y-4 text-[14.5px] leading-8 text-fg-muted">
               <p>ابدأ من ملف المبيعات. كل صف فيه يعرفك “إيه اللي اتباع”، لكنه لوحده مش يعرف تكلفة المنتج ولا اسم العميل ولا منطق الخصم والمرتجع. علشان كده هتربط الملفات بالمفاتيح المشتركة.</p>
-              <div className="rounded-2xl border border-line bg-bg-subtle p-5 font-mono text-[13px]" dir="ltr">
+              <div className="rounded-lg border border-line bg-bg-subtle p-5 font-mono text-[13px]" dir="ltr">
                 Sales.Product ID → Products.Product ID<br/>
                 Sales.Customer ID → Customers.Customer ID<br/>
                 Sales.Order ID → Adjustments.Order ID
               </div>
               <p>ابدأ ببحث بسيط لإحضار اسم المنتج والتكلفة، وبعدها اسم العميل والمنطقة، ثم الخصم والمرتجع والشحن. استخدم معالجة الخطأ بحيث المفتاح المفقود يظهر بوضوح بدل ما يختفي.</p>
-              <div className="rounded-2xl border border-line bg-surface p-5 font-mono text-[13px]" dir="ltr">
+              <div className="rounded-lg border border-line bg-surface p-5 font-mono text-[13px]" dir="ltr">
                 =IFERROR(VLOOKUP(D2,'[02_Product_Master.xlsx]Products'!$A:$G,2,FALSE),"NOT FOUND")
               </div>
               <p>بعد الربط احسب بالتسلسل: إجمالي البيع، قيمة الخصم، قيمة المرتجع، صافي المبيعات، تكلفة البضاعة، الربح، ثم هامش الربح. لو صافي المبيعات صفر، لازم تحمي معادلة الهامش من القسمة على صفر.</p>
@@ -282,12 +312,12 @@ export default async function ExcelAutomationGuidePage() {
             <p className="mb-5 leading-8 text-fg-muted">الملفات فيها مشاكل مقصودة. دي مش عيوب في التمرين، دي جزء أساسي منه. لما يظهر لك مفتاح مش موجود أو قيمة غريبة، اسأل: “لو ده حصل الشهر الجاي وأنا مش واقف جنب الأداة، النظام المفروض يعمل إيه؟”</p>
             <div className="grid gap-3 sm:grid-cols-2">
               {["منتج غير موجود في دليل المنتجات","عميل غير موجود","مسافات زيادة حول الكود","حروف صغيرة بدل الكبيرة","سعر بيع فارغ","كمية صفر","رقم طلب مكرر","مفتاح مكرر في ملف Master","مرتجع أكبر من الكمية المباعة","تكلفة شحن سالبة","خصم غير منطقي"].map(x => (
-                <div key={x} className="flex items-start gap-2 rounded-xl border border-line p-4 text-[13.5px] text-fg-muted">
+                <div key={x} className="flex items-start gap-2 rounded-lg border border-line p-4 text-[13.5px] text-fg-muted">
                   <TriangleAlert className="mt-0.5 size-4 shrink-0 text-gold-500" />{x}
                 </div>
               ))}
             </div>
-            <p className="mt-5 rounded-2xl border border-aqua-500/20 bg-aqua-500/[0.06] p-5 font-bold leading-7 text-fg">القاعدة: مشكلة البيانات لا تختفي. إمّا تتصلح بقاعدة معلنة، أو تتسجل في Issues علشان إنسان يراجعها.</p>
+            <p className="mt-5 rounded-lg border border-aqua-500/20 bg-aqua-500/[0.06] p-5 font-bold leading-7 text-fg">القاعدة: مشكلة البيانات لا تختفي. إمّا تتصلح بقاعدة معلنة، أو تتسجل في Issues علشان إنسان يراجعها.</p>
           </section>
 
           <section>
@@ -307,7 +337,7 @@ export default async function ExcelAutomationGuidePage() {
             <div className="space-y-3 text-[14px] leading-8 text-fg-muted">
               <p>افتح ملف المتدرب في Excel واحفظ نسخة منه بصيغة تدعم الماكرو. فعّل تبويب Developer لو مش ظاهر، ثم افتح محرر VBA وأنشئ Module جديد. الصق أول وحدة فقط، احفظ، ارجع لإكسل وشغّلها.</p>
               <p>بعد كل وحدة اسأل نفسك أربع أسئلة: هل اشتغلت؟ هل الناتج صحيح؟ ماذا يحدث لو الملف ناقص؟ وهل أقدر أشغّلها مرة ثانية من غير ما تضاعف البيانات؟ لو واحدة منهم إجابتها “مش عارف”، ما تنتقلش للخطوة التالية.</p>
-              <p className="rounded-2xl border border-gold-500/25 bg-gold-500/[0.06] p-5 font-bold text-fg">ما تفعّلش ماكرو من مصدر مجهول. في التدريب أنت بتراجع الكود اللي اتولد لك، وبتجربه على نسخة من البيانات، وبعدين فقط تعتمد النسخة.</p>
+              <p className="rounded-lg border border-gold-500/25 bg-gold-500/[0.06] p-5 font-bold text-fg">ما تفعّلش ماكرو من مصدر مجهول. في التدريب أنت بتراجع الكود اللي اتولد لك، وبتجربه على نسخة من البيانات، وبعدين فقط تعتمد النسخة.</p>
             </div>
           </section>
 
@@ -316,10 +346,10 @@ export default async function ExcelAutomationGuidePage() {
               <ShieldCheck className="size-6 text-brand-500" />
               <h2 className="text-2xl font-extrabold text-fg">٧. شكل الأتمتة المحترفة في النهاية</h2>
             </div>
-            <div className="rounded-3xl border border-line bg-bg-subtle p-6">
+            <div className="rounded-lg border border-line bg-bg-subtle p-6">
               <div className="flex flex-wrap items-center justify-center gap-2 text-center text-[13px] font-bold text-fg">
                 {["اختيار الملفات","استيراد Raw","تنظيف المفاتيح","فحص الجودة","ربط الجداول","الحسابات","التقرير","Issues","Run Log"].map((x,i) => (
-                  <span key={x} className="contents"><span className="rounded-xl border border-line bg-surface px-3 py-2">{x}</span>{i<8 && <span className="text-fg-subtle">←</span>}</span>
+                  <span key={x} className="contents"><span className="rounded-lg border border-line bg-surface px-3 py-2">{x}</span>{i<8 && <span className="text-fg-subtle">←</span>}</span>
                 ))}
               </div>
             </div>
@@ -339,11 +369,11 @@ export default async function ExcelAutomationGuidePage() {
                 ["اختبار عينة يدوية","اختار 5 إلى 10 طلبات واحسبها يدويًا وقارن الناتج."],
                 ["اختبار المجاميع","قارن إجمالي المبيعات والربح بين النسخة اليدوية والآلية."],
                 ["اختبار الزمن","سجّل زمن الطريقة اليدوية وزمن الزر الواحد. ده رقم العائد اللي تعرضه."],
-              ].map(([t,d]) => <div key={t} className="rounded-2xl border border-line bg-surface p-5"><h3 className="flex items-center gap-2 font-extrabold text-fg"><CheckCircle2 className="size-4 text-aqua-500"/>{t}</h3><p className="mt-2 text-[13.5px] leading-7 text-fg-muted">{d}</p></div>)}
+              ].map(([t,d]) => <div key={t} className="rounded-lg border border-line bg-surface p-5"><h3 className="flex items-center gap-2 font-extrabold text-fg"><CheckCircle2 className="size-4 text-aqua-500"/>{t}</h3><p className="mt-2 text-[13.5px] leading-7 text-fg-muted">{d}</p></div>)}
             </div>
           </section>
 
-          <section className="rounded-3xl border border-brand-500/20 bg-brand-500/[0.06] p-6 sm:p-8">
+          <section className="rounded-lg border border-brand-500/20 bg-brand-500/[0.06] p-6 sm:p-8">
             <h2 className="text-2xl font-extrabold text-fg">٩. إمتى تنتقل لبايثون؟</h2>
             <p className="mt-4 leading-8 text-fg-muted">مش لأن بايثون “أقوى” وخلاص. تنتقل لما المشكلة نفسها تكبر: عشرات الملفات، مئات الآلاف من الصفوف، تشغيل مجدول، سجلات أقوى، معالجة أسرع، أو احتياج لأداة تعمل خارج Excel. الجميل إن المنطق لا يتغير: مدخلات، تنظيف، ربط، قواعد، فحوصات، مخرجات، وسجل تشغيل. أنت بتغيّر المحرك، مش طريقة التفكير.</p>
           </section>
