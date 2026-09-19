@@ -7,47 +7,62 @@
    كل الألوان بصيغة OKLCH عشان تدرّجاتها تبقى نظيفة وطبيعية للعين
    ═══════════════════════════════════════════════════════════════════ */
 @theme {
-  --font-display: var(--font-tajawal), "Tajawal", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-cairo), "Cairo", ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-plex-ar), "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
 
-  /* اللون الأساسي — بنفسجي نيلي راقي */
-  --color-brand-50: oklch(0.97 0.02 288);
-  --color-brand-100: oklch(0.94 0.04 288);
-  --color-brand-200: oklch(0.88 0.08 288);
-  --color-brand-300: oklch(0.8 0.12 288);
-  --color-brand-400: oklch(0.71 0.17 288);
-  --color-brand-500: oklch(0.63 0.21 288);
-  --color-brand-600: oklch(0.55 0.23 288);
-  --color-brand-700: oklch(0.47 0.21 288);
-  --color-brand-800: oklch(0.39 0.17 288);
-  --color-brand-900: oklch(0.31 0.13 288);
-  --color-brand-950: oklch(0.21 0.09 288);
+  /* ═══════════════════════════════════════════════════════════════
+     لوحة الألوان — «Black and Gold Elegance»
+     الألوان الخمسة الأصلية محوّلة بدقة من HEX لـOKLCH:
+       #FFFFFF · #E5E5E5 · #FCA311 · #14213D · #000000
+     ═══════════════════════════════════════════════════════════════ */
 
-  /* اللون المساعد — فيروزي هادي */
-  --color-aqua-300: oklch(0.86 0.1 197);
-  --color-aqua-400: oklch(0.78 0.13 197);
-  --color-aqua-500: oklch(0.7 0.15 197);
-  --color-aqua-600: oklch(0.6 0.14 197);
+  /* الكحلي — اللون الهيكلي. الدرجة 900 هي #14213D بالظبط */
+  --color-brand-50: oklch(0.972 0.006 264);
+  --color-brand-100: oklch(0.942 0.012 264);
+  --color-brand-200: oklch(0.878 0.023 264);
+  --color-brand-300: oklch(0.782 0.036 264);
+  --color-brand-400: oklch(0.658 0.048 264);
+  --color-brand-500: oklch(0.535 0.058 264);
+  --color-brand-600: oklch(0.428 0.062 264);
+  --color-brand-700: oklch(0.345 0.06 264);
+  --color-brand-800: oklch(0.292 0.058 264);
+  --color-brand-900: oklch(0.2522 0.0562 264); /* #14213D */
+  --color-brand-950: oklch(0.175 0.042 264);
 
-  /* لمسة ذهبية للفخامة */
-  --color-gold-300: oklch(0.89 0.1 85);
-  --color-gold-400: oklch(0.83 0.13 85);
-  --color-gold-500: oklch(0.76 0.14 80);
-  --color-gold-600: oklch(0.66 0.13 76);
+  /* الذهبي — لون الحركة والدعوة للفعل. الدرجة 500 هي #FCA311 بالظبط */
+  --color-gold-50: oklch(0.975 0.022 70);
+  --color-gold-100: oklch(0.945 0.046 70);
+  --color-gold-200: oklch(0.9 0.085 70);
+  --color-gold-300: oklch(0.855 0.124 70);
+  --color-gold-400: oklch(0.82 0.15 70);
+  --color-gold-500: oklch(0.7859 0.1674 70); /* #FCA311 */
+  --color-gold-600: oklch(0.7 0.155 68);
+  --color-gold-700: oklch(0.57 0.13 64); /* نصّ ذهبي على أبيض — تباين 4.61 ✅ */
+  --color-gold-800: oklch(0.48 0.105 60);
+  --color-gold-900: oklch(0.39 0.082 58);
 
-  /* حبر الخلفية الداكنة */
-  --color-ink-800: oklch(0.22 0.02 270);
-  --color-ink-900: oklch(0.16 0.018 270);
-  --color-ink-950: oklch(0.11 0.015 270);
-  --color-ink-1000: oklch(0.07 0.012 270);
+  /* الفولاذي — اللون التالت المحايد (كان اسمه aqua، والاسم اتساب زي ما هو
+     عشان ما نكسرش ٣٢ استخدام — القيم بس هي اللي اتغيّرت) */
+  --color-aqua-300: oklch(0.8 0.04 250);
+  --color-aqua-400: oklch(0.7 0.05 250);
+  --color-aqua-500: oklch(0.6 0.055 250);
+  --color-aqua-600: oklch(0.49 0.058 250);
+
+  /* الأسود والكحلي الداكن — خلفيات الوضع الليلي */
+  --color-ink-800: oklch(0.175 0.042 264);
+  --color-ink-900: oklch(0.12 0.03 264);
+  --color-ink-950: oklch(0.06 0.018 264);
+  --color-ink-1000: oklch(0 0 0); /* #000000 */
 
   --radius-4xl: 2rem;
   --radius-5xl: 2.75rem;
 
-  --shadow-glow: 0 0 60px -12px oklch(0.63 0.21 288 / 0.5);
-  --shadow-soft: 0 2px 8px -2px oklch(0.2 0.02 270 / 0.08), 0 12px 32px -8px oklch(0.2 0.02 270 / 0.12);
-  --shadow-lift: 0 4px 16px -4px oklch(0.2 0.02 270 / 0.12), 0 24px 64px -16px oklch(0.2 0.02 270 / 0.2);
+  --shadow-glow: 0 0 60px -12px oklch(0.7859 0.1674 70 / 0.45);
+  --shadow-soft: 0 1px 3px -1px oklch(0.2522 0.0562 264 / 0.08),
+    0 8px 24px -8px oklch(0.2522 0.0562 264 / 0.1);
+  --shadow-lift: 0 4px 12px -4px oklch(0.2522 0.0562 264 / 0.12),
+    0 20px 48px -16px oklch(0.2522 0.0562 264 / 0.18);
 
   --animate-float: float 7s ease-in-out infinite;
   --animate-aurora: aurora 22s ease-in-out infinite alternate;
@@ -75,9 +90,9 @@
     to { transform: translateX(50%); }
   }
   @keyframes pulse-ring {
-    0% { box-shadow: 0 0 0 0 oklch(0.63 0.21 288 / 0.45); }
-    70% { box-shadow: 0 0 0 18px oklch(0.63 0.21 288 / 0); }
-    100% { box-shadow: 0 0 0 0 oklch(0.63 0.21 288 / 0); }
+    0% { box-shadow: 0 0 0 0 oklch(0.7859 0.1674 70 / 0.45); }
+    70% { box-shadow: 0 0 0 18px oklch(0.7859 0.1674 70 / 0); }
+    100% { box-shadow: 0 0 0 0 oklch(0.7859 0.1674 70 / 0); }
   }
   @keyframes fade-up {
     from { opacity: 0; transform: translateY(24px); }
@@ -89,39 +104,61 @@
    المتغيّرات الدلالية — الوضع الفاتح والداكن
    ═══════════════════════════════════════════════════════════════════ */
 :root {
-  --bg: oklch(0.99 0.004 95);
-  --bg-subtle: oklch(0.97 0.007 95);
+  /* ── الوضع النهاري: أبيض نضيف، نصّ كحلي، ذهبي للحركة ── */
+  --bg: oklch(1 0 0);                       /* #FFFFFF */
+  --bg-subtle: oklch(0.974 0.003 264);
   --surface: oklch(1 0 0);
-  --surface-2: oklch(0.975 0.006 288);
-  --border: oklch(0.9 0.008 288);
-  --border-strong: oklch(0.83 0.014 288);
-  --fg: oklch(0.2 0.02 270);
-  --fg-muted: oklch(0.47 0.016 270);
-  --fg-subtle: oklch(0.6 0.014 270);
-  --primary: oklch(0.55 0.23 288);
-  --primary-fg: oklch(0.99 0 0);
-  --ring: oklch(0.63 0.21 288 / 0.55);
-  --glass: oklch(1 0 0 / 0.72);
-  --glass-border: oklch(1 0 0 / 0.5);
-  --shadow-color: oklch(0.45 0.05 288 / 0.1);
+  --surface-2: oklch(0.958 0.005 264);
+  --border: oklch(0.9219 0 0);              /* #E5E5E5 */
+  --border-strong: oklch(0.855 0.008 264);
+  --fg: oklch(0.2522 0.0562 264);           /* #14213D */
+  --fg-muted: oklch(0.455 0.035 264);
+  --fg-subtle: oklch(0.535 0.025 264);     /* 5.19 على الأبيض · 4.59 على surface-2 ✅ */
+
+  /* الذهبي هو زر الدعوة الأساسي في الوضعين — والنصّ عليه كحلي */
+  --primary: oklch(0.7859 0.1674 70);       /* #FCA311 */
+  --primary-fg: oklch(0.2522 0.0562 264);
+
+  /* الكحلي هو الزر الثانوي الصلب */
+  --solid: oklch(0.2522 0.0562 264);
+  --solid-fg: oklch(1 0 0);
+
+  --ring: oklch(0.2522 0.0562 264 / 0.5);
+  --glass: oklch(1 0 0 / 0.86);
+  --glass-border: oklch(0.9219 0 0 / 0.9);
+  --shadow-color: oklch(0.2522 0.0562 264 / 0.1);
+
+  /* تدرّج العناوين — الذهبي الفاتح تباينه ضعيف على الأبيض،
+     فبنستخدم درجة أغمق في الوضع النهاري */
+  --grad-from: oklch(0.2522 0.0562 264);
+  --grad-to: oklch(0.57 0.13 64);
 }
 
 .dark {
-  --bg: oklch(0.11 0.015 270);
-  --bg-subtle: oklch(0.14 0.017 270);
-  --surface: oklch(0.16 0.018 270);
-  --surface-2: oklch(0.2 0.02 272);
-  --border: oklch(0.28 0.022 272);
-  --border-strong: oklch(0.38 0.03 274);
-  --fg: oklch(0.96 0.005 90);
-  --fg-muted: oklch(0.73 0.014 270);
-  --fg-subtle: oklch(0.6 0.016 270);
-  --primary: oklch(0.71 0.17 288);
-  --primary-fg: oklch(0.12 0.02 270);
-  --ring: oklch(0.71 0.17 288 / 0.6);
-  --glass: oklch(0.18 0.02 270 / 0.6);
-  --glass-border: oklch(1 0 0 / 0.09);
-  --shadow-color: oklch(0 0 0 / 0.5);
+  /* ── الوضع الليلي: أسود، كروت كحلية، ذهبي لامع ── */
+  --bg: oklch(0 0 0);                       /* #000000 */
+  --bg-subtle: oklch(0.105 0.024 264);
+  --surface: oklch(0.2522 0.0562 264);      /* #14213D */
+  --surface-2: oklch(0.32 0.055 264);
+  --border: oklch(0.33 0.042 264);
+  --border-strong: oklch(0.44 0.048 264);
+  --fg: oklch(1 0 0);                       /* #FFFFFF */
+  --fg-muted: oklch(0.8 0.012 264);
+  --fg-subtle: oklch(0.69 0.02 264);        /* 4.62 على surface-2 الكحلي ✅ */
+
+  --primary: oklch(0.7859 0.1674 70);       /* #FCA311 */
+  --primary-fg: oklch(0 0 0);
+
+  --solid: oklch(1 0 0);
+  --solid-fg: oklch(0.2522 0.0562 264);
+
+  --ring: oklch(0.7859 0.1674 70 / 0.6);
+  --glass: oklch(0.06 0.018 264 / 0.78);
+  --glass-border: oklch(1 0 0 / 0.1);
+  --shadow-color: oklch(0 0 0 / 0.6);
+
+  --grad-from: oklch(1 0 0);
+  --grad-to: oklch(0.7859 0.1674 70);
 }
 
 @theme inline {
@@ -136,6 +173,8 @@
   --color-fg-subtle: var(--fg-subtle);
   --color-primary: var(--primary);
   --color-primary-fg: var(--primary-fg);
+  --color-solid: var(--solid);
+  --color-solid-fg: var(--solid-fg);
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -164,16 +203,16 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 800;
-    letter-spacing: -0.015em;
-    line-height: 1.25;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
     text-wrap: balance;
   }
 
   p { text-wrap: pretty; }
 
   ::selection {
-    background: oklch(0.63 0.21 288 / 0.28);
+    background: oklch(0.7859 0.1674 70 / 0.32);
     color: var(--fg);
   }
 
@@ -224,12 +263,10 @@
 }
 
 @utility text-gradient {
-  background-image: linear-gradient(
-    115deg,
-    var(--color-brand-400) 0%,
-    var(--color-aqua-400) 45%,
-    var(--color-gold-400) 100%
-  );
+  /* بيتغيّر مع الوضع — شوف --grad-from و --grad-to فوق.
+     السبب: الذهبي #FCA311 تباينه على الأبيض ضعيف (٢:١)،
+     فالنهاري بيستخدم درجة ذهبية أغمق تقرا صح. */
+  background-image: linear-gradient(110deg, var(--grad-from) 10%, var(--grad-to) 95%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -237,7 +274,7 @@
 }
 
 @utility text-gradient-soft {
-  background-image: linear-gradient(120deg, var(--color-fg) 20%, var(--color-brand-400) 100%);
+  background-image: linear-gradient(120deg, var(--color-fg) 25%, var(--grad-to) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -255,9 +292,9 @@
     padding: 1px;
     background: linear-gradient(
       140deg,
-      oklch(0.71 0.17 288 / 0.55),
-      oklch(0.7 0.15 197 / 0.25) 40%,
-      transparent 70%
+      oklch(0.7859 0.1674 70 / 0.65),
+      oklch(0.7859 0.1674 70 / 0.18) 42%,
+      transparent 72%
     );
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -366,4 +403,82 @@
     direction: ltr;
     display: inline-block;
   }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   أدوات التخطيط المؤسسي — مستوحاة من المراجع البصرية اللي بعتها
+   ═══════════════════════════════════════════════════════════════════ */
+
+/** شريط كحلي بعرض الشاشة — للأرقام والفوتر والأقسام الداكنة */
+@utility band-navy {
+  background: var(--color-brand-900);
+  color: oklch(1 0 0);
+}
+
+/** شريط ذهبي بعرض الشاشة — للنشرة والدعوات */
+@utility band-gold {
+  background: var(--color-gold-500);
+  color: var(--color-brand-900);
+}
+
+/** خط ذهبي قصير تحت العنوان — توقيع بصري متكرّر */
+@utility rule-gold {
+  position: relative;
+  padding-bottom: 1rem;
+  &::after {
+    content: "";
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-start: 0;
+    width: 3.5rem;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--color-gold-500);
+  }
+}
+
+/** نفس الخط بس في النص — للعناوين المتمركزة.
+    التمركز بـinset-inline: 0 + margin-inline: auto — مش start-50% مع translate،
+    لأن الاتنين بيتجمعوا في RTL والخط بيزيح للشمال (راجع DESIGN.md §10.6) */
+@utility rule-gold-center {
+  position: relative;
+  padding-bottom: 1rem;
+  &::after {
+    content: "";
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline: 0;
+    margin-inline: auto;
+    width: 3.5rem;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--color-gold-500);
+  }
+}
+
+/** بطاقة مؤسسية — حواف أهدى وظل أنعم من الكروت الدائرية */
+@utility card-inst {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+    border-color: var(--color-gold-500);
+  }
+}
+
+/** نصّ فوقي صغير بحروف متباعدة — «OUR PROGRAMS» في المرجع */
+@utility eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--color-gold-700);
+  text-transform: none;
 }

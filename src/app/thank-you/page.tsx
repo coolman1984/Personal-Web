@@ -55,7 +55,7 @@ export default async function ThankYouPage({
           </p>
         )}
 
-        <div className="mt-8 w-full max-w-lg rounded-2xl border border-gold-500/25 bg-gold-500/8 p-4 text-center">
+        <div className="mt-8 w-full max-w-lg rounded-lg border border-gold-500/25 bg-gold-500/8 p-4 text-center">
           <p className="text-[14px] leading-relaxed text-fg-muted">
             <span className="font-extrabold text-fg">مهم: </span>
             سجّل دخولك بنفس الإيميل اللي حجزت بيه. لو حسابك على جوجل بإيميل تاني،
@@ -63,7 +63,7 @@ export default async function ThankYouPage({
           </p>
         </div>
 
-        <div className="mt-6 w-full max-w-lg rounded-[24px] border border-line bg-surface p-6 text-start shadow-soft">
+        <div className="mt-6 w-full max-w-lg rounded-lg border border-line bg-surface p-6 text-start shadow-soft">
           <h2 className="mb-4 text-base font-extrabold text-fg">الخطوات الجاية</h2>
           <ol className="flex flex-col gap-3.5">
             {steps.map((step, i) => (

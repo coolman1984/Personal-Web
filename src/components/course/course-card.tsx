@@ -50,7 +50,7 @@ export function CourseCard({
         {/* الأيقونة */}
         <span
           className={cn(
-            "mb-4 grid size-14 place-items-center rounded-2xl border",
+            "mb-4 grid size-14 place-items-center rounded-lg border",
             accent.bg,
             accent.border,
             accent.text,
@@ -73,7 +73,7 @@ export function CourseCard({
         {course.promise && (
           <p className="mb-4 flex items-start gap-2 rounded-xl border border-gold-500/22 bg-gold-500/8 p-3 text-[12.5px] leading-snug text-fg-muted">
             <PackageCheck
-              className="mt-0.5 size-3.5 shrink-0 text-gold-600 dark:text-gold-300"
+              className="mt-0.5 size-3.5 shrink-0 text-gold-700 dark:text-gold-300"
               aria-hidden
             />
             <span>
@@ -125,7 +125,7 @@ export function CourseCard({
                   {formatNumber(course.price.compareAt)}
                 </span>
                 {discount && (
-                  <span className="text-[11px] font-bold text-gold-600 dark:text-gold-300">
+                  <span className="text-[11px] font-bold text-gold-700 dark:text-gold-300">
                     وفّر <span className="ltr-nums">{formatNumber(discount)}٪</span>
                   </span>
                 )}

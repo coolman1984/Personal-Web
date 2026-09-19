@@ -100,7 +100,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
           {/* دعوة للكورس المرتبط */}
           {relatedCourse && (
-            <div className="mt-10 rounded-[24px] border border-line bg-surface p-7 noise ring-gradient">
+            <div className="mt-10 rounded-lg border border-line bg-surface p-7 noise ring-gradient">
               <p className="text-[13px] font-bold text-fg-subtle">الكورس اللي بيغطّي ده عمليًا</p>
               <h2 className="mt-2 text-xl font-extrabold text-fg">{relatedCourse.title}</h2>
               <p className="mt-2 text-[14.5px] leading-[1.9] text-fg-muted">
@@ -127,7 +127,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               <li key={a.slug}>
                 <Link
                   href={`/articles/${a.slug}`}
-                  className="group flex h-full flex-col rounded-[20px] border border-line bg-surface p-6 shadow-soft card-hover"
+                  className="group flex h-full flex-col rounded-lg border border-line bg-surface p-6 shadow-soft card-hover"
                 >
                   <Badge tone="neutral" size="sm" className="self-start">
                     {a.category}

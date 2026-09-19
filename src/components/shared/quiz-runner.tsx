@@ -62,7 +62,7 @@ export function QuizRunner({
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="mx-auto max-w-4xl"
       >
-        <div className="rounded-[28px] border border-line bg-surface p-8 text-center noise ring-gradient md:p-12">
+        <div className="rounded-xl border border-line bg-surface p-8 text-center noise ring-gradient md:p-12">
           <Badge
             tone={result.level === "beginner" ? "aqua" : result.level === "intermediate" ? "brand" : "gold"}
             size="lg"
@@ -141,7 +141,7 @@ export function QuizRunner({
                 <button
                   onClick={() => choose(opt.score)}
                   className={cn(
-                    "group flex w-full items-center gap-3 rounded-2xl border border-line bg-surface p-5 text-start",
+                    "group flex w-full items-center gap-3 rounded-lg border border-line bg-surface p-5 text-start",
                     "text-[15px] font-medium text-fg-muted shadow-soft transition-all",
                     "hover:-translate-y-0.5 hover:border-brand-500/40 hover:text-fg hover:shadow-lift",
                     "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ring)",

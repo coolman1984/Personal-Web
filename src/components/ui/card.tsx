@@ -31,7 +31,7 @@ export function Card({
   return (
     <Tag
       className={cn(
-        "relative rounded-[20px] border border-line bg-surface shadow-soft",
+        "relative rounded-lg border border-line bg-surface shadow-soft",
         paddings[padding],
         interactive && "card-hover",
         ringGradient && "ring-gradient",

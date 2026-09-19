@@ -52,7 +52,7 @@ export default async function AdminPage() {
           {stats.map((s) => (
             <li
               key={s.label}
-              className="flex items-center gap-4 rounded-[20px] border border-line bg-surface p-6 shadow-soft"
+              className="flex items-center gap-4 rounded-lg border border-line bg-surface p-6 shadow-soft"
             >
               <span className="grid size-12 place-items-center rounded-xl bg-brand-500/12 text-brand-500">
                 <s.icon className="size-5" aria-hidden />
@@ -68,7 +68,7 @@ export default async function AdminPage() {
         </ul>
 
         {byCourse.length > 0 && (
-          <div className="rounded-[20px] border border-line bg-surface p-6 shadow-soft">
+          <div className="rounded-lg border border-line bg-surface p-6 shadow-soft">
             <h2 className="mb-4 text-base font-extrabold text-fg">التوزيع على الكورسات</h2>
             <ul className="flex flex-col gap-3">
               {byCourse.map(({ course, count }) => (
@@ -84,7 +84,7 @@ export default async function AdminPage() {
         )}
 
         {access.length > 0 && (
-          <div className="mt-6 rounded-[20px] border border-line bg-surface p-6 shadow-soft">
+          <div className="mt-6 rounded-lg border border-line bg-surface p-6 shadow-soft">
             <h2 className="mb-4 text-base font-extrabold text-fg">آخر ٥ إضافات</h2>
             <ul className="flex flex-col gap-3">
               {access.slice(0, 5).map((a) => (

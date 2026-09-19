@@ -27,7 +27,7 @@ export function MegaMenu({ open, levels, coursesByLevel, onNavigate }: MegaMenuP
           transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
           className="absolute top-full start-1/2 z-50 w-[min(42rem,calc(100vw-3rem))] ltr:-translate-x-1/2 rtl:translate-x-1/2 pt-3"
         >
-          <div className="overflow-hidden rounded-[20px] border border-line glass p-6 shadow-lift">
+          <div className="overflow-hidden rounded-lg border border-line glass p-6 shadow-lift">
             <div className="grid gap-5 md:grid-cols-3">
               {levels.map((level) => {
                 const Icon = getIcon(level.icon);

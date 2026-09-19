@@ -31,7 +31,7 @@ export function PriceBox({
   if (enrolled) {
     return (
       <aside className="lg:sticky lg:top-24">
-        <div className="rounded-[24px] border border-[oklch(0.58_0.15_150/0.3)] bg-[oklch(0.58_0.15_150/0.07)] p-6 shadow-soft">
+        <div className="rounded-lg border border-[oklch(0.58_0.15_150/0.3)] bg-[oklch(0.58_0.15_150/0.07)] p-6 shadow-soft">
           <Badge tone="success" size="md" className="mb-4">
             إنت مشترك في الكورس ده
           </Badge>
@@ -54,7 +54,7 @@ export function PriceBox({
 
   return (
     <aside className="lg:sticky lg:top-24">
-      <div className="rounded-[24px] border border-line bg-surface p-6 shadow-soft ring-gradient">
+      <div className="rounded-lg border border-line bg-surface p-6 shadow-soft ring-gradient">
         {/* السعر — بيختفي لو site.features.showPrices = false */}
         {site.features.showPrices ? (
           <>
@@ -103,7 +103,7 @@ export function PriceBox({
 
         {/* الأماكن المتبقية */}
         {typeof course.seatsLeft === "number" && !soldOut && (
-          <p className="mt-4 rounded-xl border border-gold-500/25 bg-gold-500/10 p-3 text-center text-[13px] font-bold text-gold-600 dark:text-gold-300">
+          <p className="mt-4 rounded-xl border border-gold-500/25 bg-gold-500/10 p-3 text-center text-[13px] font-bold text-gold-800 dark:text-gold-300">
             آخر <span className="ltr-nums">{formatNumber(course.seatsLeft)}</span> أماكن في
             المجموعة الجاية
           </p>

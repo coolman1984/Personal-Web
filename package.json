@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "og": "node scripts/generate-og.mjs"
+    "og": "node scripts/generate-og.mjs",
+    "contrast": "node scripts/contrast.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

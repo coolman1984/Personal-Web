@@ -62,7 +62,7 @@ export default async function CourseReviewPage({
           <div className="flex flex-wrap items-start gap-4">
             <span
               className={cn(
-                "grid size-14 shrink-0 place-items-center rounded-2xl border",
+                "grid size-14 shrink-0 place-items-center rounded-lg border",
                 accent.bg,
                 accent.border,
                 accent.text,
@@ -150,7 +150,7 @@ export default async function CourseReviewPage({
                 <Play className="size-5 text-gold-500" aria-hidden />
                 تسجيلات الجلسات
               </h2>
-              <div className="rounded-[20px] border border-dashed border-line-strong p-8 text-center">
+              <div className="rounded-lg border border-dashed border-line-strong p-8 text-center">
                 <p className="text-[14.5px] leading-relaxed text-fg-muted">
                   تسجيل جلستك بيتحطّ هنا خلال ٤٨ ساعة من الجلسة.
                 </p>
@@ -164,7 +164,7 @@ export default async function CourseReviewPage({
 
           {/* العمود الجانبي */}
           <aside className="flex flex-col gap-5 lg:sticky lg:top-24">
-            <div className="rounded-[20px] border border-line bg-surface p-6 shadow-soft">
+            <div className="rounded-lg border border-line bg-surface p-6 shadow-soft">
               <h2 className="mb-4 flex items-center gap-2.5 text-base font-extrabold text-fg">
                 <Download className="size-4.5 text-fg-subtle" aria-hidden />
                 اللي معاك
@@ -182,7 +182,7 @@ export default async function CourseReviewPage({
               </ul>
             </div>
 
-            <div className="rounded-[20px] border border-line bg-surface p-6 shadow-soft">
+            <div className="rounded-lg border border-line bg-surface p-6 shadow-soft">
               <h2 className="mb-3 text-base font-extrabold text-fg">وقفت في حاجة؟</h2>
               <p className="mb-4 text-[13.5px] leading-relaxed text-fg-muted">
                 ابعتلي على واتساب. لو السؤال بيتكرّر، بيتحوّل لنقطة في جلسة العيادة الجاية.

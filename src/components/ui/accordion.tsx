@@ -39,7 +39,7 @@ export function Accordion({
   }
 
   return (
-    <div className={cn("divide-y divide-line rounded-[20px] border border-line bg-surface", className)}>
+    <div className={cn("divide-y divide-line rounded-lg border border-line bg-surface", className)}>
       {items.map((item) => {
         const isOpen = open.includes(item.id);
         return (

@@ -49,7 +49,7 @@ export function MiniCourses({ courses }: { courses: Course[] }) {
 
                   <span
                     className={cn(
-                      "mb-5 grid size-14 place-items-center rounded-2xl border",
+                      "mb-5 grid size-14 place-items-center rounded-lg border",
                       accent.bg,
                       accent.border,
                       accent.text,
@@ -70,7 +70,7 @@ export function MiniCourses({ courses }: { courses: Course[] }) {
                   {course.promise && (
                     <p className="mt-5 flex items-start gap-2.5 rounded-xl border border-gold-500/22 bg-gold-500/8 p-3.5 text-[13.5px] leading-snug text-fg-muted">
                       <PackageCheck
-                        className="mt-0.5 size-4 shrink-0 text-gold-600 dark:text-gold-300"
+                        className="mt-0.5 size-4 shrink-0 text-gold-700 dark:text-gold-300"
                         aria-hidden
                       />
                       <span>
@@ -106,7 +106,7 @@ export function MiniCourses({ courses }: { courses: Course[] }) {
                         ? formatPrice(course.price)
                         : site.priceHidden.label}
                     </span>
-                    <span className="flex items-center gap-1.5 text-sm font-bold text-gold-600 dark:text-gold-300">
+                    <span className="flex items-center gap-1.5 text-sm font-bold text-gold-700 dark:text-gold-300">
                       التفاصيل
                       <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
                     </span>

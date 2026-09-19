@@ -53,7 +53,7 @@ function Panel({
   tone: string;
 }) {
   return (
-    <div className="rounded-[20px] border border-line bg-surface p-6">
+    <div className="rounded-lg border border-line bg-surface p-6">
       <h2 className="mb-4 flex items-center gap-2.5 text-lg font-extrabold text-fg">
         <Icon className={cn("size-5", tone)} aria-hidden />
         {title}
@@ -97,11 +97,10 @@ export default async function LevelPage({ params }: { params: Promise<{ level: s
       <PageHero
         crumbs={crumbs}
         eyebrow={`المستوى ${formatNumber(level.order)} من ٣`}
-        eyebrowTone={accent === accentFor("beginner") ? "aqua" : undefined}
         title={level.label}
         description={level.description}
       >
-        <p className={cn("text-[17px] font-bold", accent.text)}>{level.tagline}</p>
+        <p className="text-[17px] font-bold text-gold-500">{level.tagline}</p>
         <div className="flex flex-wrap gap-2">
           <Badge tone="neutral" size="md">
             <span className="ltr-nums">{formatNumber(courses.length)}</span>&nbsp;كورسات
@@ -146,7 +145,7 @@ export default async function LevelPage({ params }: { params: Promise<{ level: s
       {/* الأدوات والمخرجات */}
       <section className="container-x pb-14 md:pb-20">
         <div className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-[20px] border border-line bg-surface p-6">
+          <div className="rounded-lg border border-line bg-surface p-6">
             <h2 className="mb-4 text-lg font-extrabold text-fg">الأدوات في المستوى ده</h2>
             <ul className="flex flex-wrap gap-2">
               {tools.map((t) => (
@@ -161,7 +160,7 @@ export default async function LevelPage({ params }: { params: Promise<{ level: s
           </div>
 
           {projects.length > 0 && (
-            <div className="rounded-[20px] border border-line bg-surface p-6">
+            <div className="rounded-lg border border-line bg-surface p-6">
               <h2 className="mb-4 text-lg font-extrabold text-fg">المخرجات اللي هتبنيها</h2>
               <ul className="flex flex-col gap-3">
                 {projects.map((p) => (

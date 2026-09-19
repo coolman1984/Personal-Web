@@ -39,7 +39,7 @@ export default async function MyCoursesPage() {
 
       <section className="container-x pb-14 md:pb-20">
         {courses.length === 0 ? (
-          <div className="mx-auto max-w-lg rounded-[24px] border border-dashed border-line-strong p-8 text-center">
+          <div className="mx-auto max-w-lg rounded-lg border border-dashed border-line-strong p-8 text-center">
             <BookOpen className="mx-auto mb-4 size-8 text-fg-subtle" aria-hidden />
             <h2 className="text-lg font-extrabold text-fg">لسه مفيش كورسات مفتوحة</h2>
             <p className="mt-2.5 text-[14.5px] leading-[1.9] text-fg-muted">
@@ -74,7 +74,7 @@ export default async function MyCoursesPage() {
                 <li key={course.slug} className="h-full">
                   <Link
                     href={`/my/${course.slug}`}
-                    className="group flex h-full flex-col rounded-[20px] border border-line bg-surface p-6 shadow-soft card-hover"
+                    className="group flex h-full flex-col rounded-lg border border-line bg-surface p-6 shadow-soft card-hover"
                   >
                     <div className="mb-4 flex items-center justify-between gap-2">
                       <LevelBadge level={course.level} />

@@ -66,7 +66,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <section className="container-x pb-8">
         <div className="grid gap-6 lg:grid-cols-2">
           <Reveal>
-            <div className="h-full rounded-[20px] border border-[oklch(0.55_0.2_25/0.2)] bg-[oklch(0.55_0.2_25/0.05)] p-6">
+            <div className="h-full rounded-lg border border-[oklch(0.55_0.2_25/0.2)] bg-[oklch(0.55_0.2_25/0.05)] p-6">
               <h2 className="mb-3 flex items-center gap-2.5 text-lg font-extrabold text-fg">
                 <Target className="size-5 text-[oklch(0.55_0.2_25)] dark:text-[oklch(0.75_0.19_25)]" aria-hidden />
                 المشكلة
@@ -75,7 +75,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             </div>
           </Reveal>
           <Reveal delay={0.06}>
-            <div className="h-full rounded-[20px] border border-[oklch(0.58_0.15_150/0.25)] bg-[oklch(0.58_0.15_150/0.06)] p-6">
+            <div className="h-full rounded-lg border border-[oklch(0.58_0.15_150/0.25)] bg-[oklch(0.58_0.15_150/0.06)] p-6">
               <h2 className="mb-3 flex items-center gap-2.5 text-lg font-extrabold text-fg">
                 <Check
                   className="size-5 text-[oklch(0.45_0.15_150)] dark:text-[oklch(0.78_0.16_150)]"
@@ -90,7 +90,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         </div>
 
         <Reveal className="mt-6">
-          <div className="rounded-[20px] border border-line bg-surface p-6">
+          <div className="rounded-lg border border-line bg-surface p-6">
             <h2 className="mb-4 flex items-center gap-2.5 text-lg font-extrabold text-fg">
               <Check className={cn("size-5", accent.text)} strokeWidth={3} aria-hidden />
               أهم اللي بتتعلّمه
@@ -108,7 +108,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           <Reveal>
-            <div className="h-full rounded-[20px] border border-line bg-surface p-6">
+            <div className="h-full rounded-lg border border-line bg-surface p-6">
               <h2 className="mb-4 flex items-center gap-2.5 text-lg font-extrabold text-fg">
                 <Wrench className="size-5 text-fg-subtle" aria-hidden />
                 الأدوات
@@ -126,7 +126,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             </div>
           </Reveal>
           <Reveal delay={0.06}>
-            <div className="flex h-full flex-col justify-center rounded-[20px] border border-line bg-surface p-6 noise ring-gradient">
+            <div className="flex h-full flex-col justify-center rounded-lg border border-line bg-surface p-6 noise ring-gradient">
               <h2 className="mb-2 flex items-center gap-2.5 text-lg font-extrabold text-fg">
                 <TrendingUp className="size-5 text-brand-500" aria-hidden />
                 الأثر

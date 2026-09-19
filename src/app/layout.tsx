@@ -3,7 +3,7 @@
  * المواصفات: docs/DESIGN.md §3.1 و §10.3
  */
 import type { Metadata, Viewport } from "next";
-import { Tajawal, IBM_Plex_Sans_Arabic, JetBrains_Mono } from "next/font/google";
+import { Cairo, IBM_Plex_Sans_Arabic, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 import { site } from "@/content/site";
@@ -24,10 +24,15 @@ import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 import { JsonLd } from "@/components/shared/json-ld";
 import { AnalyticsScripts } from "@/components/layout/analytics-scripts";
 
-const display = Tajawal({
+/**
+ * خط العناوين — Cairo بالأوزان التقيلة.
+ * الاختيار مبني على المرجع البصري: حروف عريضة هندسية بنهايات مسطّحة.
+ * لو حبيت تغيّره، غيّره هنا وفي --font-display في globals.css بس.
+ */
+const display = Cairo({
   subsets: ["arabic", "latin"],
-  weight: ["500", "700", "800", "900"],
-  variable: "--font-tajawal",
+  weight: ["600", "700", "800", "900"],
+  variable: "--font-cairo",
   display: "swap",
 });
 

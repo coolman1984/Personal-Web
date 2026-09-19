@@ -65,7 +65,7 @@ export function Pricing({ tiers }: { tiers: PricingTier[] }) {
             >
               <article
                 className={cn(
-                  "relative flex h-full flex-col rounded-[24px] border border-line bg-surface p-7 shadow-soft",
+                  "relative flex h-full flex-col rounded-lg border border-line bg-surface p-7 shadow-soft",
                   tier.highlighted && "ring-gradient shadow-lift",
                 )}
               >
@@ -112,7 +112,7 @@ export function Pricing({ tiers }: { tiers: PricingTier[] }) {
                       key={f.text}
                       className={cn(
                         "flex items-start gap-2.5 text-[14px] leading-snug",
-                        f.included ? "text-fg-muted" : "text-fg-subtle/70",
+                        f.included ? "text-fg-muted" : "text-fg-subtle",
                       )}
                     >
                       {f.included ? (

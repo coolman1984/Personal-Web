@@ -64,12 +64,12 @@ export default async function EnrollPage({ params }: { params: Promise<{ slug: s
 
       <section className="container-x pb-14 md:pb-20">
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
-          <div className="rounded-[24px] border border-line bg-surface p-6 shadow-soft md:p-8">
+          <div className="rounded-lg border border-line bg-surface p-6 shadow-soft md:p-8">
             <EnrollForm courseSlug={course.slug} paymentsEnabled={paymentsEnabled} />
           </div>
 
           {/* ملخّص الطلب */}
-          <aside className="rounded-[24px] border border-line bg-surface p-6 shadow-soft ring-gradient lg:sticky lg:top-24">
+          <aside className="rounded-lg border border-line bg-surface p-6 shadow-soft ring-gradient lg:sticky lg:top-24">
             <p className="text-[13px] font-bold text-fg-subtle">ملخّص الحجز</p>
             <h2 className="mt-2 text-lg font-extrabold leading-snug text-fg">{course.title}</h2>
             <div className="mt-3 flex flex-wrap gap-2">

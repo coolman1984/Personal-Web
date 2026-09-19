@@ -25,7 +25,7 @@ function PromptCard({ prompt }: { prompt: Prompt }) {
   }
 
   return (
-    <article className="rounded-[20px] border border-line bg-surface p-5 shadow-soft">
+    <article className="rounded-lg border border-line bg-surface p-5 shadow-soft">
       <div className="mb-3 flex items-start justify-between gap-3">
         <div className="min-w-0">
           <h3 className="text-[15.5px] font-extrabold leading-snug text-fg">{prompt.title}</h3>

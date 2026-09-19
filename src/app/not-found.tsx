@@ -15,7 +15,7 @@ export default function NotFound() {
     <section className="relative isolate overflow-hidden noise">
       <Aurora />
       <div className="container-x relative flex min-h-[70vh] flex-col items-center justify-center py-24 text-center">
-        <span className="grid size-16 place-items-center rounded-2xl border border-line bg-surface text-brand-500">
+        <span className="grid size-16 place-items-center rounded-lg border border-line bg-surface text-brand-500">
           <Compass className="size-7" aria-hidden />
         </span>
         <p className="ltr-nums mt-7 text-[clamp(3rem,10vw,6rem)] font-black leading-none text-gradient">

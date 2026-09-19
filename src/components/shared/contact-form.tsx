@@ -59,7 +59,7 @@ export function ContactForm({ defaultSubject }: { defaultSubject?: string }) {
 
   if (sent) {
     return (
-      <div className="rounded-[24px] border border-[oklch(0.58_0.15_150/0.28)] bg-[oklch(0.58_0.15_150/0.07)] p-8 text-center">
+      <div className="rounded-lg border border-[oklch(0.58_0.15_150/0.28)] bg-[oklch(0.58_0.15_150/0.07)] p-8 text-center">
         <p className="text-xl font-extrabold text-fg">وصلت رسالتك 👌</p>
         <p className="mt-2 text-[15px] leading-relaxed text-fg-muted">
           هرد عليك خلال ٢٤ ساعة. لو مستعجل، كلّمني على واتساب مباشرة.

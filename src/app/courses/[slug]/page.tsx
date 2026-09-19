@@ -76,7 +76,7 @@ function PointList({
   } as const;
 
   return (
-    <div className="rounded-[20px] border border-line bg-surface p-6">
+    <div className="rounded-lg border border-line bg-surface p-6">
       <h3 className="mb-4 flex items-center gap-2.5 text-lg font-extrabold text-fg">
         <Icon className={cn("size-5", colors[tone])} aria-hidden />
         {title}
@@ -153,8 +153,8 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
         </div>
         <p className={cn("text-[17px] font-bold", accent.text)}>{course.tagline}</p>
         {course.promise && (
-          <p className="flex items-start gap-2.5 rounded-2xl border border-gold-500/25 bg-gold-500/8 p-4 text-[15px] leading-snug text-fg-muted">
-            <Package className="mt-0.5 size-4.5 shrink-0 text-gold-600 dark:text-gold-300" aria-hidden />
+          <p className="flex items-start gap-2.5 rounded-lg border border-gold-500/25 bg-gold-500/8 p-4 text-[15px] leading-snug text-fg-muted">
+            <Package className="mt-0.5 size-4.5 shrink-0 text-gold-700 dark:text-gold-300" aria-hidden />
             <span>
               <span className="font-extrabold text-fg">هتخرج بـ: </span>
               {course.promise}
@@ -168,7 +168,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
           {/* العمود الرئيسي */}
           <div className="flex flex-col gap-10">
             <Reveal>
-              <div className="rounded-[20px] border border-line bg-surface p-6">
+              <div className="rounded-lg border border-line bg-surface p-6">
                 <p className="text-[16px] leading-[2] text-fg-muted">{course.description}</p>
               </div>
             </Reveal>
@@ -177,7 +177,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
             {course.delivery && (
               <Reveal>
                 <div className="grid gap-4 md:grid-cols-2">
-                  <div className="rounded-[20px] border border-brand-500/25 bg-brand-500/6 p-6">
+                  <div className="rounded-lg border border-brand-500/25 bg-brand-500/6 p-6">
                     <h3 className="mb-2 flex items-center gap-2.5 text-base font-extrabold text-fg">
                       <Radio className="size-5 text-brand-500" aria-hidden />
                       الشرح — مباشر معايا
@@ -190,9 +190,9 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                     </p>
                   </div>
 
-                  <div className="rounded-[20px] border border-gold-500/25 bg-gold-500/6 p-6">
+                  <div className="rounded-lg border border-gold-500/25 bg-gold-500/6 p-6">
                     <h3 className="mb-3 flex items-center gap-2.5 text-base font-extrabold text-fg">
-                      <BookMarked className="size-5 text-gold-600 dark:text-gold-300" aria-hidden />
+                      <BookMarked className="size-5 text-gold-700 dark:text-gold-300" aria-hidden />
                       المراجعة — على الموقع
                     </h3>
                     <ul className="flex flex-col gap-2">
@@ -202,7 +202,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
                           className="flex items-start gap-2 text-[13.5px] leading-snug text-fg-muted"
                         >
                           <Check
-                            className="mt-0.5 size-3.5 shrink-0 text-gold-600 dark:text-gold-300"
+                            className="mt-0.5 size-3.5 shrink-0 text-gold-700 dark:text-gold-300"
                             strokeWidth={3}
                             aria-hidden
                           />
@@ -282,7 +282,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
 
             {/* الأدوات */}
             <Reveal>
-              <div className="rounded-[20px] border border-line bg-surface p-6">
+              <div className="rounded-lg border border-line bg-surface p-6">
                 <h3 className="mb-4 text-lg font-extrabold text-fg">الأدوات اللي هتشتغل بيها</h3>
                 <ul className="flex flex-wrap gap-2">
                   {course.tools.map((tool) => (

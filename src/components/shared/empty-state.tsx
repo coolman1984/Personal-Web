@@ -12,7 +12,7 @@ export function EmptyState({
   children?: ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center gap-3 rounded-3xl border border-dashed border-line-strong px-6 py-16 text-center">
+    <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-line-strong px-6 py-16 text-center">
       <SearchX className="size-8 text-fg-subtle" aria-hidden />
       <p className="text-base font-bold text-fg">{title}</p>
       <p className="max-w-sm text-sm text-fg-muted">{description}</p>

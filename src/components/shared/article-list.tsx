@@ -67,7 +67,7 @@ export function ArticleList({ articles, tags }: { articles: Article[]; tags: str
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 className="h-full"
               >
-                <article className="group relative flex h-full flex-col rounded-[20px] border border-line bg-surface p-6 shadow-soft card-hover">
+                <article className="group relative flex h-full flex-col rounded-lg border border-line bg-surface p-6 shadow-soft card-hover">
                   <div className="mb-4 flex items-center gap-2">
                     <Badge tone="brand" size="sm">
                       {article.category}

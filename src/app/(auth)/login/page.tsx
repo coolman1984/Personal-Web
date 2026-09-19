@@ -25,7 +25,7 @@ export default function LoginPage() {
             <Logo />
           </div>
 
-          <div className="rounded-[24px] border border-line bg-surface p-7 shadow-lift ring-gradient md:p-8">
+          <div className="rounded-lg border border-line bg-surface p-7 shadow-lift ring-gradient md:p-8">
             <h1 className="text-center text-2xl font-extrabold text-fg">
               أهلًا بيك تاني
             </h1>

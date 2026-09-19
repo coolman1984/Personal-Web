@@ -38,7 +38,7 @@ export function Curriculum({ modules }: { modules: CourseModule[] }) {
         </ul>
         {m.project && (
           <p className="flex items-start gap-2.5 rounded-xl border border-gold-500/22 bg-gold-500/8 p-3 text-[13.5px] leading-snug">
-            <Package className="mt-0.5 size-4 shrink-0 text-gold-600 dark:text-gold-300" aria-hidden />
+            <Package className="mt-0.5 size-4 shrink-0 text-gold-700 dark:text-gold-300" aria-hidden />
             <span>
               <span className="font-bold text-fg">المخرج: </span>
               {m.project}

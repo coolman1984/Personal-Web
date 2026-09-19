@@ -45,7 +45,7 @@ export function UserMenu({ email, isAdmin }: UserMenuProps) {
 
       {open && (
         <div className="absolute end-0 top-full z-50 w-60 pt-2">
-          <div className="overflow-hidden rounded-2xl border border-line glass shadow-lift">
+          <div className="overflow-hidden rounded-lg border border-line glass shadow-lift">
             <p
               className="truncate border-b border-line px-4 py-3 text-[12.5px] text-fg-subtle"
               dir="ltr"

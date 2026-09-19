@@ -59,14 +59,14 @@ export default async function ContactPage({
       <section className="container-x pb-14 md:pb-20">
         <div className="grid gap-10 lg:grid-cols-[1.3fr_0.7fr] lg:items-start">
           <Reveal>
-            <div className="rounded-[24px] border border-line bg-surface p-6 shadow-soft md:p-8">
+            <div className="rounded-lg border border-line bg-surface p-6 shadow-soft md:p-8">
               <ContactForm defaultSubject={defaultSubject} />
             </div>
           </Reveal>
 
           <div className="flex flex-col gap-6 lg:sticky lg:top-24">
             <Reveal delay={0.08}>
-              <ul className="flex flex-col gap-3 rounded-[24px] border border-line bg-surface p-6 shadow-soft">
+              <ul className="flex flex-col gap-3 rounded-lg border border-line bg-surface p-6 shadow-soft">
                 {channels.map((c) => {
                   const inner = (
                     <>

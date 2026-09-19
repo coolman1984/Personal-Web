@@ -91,7 +91,7 @@ export function AccessManager({ rows, courses }: Props) {
       {/* فتح وصول جديد */}
       <form
         onSubmit={grant}
-        className="rounded-[20px] border border-line bg-surface p-6 shadow-soft"
+        className="rounded-lg border border-line bg-surface p-6 shadow-soft"
       >
         <h2 className="mb-5 flex items-center gap-2.5 text-lg font-extrabold text-fg">
           <KeyRound className="size-5 text-brand-500" aria-hidden />

@@ -11,27 +11,27 @@ export function Footer() {
   const year = new Intl.DateTimeFormat("ar-EG", { year: "numeric" }).format(new Date());
 
   return (
-    <footer className="relative mt-24 border-t border-line bg-bg-subtle">
+    <footer className="relative band-navy">
       <div className="container-x py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           {/* العمود الأول — الهوية */}
           <div className="flex flex-col gap-5">
-            <Logo />
-            <p className="max-w-xs text-sm leading-[1.9] text-fg-muted">{site.tagline}</p>
+            <Logo onDark />
+            <p className="max-w-xs text-sm leading-[1.9] text-white/65">{site.tagline}</p>
 
-            <ul className="flex flex-col gap-2.5 text-[13px] text-fg-muted">
+            <ul className="flex flex-col gap-2.5 text-[13px] text-white/70">
               <li className="flex items-center gap-2.5">
-                <Mail className="size-4 shrink-0 text-fg-subtle" aria-hidden />
-                <a href={`mailto:${site.email}`} className="hover:text-fg" dir="ltr">
+                <Mail className="size-4 shrink-0 text-gold-500" aria-hidden />
+                <a href={`mailto:${site.email}`} className="hover:text-gold-500" dir="ltr">
                   {site.email}
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
-                <Phone className="size-4 shrink-0 text-fg-subtle" aria-hidden />
+                <Phone className="size-4 shrink-0 text-gold-500" aria-hidden />
                 <span className="ltr-nums">{site.phoneDisplay}</span>
               </li>
               <li className="flex items-center gap-2.5">
-                <MapPin className="size-4 shrink-0 text-fg-subtle" aria-hidden />
+                <MapPin className="size-4 shrink-0 text-gold-500" aria-hidden />
                 <span>{site.location}</span>
               </li>
             </ul>
@@ -47,7 +47,7 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={socialLabels[key] ?? key}
-                      className="grid size-9 place-items-center rounded-lg border border-line bg-surface text-fg-subtle transition-colors hover:border-line-strong hover:text-fg"
+                      className="grid size-9 place-items-center rounded-md border border-white/15 text-white/70 transition-colors hover:border-gold-500 hover:text-gold-500"
                     >
                       <Icon className="size-4" />
                     </a>
@@ -60,13 +60,13 @@ export function Footer() {
           {/* أعمدة الروابط */}
           {footerNav.map((column) => (
             <nav key={column.title} aria-label={column.title} className="flex flex-col gap-4">
-              <h3 className="text-sm font-extrabold text-fg">{column.title}</h3>
+              <h3 className="text-sm font-extrabold text-white">{column.title}</h3>
               <ul className="flex flex-col gap-2.5">
                 {column.links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-[14px] text-fg-muted transition-colors hover:text-fg"
+                      className="text-[14px] text-white/70 transition-colors hover:text-gold-500"
                     >
                       {link.label}
                     </Link>
@@ -79,11 +79,11 @@ export function Footer() {
 
         {/* النشرة */}
         {site.features.newsletter && (
-          <div className="mt-12 rounded-3xl border border-line bg-surface p-6 noise md:p-8">
+          <div className="mt-14 rounded-lg border border-white/12 bg-white/[0.05] p-6 md:p-8">
             <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
               <div className="max-w-md">
-                <h3 className="text-lg font-extrabold text-fg">{site.leadMagnet.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">
+                <h3 className="text-lg font-extrabold text-white">{site.leadMagnet.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-white/65">
                   {site.leadMagnet.description}
                 </p>
               </div>
@@ -94,8 +94,8 @@ export function Footer() {
       </div>
 
       {/* الشريط السفلي */}
-      <div className="border-t border-line">
-        <div className="container-x flex flex-col items-center justify-between gap-3 py-6 text-[13px] text-fg-subtle sm:flex-row">
+      <div className="border-t border-white/12">
+        <div className="container-x flex flex-col items-center justify-between gap-3 py-6 text-[13px] text-white/55 sm:flex-row">
           <p>
             © {year} {site.name}
             <span aria-hidden className="mx-1.5 opacity-60">
@@ -105,17 +105,17 @@ export function Footer() {
           </p>
           <ul className="flex items-center gap-4">
             <li>
-              <Link href="/legal/terms" className="hover:text-fg">
+              <Link href="/legal/terms" className="hover:text-gold-500">
                 الشروط
               </Link>
             </li>
             <li>
-              <Link href="/legal/privacy" className="hover:text-fg">
+              <Link href="/legal/privacy" className="hover:text-gold-500">
                 الخصوصية
               </Link>
             </li>
             <li>
-              <Link href="/legal/refund" className="hover:text-fg">
+              <Link href="/legal/refund" className="hover:text-gold-500">
                 الاسترداد
               </Link>
             </li>

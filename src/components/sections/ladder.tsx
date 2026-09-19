@@ -13,7 +13,7 @@ import { Reveal } from "@/components/motion/reveal";
 function toneFor(step: number) {
   if (step <= 3) return { dot: "bg-aqua-500", ring: "border-aqua-500/40", text: "text-aqua-600 dark:text-aqua-300" };
   if (step <= 6) return { dot: "bg-brand-500", ring: "border-brand-500/40", text: "text-brand-600 dark:text-brand-300" };
-  return { dot: "bg-gold-500", ring: "border-gold-500/40", text: "text-gold-600 dark:text-gold-300" };
+  return { dot: "bg-gold-500", ring: "border-gold-500/40", text: "text-gold-700 dark:text-gold-300" };
 }
 
 export function Ladder() {
@@ -81,7 +81,7 @@ export function Ladder() {
         <Reveal delay={0.2} className="mt-12 flex justify-center">
           <Link
             href="/roadmap"
-            className="group inline-flex items-center gap-2 rounded-2xl border border-line bg-surface px-6 py-4 text-sm font-bold text-fg shadow-soft transition-all hover:-translate-y-0.5 hover:border-line-strong"
+            className="group inline-flex items-center gap-2 rounded-lg border border-line bg-surface px-6 py-4 text-sm font-bold text-fg shadow-soft transition-all hover:-translate-y-0.5 hover:border-line-strong"
           >
             شوف خريطة التعلّم كاملة
             <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />

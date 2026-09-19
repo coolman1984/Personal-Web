@@ -29,7 +29,6 @@ export default async function PricingPage() {
       <PageHero
         crumbs={crumbs}
         eyebrow="الباقات"
-        eyebrowTone="gold"
         title="اختار الشكل اللي يناسبك"
         description="تلات طرق تشتغل معايا بيها: كورس واحد، أو البرنامج الشامل، أو تدريب مفصّل على عمليات شركتك. السعر بيتحدّد بعد ما نتكلّم — عشان يبقى مبني على حالتك مش على قايمة."
       />

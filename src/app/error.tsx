@@ -18,7 +18,7 @@ export default function Error({
 
   return (
     <section className="container-x flex min-h-[70vh] flex-col items-center justify-center py-24 text-center">
-      <span className="grid size-16 place-items-center rounded-2xl border border-gold-500/25 bg-gold-500/10 text-gold-600 dark:text-gold-300">
+      <span className="grid size-16 place-items-center rounded-lg border border-gold-500/25 bg-gold-500/10 text-gold-700 dark:text-gold-300">
         <TriangleAlert className="size-7" aria-hidden />
       </span>
       <h1 className="mt-7 text-2xl font-extrabold text-fg">فيه حاجة مش مظبوطة</h1>
