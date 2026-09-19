@@ -191,7 +191,7 @@ export default async function ExcelAutomationGuidePage() {
             <ArrowRight className="size-4" /> ارجع للكورس
           </Link>
           <div className="max-w-4xl">
-            <span className="eyebrow mb-4 inline-flex items-center gap-2">
+            <span className="mb-4 inline-flex items-center gap-2 text-[13px] font-extrabold tracking-wide text-gold-400">
               <Sparkles className="size-3.5" /> المعمل العملي الكامل
             </span>
             <h1 className="text-[clamp(2rem,4.2vw+0.5rem,3.75rem)] font-black leading-[1.28] text-white">
