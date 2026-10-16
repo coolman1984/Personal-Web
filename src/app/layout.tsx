@@ -3,6 +3,7 @@
  * المواصفات: docs/DESIGN.md §3.1 و §10.3
  */
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import { Geist, Geist_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 
@@ -13,7 +14,7 @@ import { getAllLevels, getCoursesByLevel, getSearchIndex } from "@/lib/queries";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import { ToastProvider } from "@/components/ui/toast";
 import { SiteShell } from "@/components/layout/site-shell";
-import { ScrollProgress } from "@/components/layout/scroll-progress";
+import { ScrollProgressGate } from "@/components/layout/scroll-progress-gate";
 import { SiteExtras } from "@/components/layout/site-extras";
 import { JsonLd } from "@/components/shared/json-ld";
 
@@ -33,7 +34,7 @@ const geistMono = Geist_Mono({
 
 const arabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic", "latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-plex-ar",
   display: "swap",
 });
@@ -57,6 +58,10 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const headerList = await headers();
+  const pathname = headerList.get("x-pathname") ?? "";
+  const isWorkshopHome = pathname === "/";
+
   // البيانات بتتجاب هنا مرة واحدة على السيرفر
   const levels = await getAllLevels();
   const [beginner, intermediate, advanced] = await Promise.all([
@@ -68,22 +73,22 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html
-      lang="ar"
-      dir="rtl"
+      lang={isWorkshopHome ? "en" : "ar"}
+      dir={isWorkshopHome ? "ltr" : "rtl"}
       suppressHydrationWarning
       className={`${geist.variable} ${geistMono.variable} ${arabic.variable}`}
     >
       <body>
-        <JsonLd data={[personJsonLd(), organizationJsonLd()]} />
+        {!isWorkshopHome && <JsonLd data={[personJsonLd(), organizationJsonLd()]} />}
         <ThemeProvider>
           <ToastProvider>
-            <ScrollProgress />
+            <ScrollProgressGate />
             <SiteShell
               levels={levels}
               coursesByLevel={{ beginner, intermediate, advanced }}
               searchIndex={searchIndex}
             >
-              <main id="main">{children}</main>
+              {isWorkshopHome ? children : <main id="main">{children}</main>}
               <SiteExtras />
             </SiteShell>
           </ToastProvider>

@@ -3,8 +3,9 @@
  */
 import type { Metadata } from "next";
 import { getWorkshopContent } from "@/lib/queries";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, workshopJsonLd } from "@/lib/seo";
 import { WorkshopLanding } from "@/components/workshop/workshop-landing";
+import { JsonLd } from "@/components/shared/json-ld";
 
 export const metadata: Metadata = buildMetadata({
   title: "Build your AI agent team — Executive workshop with Mohamed Fawzy",
@@ -24,5 +25,10 @@ export const metadata: Metadata = buildMetadata({
 
 export default async function HomePage() {
   const content = await getWorkshopContent();
-  return <WorkshopLanding content={content} />;
+  return (
+    <>
+      <JsonLd data={workshopJsonLd()} />
+      <WorkshopLanding content={content} />
+    </>
+  );
 }

@@ -253,12 +253,12 @@ export function resolveQuizResult(score: number): QuizResult {
 const staticPages: SearchItem[] = [
   {
     id: "page-home",
-    title: "الرئيسية",
-    description: "نظرة عامة على الكورسات والمنهج",
+    title: "Build your AI agent team",
+    description: "Executive workshop landing — agenda, outcomes, and contact",
     href: "/",
     kind: "page",
     icon: "Home",
-    keywords: ["رئيسية", "home"],
+    keywords: ["workshop", "executive", "AI agents", "رئيسية", "home"],
   },
   {
     id: "page-courses",

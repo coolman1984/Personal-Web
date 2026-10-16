@@ -2,8 +2,9 @@
 /**
  * Fade + rise on scroll — respects reduced motion and no-JS fallback.
  */
-import { useEffect, useRef, type ReactNode } from "react";
+import { useLayoutEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { armScrollMotion, isElementInView } from "./motion-ready";
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -14,7 +15,7 @@ interface ScrollRevealProps {
 export function ScrollReveal({ children, className, delayMs = 0 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -22,11 +23,29 @@ export function ScrollReveal({ children, className, delayMs = 0 }: ScrollRevealP
       el.classList.add("is-in-view");
       return;
     }
-    document.documentElement.classList.add("motion-ready");
+
+    const markVisible = () => {
+      el.classList.add("is-in-view");
+      el.removeAttribute("inert");
+    };
+
+    const markHidden = () => {
+      armScrollMotion();
+      el.classList.add("scroll-reveal-armed");
+      el.setAttribute("inert", "");
+    };
+
+    if (isElementInView(el)) {
+      markVisible();
+      return;
+    }
+
+    markHidden();
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry?.isIntersecting) {
-          el.classList.add("is-in-view");
+          markVisible();
           observer.disconnect();
         }
       },

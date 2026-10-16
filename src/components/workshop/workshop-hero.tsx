@@ -15,7 +15,8 @@ export function WorkshopHero({ hero }: WorkshopHeroProps) {
   return (
     <section className="section-pad ink-grid-bg bg-ink text-ink-fg">
       <div className="container-x">
-        <Eyebrow onInk>{hero.eyebrow}</Eyebrow>
+        <div id="workshop-content" tabIndex={-1} className="outline-none">
+          <Eyebrow onInk>{hero.eyebrow}</Eyebrow>
         <WordReveal
           as="h1"
           text={hero.headline}
@@ -33,6 +34,7 @@ export function WorkshopHero({ hero }: WorkshopHeroProps) {
             {hero.secondaryCta.label}
           </WorkshopButton>
         </ScrollReveal>
+        </div>
       </div>
     </section>
   );

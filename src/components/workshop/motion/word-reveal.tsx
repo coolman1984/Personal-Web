@@ -3,8 +3,9 @@
  * Heading reveal word-by-word on scroll — CSS + IntersectionObserver.
  * Without JS or with reduced motion, words stay visible (see globals.css).
  */
-import { useEffect, useRef, type ElementType, type ReactNode } from "react";
+import { useLayoutEffect, useRef, type ElementType } from "react";
 import { cn } from "@/lib/utils";
+import { armScrollMotion, isElementInView } from "./motion-ready";
 
 interface WordRevealProps {
   text: string;
@@ -12,7 +13,6 @@ interface WordRevealProps {
   className?: string;
   /** Stagger per word in ms */
   staggerMs?: number;
-  children?: ReactNode;
 }
 
 export function WordReveal({
@@ -24,7 +24,7 @@ export function WordReveal({
   const ref = useRef<HTMLElement | null>(null);
   const words = text.split(/\s+/).filter(Boolean);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -32,11 +32,29 @@ export function WordReveal({
       el.classList.add("is-in-view");
       return;
     }
-    document.documentElement.classList.add("motion-ready");
+
+    const markVisible = () => {
+      el.classList.add("is-in-view");
+      el.removeAttribute("inert");
+    };
+
+    const markHidden = () => {
+      armScrollMotion();
+      el.classList.add("word-reveal-armed");
+      el.setAttribute("inert", "");
+    };
+
+    if (isElementInView(el, 0.25)) {
+      markVisible();
+      return;
+    }
+
+    markHidden();
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry?.isIntersecting) {
-          el.classList.add("is-in-view");
+          markVisible();
           observer.disconnect();
         }
       },

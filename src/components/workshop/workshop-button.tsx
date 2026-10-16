@@ -15,7 +15,7 @@ interface WorkshopButtonProps {
 
 const variants: Record<WorkshopButtonVariant, string> = {
   primary:
-    "bg-primary text-primary-fg border border-primary hover:brightness-[1.06] focus-visible:ring-2 focus-visible:ring-primary/40",
+    "bg-primary-solid text-primary-fg border border-primary-solid hover:border-primary hover:brightness-[1.06] focus-visible:ring-2 focus-visible:ring-primary",
   secondary:
     "bg-secondary text-fg border border-border hover:bg-secondary/80 hover:border-border",
   ghost:

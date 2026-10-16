@@ -13,7 +13,7 @@ export function Eyebrow({ children, className, onInk }: EyebrowProps) {
   return (
     <p
       className={cn(
-        "flex items-center gap-3 font-mono text-[0.6875rem] font-medium uppercase tracking-[0.18em] opacity-60",
+        "flex items-center gap-3 font-mono text-[0.6875rem] font-medium uppercase tracking-[0.18em]",
         onInk ? "text-ink-muted" : "text-fg-muted",
         className,
       )}

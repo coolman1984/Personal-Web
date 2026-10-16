@@ -20,17 +20,19 @@ interface WorkshopLandingProps {
 
 export function WorkshopLanding({ content }: WorkshopLandingProps) {
   return (
-    <div className="workshop-root min-h-screen bg-background text-fg" lang="en" dir="ltr">
+    <div className="workshop-root min-h-screen bg-background text-fg">
       <WorkshopNav content={content} />
-      <WorkshopHero hero={content.hero} />
-      <WorkshopAudience audience={content.audience} />
-      <WorkshopOutcomes outcomes={content.outcomes} />
-      <WorkshopAgenda agenda={content.agenda} />
-      <WorkshopFormat format={content.format} />
-      <WorkshopAbout about={content.about} />
-      <WorkshopProof proof={content.proof} />
-      <WorkshopFaq faq={content.faq} />
-      <WorkshopContact contact={content.contact} />
+      <main>
+        <WorkshopHero hero={content.hero} />
+        <WorkshopAudience audience={content.audience} />
+        <WorkshopOutcomes outcomes={content.outcomes} />
+        <WorkshopAgenda agenda={content.agenda} />
+        <WorkshopFormat format={content.format} />
+        <WorkshopAbout about={content.about} />
+        <WorkshopProof proof={content.proof} />
+        <WorkshopFaq faq={content.faq} />
+        <WorkshopContact contact={content.contact} />
+      </main>
       <WorkshopFooter content={content} />
     </div>
   );

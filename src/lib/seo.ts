@@ -160,6 +160,32 @@ export function faqJsonLd(faqs: Faq[]) {
   };
 }
 
+/** Workshop home — no placeholder social URLs; English event-focused copy. */
+export function workshopJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: "Build your AI agent team — Executive workshop",
+    description:
+      "A one-day, hands-on workshop for managers in the Gulf and Egypt on building a practical AI agent team with free or low-cost tools.",
+    eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
+    eventStatus: "https://schema.org/EventScheduled",
+    inLanguage: "en",
+    url: siteUrl(),
+    organizer: {
+      "@type": "Person",
+      name: site.name,
+      jobTitle: "Leads AI Automation & Transformation at Samsung Electronics Egypt",
+      address: { "@type": "PostalAddress", addressLocality: "Cairo", addressCountry: "EG" },
+    },
+    location: {
+      "@type": "Place",
+      name: "Gulf (KSA) and Egypt — in person or on site",
+      address: { "@type": "PostalAddress", addressCountry: "EG" },
+    },
+  };
+}
+
 export function breadcrumbJsonLd(items: { label: string; href: string }[]) {
   return {
     "@context": "https://schema.org",
