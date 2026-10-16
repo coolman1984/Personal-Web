@@ -12,7 +12,7 @@ export const site = {
   tagline: "ما بعلّمش أدوات... بعلّم إزاي تبني نظام عمل",
   bio: "بشتغل على التحوّل بالذكاء الاصطناعي وأتمتة المؤسسات، وبدرّب فرق العمل بالعربي. شغلي كله قايم على فكرة واحدة: الهدف مش إنك تتعلّم أدوات، الهدف إنك تشوف شغلك كنظام متكامل وتعرف فين التقنية ممكن تعمل أثر حقيقي.",
 
-  url: "https://github.com/coolman1984/Personal-Web", // preview until custom domain
+  url: "https://example.com", // 👈 غيّر ده بعد ما يطلع preview على Cloudflare
   locale: "ar_EG",
 
   // ═══ التواصل ══════════════════════════════════════════
@@ -28,7 +28,7 @@ export const site = {
     youtube: "https://youtube.com/@username",
     x: "https://x.com/username",
     facebook: "https://facebook.com/username",
-    github: "https://github.com/username",
+    github: "https://github.com/coolman1984",
     telegram: "https://t.me/username",
   } as Record<string, string>,
 
