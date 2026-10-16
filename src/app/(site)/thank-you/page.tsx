@@ -1,6 +1,8 @@
 /** صفحة الشكر بعد الحجز. */
 import { CheckCircle2, MessageCircle } from "lucide-react";
 import { site } from "@/content/site";
+import { isAuthConfigured } from "@/lib/features";
+import { publicContact } from "@/lib/public-contact";
 import { getCourseBySlug } from "@/lib/queries";
 import { buildMetadata } from "@/lib/seo";
 import { whatsappLink } from "@/lib/utils";
@@ -15,7 +17,6 @@ export const metadata = buildMetadata({
 });
 
 const steps = [
-  "سجّل دخولك على الموقع بنفس الإيميل اللي حجزت بيه — هفتحلك المواد عليه",
   "هتواصل معاك خلال ٢٤ ساعة لتأكيد الحجز وموعد المجموعة",
   "هبعتلك الأدلة والمواد قبل الجلسة الأولى",
   "جهّز ملف Excel حقيقي من شغلك (غير سرّي) — هنشتغل عليه طول الكورس",
@@ -29,6 +30,11 @@ export default async function ThankYouPage({
 }) {
   const { course: slug, ref } = await searchParams;
   const course = slug ? await getCourseBySlug(slug) : null;
+  const authOn = isAuthConfigured();
+  const whatsappOk = !/0{7,}$/.test(site.whatsapp);
+  const nextSteps = authOn
+    ? ["سجّل دخولك على الموقع بنفس الإيميل اللي حجزت بيه — هفتحلك المواد عليه", ...steps]
+    : steps;
 
   return (
     <section className="relative isolate overflow-hidden noise">
@@ -55,18 +61,20 @@ export default async function ThankYouPage({
           </p>
         )}
 
-        <div className="mt-8 w-full max-w-lg rounded-lg border border-gold-500/25 bg-gold-500/8 p-4 text-center">
-          <p className="text-[14px] leading-relaxed text-fg-muted">
-            <span className="font-extrabold text-fg">مهم: </span>
-            سجّل دخولك بنفس الإيميل اللي حجزت بيه. لو حسابك على جوجل بإيميل تاني،
-            كلّمني وهظبّطها في دقيقة.
-          </p>
-        </div>
+        {authOn && (
+          <div className="mt-8 w-full max-w-lg rounded-lg border border-gold-500/25 bg-gold-500/8 p-4 text-center">
+            <p className="text-[14px] leading-relaxed text-fg-muted">
+              <span className="font-extrabold text-fg">مهم: </span>
+              سجّل دخولك بنفس الإيميل اللي حجزت بيه. لو حسابك على جوجل بإيميل تاني،
+              كلّمني وهظبّطها في دقيقة.
+            </p>
+          </div>
+        )}
 
         <div className="mt-6 w-full max-w-lg rounded-lg border border-line bg-surface p-6 text-start shadow-soft">
           <h2 className="mb-4 text-base font-extrabold text-fg">الخطوات الجاية</h2>
           <ol className="flex flex-col gap-3.5">
-            {steps.map((step, i) => (
+            {nextSteps.map((step, i) => (
               <li key={step} className="flex items-start gap-3 text-[14.5px] leading-snug text-fg-muted">
                 <span className="ltr-nums grid size-6 shrink-0 place-items-center rounded-full bg-brand-500/12 text-[12px] font-black text-brand-600 dark:text-brand-300">
                   {new Intl.NumberFormat("ar-EG").format(i + 1)}
@@ -79,22 +87,28 @@ export default async function ThankYouPage({
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button
-            href={whatsappLink(
-              site.whatsapp,
-              course
-                ? `السلام عليكم ${site.shortName}، سجّلت في «${course.title}».`
-                : `السلام عليكم ${site.shortName}،`,
-            )}
+            href={
+              whatsappOk
+                ? whatsappLink(
+                    site.whatsapp,
+                    course
+                      ? `السلام عليكم ${site.shortName}، سجّلت في «${course.title}».`
+                      : `السلام عليكم ${site.shortName}،`,
+                  )
+                : publicContact.mailto
+            }
             size="lg"
-            icon={<MessageCircle />}
-            target="_blank"
-            rel="noopener noreferrer"
+            icon={whatsappOk ? <MessageCircle /> : undefined}
+            target={whatsappOk ? "_blank" : undefined}
+            rel={whatsappOk ? "noopener noreferrer" : undefined}
           >
-            كلّمني على واتساب
+            {whatsappOk ? "كلّمني على واتساب" : publicContact.email}
           </Button>
-          <Button href="/login" variant="secondary" size="lg">
-            سجّل دخولك دلوقتي
-          </Button>
+          {authOn && (
+            <Button href="/login" variant="secondary" size="lg">
+              سجّل دخولك دلوقتي
+            </Button>
+          )}
         </div>
       </div>
     </section>

@@ -6,21 +6,29 @@
  */
 import { NextResponse } from "next/server";
 import { isAdmin } from "@/lib/access";
+import { isAuthConfigured } from "@/lib/features";
 import { createClient } from "@/lib/supabase/server";
 import { getCourseBySlug } from "@/lib/queries";
+import { unavailable } from "@/lib/unavailable";
 import { isEmail } from "@/lib/validation";
 import type { ApiResponse } from "@/types";
 
 async function guard() {
+  if (!isAuthConfigured()) {
+    return { error: "نظام الحسابات مش متاح دلوقتي.", status: 503 as const, supabase: null };
+  }
   const supabase = await createClient();
-  if (!supabase) return { error: "نظام الحسابات مش متظبّط.", supabase: null };
-  if (!(await isAdmin())) return { error: "مش مسموح.", supabase: null };
-  return { error: null, supabase };
+  if (!supabase) {
+    return { error: "نظام الحسابات مش متاح دلوقتي.", status: 503 as const, supabase: null };
+  }
+  if (!(await isAdmin())) return { error: "مش مسموح.", status: 403 as const, supabase: null };
+  return { error: null, status: null, supabase };
 }
 
 export async function POST(req: Request) {
-  const { error: guardError, supabase } = await guard();
+  const { error: guardError, status, supabase } = await guard();
   if (guardError || !supabase) {
+    if (status === 503) return unavailable(guardError!);
     return NextResponse.json<ApiResponse>({ ok: false, message: guardError! }, { status: 403 });
   }
 
@@ -83,8 +91,9 @@ export async function POST(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  const { error: guardError, supabase } = await guard();
+  const { error: guardError, status, supabase } = await guard();
   if (guardError || !supabase) {
+    if (status === 503) return unavailable(guardError!);
     return NextResponse.json<ApiResponse>({ ok: false, message: guardError! }, { status: 403 });
   }
 

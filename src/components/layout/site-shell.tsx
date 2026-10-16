@@ -20,6 +20,8 @@ interface SiteShellProps {
   userEmail: string | null;
   isAdmin: boolean;
   authEnabled: boolean;
+  /** النشرة متاحة: مفتاح المحتوى + مفاتيح Mailchimp. */
+  newsletterEnabled: boolean;
   children: ReactNode;
 }
 
@@ -30,6 +32,7 @@ export function SiteShell({
   userEmail,
   isAdmin,
   authEnabled,
+  newsletterEnabled,
   children,
 }: SiteShellProps) {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -55,7 +58,7 @@ export function SiteShell({
       {site.features.commandPalette && (
         <CommandPalette open={searchOpen} onClose={closeSearch} items={searchIndex} />
       )}
-      {site.features.exitIntent && site.features.newsletter && <ExitIntentModal />}
+      {site.features.exitIntent && newsletterEnabled && <ExitIntentModal />}
     </>
   );
 }

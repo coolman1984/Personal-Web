@@ -1,11 +1,17 @@
 /** تسجيل اهتمام بكورس — من غير دفع. */
 import { NextResponse } from "next/server";
+import { isContactConfigured } from "@/lib/features";
 import { validateEnroll } from "@/lib/validation";
 import { clientKey, rateLimit } from "@/lib/rate-limit";
 import { getCourseBySlug } from "@/lib/queries";
+import { unavailable } from "@/lib/unavailable";
 import type { ApiResponse } from "@/types";
 
 export async function POST(req: Request) {
+  if (!isContactConfigured()) {
+    return unavailable("تسجيل الاهتمام مش متاح دلوقتي. راسلني على الإيميل أو لينكدإن.");
+  }
+
   const limit = rateLimit(`enroll:${clientKey(req)}`);
   if (!limit.allowed) {
     return NextResponse.json<ApiResponse>(
@@ -47,7 +53,11 @@ export async function POST(req: Request) {
     const resendKey = process.env.RESEND_API_KEY;
     const to = process.env.CONTACT_TO_EMAIL;
 
-    if (resendKey && to) {
+    if (!resendKey || !to) {
+      return unavailable("تسجيل الاهتمام مش متاح دلوقتي. راسلني على الإيميل أو لينكدإن.");
+    }
+
+    {
       const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
@@ -73,8 +83,6 @@ export async function POST(req: Request) {
         const detail = await res.text().catch(() => "");
         throw new Error(`Resend رفض إشعار الحجز (${res.status}): ${detail}`);
       }
-    } else {
-      console.info("[enroll] حجز جديد:", { reference, course: course.slug });
     }
 
     return NextResponse.json<ApiResponse<{ reference: string }>>({

@@ -4,12 +4,13 @@
  */
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import { authEnabled, supabaseAnonKey, supabaseUrl } from "./config";
+import { isAuthConfigured } from "@/lib/features";
+import { supabaseAnonKey, supabaseUrl } from "./config";
 
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
 
-  if (!authEnabled) return { response, user: null };
+  if (!isAuthConfigured()) return { response, user: null };
 
   const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {

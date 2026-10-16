@@ -11,7 +11,14 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { Reveal } from "@/components/motion/reveal";
 import type { PricingTier } from "@/types";
 
-export function Pricing({ tiers }: { tiers: PricingTier[] }) {
+export function Pricing({
+  tiers,
+  bookingEnabled,
+}: {
+  tiers: PricingTier[];
+  /** false = أزرار /enroll تتحول لصفحة التواصل بدل نموذج حجز مش شغّال. */
+  bookingEnabled: boolean;
+}) {
   const [group, setGroup] = useState(false);
   const showPrices = site.features.showPrices;
   const hasGroupPricing = showPrices && tiers.some((t) => t.groupPrice);
@@ -131,7 +138,11 @@ export function Pricing({ tiers }: { tiers: PricingTier[] }) {
 
                 <div className="mt-auto pt-7">
                   <Button
-                    href={showPrices ? tier.ctaHref : "/contact"}
+                    href={
+                      !showPrices || (tier.ctaHref.startsWith("/enroll") && !bookingEnabled)
+                        ? "/contact"
+                        : tier.ctaHref
+                    }
                     variant={tier.highlighted ? "primary" : "secondary"}
                     size="lg"
                     fullWidth

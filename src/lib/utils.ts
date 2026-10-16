@@ -70,12 +70,17 @@ export function whatsappLink(phone: string, message: string): string {
   return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }
 
+/**
+ * رابط Workers.dev الافتراضي.
+ * Next بيثبّت NEXT_PUBLIC_* وقت البناء. لو المتغيّر مش موجود في بيئة البناء،
+ * الكود ده هو اللي البناء يشوفه. نفس القيمة موجودة في wrangler.jsonc → vars.
+ */
+export const DEFAULT_SITE_URL = "https://personal-web.mflma2040.workers.dev" as const;
+
 /** الرابط الأساسي للموقع — من متغيّر البيئة أو الافتراضي */
 export function siteUrl(): string {
-  return (
-    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-    "http://localhost:3000"
-  );
+  const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  return (configured || DEFAULT_SITE_URL).replace(/\/$/, "");
 }
 
 /** يبني رابطًا مطلقًا من مسار نسبي */

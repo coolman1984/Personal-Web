@@ -7,10 +7,11 @@ import "server-only";
  */
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import { authEnabled, supabaseAnonKey, supabaseUrl } from "./config";
+import { isAuthConfigured } from "@/lib/features";
+import { supabaseAnonKey, supabaseUrl } from "./config";
 
 export async function createClient() {
-  if (!authEnabled) return null;
+  if (!isAuthConfigured()) return null;
 
   const cookieStore = await cookies();
 

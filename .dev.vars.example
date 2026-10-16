@@ -1,3 +1,5 @@
+# Empty on purpose. Code and wrangler.jsonc fall back to
+# https://personal-web.mflma2040.workers.dev
 NEXT_PUBLIC_SITE_URL=
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=

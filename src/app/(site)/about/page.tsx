@@ -4,6 +4,7 @@ import { site } from "@/content/site";
 import { getComparison, getMethodPillars, getStats, getTimeline, getTools } from "@/lib/queries";
 import { buildMetadata, breadcrumbJsonLd, personJsonLd } from "@/lib/seo";
 import { getIcon } from "@/lib/icon";
+import { publicContact } from "@/lib/public-contact";
 import { cn, whatsappLink } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -36,6 +37,7 @@ const guides = [
 ];
 
 export default async function AboutPage() {
+  const whatsappOk = !/0{7,}$/.test(site.whatsapp);
   const [timeline, stats, pillars, comparison, tools] = await Promise.all([
     getTimeline(),
     getStats(),
@@ -60,14 +62,18 @@ export default async function AboutPage() {
             حدّد مستواك
           </Button>
           <Button
-            href={whatsappLink(site.whatsapp, `السلام عليكم ${site.shortName}،`)}
+            href={
+              whatsappOk
+                ? whatsappLink(site.whatsapp, `السلام عليكم ${site.shortName}،`)
+                : publicContact.mailto
+            }
             variant="outline"
             size="lg"
             className="border-white/30 text-white hover:border-gold-500 hover:text-gold-500"
-            target="_blank"
-            rel="noopener noreferrer"
+            target={whatsappOk ? "_blank" : undefined}
+            rel={whatsappOk ? "noopener noreferrer" : undefined}
           >
-            كلّمني مباشرة
+            {whatsappOk ? "كلّمني مباشرة" : publicContact.email}
           </Button>
         </div>
       </PageHero>

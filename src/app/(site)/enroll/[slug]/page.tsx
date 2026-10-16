@@ -3,13 +3,14 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Check } from "lucide-react";
 import { site } from "@/content/site";
+import { canCheckout, canManualEnroll } from "@/lib/booking";
 import { getAllCourses, getCourseBySlug } from "@/lib/queries";
-import { hasRealPayments } from "@/lib/payments";
 import { buildMetadata } from "@/lib/seo";
 import { formatNumber, formatPrice } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { PageHero } from "@/components/shared/page-hero";
 import { EnrollForm } from "@/components/shared/enroll-form";
+import { DirectContact } from "@/components/shared/direct-contact";
 import { LevelBadge } from "@/components/course/level-badge";
 
 export const dynamicParams = false;
@@ -39,7 +40,8 @@ export default async function EnrollPage({ params }: { params: Promise<{ slug: s
   const course = await getCourseBySlug(slug);
   if (!course) notFound();
 
-  const paymentsEnabled = site.features.payments && hasRealPayments();
+  const paymentsEnabled = canCheckout();
+  const manualEnroll = canManualEnroll();
 
   const crumbs = [
     { label: "الرئيسية", href: "/" },
@@ -67,7 +69,11 @@ export default async function EnrollPage({ params }: { params: Promise<{ slug: s
       <section className="container-x pb-14 md:pb-20">
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
           <div className="rounded-lg border border-line bg-surface p-6 shadow-soft md:p-8">
-            <EnrollForm courseSlug={course.slug} paymentsEnabled={paymentsEnabled} />
+            {paymentsEnabled || manualEnroll ? (
+              <EnrollForm courseSlug={course.slug} paymentsEnabled={paymentsEnabled} />
+            ) : (
+              <DirectContact intro="الحجز الإلكتروني مش متاح دلوقتي. راسلني على الإيميل أو لينكدإن وأنا أتابع معاك." />
+            )}
           </div>
 
           {/* ملخّص الطلب */}

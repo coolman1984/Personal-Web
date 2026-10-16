@@ -4,9 +4,15 @@
  * المرجع: docs/MEMBERSHIP-PLAN.md §7
  */
 import { NextResponse, type NextRequest } from "next/server";
+import { isAuthConfigured } from "@/lib/features";
 import { updateSession } from "@/lib/supabase/middleware";
 
 export async function middleware(request: NextRequest) {
+  // من غير مفاتيح Supabase مفيش جلسة ولا عميل. الطلب يعدّي كما هو.
+  if (!isAuthConfigured()) {
+    return NextResponse.next();
+  }
+
   const { response, user } = await updateSession(request);
   const { pathname } = request.nextUrl;
 

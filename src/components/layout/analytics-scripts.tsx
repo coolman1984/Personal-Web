@@ -3,10 +3,13 @@
  * التفاصيل: docs/ROADMAP.md §1.3
  */
 import Script from "next/script";
+import { isAnalyticsConfigured } from "@/lib/features";
 
 export function AnalyticsScripts() {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
-  const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
+  if (!isAnalyticsConfigured()) return null;
+
+  const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim();
+  const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN?.trim();
 
   if (!gaId && !plausibleDomain) return null;
 

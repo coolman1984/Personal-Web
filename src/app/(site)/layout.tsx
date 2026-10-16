@@ -3,6 +3,7 @@
  * المواصفات: docs/DESIGN.md §3.1 و §10.3
  */
 import type { Metadata, Viewport } from "next";
+import { connection } from "next/server";
 import "../globals.css";
 
 import { site } from "@/content/site";
@@ -10,7 +11,7 @@ import { personJsonLd, organizationJsonLd } from "@/lib/seo";
 import { getAllLevels, getCoursesByLevel, getSearchIndex } from "@/lib/queries";
 import { getUserEmail } from "@/lib/supabase/server";
 import { isAdmin } from "@/lib/access";
-import { authEnabled } from "@/lib/supabase/config";
+import { isAuthConfigured, isNewsletterConfigured } from "@/lib/features";
 import { AnalyticsScripts } from "@/components/layout/analytics-scripts";
 import { siteUrl } from "@/lib/utils";
 import { arabicFontClassName } from "@/lib/fonts-ar";
@@ -45,6 +46,10 @@ export const viewport: Viewport = {
 };
 
 export default async function SiteRootLayout({ children }: { children: React.ReactNode }) {
+  // الأعلام بتعتمد على أسرار وقت التشغيل، مش على قيمة اتثبتت وقت البناء.
+  await connection();
+  const authEnabled = isAuthConfigured();
+  const newsletterEnabled = site.features.newsletter && isNewsletterConfigured();
   const levels = await getAllLevels();
   const [beginner, intermediate, advanced] = await Promise.all([
     getCoursesByLevel("beginner"),
@@ -69,9 +74,10 @@ export default async function SiteRootLayout({ children }: { children: React.Rea
               userEmail={userEmail}
               isAdmin={admin}
               authEnabled={authEnabled}
+              newsletterEnabled={newsletterEnabled}
             >
               <main id="main">{children}</main>
-              <SiteExtras />
+              <SiteExtras newsletterEnabled={newsletterEnabled} />
             </SiteShell>
           </ToastProvider>
         </ThemeProvider>

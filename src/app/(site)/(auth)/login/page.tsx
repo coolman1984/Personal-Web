@@ -1,7 +1,8 @@
 /** صفحة الدخول. */
 import { Suspense } from "react";
 import { buildMetadata } from "@/lib/seo";
-import { authEnabled } from "@/lib/supabase/config";
+import { isAuthConfigured } from "@/lib/features";
+import { publicContact } from "@/lib/public-contact";
 import { LoginForm } from "@/components/auth/login-form";
 import { Aurora } from "@/components/layout/aurora";
 import { Logo } from "@/components/layout/logo";
@@ -33,7 +34,7 @@ export default function LoginPage() {
               ادخل بنفس الإيميل اللي حجزت بيه، وهتلاقي مواد كورساتك مفتوحة.
             </p>
 
-            {authEnabled ? (
+            {isAuthConfigured() ? (
               <Suspense
                 fallback={<div className="mt-7 h-40 animate-pulse rounded-xl bg-surface-2" />}
               >
@@ -41,8 +42,20 @@ export default function LoginPage() {
               </Suspense>
             ) : (
               <p className="mt-7 rounded-xl border border-gold-500/25 bg-gold-500/8 p-4 text-center text-[14px] leading-relaxed text-fg-muted">
-                نظام الحسابات لسه بيتظبّط. تواصل معايا على واتساب وهبعتلك المواد
-                مباشرة.
+                نظام الحسابات لسه بيتظبّط. راسلني على{" "}
+                <a href={publicContact.mailto} className="font-bold text-brand-600 dark:text-brand-300" dir="ltr">
+                  {publicContact.email}
+                </a>{" "}
+                أو{" "}
+                <a
+                  href={publicContact.linkedin}
+                  className="font-bold text-brand-600 dark:text-brand-300"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {publicContact.linkedinLabel}
+                </a>{" "}
+                وهبعتلك المواد مباشرة.
               </p>
             )}
           </div>

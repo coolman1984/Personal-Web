@@ -5,10 +5,19 @@
  *    «تم الدفع» كذبًا.
  */
 import { NextResponse } from "next/server";
+import { hasPaymentKeys } from "@/lib/features";
 import { getPaymentProvider } from "@/lib/payments";
+import { unavailable } from "@/lib/unavailable";
 
 export async function POST(req: Request) {
+  if (!hasPaymentKeys()) {
+    return unavailable("استقبال تأكيد الدفع مش متاح دلوقتي.");
+  }
+
   const provider = getPaymentProvider();
+  if (!provider.enabled || provider.id === "mock") {
+    return unavailable("استقبال تأكيد الدفع مش متاح دلوقتي.");
+  }
 
   // لازم ناخد الجسم خام (نص) مش JSON — التوقيع بيتحسب على النص الأصلي
   const rawBody = await req.text();

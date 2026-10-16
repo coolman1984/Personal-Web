@@ -1,13 +1,19 @@
 /**
  * استقبال رسائل التواصل.
- * بيشتغل من غير أي مفتاح — بيسجّل الرسالة، وبيبعت إيميل لو RESEND_API_KEY موجود.
+ * من غير RESEND_API_KEY و CONTACT_TO_EMAIL بيرجع 503 قبل أي نداء خارجي.
  */
 import { NextResponse } from "next/server";
+import { isContactConfigured } from "@/lib/features";
 import { validateContact } from "@/lib/validation";
 import { clientKey, rateLimit } from "@/lib/rate-limit";
+import { unavailable } from "@/lib/unavailable";
 import type { ApiResponse } from "@/types";
 
 export async function POST(req: Request) {
+  if (!isContactConfigured()) {
+    return unavailable("نموذج التواصل مش متاح دلوقتي. راسلني على الإيميل أو لينكدإن.");
+  }
+
   const limit = rateLimit(`contact:${clientKey(req)}`);
   if (!limit.allowed) {
     return NextResponse.json<ApiResponse>(
@@ -40,7 +46,11 @@ export async function POST(req: Request) {
     const resendKey = process.env.RESEND_API_KEY;
     const to = process.env.CONTACT_TO_EMAIL;
 
-    if (resendKey && to) {
+    if (!resendKey || !to) {
+      return unavailable("نموذج التواصل مش متاح دلوقتي. راسلني على الإيميل أو لينكدإن.");
+    }
+
+    {
       // ── إرسال فعلي عبر Resend ──────────────────────────────
       const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
@@ -71,13 +81,6 @@ export async function POST(req: Request) {
         const detail = await res.text().catch(() => "");
         throw new Error(`Resend رفض الرسالة (${res.status}): ${detail}`);
       }
-    } else {
-      // مفيش مفتاح — نسجّل على السيرفر عشان ما نضيّعش الرسالة
-      console.info("[contact] رسالة جديدة (الإيميل مش متظبّط):", {
-        name: data.name,
-        email: data.email,
-        subject: data.subject,
-      });
     }
 
     return NextResponse.json<ApiResponse>({
