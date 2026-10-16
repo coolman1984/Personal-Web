@@ -17,7 +17,7 @@ const calloutStyles = {
   warn: {
     icon: TriangleAlert,
     box: "border-gold-500/28 bg-gold-500/8",
-    icn: "text-gold-600 dark:text-gold-300",
+    icn: "text-gold-700 dark:text-gold-300",
   },
 } as const;
 
@@ -63,7 +63,7 @@ export function ArticleBody({ blocks }: { blocks: ArticleBlock[] }) {
             const s = calloutStyles[block.tone];
             const Icon = s.icon;
             return (
-              <div key={i} className={cn("my-7 rounded-2xl border p-5", s.box)}>
+              <div key={i} className={cn("my-7 rounded-lg border p-5", s.box)}>
                 <p className="mb-1.5 flex items-center gap-2 text-[15px] font-extrabold text-fg">
                   <Icon className={cn("size-4.5", s.icn)} aria-hidden />
                   {block.title}
@@ -77,7 +77,7 @@ export function ArticleBody({ blocks }: { blocks: ArticleBlock[] }) {
               <pre
                 key={i}
                 dir="ltr"
-                className="my-6 overflow-x-auto rounded-2xl border border-line bg-surface-2 p-5 text-start text-sm"
+                className="my-6 overflow-x-auto rounded-lg border border-line bg-surface-2 p-5 text-start text-sm"
               >
                 <code className="font-mono">{block.code}</code>
               </pre>

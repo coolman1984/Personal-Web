@@ -1,12 +1,19 @@
 /** صندوق السعر اللاصق في صفحة الكورس. المواصفات: docs/DESIGN.md §9.2 */
-import { CalendarDays, Check, Clock, GraduationCap, Users } from "lucide-react";
+import { ArrowLeft, CalendarDays, Check, Clock, GraduationCap, Users } from "lucide-react";
 import { site } from "@/content/site";
 import { cn, discountPercent, formatNumber, formatPrice, whatsappLink } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { Course } from "@/types";
 
-export function PriceBox({ course }: { course: Course }) {
+export function PriceBox({
+  course,
+  enrolled = false,
+}: {
+  course: Course;
+  /** المتدرّب الحالي مفتوحله الكورس ده؟ */
+  enrolled?: boolean;
+}) {
   const discount = discountPercent(course.price);
   const soldOut = course.status === "مكتمل";
 
@@ -20,30 +27,66 @@ export function PriceBox({ course }: { course: Course }) {
       : []),
   ];
 
+  // المتدرّب المشترك ما يشوفش سعرًا ولا زر حجز — يشوف طريقه للمراجعة
+  if (enrolled) {
+    return (
+      <aside className="lg:sticky lg:top-24">
+        <div className="rounded-lg border border-[oklch(0.58_0.15_150/0.3)] bg-[oklch(0.58_0.15_150/0.07)] p-6 shadow-soft">
+          <Badge tone="success" size="md" className="mb-4">
+            إنت مشترك في الكورس ده
+          </Badge>
+          <p className="text-[14.5px] leading-[1.9] text-fg-muted">
+            مواد المراجعة مفتوحة ليك — البرومبتات والقوالب وقوايم المراجعة.
+          </p>
+          <Button
+            href={`/my/${course.slug}`}
+            size="lg"
+            fullWidth
+            className="mt-5"
+            iconAfter={<ArrowLeft />}
+          >
+            افتح المراجعة
+          </Button>
+        </div>
+      </aside>
+    );
+  }
+
   return (
     <aside className="lg:sticky lg:top-24">
-      <div className="rounded-[24px] border border-line bg-surface p-6 shadow-soft ring-gradient">
-        {/* السعر */}
-        <div className="flex items-end gap-3">
-          <span className="ltr-nums text-[2.25rem] font-black leading-none text-fg">
-            {formatPrice(course.price)}
-          </span>
-          {course.price.compareAt && (
-            <span className="ltr-nums pb-1 text-sm text-fg-subtle line-through">
-              {formatNumber(course.price.compareAt)}
-            </span>
-          )}
-        </div>
-        <div className="mt-2 flex flex-wrap items-center gap-2">
-          {course.price.note && (
-            <span className="text-[13px] text-fg-subtle">{course.price.note}</span>
-          )}
-          {discount && (
-            <Badge tone="gold" size="sm">
-              خصم <span className="ltr-nums">{formatNumber(discount)}٪</span>
-            </Badge>
-          )}
-        </div>
+      <div className="rounded-lg border border-line bg-surface p-6 shadow-soft ring-gradient">
+        {/* السعر — بيختفي لو site.features.showPrices = false */}
+        {site.features.showPrices ? (
+          <>
+            <div className="flex items-end gap-3">
+              <span className="ltr-nums text-[2.25rem] font-black leading-none text-fg">
+                {formatPrice(course.price)}
+              </span>
+              {course.price.compareAt && (
+                <span className="ltr-nums pb-1 text-sm text-fg-subtle line-through">
+                  {formatNumber(course.price.compareAt)}
+                </span>
+              )}
+            </div>
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              {course.price.note && (
+                <span className="text-[13px] text-fg-subtle">{course.price.note}</span>
+              )}
+              {discount && (
+                <Badge tone="gold" size="sm">
+                  خصم <span className="ltr-nums">{formatNumber(discount)}٪</span>
+                </Badge>
+              )}
+            </div>
+          </>
+        ) : (
+          <div>
+            <p className="text-xl font-extrabold text-fg">{site.priceHidden.label}</p>
+            <p className="mt-2 text-[13.5px] leading-relaxed text-fg-muted">
+              {site.priceHidden.hint}
+            </p>
+          </div>
+        )}
 
         {/* الحقائق */}
         <ul className="mt-6 flex flex-col gap-3 border-y border-line py-5">
@@ -60,7 +103,7 @@ export function PriceBox({ course }: { course: Course }) {
 
         {/* الأماكن المتبقية */}
         {typeof course.seatsLeft === "number" && !soldOut && (
-          <p className="mt-4 rounded-xl border border-gold-500/25 bg-gold-500/10 p-3 text-center text-[13px] font-bold text-gold-600 dark:text-gold-300">
+          <p className="mt-4 rounded-xl border border-gold-500/25 bg-gold-500/10 p-3 text-center text-[13px] font-bold text-gold-800 dark:text-gold-300">
             آخر <span className="ltr-nums">{formatNumber(course.seatsLeft)}</span> أماكن في
             المجموعة الجاية
           </p>
@@ -74,7 +117,11 @@ export function PriceBox({ course }: { course: Course }) {
             fullWidth
             variant={soldOut ? "secondary" : "primary"}
           >
-            {soldOut ? "سجّل في قائمة الانتظار" : "احجز مكانك"}
+            {soldOut
+              ? "سجّل في قائمة الانتظار"
+              : site.features.showPrices
+                ? "احجز مكانك"
+                : site.priceHidden.cta}
           </Button>
           <Button
             href={whatsappLink(

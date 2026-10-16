@@ -1,5 +1,10 @@
 /**
- * الباقات — 👈 غيّر ده: الأسعار مبدئية.
+ * الباقات.
+ *
+ * ⚠️ الأسعار هنا **مخفية عن الموقع** حاليًا — المفتاح في
+ *    `site.features.showPrices`. البيانات بتفضل موجودة عشان ترجّعها بسطر.
+ *
+ * 👈 غيّر ده: الأرقام دي تقديرية. حطّ أسعارك الحقيقية قبل ما تعرضها.
  * المرجع: docs/DESIGN.md §12.11
  */
 import type { PricingTier } from "@/types";
@@ -9,7 +14,7 @@ export const pricingTiers: PricingTier[] = [
     id: "single",
     name: "كورس واحد",
     tagline: "تبدأ من نقطة محدّدة عايز تحلّها",
-    price: { amount: 2400, currency: "EGP", note: "يبدأ من" },
+    price: { amount: 2400, currency: "EGP", note: "يبدأ من" }, // 👈 غيّر ده
     bestFor: "اللي عنده مشكلة واحدة واضحة عايز يحلّها",
     accent: "aqua",
     features: [

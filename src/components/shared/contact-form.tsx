@@ -5,6 +5,7 @@ import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FieldWrap, Input, Select, Textarea } from "@/components/ui/field";
 import { useToast } from "@/components/ui/toast";
+import { track } from "@/lib/analytics";
 import type { ApiResponse } from "@/types";
 
 const subjects = [
@@ -41,6 +42,7 @@ export function ContactForm({ defaultSubject }: { defaultSubject?: string }) {
       const data = (await res.json()) as ApiResponse;
 
       if (data.ok) {
+        track("submit_contact");
         push(data.message, "success");
         setSent(true);
         form.reset();
@@ -57,7 +59,7 @@ export function ContactForm({ defaultSubject }: { defaultSubject?: string }) {
 
   if (sent) {
     return (
-      <div className="rounded-[24px] border border-[oklch(0.58_0.15_150/0.28)] bg-[oklch(0.58_0.15_150/0.07)] p-8 text-center">
+      <div className="rounded-lg border border-[oklch(0.58_0.15_150/0.28)] bg-[oklch(0.58_0.15_150/0.07)] p-8 text-center">
         <p className="text-xl font-extrabold text-fg">وصلت رسالتك 👌</p>
         <p className="mt-2 text-[15px] leading-relaxed text-fg-muted">
           هرد عليك خلال ٢٤ ساعة. لو مستعجل، كلّمني على واتساب مباشرة.

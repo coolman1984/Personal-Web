@@ -27,7 +27,6 @@ export default async function ProjectsPage() {
       <PageHero
         crumbs={crumbs}
         eyebrow="المخرجات"
-        eyebrowTone="aqua"
         title="اللي هتخرج بيه فعلًا"
         description="كل مخرج هنا مطلوب إلزاميًا في البرنامج — بيتبني من ملفاتك إنت، مش من تمارين جاهزة، وبيبقى قابل للاستخدام نفس الأسبوع."
       />

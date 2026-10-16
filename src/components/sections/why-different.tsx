@@ -16,7 +16,7 @@ export function WhyDifferent({ rows }: { rows: ComparisonRow[] }) {
       <Reveal delay={0.1} className="mt-14">
         <div className="grid gap-5 md:grid-cols-2">
           {/* التقليدي */}
-          <div className="rounded-[22px] border border-[oklch(0.55_0.2_25/0.22)] bg-[oklch(0.55_0.2_25/0.05)] p-7">
+          <div className="rounded-lg border border-[oklch(0.55_0.2_25/0.22)] bg-[oklch(0.55_0.2_25/0.05)] p-7">
             <h3 className="mb-6 flex items-center gap-2.5 text-lg font-extrabold text-fg">
               <span className="grid size-7 place-items-center rounded-full bg-[oklch(0.55_0.2_25/0.15)] text-[oklch(0.55_0.2_25)] dark:text-[oklch(0.75_0.19_25)]">
                 <X className="size-4" strokeWidth={3} aria-hidden />
@@ -37,7 +37,7 @@ export function WhyDifferent({ rows }: { rows: ComparisonRow[] }) {
           </div>
 
           {/* طريقتي */}
-          <div className="rounded-[22px] border border-[oklch(0.58_0.15_150/0.25)] bg-[oklch(0.58_0.15_150/0.06)] p-7 ring-gradient">
+          <div className="rounded-lg border border-[oklch(0.58_0.15_150/0.25)] bg-[oklch(0.58_0.15_150/0.06)] p-7 ring-gradient">
             <h3 className="mb-6 flex items-center gap-2.5 text-lg font-extrabold text-fg">
               <span className="grid size-7 place-items-center rounded-full bg-[oklch(0.58_0.15_150/0.16)] text-[oklch(0.45_0.15_150)] dark:text-[oklch(0.78_0.16_150)]">
                 <Check className="size-4" strokeWidth={3} aria-hidden />

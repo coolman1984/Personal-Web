@@ -10,6 +10,7 @@ import { CreditCard, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FieldWrap, Input, Textarea } from "@/components/ui/field";
 import { useToast } from "@/components/ui/toast";
+import { track } from "@/lib/analytics";
 import type { ApiResponse } from "@/types";
 
 interface EnrollFormProps {
@@ -32,6 +33,7 @@ export function EnrollForm({ courseSlug, paymentsEnabled }: EnrollFormProps) {
     const fd = new FormData(e.currentTarget);
     const payload = { ...Object.fromEntries(fd.entries()), courseSlug };
     const endpoint = paymentsEnabled ? "/api/checkout" : "/api/enroll";
+    track(paymentsEnabled ? "begin_checkout" : "click_enroll", { course: courseSlug });
 
     try {
       const res = await fetch(endpoint, {

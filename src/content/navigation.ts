@@ -50,7 +50,7 @@ export const footerNav: { title: string; links: NavItem[] }[] = [
       { label: "المستوى المتوسط", href: "/levels/intermediate" },
       { label: "المستوى المتقدّم", href: "/levels/advanced" },
       { label: "كل الكورسات", href: "/courses" },
-      { label: "الأسعار والباقات", href: "/pricing" },
+      { label: "الباقات", href: "/pricing" },
     ],
   },
   {

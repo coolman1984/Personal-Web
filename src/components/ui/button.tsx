@@ -12,42 +12,48 @@ export type ButtonVariant =
   | "secondary"
   | "ghost"
   | "outline"
-  | "gold"
+  | "navy"
   | "link";
 export type ButtonSize = "sm" | "md" | "lg" | "xl";
 
+/**
+ * أشكال الأزرار — مبنية على المرجع البصري:
+ *   الذهبي = الدعوة الأساسية (زي "APPLY NOW")
+ *   الكحلي = الإجراء الثانوي الصلب (زي "EXPLORE PROGRAMS")
+ * المواصفات: docs/DESIGN.md §5.1
+ */
 const variants: Record<ButtonVariant, string> = {
   primary: cn(
-    "bg-linear-to-bl from-brand-600 to-brand-500 text-white",
-    "shadow-[0_4px_20px_-6px_oklch(0.55_0.23_288/0.55)]",
-    "hover:brightness-110 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_-8px_oklch(0.55_0.23_288/0.65)]",
+    "bg-gold-500 text-brand-900 font-extrabold",
+    "shadow-[0_2px_12px_-4px_oklch(0.7859_0.1674_70/0.5)]",
+    "hover:bg-gold-400 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_-6px_oklch(0.7859_0.1674_70/0.6)]",
     "active:translate-y-0 active:scale-[0.985]",
   ),
   secondary: cn(
-    "bg-surface text-fg border border-line",
-    "hover:bg-surface-2 hover:border-line-strong hover:-translate-y-0.5",
+    "bg-surface text-fg border border-line-strong",
+    "hover:border-gold-500 hover:-translate-y-0.5",
     "active:translate-y-0 active:scale-[0.985]",
   ),
   ghost: "text-fg-muted hover:bg-surface-2 hover:text-fg",
   outline: cn(
-    "border border-brand-500/40 text-brand-600 dark:text-brand-300",
-    "hover:bg-brand-500/10 hover:border-brand-500/60 hover:-translate-y-0.5",
+    "border border-fg/25 text-fg",
+    "hover:border-gold-500 hover:text-gold-700 dark:hover:text-gold-400 hover:-translate-y-0.5",
     "active:translate-y-0 active:scale-[0.985]",
   ),
-  gold: cn(
-    "bg-linear-to-bl from-gold-500 to-gold-400 text-ink-950 font-extrabold",
-    "shadow-[0_4px_20px_-6px_oklch(0.76_0.14_80/0.55)]",
-    "hover:brightness-105 hover:-translate-y-0.5",
+  /** الزر الكحلي الصلب — أقوى إجراء على خلفية فاتحة */
+  navy: cn(
+    "bg-solid text-solid-fg font-extrabold",
+    "hover:brightness-125 hover:-translate-y-0.5",
     "active:translate-y-0 active:scale-[0.985]",
   ),
-  link: "text-brand-600 dark:text-brand-300 underline underline-offset-4 hover:opacity-80 px-0!",
+  link: "text-gold-700 dark:text-gold-400 underline underline-offset-4 hover:opacity-80 px-0!",
 };
 
 const sizes: Record<ButtonSize, string> = {
-  sm: "h-9 px-4 text-sm rounded-[10px] gap-2 [&_svg]:size-4",
-  md: "h-11 px-[22px] text-[15px] rounded-xl gap-2 [&_svg]:size-[18px]",
-  lg: "h-13 px-7 text-base rounded-[14px] gap-2.5 [&_svg]:size-5",
-  xl: "h-15 px-9 text-[17px] rounded-2xl gap-2.5 [&_svg]:size-[22px]",
+  sm: "h-9 px-4 text-sm rounded-md gap-2 [&_svg]:size-4",
+  md: "h-11 px-6 text-[15px] rounded-md gap-2 [&_svg]:size-[18px]",
+  lg: "h-13 px-8 text-[16.5px] rounded-md gap-2.5 [&_svg]:size-5",
+  xl: "h-15 px-10 text-[18px] rounded-md gap-2.5 [&_svg]:size-[22px]",
 };
 
 const base = cn(

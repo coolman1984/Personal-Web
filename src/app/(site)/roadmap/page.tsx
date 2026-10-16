@@ -89,7 +89,7 @@ export default async function RoadmapPage() {
                   </span>
                 </span>
 
-                <div className="flex-1 rounded-[20px] border border-line bg-surface p-5 shadow-soft">
+                <div className="flex-1 rounded-lg border border-line bg-surface p-5 shadow-soft">
                   <div className="flex flex-wrap items-center gap-2">
                     <h2 className="text-lg font-extrabold text-fg">{item.title}</h2>
                     <Badge
@@ -118,7 +118,7 @@ export default async function RoadmapPage() {
       {flagship && (
         <section className="container-x py-14 md:py-20">
           <Reveal>
-            <div className="rounded-[28px] border border-line bg-surface p-7 noise ring-gradient md:p-10">
+            <div className="rounded-xl border border-line bg-surface p-7 noise ring-gradient md:p-10">
               <Badge tone="gold" size="md" className="mb-4">
                 المسار كامل في برنامج واحد
               </Badge>

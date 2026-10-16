@@ -54,7 +54,7 @@ export function ExitIntentModal() {
   return (
     <Dialog open={open} onClose={() => setOpen(false)} title={copy.title} className="max-w-lg">
       <div className="flex flex-col items-center gap-5 p-6 text-center md:p-8">
-        <span className="grid size-14 place-items-center rounded-2xl border border-gold-500/25 bg-gold-500/12 text-gold-600 dark:text-gold-300">
+        <span className="grid size-14 place-items-center rounded-lg border border-gold-500/25 bg-gold-500/12 text-gold-700 dark:text-gold-300">
           <Gift className="size-6" />
         </span>
 

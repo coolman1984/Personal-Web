@@ -16,7 +16,7 @@ export default function GlobalError({
   }, [error]);
 
   return (
-    <html lang="en" className={latinFontClassName}>
+    <html lang="en" className={`workshop-root ${latinFontClassName}`}>
       <body className="min-h-screen bg-bg text-fg antialiased">
         <main className="container-x flex min-h-screen flex-col items-center justify-center px-5 py-24 text-center">
           <h1 className="text-2xl font-medium text-fg">Something went wrong</h1>

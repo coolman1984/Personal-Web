@@ -1,10 +1,11 @@
 /** كل الكورسات. */
-import { getAllCourses } from "@/lib/queries";
+import { getAllCourses, getMiniCourses } from "@/lib/queries";
 import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { PageHero } from "@/components/shared/page-hero";
 import { JsonLd } from "@/components/shared/json-ld";
 import { CourseBrowser } from "@/components/course/course-browser";
 import { CompareTable } from "@/components/course/compare-table";
+import { MiniCourses } from "@/components/sections/mini-courses";
 import { FinalCta } from "@/components/sections/final-cta";
 
 export const metadata = buildMetadata({
@@ -20,7 +21,7 @@ const crumbs = [
 ];
 
 export default async function CoursesPage() {
-  const courses = await getAllCourses();
+  const [courses, miniCourses] = await Promise.all([getAllCourses(), getMiniCourses()]);
 
   return (
     <>
@@ -35,6 +36,8 @@ export default async function CoursesPage() {
       <section className="container-x pb-8">
         <CourseBrowser courses={courses} />
       </section>
+
+      <MiniCourses courses={miniCourses} />
 
       <section className="container-x py-14 md:py-20">
         <h2 className="mb-8 text-2xl font-extrabold text-fg">قارن بين المستويات التلاتة</h2>

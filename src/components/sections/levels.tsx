@@ -37,7 +37,7 @@ export function Levels({
             >
               <article
                 className={cn(
-                  "relative flex h-full flex-col overflow-hidden rounded-[24px] border border-line bg-surface shadow-soft card-hover",
+                  "relative flex h-full flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-soft card-hover",
                   isMiddle && "ring-gradient shadow-lift",
                 )}
               >
@@ -50,7 +50,7 @@ export function Levels({
                 <div className="flex flex-1 flex-col p-7">
                   <span
                     className={cn(
-                      "mb-5 grid size-14 place-items-center rounded-2xl border",
+                      "mb-5 grid size-14 place-items-center rounded-lg border",
                       accent.bg,
                       accent.border,
                       accent.text,

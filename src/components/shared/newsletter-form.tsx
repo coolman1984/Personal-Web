@@ -6,8 +6,16 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/field";
 import { useToast } from "@/components/ui/toast";
+import { track } from "@/lib/analytics";
 
-export function NewsletterForm({ className }: { className?: string }) {
+export function NewsletterForm({
+  className,
+  onGold = false,
+}: {
+  className?: string;
+  /** الفورم فوق خلفية ذهبية — بيقلب ألوان الزر والحقل */
+  onGold?: boolean;
+}) {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const { push } = useToast();
@@ -23,7 +31,10 @@ export function NewsletterForm({ className }: { className?: string }) {
       });
       const data = (await res.json()) as { ok: boolean; message: string };
       push(data.message, data.ok ? "success" : "error");
-      if (data.ok) setEmail("");
+      if (data.ok) {
+        track("subscribe_newsletter");
+        setEmail("");
+      }
     } catch {
       push("فيه حاجة مش مظبوطة. جرّب تاني، أو كلّمني على واتساب.", "error");
     } finally {
@@ -44,9 +55,18 @@ export function NewsletterForm({ className }: { className?: string }) {
         placeholder="your@email.com"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="flex-1 text-start"
+        className={cn(
+          "flex-1 text-start",
+          onGold && "border-brand-900/20 bg-white text-brand-900 placeholder:text-brand-900/45",
+        )}
       />
-      <Button type="submit" size="md" loading={loading} icon={<Send />}>
+      <Button
+        type="submit"
+        size="md"
+        loading={loading}
+        icon={<Send />}
+        variant={onGold ? "navy" : "primary"}
+      >
         ابعتلي الدليل
       </Button>
     </form>

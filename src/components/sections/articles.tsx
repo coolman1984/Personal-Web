@@ -24,7 +24,7 @@ export function Articles({ articles }: { articles: Article[] }) {
           <Reveal as="li" key={article.slug} delay={i * 0.08} className="h-full">
             <article
               className={cn(
-                "group relative flex h-full flex-col rounded-[20px] border border-line bg-surface p-6 shadow-soft card-hover",
+                "group relative flex h-full flex-col rounded-lg border border-line bg-surface p-6 shadow-soft card-hover",
               )}
             >
               <div className="mb-4 flex items-center gap-2">

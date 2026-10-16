@@ -13,15 +13,27 @@ import { Logo } from "./logo";
 import { MegaMenu } from "./mega-menu";
 import { ThemeToggle } from "./theme-toggle";
 import { MobileNav } from "./mobile-nav";
+import { UserMenu } from "./user-menu";
 import type { Course, Level } from "@/types";
 
 interface NavbarProps {
   levels: Level[];
   coursesByLevel: Record<string, Course[]>;
   onOpenSearch: () => void;
+  /** إيميل المستخدم الحالي — null لو مش داخل */
+  userEmail: string | null;
+  isAdmin: boolean;
+  authEnabled: boolean;
 }
 
-export function Navbar({ levels, coursesByLevel, onOpenSearch }: NavbarProps) {
+export function Navbar({
+  levels,
+  coursesByLevel,
+  onOpenSearch,
+  userEmail,
+  isAdmin,
+  authEnabled,
+}: NavbarProps) {
   const scrolled = useScrolledPast(20);
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -39,10 +51,33 @@ export function Navbar({ levels, coursesByLevel, onOpenSearch }: NavbarProps) {
         تخطّي إلى المحتوى
       </a>
 
+      {/* شريط علوي رفيع — معلومات التواصل وروابط سريعة */}
+      <div className="hidden bg-brand-900 text-white/70 lg:block">
+        <div className="container-x flex h-10 items-center justify-between text-[12.5px]">
+          <a
+            href={`mailto:${site.email}`}
+            className="transition-colors hover:text-gold-500"
+            dir="ltr"
+          >
+            {site.email}
+          </a>
+          <div className="flex items-center gap-5">
+            <span>{site.location}</span>
+            <span aria-hidden className="h-3 w-px bg-white/20" />
+            <Link href="/faq" className="transition-colors hover:text-gold-500">
+              الأسئلة الشائعة
+            </Link>
+            <Link href="/contact" className="transition-colors hover:text-gold-500">
+              تواصل
+            </Link>
+          </div>
+        </div>
+      </div>
+
       <header
         className={cn(
-          "sticky top-0 z-50 w-full transition-[height,background-color,border-color] duration-300",
-          scrolled ? "h-16 border-b border-line glass" : "h-20 border-b border-transparent",
+          "sticky top-0 z-50 w-full border-b transition-[height,background-color,border-color] duration-300",
+          scrolled ? "h-16 border-line glass" : "h-20 border-line bg-bg",
         )}
       >
         <div className="container-x flex h-full items-center justify-between gap-4">
@@ -113,7 +148,8 @@ export function Navbar({ levels, coursesByLevel, onOpenSearch }: NavbarProps) {
               </button>
             )}
             <ThemeToggle />
-            <Button href="/quiz" size="md" className="hidden sm:inline-flex">
+            {authEnabled && <UserMenu email={userEmail} isAdmin={isAdmin} />}
+            <Button href="/quiz" size="md" className="hidden md:inline-flex">
               حدّد مستواك
             </Button>
             <button

@@ -12,7 +12,7 @@ import type { Testimonial } from "@/types";
 
 function TestimonialCard({ t }: { t: Testimonial }) {
   return (
-    <figure className="flex w-[22rem] shrink-0 flex-col gap-4 rounded-[20px] border border-line bg-surface p-6 shadow-soft">
+    <figure className="flex w-[22rem] shrink-0 flex-col gap-4 rounded-lg border border-line bg-surface p-6 shadow-soft">
       <Quote className="size-5 text-brand-500/40" aria-hidden />
       <blockquote className="flex-1 text-[14.5px] leading-[1.9] text-fg-muted">
         {t.quote}
@@ -22,7 +22,11 @@ function TestimonialCard({ t }: { t: Testimonial }) {
         <div className="min-w-0 flex-1">
           <p className="truncate text-sm font-extrabold text-fg">{t.name}</p>
           <p className="truncate text-[12px] text-fg-subtle">
-            {t.role} · {levelShortLabel[t.level]}
+            {t.role}
+            <span aria-hidden className="mx-1.5 opacity-60">
+              ·
+            </span>
+            {levelShortLabel[t.level]}
           </p>
         </div>
         <Rating value={t.rating} />

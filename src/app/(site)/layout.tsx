@@ -1,5 +1,5 @@
 /**
- * جذر الموقع العربي — RTL وغلاف الكورسات (ثابت بدون headers في الجذر).
+ * جذر الموقع العربي — RTL وغلاف الكورسات وحالة الحساب.
  * المواصفات: docs/DESIGN.md §3.1 و §10.3
  */
 import type { Metadata, Viewport } from "next";
@@ -8,8 +8,11 @@ import "../globals.css";
 import { site } from "@/content/site";
 import { personJsonLd, organizationJsonLd } from "@/lib/seo";
 import { getAllLevels, getCoursesByLevel, getSearchIndex } from "@/lib/queries";
+import { getUserEmail } from "@/lib/supabase/server";
+import { isAdmin } from "@/lib/access";
+import { authEnabled } from "@/lib/supabase/config";
+import { AnalyticsScripts } from "@/components/layout/analytics-scripts";
 import { siteUrl } from "@/lib/utils";
-import { latinFontClassName } from "@/lib/fonts";
 import { arabicFontClassName } from "@/lib/fonts-ar";
 
 import { ThemeProvider } from "@/components/layout/theme-provider";
@@ -34,8 +37,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fcfcfd" },
-    { media: "(prefers-color-scheme: dark)", color: "#1a1c22" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -49,9 +52,11 @@ export default async function SiteRootLayout({ children }: { children: React.Rea
     getCoursesByLevel("advanced"),
   ]);
   const searchIndex = await getSearchIndex();
+  const userEmail = authEnabled ? await getUserEmail() : null;
+  const admin = userEmail ? await isAdmin() : false;
 
   return (
-    <html lang="ar" dir="rtl" suppressHydrationWarning className={`${latinFontClassName} ${arabicFontClassName}`}>
+    <html lang="ar" dir="rtl" suppressHydrationWarning className={arabicFontClassName}>
       <body>
         <JsonLd data={[personJsonLd(), organizationJsonLd()]} />
         <ThemeProvider>
@@ -61,12 +66,16 @@ export default async function SiteRootLayout({ children }: { children: React.Rea
               levels={levels}
               coursesByLevel={{ beginner, intermediate, advanced }}
               searchIndex={searchIndex}
+              userEmail={userEmail}
+              isAdmin={admin}
+              authEnabled={authEnabled}
             >
               <main id="main">{children}</main>
               <SiteExtras />
             </SiteShell>
           </ToastProvider>
         </ThemeProvider>
+        <AnalyticsScripts />
       </body>
     </html>
   );

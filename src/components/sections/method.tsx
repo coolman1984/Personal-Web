@@ -55,14 +55,14 @@ export function Method({ pillars }: { pillars: MethodPillar[] }) {
             >
               <article
                 className={cn(
-                  "relative flex h-full flex-col overflow-hidden rounded-[22px] border border-line bg-surface shadow-soft card-hover noise",
+                  "relative flex h-full flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-soft card-hover noise",
                   isLarge ? "p-8" : "p-6",
                   isLarge && "ring-gradient",
                 )}
               >
                 <span
                   className={cn(
-                    "mb-4 grid place-items-center rounded-2xl border",
+                    "mb-4 grid place-items-center rounded-lg border",
                     accent.bg,
                     accent.border,
                     accent.text,

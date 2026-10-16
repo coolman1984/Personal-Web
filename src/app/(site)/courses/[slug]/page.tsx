@@ -1,7 +1,16 @@
 /** صفحة الكورس التفصيلية. */
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { ArrowLeft, Check, CircleDot, Package, Sparkles, Wrench } from "lucide-react";
+import {
+  ArrowLeft,
+  BookMarked,
+  Check,
+  CircleDot,
+  Package,
+  Radio,
+  Sparkles,
+  Wrench,
+} from "lucide-react";
 import {
   getAllCourses,
   getCourseBySlug,
@@ -16,10 +25,12 @@ import { Accordion } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/shared/page-hero";
 import { JsonLd } from "@/components/shared/json-ld";
+import { FactRow } from "@/components/shared/fact-row";
 import { ShareButtons } from "@/components/shared/share-buttons";
 import { Reveal } from "@/components/motion/reveal";
 import { LevelBadge } from "@/components/course/level-badge";
 import { PriceBox } from "@/components/course/price-box";
+import { hasAccess } from "@/lib/access";
 import { Curriculum } from "@/components/course/curriculum";
 import { CourseCard } from "@/components/course/course-card";
 import { absoluteUrl } from "@/lib/utils";
@@ -67,7 +78,7 @@ function PointList({
   } as const;
 
   return (
-    <div className="rounded-[20px] border border-line bg-surface p-6">
+    <div className="rounded-lg border border-line bg-surface p-6">
       <h3 className="mb-4 flex items-center gap-2.5 text-lg font-extrabold text-fg">
         <Icon className={cn("size-5", colors[tone])} aria-hidden />
         {title}
@@ -89,9 +100,10 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
   const course = await getCourseBySlug(slug);
   if (!course) notFound();
 
-  const [level, related] = await Promise.all([
+  const [level, related, enrolled] = await Promise.all([
     getLevelById(course.level),
     getRelatedCourses(slug, 3),
+    hasAccess(slug),
   ]);
 
   const accent = accentFor(course.level);
@@ -119,6 +131,11 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
       >
         <div className="flex flex-wrap items-center gap-2">
           <LevelBadge level={course.level} size="md" />
+          {course.kind === "mini" && (
+            <Badge tone="gold" size="md">
+              ميني كورس
+            </Badge>
+          )}
           <Badge tone="neutral" size="md">
             {course.duration}
           </Badge>
@@ -137,6 +154,15 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
           ))}
         </div>
         <p className={cn("text-[17px] font-bold", accent.text)}>{course.tagline}</p>
+        {course.promise && (
+          <p className="flex items-start gap-2.5 rounded-lg border border-gold-500/25 bg-gold-500/8 p-4 text-[15px] leading-snug text-fg-muted">
+            <Package className="mt-0.5 size-4.5 shrink-0 text-gold-700 dark:text-gold-300" aria-hidden />
+            <span>
+              <span className="font-extrabold text-fg">هتخرج بـ: </span>
+              {course.promise}
+            </span>
+          </p>
+        )}
       </PageHero>
 
       <div className="container-x pb-8">
@@ -144,10 +170,55 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
           {/* العمود الرئيسي */}
           <div className="flex flex-col gap-10">
             <Reveal>
-              <div className="rounded-[20px] border border-line bg-surface p-6">
+              <div className="rounded-lg border border-line bg-surface p-6">
                 <p className="text-[16px] leading-[2] text-fg-muted">{course.description}</p>
               </div>
             </Reveal>
+
+            {/* نموذج التسليم — بيوضّح إيه مباشر وإيه مراجعة */}
+            {course.delivery && (
+              <Reveal>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="rounded-lg border border-brand-500/25 bg-brand-500/6 p-6">
+                    <h3 className="mb-2 flex items-center gap-2.5 text-base font-extrabold text-fg">
+                      <Radio className="size-5 text-brand-500" aria-hidden />
+                      الشرح — مباشر معايا
+                    </h3>
+                    <p className="text-[14.5px] leading-[1.9] text-fg-muted">
+                      {course.delivery.live}
+                    </p>
+                    <p className="mt-3 text-[13px] leading-snug text-fg-subtle">
+                      التطبيق بيتعمل على ملفك إنت، مش على تمرين جاهز.
+                    </p>
+                  </div>
+
+                  <div className="rounded-lg border border-gold-500/25 bg-gold-500/6 p-6">
+                    <h3 className="mb-3 flex items-center gap-2.5 text-base font-extrabold text-fg">
+                      <BookMarked className="size-5 text-gold-700 dark:text-gold-300" aria-hidden />
+                      المراجعة — على الموقع
+                    </h3>
+                    <ul className="flex flex-col gap-2">
+                      {course.delivery.review.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-2 text-[13.5px] leading-snug text-fg-muted"
+                        >
+                          <Check
+                            className="mt-0.5 size-3.5 shrink-0 text-gold-700 dark:text-gold-300"
+                            strokeWidth={3}
+                            aria-hidden
+                          />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-3 text-[13px] leading-snug text-fg-subtle">
+                      بتتفتح بعد الحجز، وبتفضل معاك.
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            )}
 
             <Reveal>
               <PointList
@@ -163,13 +234,21 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
               <section>
                 <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
                   <h2 className="text-2xl font-extrabold text-fg">المنهج بالتفصيل</h2>
-                  <p className="text-[13px] text-fg-subtle">
-                    <span className="ltr-nums">{formatNumber(course.curriculum.length)}</span> وحدات
-                    {" · "}
-                    <span className="ltr-nums">{formatNumber(totalLessons)}</span> درس
-                    {" · "}
-                    <span className="ltr-nums">{formatNumber(totalHours)}</span> ساعة
-                  </p>
+                  <FactRow
+                    className="text-[13px] text-fg-subtle"
+                    items={[
+                      <>
+                        <span className="ltr-nums">{formatNumber(course.curriculum.length)}</span>{" "}
+                        وحدات
+                      </>,
+                      <>
+                        <span className="ltr-nums">{formatNumber(totalLessons)}</span> درس
+                      </>,
+                      <>
+                        <span className="ltr-nums">{formatNumber(totalHours)}</span> ساعة
+                      </>,
+                    ]}
+                  />
                 </div>
                 <Curriculum modules={course.curriculum} />
               </section>
@@ -205,7 +284,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
 
             {/* الأدوات */}
             <Reveal>
-              <div className="rounded-[20px] border border-line bg-surface p-6">
+              <div className="rounded-lg border border-line bg-surface p-6">
                 <h3 className="mb-4 text-lg font-extrabold text-fg">الأدوات اللي هتشتغل بيها</h3>
                 <ul className="flex flex-wrap gap-2">
                   {course.tools.map((tool) => (
@@ -250,7 +329,7 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
           </div>
 
           {/* العمود الجانبي */}
-          <PriceBox course={course} />
+          <PriceBox course={course} enrolled={enrolled} />
         </div>
       </div>
 

@@ -3,6 +3,7 @@
 import { MessageCircle } from "lucide-react";
 import { site } from "@/content/site";
 import { whatsappLink } from "@/lib/utils";
+import { track } from "@/lib/analytics";
 
 export function WhatsAppFab() {
   if (!site.features.whatsappFab) return null;
@@ -18,6 +19,7 @@ export function WhatsAppFab() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="تواصل معايا على واتساب"
+      onClick={() => track("click_whatsapp", { from: "fab" })}
       className="group fixed bottom-24 end-5 z-40 grid size-14 place-items-center rounded-full text-white shadow-[0_8px_24px_-6px_oklch(0.72_0.17_145/0.45)] transition-transform hover:scale-105 md:bottom-6"
       style={{ background: "oklch(0.66 0.16 145)", animation: "pulse-ring 2.6s cubic-bezier(0.4,0,0.6,1) infinite" }}
     >

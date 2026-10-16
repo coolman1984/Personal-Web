@@ -8,26 +8,31 @@ import { Aurora } from "@/components/layout/aurora";
 
 export function FinalCta() {
   return (
-    <section className="container-x pb-8 pt-16 md:pt-20">
+    <section className="relative isolate overflow-hidden band-navy">
       <Reveal>
-        <div className="relative isolate overflow-hidden rounded-[32px] border border-line bg-ink-950 px-6 py-16 text-center noise md:px-12 md:py-20">
+        <div className="relative px-6 py-20 text-center md:py-24">
           <Aurora className="opacity-90" />
           <div aria-hidden className="absolute inset-0 dots-bg opacity-30" />
 
-          <div className="relative mx-auto flex max-w-2xl flex-col items-center">
-            <h2 className="text-[clamp(1.75rem,4vw+0.5rem,3rem)] font-black leading-tight text-white">
-              خلّي أول أتمتة ليك <span className="text-gradient">الأسبوع الجاي</span>
+          <div className="container-x relative mx-auto flex max-w-3xl flex-col items-center">
+            <h2 className="rule-gold-center text-[clamp(1.875rem,4vw+0.5rem,3rem)] font-black leading-[1.3] text-white">
+              خلّي أول أتمتة ليك <span className="text-gold-500">الأسبوع الجاي</span>
             </h2>
-            <p className="mt-5 text-[16.5px] leading-[1.9] text-white/70">
+            <p className="mt-6 text-[17px] leading-[2] text-white/70">
               ابدأ بالاختبار — ٨ أسئلة في دقيقتين هيقولوك تبدأ منين بالظبط،
               ويرشّحولك الكورس المناسب لمستواك.
             </p>
 
             <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
-              <Button href="/quiz" variant="gold" size="xl" iconAfter={<ArrowLeft />}>
+              <Button href="/quiz" variant="primary" size="xl" iconAfter={<ArrowLeft />}>
                 حدّد مستواك دلوقتي
               </Button>
-              <Button href="/courses" variant="secondary" size="xl">
+              <Button
+                href="/courses"
+                variant="outline"
+                size="xl"
+                className="border-white/30 text-white hover:border-gold-500 hover:text-gold-500"
+              >
                 استعرض الكورسات
               </Button>
             </div>
@@ -39,7 +44,7 @@ export function FinalCta() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-white/60 transition-colors hover:text-white"
+              className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-white/60 transition-colors hover:text-gold-500"
             >
               <MessageCircle className="size-4" aria-hidden />
               أو كلّمني على واتساب مباشرة

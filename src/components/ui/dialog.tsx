@@ -78,7 +78,7 @@ export function Dialog({
             exit={{ opacity: 0, scale: 0.97, y: 8 }}
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
             className={cn(
-              "relative w-full max-w-2xl overflow-hidden rounded-3xl border border-line",
+              "relative w-full max-w-2xl overflow-hidden rounded-xl border border-line",
               "bg-surface shadow-lift",
               className,
             )}

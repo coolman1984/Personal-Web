@@ -21,6 +21,8 @@
 | ٣ | `docs/DESIGN.md` | كل قرار بصري بالمقاس والرقم |
 | ٤ | `docs/CONTENT.md` | كل النصوص ونبرة الكتابة |
 | ٥ | `docs/ROADMAP.md` | خطة التوسّع بعدين |
+| ٦ | `docs/SOURCE-MATERIAL.md` | المادة الأصلية — ممنوع تخترع محتوى مش فيها |
+| ٧ | `docs/MEMBERSHIP-PLAN.md` | خطة الحسابات والوصول المدفوع (المرحلة الجاية) |
 
 **قاعدة الأولوية عند التعارض:**
 `DESIGN.md` (للبصريات) > `PLAN.md` (للبنية) > الكود الموجود.
@@ -59,6 +61,10 @@ npm run typecheck && npm run build
 | ٨ | حساب السعر من بيانات المتصفّح | ثغرة أمنية خطيرة | احسبه على السيرفر من `content/courses.ts` |
 | ٩ | أي مفتاح سرّي في الكود | تسريب | `.env` + `.env.example` موثّق |
 | ١٠ | أرقام أو آراء مُختلقة تُعرض كحقيقية | خداع للزائر | علّم عليها `// 👈 غيّر ده` |
+| ١١ | فاصل ` · ` مكتوب كنص جنب رقم | بيتنقل لمكان غلط وبيتقري كأنه صفر عربي «٠» | أعِد صياغة الجملة، أو استخدم `<FactRow>` |
+| ١٢ | `.ltr-nums` على جملة كاملة فيها رقم | بتقلب الكلمة العربية للناحية الغلط | حطّها على الرقم لوحده |
+| ١٣ | `text-fg` / `text-fg-muted` / `accent.text` جوّه شريط كحلي | بتبقى كحلي على كحلي — نصّ مختفي في الوضع النهاري | كلاس `dark` على السكشن، أو ألوان صريحة (`text-white/70`) — `DESIGN.md §14.7` |
+| ١٤ | `inset-inline-start: 50%` + `translateX(-50%)` للتمركز | بيتجمعوا في RTL فالعنصر بيزيح بعرضه كله | `inset-inline: 0` + `margin-inline: auto` — `DESIGN.md §10.6` |
 
 ---
 
@@ -122,6 +128,8 @@ export function CourseCard({ course, size = "md", className }: CourseCardProps) 
 | ترتيب سكاشن الرئيسية | `src/app/page.tsx` |
 | الهيدر / الفوتر | `src/components/layout/` |
 | تفعيل/تعطيل ميزة | `src/content/site.ts` → `features` |
+| نوع الكورس (ميني/عادي/برنامج) | `src/content/courses.ts` → `kind` |
+| وعد الميني كورس ونموذج تسليمه | `src/content/courses.ts` → `promise` و`delivery` |
 | إعدادات SEO العامة | `src/lib/seo.ts` |
 | بوابة الدفع | `src/lib/payments/` |
 
@@ -149,6 +157,8 @@ export function CourseCard({ course, size = "md", className }: CourseCardProps) 
 - [ ] `grep -rE "\b(ml|mr|pl|pr)-[0-9]|text-(left|right)|\b(left|right)-[0-9]" src/` → صفر
 - [ ] مفيش نص ظاهر للمستخدم مكتوب جوّه مكوّن
 - [ ] الوضع الليلي والنهاري مراجعين
+- [ ] **فحص التباين** — مفيش نصّ تحت 4.5:1 (أو 3:1 للعناوين) في الوضعين
+      (الطريقة والنتائج في `docs/DESIGN.md §11.1`)
 - [ ] جرّبت على عرض 320px — مفيش تمرير أفقي
 - [ ] كل زر أيقوني له `aria-label`
 - [ ] التوثيق في `docs/` متحدّث لو غيّرت حاجة أساسية
@@ -168,3 +178,13 @@ export function CourseCard({ course, size = "md", className }: CourseCardProps) 
 > **الموقع ده واجهة شخص حقيقي.** أي رقم أو رأي أو ادّعاء غير حقيقي بيضرّه، مش
 > بيساعده. كل بيانات العيّنة في `src/content/` معلّم عليها `// 👈 غيّر ده` —
 > خلّي التعليق ده موجود لحد ما صاحب الموقع يحطّ بياناته الحقيقية.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

@@ -54,15 +54,16 @@ export default async function AboutPage() {
         title={site.name}
         description={site.bio}
       >
-        <p className="text-[15px] font-bold text-brand-600 dark:text-brand-300">{site.role}</p>
+        <p className="text-[15px] font-bold text-gold-500">{site.role}</p>
         <div className="flex flex-wrap gap-3">
           <Button href="/quiz" size="lg" iconAfter={<ArrowLeft />}>
             حدّد مستواك
           </Button>
           <Button
             href={whatsappLink(site.whatsapp, `السلام عليكم ${site.shortName}،`)}
-            variant="secondary"
+            variant="outline"
             size="lg"
+            className="border-white/30 text-white hover:border-gold-500 hover:text-gold-500"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -76,7 +77,7 @@ export default async function AboutPage() {
       {/* الفلسفة */}
       <section className="container-x py-14 md:py-20">
         <Reveal>
-          <blockquote className="mx-auto max-w-3xl rounded-[28px] border border-line bg-surface p-8 text-center noise ring-gradient md:p-12">
+          <blockquote className="mx-auto max-w-3xl rounded-xl border border-line bg-surface p-8 text-center noise ring-gradient md:p-12">
             <Quote className="mx-auto mb-5 size-7 text-brand-500/50" aria-hidden />
             <p className="text-[clamp(1.25rem,2.5vw+0.5rem,1.75rem)] font-extrabold leading-[1.7] text-fg">
               الهدف مش إنك تستخدم أدوات الذكاء الاصطناعي، بل إنك تشوف شغلك كنظام
@@ -127,7 +128,7 @@ export default async function AboutPage() {
         <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {guides.map((g, i) => (
             <Reveal as="li" key={g.n} delay={i * 0.05} className="h-full">
-              <div className="flex h-full flex-col rounded-[20px] border border-line bg-surface p-6 shadow-soft card-hover">
+              <div className="flex h-full flex-col rounded-lg border border-line bg-surface p-6 shadow-soft card-hover">
                 <span className="ltr-nums mb-4 grid size-10 place-items-center rounded-xl bg-brand-500/12 text-base font-black text-brand-600 dark:text-brand-300">
                   {g.n}
                 </span>
