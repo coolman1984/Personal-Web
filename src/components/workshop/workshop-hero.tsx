@@ -15,7 +15,7 @@ interface WorkshopHeroProps {
 export function WorkshopHero({ hero }: WorkshopHeroProps) {
   return (
     <section className="section-pad ink-grid-bg bg-ink text-ink-fg">
-      <div className="container-x grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-center xl:grid-cols-[minmax(0,1fr)_360px]">
+      <div className="container-ws grid gap-12 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-center xl:grid-cols-[minmax(0,1fr)_360px]">
         <div id="workshop-content" tabIndex={-1} className="outline-none">
           <Eyebrow onInk>{hero.eyebrow}</Eyebrow>
           <WordReveal

@@ -265,6 +265,15 @@
   @media (min-width: 768px) { padding-inline: 2rem; }
 }
 
+@utility container-ws {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  max-width: 84rem;
+  @media (min-width: 640px) { padding-inline: 2rem; }
+  @media (min-width: 1024px) { padding-inline: 3rem; }
+}
+
 @utility glass {
   background: var(--glass);
   backdrop-filter: blur(20px) saturate(180%);

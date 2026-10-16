@@ -31,7 +31,7 @@ export function WorkshopSection({
         className,
       )}
     >
-      <div className="container-x">{children}</div>
+      <div className="container-ws">{children}</div>
     </section>
   );
 }

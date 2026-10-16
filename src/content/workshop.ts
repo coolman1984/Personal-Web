@@ -149,7 +149,7 @@ export const workshop = {
       "Mohamed leads AI automation and business transformation initiatives within Samsung Electronics Egypt, connecting AI, automation, finance, manufacturing, supply chain and SAP. He helps organisations turn AI experimentation into measurable business impact: less manual work, better decisions, greater accuracy and measurable value.",
     credentials: [
       {
-        title: "14+ years in manufacturing",
+        title: "14+ years in multinational manufacturing",
         description:
           "Experience in a multinational manufacturing environment, with a background in Finance Business Partnering, FP&A, operations and manufacturing.",
       },
@@ -206,7 +206,7 @@ export const workshop = {
           src: "/workshop/store.webp",
           alt: "Store / Mizan owner home screen in training mode",
           width: 1280,
-          height: 806,
+          height: 543,
         },
       },
       {
@@ -223,10 +223,10 @@ export const workshop = {
       {
         title: "AI Academy course",
         description:
-          "An AI Academy course page used for training.",
+          "An illustrated page from the AI Academy course book explaining in Arabic how AI helps at work.",
         image: {
           src: "/workshop/academy.webp",
-          alt: "AI Academy course page with training lessons",
+          alt: "Illustrated AI Academy course book page in Arabic explaining how AI helps at work",
           width: 820,
           height: 1159,
         },

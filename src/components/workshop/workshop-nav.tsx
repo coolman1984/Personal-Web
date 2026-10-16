@@ -30,7 +30,7 @@ export function WorkshopNav({ content }: WorkshopNavProps) {
           scrolled ? "border-border" : "border-transparent",
         )}
       >
-        <div className="container-x flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
+        <div className="container-ws flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
           <Link
             href="/"
             className="font-display text-base font-semibold tracking-tight text-fg transition-colors duration-200 hover:text-fg"

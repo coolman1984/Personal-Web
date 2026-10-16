@@ -13,7 +13,7 @@ export function WorkshopFooter({ content }: WorkshopFooterProps) {
 
   return (
     <footer className="border-t border-border bg-secondary/40">
-      <div className="container-x flex flex-col gap-4 py-10 text-sm text-fg-muted sm:flex-row sm:items-center sm:justify-between">
+      <div className="container-ws flex flex-col gap-4 py-10 text-sm text-fg-muted sm:flex-row sm:items-center sm:justify-between">
         <p>
           © {year} {content.footer.note}
         </p>
