@@ -22,7 +22,9 @@ import { methodPillars, comparison } from "@/content/method";
 import { stats } from "@/content/stats";
 import { timeline } from "@/content/timeline";
 import { quizQuestions, quizResults, maxQuizScore } from "@/content/quiz";
+import { workshop } from "@/content/workshop";
 import { readingTime } from "@/lib/utils";
+import type { WorkshopContent } from "@/content/workshop";
 import type {
   Article,
   ComparisonRow,
@@ -374,4 +376,9 @@ export async function getSearchIndex(): Promise<SearchItem[]> {
   }));
 
   return [...courseItems, ...articleItems, ...projectItems, ...staticPages];
+}
+
+/** Workshop landing content — single source via content/workshop.ts */
+export async function getWorkshopContent(): Promise<WorkshopContent> {
+  return workshop;
 }
