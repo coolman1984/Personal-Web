@@ -3,7 +3,6 @@
  * المواصفات: docs/DESIGN.md §3.1 و §10.3
  */
 import type { Metadata, Viewport } from "next";
-import { connection } from "next/server";
 import "../globals.css";
 
 import { site } from "@/content/site";
@@ -46,8 +45,7 @@ export const viewport: Viewport = {
 };
 
 export default async function SiteRootLayout({ children }: { children: React.ReactNode }) {
-  // الأعلام بتعتمد على أسرار وقت التشغيل، مش على قيمة اتثبتت وقت البناء.
-  await connection();
+  // من غير مفاتيح التكامل، الصفحات العامة تفضل ثابتة. كوكيز الحساب بتتقري بس لو متفعّل.
   const authEnabled = isAuthConfigured();
   const newsletterEnabled = site.features.newsletter && isNewsletterConfigured();
   const levels = await getAllLevels();

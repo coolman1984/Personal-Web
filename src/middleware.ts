@@ -4,24 +4,21 @@
  * المرجع: docs/MEMBERSHIP-PLAN.md §7
  */
 import { NextResponse, type NextRequest } from "next/server";
-import { isAuthConfigured } from "@/lib/features";
 import { updateSession } from "@/lib/supabase/middleware";
 
 export async function middleware(request: NextRequest) {
-  // من غير مفاتيح Supabase مفيش جلسة ولا عميل. الطلب يعدّي كما هو.
-  if (!isAuthConfigured()) {
-    return NextResponse.next();
-  }
-
+  // من غير مفاتيح Supabase، updateSession بيرجع user: null من غير عميل أو كوكيز.
   const { response, user } = await updateSession(request);
-  const { pathname } = request.nextUrl;
+  const { pathname, search } = request.nextUrl;
 
-  const isProtected = pathname.startsWith("/my") || pathname.startsWith("/admin");
+  const isProtected = ["/my", "/admin"].some(
+    (path) => pathname === path || pathname.startsWith(`${path}/`),
+  );
 
   if (isProtected && !user) {
     const loginUrl = new URL("/login", request.url);
     // نفتكر هو كان رايح فين عشان نرجّعه بعد الدخول
-    loginUrl.searchParams.set("next", pathname);
+    loginUrl.searchParams.set("next", pathname + search);
     return NextResponse.redirect(loginUrl);
   }
 
