@@ -12,7 +12,7 @@ interface WorkshopAboutProps {
 }
 
 const gridCellBorder =
-  "h-full border-b border-e border-border sm:[&:nth-child(2n)]:border-e-0 sm:last:border-e-0";
+  "h-full border-b border-e border-border max-sm:border-e-0 sm:[&:nth-child(2n)]:border-e-0 sm:last:border-e-0";
 
 export function WorkshopAbout({ about }: WorkshopAboutProps) {
   return (

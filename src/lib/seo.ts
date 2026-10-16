@@ -25,6 +25,10 @@ interface MetaInput {
   ogImage?: string | null;
   /** When false, only `keywords` are used (no Arabic site keywords). */
   mergeSiteKeywords?: boolean;
+  /** Author and creator. Defaults to the Arabic site name. */
+  authorName?: string;
+  /** Open Graph site name. Defaults to `authorName`, then the Arabic site name. */
+  siteName?: string;
 }
 
 export function buildMetadata({
@@ -38,10 +42,14 @@ export function buildMetadata({
   locale = site.locale,
   ogImage = OG_IMAGE,
   mergeSiteKeywords = true,
+  authorName,
+  siteName,
 }: MetaInput): Metadata {
   const url = absoluteUrl(path);
   const fullTitle = path === "/" ? title : `${title} — ${site.name}`;
   const keywordList = mergeSiteKeywords ? [...site.keywords, ...keywords] : keywords;
+  const author = authorName ?? site.name;
+  const ogSiteName = siteName ?? authorName ?? site.name;
   const ogImages =
     ogImage === null
       ? undefined
@@ -51,8 +59,8 @@ export function buildMetadata({
     title: fullTitle,
     description,
     keywords: keywordList.length > 0 ? keywordList : undefined,
-    authors: [{ name: site.name }],
-    creator: site.name,
+    authors: [{ name: author }],
+    creator: author,
     metadataBase: new URL(siteUrl()),
     alternates: { canonical: url },
     robots: noIndex ? { index: false, follow: false } : { index: true, follow: true },
@@ -61,7 +69,7 @@ export function buildMetadata({
       url,
       title: fullTitle,
       description,
-      siteName: site.name,
+      siteName: ogSiteName,
       locale,
       ...(ogImages ? { images: ogImages } : {}),
       ...(publishedAt ? { publishedTime: publishedAt } : {}),

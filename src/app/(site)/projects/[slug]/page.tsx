@@ -14,6 +14,8 @@ import { LevelBadge } from "@/components/course/level-badge";
 import { CourseCard } from "@/components/course/course-card";
 import { Reveal } from "@/components/motion/reveal";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const projects = await getAllProjects();
   return projects.map((p) => ({ slug: p.slug }));

@@ -12,6 +12,8 @@ import { PageHero } from "@/components/shared/page-hero";
 import { EnrollForm } from "@/components/shared/enroll-form";
 import { LevelBadge } from "@/components/course/level-badge";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const courses = await getAllCourses();
   return courses.map((c) => ({ slug: c.slug }));

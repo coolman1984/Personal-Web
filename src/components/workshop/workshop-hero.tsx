@@ -30,7 +30,11 @@ export function WorkshopHero({ hero }: WorkshopHeroProps) {
           <WorkshopButton href={hero.primaryCta.href} variant="primary">
             {hero.primaryCta.label}
           </WorkshopButton>
-          <WorkshopButton href={hero.secondaryCta.href} variant="secondary" className="border-ink-border bg-transparent text-ink-fg hover:bg-white/5">
+          <WorkshopButton
+            href={hero.secondaryCta.href}
+            variant="secondary"
+            className="border-ink-border bg-transparent text-ink-fg hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink-fg focus-visible:ring-2 focus-visible:ring-ink-fg focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+          >
             {hero.secondaryCta.label}
           </WorkshopButton>
         </ScrollReveal>

@@ -2,6 +2,7 @@
  * Home — AI executive workshop landing (English, LTR).
  */
 import type { Metadata } from "next";
+import { workshop } from "@/content/workshop";
 import { getWorkshopContent } from "@/lib/queries";
 import { buildMetadata, workshopJsonLd, WORKSHOP_OG_IMAGE } from "@/lib/seo";
 import { WorkshopLanding } from "@/components/workshop/workshop-landing";
@@ -14,6 +15,8 @@ export const metadata: Metadata = buildMetadata({
   path: "/",
   locale: "en_US",
   ogImage: WORKSHOP_OG_IMAGE,
+  authorName: workshop.owner.name,
+  siteName: workshop.owner.name,
   mergeSiteKeywords: false,
   keywords: [
     "AI workshop",

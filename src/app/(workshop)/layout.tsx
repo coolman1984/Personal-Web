@@ -4,7 +4,7 @@
 import type { Viewport } from "next";
 import "../globals.css";
 
-import { fontClassName } from "@/lib/fonts";
+import { latinFontClassName } from "@/lib/fonts";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import { ToastProvider } from "@/components/ui/toast";
 
@@ -19,7 +19,7 @@ export const viewport: Viewport = {
 
 export default function WorkshopRootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" dir="ltr" suppressHydrationWarning className={fontClassName}>
+    <html lang="en" dir="ltr" suppressHydrationWarning className={latinFontClassName}>
       <body>
         <ThemeProvider>
           <ToastProvider>{children}</ToastProvider>

@@ -24,6 +24,8 @@ import { Curriculum } from "@/components/course/curriculum";
 import { CourseCard } from "@/components/course/course-card";
 import { absoluteUrl } from "@/lib/utils";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const courses = await getAllCourses();
   return courses.map((c) => ({ slug: c.slug }));

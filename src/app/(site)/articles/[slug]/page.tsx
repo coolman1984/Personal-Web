@@ -19,6 +19,8 @@ import { ArticleBody } from "@/components/shared/article-body";
 import { ShareButtons } from "@/components/shared/share-buttons";
 import { ReadingProgress } from "@/components/shared/reading-progress";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const articles = await getAllArticles();
   return articles.map((a) => ({ slug: a.slug }));

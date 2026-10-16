@@ -20,6 +20,8 @@ import { CourseCard } from "@/components/course/course-card";
 import { FinalCta } from "@/components/sections/final-cta";
 import type { LevelId } from "@/types";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const levels = await getAllLevels();
   return levels.map((l) => ({ level: l.id }));

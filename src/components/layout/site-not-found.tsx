@@ -1,4 +1,4 @@
-/** صفحة ٤٠٤. */
+/** Arabic 404 body shared by the global document and the course-site boundary. */
 import { Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Aurora } from "@/components/layout/aurora";
@@ -10,7 +10,7 @@ const links = [
   { label: "المقالات", href: "/articles" },
 ];
 
-export default function NotFound() {
+export function SiteNotFound() {
   return (
     <section className="relative isolate overflow-hidden noise">
       <Aurora />
@@ -36,8 +36,8 @@ export default function NotFound() {
           ))}
         </ul>
 
-        <Button href="/" size="lg" className="mt-8">
-          ارجع للرئيسية
+        <Button href="/courses" size="lg" className="mt-8">
+          ارجع للكورسات
         </Button>
       </div>
     </section>

@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: `${site.name} — كورسات الذكاء الاصطناعي`,
     short_name: site.shortName,
     description: site.tagline,
-    start_url: "/",
+    start_url: "/courses",
     display: "standalone",
     // لون خام هنا استثناء مقصود: المتصفّح بيقرا الملف ده قبل ما يحمّل أي CSS،
     // فمش بيفهم متغيّرات `globals.css`. القيمة = `--bg` الليلي (docs/DESIGN.md §2).

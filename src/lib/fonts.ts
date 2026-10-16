@@ -1,7 +1,9 @@
 /**
- * خطوط الموقع — مشتركة بين مجموعات المسارات (workshop / site).
+ * Latin faces for every document.
+ * IBM Plex Sans Arabic is in fonts-ar.ts so the English workshop layout
+ * does not import it and does not preload it.
  */
-import { Geist, Geist_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 
 export const geist = Geist({
   subsets: ["latin"],
@@ -17,11 +19,4 @@ export const geistMono = Geist_Mono({
   display: "swap",
 });
 
-export const arabic = IBM_Plex_Sans_Arabic({
-  subsets: ["arabic", "latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-plex-ar",
-  display: "swap",
-});
-
-export const fontClassName = `${geist.variable} ${geistMono.variable} ${arabic.variable}`;
+export const latinFontClassName = `${geist.variable} ${geistMono.variable}`;

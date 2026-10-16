@@ -403,7 +403,15 @@
   & ol { margin-bottom: 1.25rem; padding-inline-start: 1.5rem; list-style: decimal; }
   & li { margin-bottom: 0.5rem; }
   & strong { color: var(--fg); font-weight: 700; }
-  & a { color: var(--primary); text-decoration: underline; text-underline-offset: 4px; }
+  & a {
+    color: var(--primary-solid);
+    text-decoration-line: underline;
+    text-underline-offset: 4px;
+  }
+  & a:hover {
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 1px;
+  }
   & blockquote {
     border-inline-start: 3px solid var(--primary);
     padding-inline-start: 1.25rem;

@@ -9,7 +9,8 @@ import { site } from "@/content/site";
 import { personJsonLd, organizationJsonLd } from "@/lib/seo";
 import { getAllLevels, getCoursesByLevel, getSearchIndex } from "@/lib/queries";
 import { siteUrl } from "@/lib/utils";
-import { fontClassName } from "@/lib/fonts";
+import { latinFontClassName } from "@/lib/fonts";
+import { arabicFontClassName } from "@/lib/fonts-ar";
 
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import { ToastProvider } from "@/components/ui/toast";
@@ -50,7 +51,7 @@ export default async function SiteRootLayout({ children }: { children: React.Rea
   const searchIndex = await getSearchIndex();
 
   return (
-    <html lang="ar" dir="rtl" suppressHydrationWarning className={fontClassName}>
+    <html lang="ar" dir="rtl" suppressHydrationWarning className={`${latinFontClassName} ${arabicFontClassName}`}>
       <body>
         <JsonLd data={[personJsonLd(), organizationJsonLd()]} />
         <ThemeProvider>
