@@ -5,6 +5,7 @@ import { PageHero } from "@/components/shared/page-hero";
 import { JsonLd } from "@/components/shared/json-ld";
 import { FaqBrowser } from "@/components/shared/faq-browser";
 import { FinalCta } from "@/components/sections/final-cta";
+import { publicContact } from "@/lib/public-contact";
 
 export const metadata = buildMetadata({
   title: "الأسئلة الشائعة",
@@ -28,7 +29,7 @@ export default async function FaqPage() {
         crumbs={crumbs}
         eyebrow="أسئلة شائعة"
         title="كل اللي ممكن تسأل عنه"
-        description="لو سؤالك مش هنا، كلّمني على واتساب وهرد عليك شخصيًا."
+        description={`لو سؤالك مش هنا، ابعتلي على الإيميل ${publicContact.email} أو لينكدإن وهرد عليك شخصيًا.`}
       />
       <section className="container-x pb-8">
         <FaqBrowser faqs={faqs} categories={categories} />

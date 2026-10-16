@@ -17,20 +17,15 @@ export const site = {
   locale: "ar_EG",
 
   // ═══ التواصل ══════════════════════════════════════════
-  email: "hello@example.com", // 👈 غيّر ده
+  email: "mflma2030@gmail.com",
   phoneDisplay: "٠١٠٠ ٠٠٠ ٠٠٠٠", // 👈 غيّر ده
   whatsapp: "201000000000", // 👈 غيّر ده — بصيغة دولية بدون +
   location: "القاهرة، مصر", // 👈 غيّر ده
 
   // ═══ السوشيال ═════════════════════════════════════════
-  // 👈 غيّر الروابط دي، واحذف أي حساب مش موجود عندك
+  // الحسابات العامة المؤكّدة فقط
   social: {
-    linkedin: "https://linkedin.com/in/username",
-    youtube: "https://youtube.com/@username",
-    x: "https://x.com/username",
-    facebook: "https://facebook.com/username",
-    github: "https://github.com/username",
-    telegram: "https://t.me/username",
+    linkedin: "https://www.linkedin.com/in/mohamedfawzy1984/",
   } as Record<string, string>,
 
   // ═══ نصوص الهيرو ══════════════════════════════════════
