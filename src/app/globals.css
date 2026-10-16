@@ -548,6 +548,12 @@ html.workshop-root.dark {
   --shadow-color: oklch(0 0 0 / 0.5);
 }
 
+@utility section-pad {
+  padding-block: 5rem;
+  @media (min-width: 768px) { padding-block: 7rem; }
+  @media (min-width: 1024px) { padding-block: 9rem; }
+}
+
 @utility ink-grid-bg {
   background-color: var(--ink);
   background-image:
