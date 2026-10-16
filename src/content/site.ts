@@ -12,11 +12,11 @@ export const site = {
   tagline: "ما بعلّمش أدوات... بعلّم إزاي تبني نظام عمل",
   bio: "بشتغل على التحوّل بالذكاء الاصطناعي وأتمتة المؤسسات، وبدرّب فرق العمل بالعربي. شغلي كله قايم على فكرة واحدة: الهدف مش إنك تتعلّم أدوات، الهدف إنك تشوف شغلك كنظام متكامل وتعرف فين التقنية ممكن تعمل أثر حقيقي.",
 
-  url: "https://example.com", // 👈 غيّر ده — دومين موقعك
+  url: "https://github.com/coolman1984/Personal-Web", // preview until custom domain
   locale: "ar_EG",
 
   // ═══ التواصل ══════════════════════════════════════════
-  email: "hello@example.com", // 👈 غيّر ده
+  email: "mflma2030@gmail.com",
   phoneDisplay: "٠١٠٠ ٠٠٠ ٠٠٠٠", // 👈 غيّر ده
   whatsapp: "201000000000", // 👈 غيّر ده — بصيغة دولية بدون +
   location: "القاهرة، مصر", // 👈 غيّر ده
@@ -24,7 +24,7 @@ export const site = {
   // ═══ السوشيال ═════════════════════════════════════════
   // 👈 غيّر الروابط دي، واحذف أي حساب مش موجود عندك
   social: {
-    linkedin: "https://linkedin.com/in/username",
+    linkedin: "https://www.linkedin.com/in/mohamedfawzy1984/",
     youtube: "https://youtube.com/@username",
     x: "https://x.com/username",
     facebook: "https://facebook.com/username",
