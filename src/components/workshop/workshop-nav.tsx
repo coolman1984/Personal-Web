@@ -26,14 +26,14 @@ export function WorkshopNav({ content }: WorkshopNavProps) {
       </a>
       <header
         className={cn(
-          "sticky top-0 z-50 border-b bg-background/80 backdrop-blur-xl transition-[border-color,background-color] duration-300",
+          "sticky top-0 z-50 border-b bg-background backdrop-blur-xl transition-[border-color,background-color] duration-300",
           scrolled ? "border-border" : "border-transparent",
         )}
       >
         <div className="container-x flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
           <Link
             href="/"
-            className="font-display text-base font-semibold tracking-tight text-fg transition-colors duration-200 hover:text-primary"
+            className="font-display text-base font-semibold tracking-tight text-fg transition-colors duration-200 hover:text-fg"
           >
             {content.owner.name}
           </Link>
@@ -79,6 +79,10 @@ export function WorkshopNav({ content }: WorkshopNavProps) {
                       <a
                         href={link.href}
                         className="block rounded-[var(--radius)] px-3 py-3 text-sm text-fg-muted transition-colors hover:bg-secondary hover:text-fg"
+                        onClick={(event) => {
+                          const details = event.currentTarget.closest("details");
+                          if (details) details.open = false;
+                        }}
                       >
                         {link.label}
                       </a>

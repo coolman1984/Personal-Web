@@ -18,7 +18,7 @@ export function WorkshopFaq({ faq }: WorkshopFaqProps) {
         {faq.items.map((item) => (
           <details key={item.question} className="group py-1">
             <summary
-              className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-[var(--radius)] py-6 text-base font-medium text-fg transition-colors duration-200 hover:text-primary md:text-lg [&::-webkit-details-marker]:hidden"
+              className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-[var(--radius)] py-6 text-base font-medium text-fg transition-colors duration-200 hover:text-fg md:text-lg [&::-webkit-details-marker]:hidden"
             >
               <span>{item.question}</span>
               <span

@@ -104,7 +104,7 @@
   --primary: oklch(0.629 0.166 293.5);
   --primary-solid: oklch(0.5 0.17 293.5);
   --primary-fg: oklch(0.99 0.002 240);
-  --ring: oklch(0.629 0.166 293.5 / 0.45);
+  --ring: var(--primary-solid);
   --ink: oklch(0.211 0.017 234);
   --ink-fg: oklch(0.985 0.002 240);
   --ink-muted: oklch(0.708 0.012 240);
@@ -126,9 +126,9 @@
   --fg-muted: oklch(0.73 0.014 270);
   --fg-subtle: oklch(0.6 0.016 270);
   --primary: oklch(0.71 0.17 288);
-  --primary-solid: oklch(0.62 0.17 288);
+  --primary-solid: oklch(0.55 0.17 288);
   --primary-fg: oklch(0.99 0.002 240);
-  --ring: oklch(0.71 0.17 288 / 0.6);
+  --ring: var(--primary-solid);
   --ink: oklch(0.14 0.017 270);
   --ink-fg: oklch(0.96 0.005 90);
   --ink-muted: oklch(0.72 0.014 270);
@@ -187,6 +187,7 @@
 
   html[dir="rtl"] body {
     font-family: var(--font-ar);
+    font-synthesis: none;
   }
 
   h1, h2, h3, h4, h5, h6 {

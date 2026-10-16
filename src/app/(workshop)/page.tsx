@@ -3,7 +3,7 @@
  */
 import type { Metadata } from "next";
 import { getWorkshopContent } from "@/lib/queries";
-import { buildMetadata, workshopJsonLd } from "@/lib/seo";
+import { buildMetadata, workshopJsonLd, WORKSHOP_OG_IMAGE } from "@/lib/seo";
 import { WorkshopLanding } from "@/components/workshop/workshop-landing";
 import { JsonLd } from "@/components/shared/json-ld";
 
@@ -12,6 +12,9 @@ export const metadata: Metadata = buildMetadata({
   description:
     "A one-day, hands-on workshop for managers in the Gulf and Egypt. Leave with agent roles, prompts, and a rollout plan using free or low-cost tools.",
   path: "/",
+  locale: "en_US",
+  ogImage: WORKSHOP_OG_IMAGE,
+  mergeSiteKeywords: false,
   keywords: [
     "AI workshop",
     "executive training",

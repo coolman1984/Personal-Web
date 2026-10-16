@@ -12,7 +12,7 @@ interface WorkshopOutcomesProps {
 }
 
 const gridCellBorder =
-  "h-full border-b border-e border-ink-border md:[&:nth-child(2n)]:border-e-0 lg:[&:nth-child(3n)]:border-e-0";
+  "h-full border-b border-ink-border max-md:border-e-0 md:border-e md:[&:nth-child(2n)]:border-e-0 lg:[&:nth-child(2n)]:border-e lg:[&:nth-child(3n)]:border-e-0 last:border-e-0";
 
 export function WorkshopOutcomes({ outcomes }: WorkshopOutcomesProps) {
   return (
