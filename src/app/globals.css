@@ -7,9 +7,10 @@
    كل الألوان بصيغة OKLCH عشان تدرّجاتها تبقى نظيفة وطبيعية للعين
    ═══════════════════════════════════════════════════════════════════ */
 @theme {
-  --font-display: var(--font-tajawal), "Tajawal", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-plex-ar), "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+  --font-display: var(--font-geist), "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-ar: var(--font-plex-ar), "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
 
   /* اللون الأساسي — بنفسجي نيلي راقي */
   --color-brand-50: oklch(0.97 0.02 288);
@@ -89,18 +90,24 @@
    المتغيّرات الدلالية — الوضع الفاتح والداكن
    ═══════════════════════════════════════════════════════════════════ */
 :root {
-  --bg: oklch(0.99 0.004 95);
-  --bg-subtle: oklch(0.97 0.007 95);
+  --radius: 0.25rem;
+  --bg: oklch(0.995 0.001 240);
+  --bg-subtle: oklch(0.97 0.004 240);
   --surface: oklch(1 0 0);
-  --surface-2: oklch(0.975 0.006 288);
-  --border: oklch(0.9 0.008 288);
-  --border-strong: oklch(0.83 0.014 288);
-  --fg: oklch(0.2 0.02 270);
-  --fg-muted: oklch(0.47 0.016 270);
-  --fg-subtle: oklch(0.6 0.014 270);
-  --primary: oklch(0.55 0.23 288);
-  --primary-fg: oklch(0.99 0 0);
-  --ring: oklch(0.63 0.21 288 / 0.55);
+  --surface-2: oklch(0.962 0.004 240);
+  --secondary: oklch(0.962 0.004 240);
+  --border: oklch(0.905 0.004 240);
+  --border-strong: oklch(0.83 0.006 240);
+  --fg: oklch(0.211 0.017 234);
+  --fg-muted: oklch(0.495 0.011 240);
+  --fg-subtle: oklch(0.58 0.011 240);
+  --primary: oklch(0.629 0.166 293.5);
+  --primary-fg: oklch(0.99 0.002 240);
+  --ring: oklch(0.629 0.166 293.5 / 0.45);
+  --ink: oklch(0.211 0.017 234);
+  --ink-fg: oklch(0.985 0.002 240);
+  --ink-muted: oklch(0.708 0.012 240);
+  --ink-border: oklch(1 0 0 / 0.12);
   --glass: oklch(1 0 0 / 0.72);
   --glass-border: oklch(1 0 0 / 0.5);
   --shadow-color: oklch(0.45 0.05 288 / 0.1);
@@ -125,17 +132,25 @@
 }
 
 @theme inline {
+  --color-background: var(--bg);
   --color-bg: var(--bg);
   --color-bg-subtle: var(--bg-subtle);
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
+  --color-secondary: var(--secondary);
   --color-line: var(--border);
+  --color-border: var(--border);
   --color-line-strong: var(--border-strong);
   --color-fg: var(--fg);
   --color-fg-muted: var(--fg-muted);
   --color-fg-subtle: var(--fg-subtle);
   --color-primary: var(--primary);
   --color-primary-fg: var(--primary-fg);
+  --color-ink: var(--ink);
+  --color-ink-fg: var(--ink-fg);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-border: var(--ink-border);
+  --radius-DEFAULT: var(--radius);
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -162,12 +177,26 @@
     overflow-x: hidden;
   }
 
+  html[dir="rtl"] body {
+    font-family: var(--font-ar);
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 800;
-    letter-spacing: -0.015em;
-    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
     text-wrap: balance;
+  }
+
+  html[dir="rtl"] h1,
+  html[dir="rtl"] h2,
+  html[dir="rtl"] h3,
+  html[dir="rtl"] h4,
+  html[dir="rtl"] h5,
+  html[dir="rtl"] h6 {
+    font-family: var(--font-ar);
+    font-weight: 700;
   }
 
   p { text-wrap: pretty; }
@@ -212,8 +241,28 @@
   width: 100%;
   margin-inline: auto;
   padding-inline: 1.25rem;
-  max-width: 80rem;
-  @media (min-width: 768px) { padding-inline: 2rem; }
+  max-width: 84rem;
+  @media (min-width: 640px) { padding-inline: 2rem; }
+  @media (min-width: 1024px) { padding-inline: 3rem; }
+}
+
+@utility section-pad {
+  padding-inline: 1.25rem;
+  padding-block: 5rem;
+  @media (min-width: 640px) { padding-inline: 2rem; }
+  @media (min-width: 768px) { padding-block: 7rem; }
+  @media (min-width: 1024px) {
+    padding-inline: 3rem;
+    padding-block: 9rem;
+  }
+}
+
+@utility ink-grid-bg {
+  background-color: var(--ink);
+  background-image:
+    linear-gradient(to right, oklch(1 0 0 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(1 0 0 / 0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
 }
 
 @utility glass {
@@ -358,12 +407,98 @@
     margin: 1.75rem 0;
   }
   & code {
-    font-family: var(--font-mono);
+    font-family: var(--font-mono), var(--font-geist-mono), ui-monospace, monospace;
     font-size: 0.875em;
     background: var(--surface-2);
     padding: 0.15em 0.4em;
     border-radius: 6px;
     direction: ltr;
     display: inline-block;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Workshop landing — type scale & scroll motion
+   ═══════════════════════════════════════════════════════════════════ */
+.workshop-root {
+  font-family: var(--font-display);
+}
+
+.workshop-root h1,
+.workshop-root h2,
+.workshop-root h3,
+.workshop-root h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+.display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 7.2vw, 6.5rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+
+.display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5.2vw, 4.25rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.display-md {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.word-reveal .word-reveal-shell {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.word-reveal .word-reveal-inner {
+  display: inline-block;
+  transform: translateY(0);
+}
+
+.scroll-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html.motion-ready .word-reveal:not(.is-in-view) .word-reveal-inner {
+  transform: translateY(110%);
+}
+
+html.motion-ready .word-reveal.is-in-view .word-reveal-inner {
+  transform: translateY(0);
+  transition: transform 0.85s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+html.motion-ready .scroll-reveal:not(.is-in-view) {
+  opacity: 0;
+  transform: translateY(1.25rem);
+}
+
+html.motion-ready .scroll-reveal.is-in-view {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.75s cubic-bezier(0.23, 1, 0.32, 1),
+    transform 0.75s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.motion-ready .word-reveal .word-reveal-inner,
+  html.motion-ready .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }

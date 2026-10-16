@@ -3,7 +3,7 @@
  * المواصفات: docs/DESIGN.md §3.1 و §10.3
  */
 import type { Metadata, Viewport } from "next";
-import { Tajawal, IBM_Plex_Sans_Arabic, JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 
 import { site } from "@/content/site";
@@ -13,31 +13,28 @@ import { getAllLevels, getCoursesByLevel, getSearchIndex } from "@/lib/queries";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import { ToastProvider } from "@/components/ui/toast";
 import { SiteShell } from "@/components/layout/site-shell";
-import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/layout/scroll-progress";
-import { BackToTop } from "@/components/layout/back-to-top";
-import { WhatsAppFab } from "@/components/layout/whatsapp-fab";
-import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
+import { SiteExtras } from "@/components/layout/site-extras";
 import { JsonLd } from "@/components/shared/json-ld";
 
-const display = Tajawal({
-  subsets: ["arabic", "latin"],
-  weight: ["500", "700", "800", "900"],
-  variable: "--font-tajawal",
+const geist = Geist({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-geist",
   display: "swap",
 });
 
-const body = IBM_Plex_Sans_Arabic({
-  subsets: ["arabic", "latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-plex-ar",
-  display: "swap",
-});
-
-const mono = JetBrains_Mono({
+const geistMono = Geist_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
-  variable: "--font-jetbrains",
+  variable: "--font-geist-mono",
+  display: "swap",
+});
+
+const arabic = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic", "latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-plex-ar",
   display: "swap",
 });
 
@@ -52,8 +49,8 @@ export const viewport: Viewport = {
   // ألوان شريط المتصفّح على الموبايل — استثناء مقصود من قاعدة «ممنوع ألوان خام»:
   // بتتقري قبل تحميل الـCSS. القيم = `--bg` النهاري والليلي (docs/DESIGN.md §2).
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fdfdfb" },
-    { media: "(prefers-color-scheme: dark)", color: "#0d0e14" },
+    { media: "(prefers-color-scheme: light)", color: "#fcfcfd" },
+    { media: "(prefers-color-scheme: dark)", color: "#1a1c22" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -74,7 +71,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       lang="ar"
       dir="rtl"
       suppressHydrationWarning
-      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      className={`${geist.variable} ${geistMono.variable} ${arabic.variable}`}
     >
       <body>
         <JsonLd data={[personJsonLd(), organizationJsonLd()]} />
@@ -87,10 +84,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               searchIndex={searchIndex}
             >
               <main id="main">{children}</main>
-              <Footer />
-              <BackToTop />
-              <WhatsAppFab />
-              <MobileCtaBar />
+              <SiteExtras />
             </SiteShell>
           </ToastProvider>
         </ThemeProvider>
