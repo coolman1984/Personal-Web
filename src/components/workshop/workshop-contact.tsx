@@ -1,5 +1,5 @@
 /**
- * Final CTA + contact placeholders.
+ * Final CTA and contact links.
  */
 import type { WorkshopContent } from "@/types";
 import { WordReveal } from "./motion/word-reveal";
@@ -31,6 +31,8 @@ export function WorkshopContact({ contact }: WorkshopContactProps) {
         </a>
         <a
           href={contact.linkedIn.href}
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-sm text-fg-muted transition-colors duration-200 hover:text-fg"
         >
           {contact.linkedIn.label}

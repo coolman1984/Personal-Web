@@ -143,27 +143,35 @@ export const workshop = {
   about: {
     id: "about",
     title: "About Mohamed",
+    headline:
+      "AI & Business Transformation Leader | Enterprise Automation | AI Trainer & Lecturer | Finance | Manufacturing | SAP",
     intro:
-      "Mohamed Fawzy leads AI Automation & Transformation at Samsung Electronics Egypt (since January 2026), covering 19 teams across TV and mobile divisions.",
+      "Mohamed leads AI automation and business transformation initiatives within Samsung Electronics Egypt, connecting AI, automation, finance, manufacturing, supply chain and SAP. He helps organisations turn AI experimentation into measurable business impact: less manual work, better decisions, greater accuracy and measurable value.",
     credentials: [
       {
-        title: "Samsung Electronics Egypt",
+        title: "14+ years in manufacturing",
         description:
-          "AI Automation & Transformation lead since Jan 2026 — 19 teams in TV and mobile divisions.",
+          "Experience in a multinational manufacturing environment, with a background in Finance Business Partnering, FP&A, operations and manufacturing.",
       },
       {
-        title: "Finance & operations",
+        title: "Enterprise transformation",
         description:
-          "Finance Controlling Assistant Manager and ops & supply chain team lead at Samsung, 2012–2025.",
+          "Enterprise AI adoption and transformation, business process automation and workflow redesign, and manufacturing and supply-chain transformation.",
       },
       {
-        title: "Manufacturing finance",
-        description: "Roughly 14 years at Samsung; 18+ years in manufacturing finance overall.",
+        title: "Finance, reporting & enterprise data",
+        description:
+          "AI-enabled reporting and decision support, finance/FP&A and cost-control automation, and SAP and enterprise data workflows.",
       },
       {
-        title: "Technical delivery",
+        title: "Governance & business value",
         description:
-          "Builds Python + SQL pipelines on SAP data, writes business cases, and trains staff on automation.",
+          "AI governance and validation, business-case development and value measurement.",
+      },
+      {
+        title: "AI Trainer & Lecturer",
+        description:
+          "Cairo University · 21,689 LinkedIn followers.",
       },
       {
         title: "Measured impact",
@@ -171,32 +179,57 @@ export const workshop = {
           "Cut recurring analysis and reporting time by 70% using automation and AI-agent workflows.",
       },
     ],
-    portraitLabel: "Placeholder — photo to come",
   },
 
   proof: {
     id: "proof",
     title: "Proof of work",
     intro:
-      "Shipping products and internal systems—not slides. Images below are placeholders until assets are approved.",
+      "Real product and course screenshots, shown with demo or training data only.",
     blocks: [
       {
-        title: "Apps-Factory",
+        title: "Trip Orders",
         description:
-          "Offline-first Windows business apps for Egyptian SMEs: Trip Orders (transport trip orders, licensed commercial release), Store, and Teachers.",
-        imageLabel: "Placeholder — Apps-Factory screenshot",
+          "A daily board for transport trip orders, shown with demo data.",
+        image: {
+          src: "/workshop/trip-orders.webp",
+          alt: "Trip Orders daily board showing transport orders with demo data",
+          width: 1280,
+          height: 720,
+        },
       },
       {
-        title: "Personal AI agent team",
+        title: "Store / Mizan",
         description:
-          "Chief of Staff, Engineering Lead, Store Engineer, and Teachers Engineer bots—with multi-model review before anything ships.",
-        imageLabel: "Placeholder — agent workflow diagram",
+          "The store owner's home screen in training mode.",
+        image: {
+          src: "/workshop/store.webp",
+          alt: "Store / Mizan owner home screen in training mode",
+          width: 1280,
+          height: 806,
+        },
+      },
+      {
+        title: "Teachers / Hessa",
+        description:
+          "Reports for teachers, shown with training data.",
+        image: {
+          src: "/workshop/teachers.webp",
+          alt: "Teachers / Hessa reports screen showing training data",
+          width: 1280,
+          height: 800,
+        },
       },
       {
         title: "AI Academy course",
         description:
-          "Eight lessons in simple Egyptian Arabic with ready prompts for free AI models—designed for staff who are new to agents.",
-        imageLabel: "Placeholder — course cover",
+          "An AI Academy course page used for training.",
+        image: {
+          src: "/workshop/academy.webp",
+          alt: "AI Academy course page with training lessons",
+          width: 820,
+          height: 1159,
+        },
       },
     ],
   },
@@ -243,10 +276,10 @@ export const workshop = {
     title: "Start a conversation",
     body:
       "Tell us about your team, location, and the reporting or ops workflow you want to accelerate. We will follow up with format options and scheduling.",
-    email: "hello@example.com (placeholder)",
-    emailHref: "mailto:hello@example.com",
-    linkedIn: { label: "LinkedIn (placeholder)", href: "#" },
-    primaryCta: { label: "Email Mohamed", href: "mailto:hello@example.com" },
+    email: "mflma2030@gmail.com",
+    emailHref: "mailto:mflma2030@gmail.com",
+    linkedIn: { label: "LinkedIn", href: "https://www.linkedin.com/in/mohamedfawzy1984/" },
+    primaryCta: { label: "Email Mohamed", href: "mailto:mflma2030@gmail.com" },
   },
 
   footer: {

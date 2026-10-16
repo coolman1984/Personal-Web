@@ -1,6 +1,7 @@
 /**
- * Proof of work — ink section with placeholder media blocks.
+ * Proof of work — ink section with product and training screenshots.
  */
+import Image from "next/image";
 import type { WorkshopContent } from "@/types";
 import { WordReveal } from "./motion/word-reveal";
 import { ScrollReveal } from "./motion/scroll-reveal";
@@ -27,13 +28,15 @@ export function WorkshopProof({ proof }: WorkshopProofProps) {
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-ink-muted">{block.description}</p>
               </div>
-              <div
-                className="flex aspect-video items-center justify-center border border-ink-border bg-white/[0.03] p-6 text-center text-sm text-ink-muted"
-                role="img"
-                aria-label={block.imageLabel}
-              >
-                {block.imageLabel}
-              </div>
+              <Image
+                src={block.image.src}
+                alt={block.image.alt}
+                width={block.image.width}
+                height={block.image.height}
+                loading="lazy"
+                sizes="(min-width: 1280px) 592px, (min-width: 1024px) calc((100vw - 6rem) / 2), (min-width: 768px) calc(100vw - 4rem), calc(100vw - 2.5rem)"
+                className="h-auto w-full border border-ink-border"
+              />
             </article>
           </ScrollReveal>
         ))}

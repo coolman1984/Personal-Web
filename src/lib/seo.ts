@@ -1,6 +1,7 @@
 /** بناء الـmetadata والبيانات المنظّمة. المرجع: docs/PLAN.md §9.2 */
 import type { Metadata } from "next";
 import { site } from "@/content/site";
+import { workshop } from "@/content/workshop";
 import { absoluteUrl, siteUrl } from "@/lib/utils";
 import type { Article, Course, Faq } from "@/types";
 
@@ -200,7 +201,8 @@ export function workshopJsonLd() {
     about: {
       "@type": "Person",
       name: "Mohamed Fawzy",
-      jobTitle: "Leads AI Automation & Transformation at Samsung Electronics Egypt",
+      jobTitle: workshop.about.headline,
+      sameAs: [workshop.contact.linkedIn.href],
     },
   };
 }
