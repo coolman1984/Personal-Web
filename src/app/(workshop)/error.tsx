@@ -17,10 +17,9 @@ export default function WorkshopError({
   return (
     <main
       className="container-x flex min-h-screen flex-col items-center justify-center py-24 text-center"
-      role="alert"
     >
       <h1 className="display-md text-fg">Something went wrong</h1>
-      <p className="mt-4 max-w-md text-base leading-relaxed text-fg-muted">
+      <p role="alert" className="mt-4 max-w-md text-base leading-relaxed text-fg-muted">
         An unexpected error occurred. Try again, or return to the workshop.
       </p>
       {error.digest ? (
