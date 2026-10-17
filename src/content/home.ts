@@ -5,27 +5,7 @@
  * the owner is marked // 👈 غيّر ده and shown as an honest placeholder.
  */
 import { publicContact } from "@/lib/public-contact";
-
-// قالب الإيميل اللي بيتفتح لما الشركة تضغط «Discuss your challenge» — حقول §4.4
-const intakeBody = [
-  "Company and sector:",
-  "Department:",
-  "The problem (one or two lines):",
-  "How often it happens:",
-  "Time it takes today:",
-  "Systems involved (SAP / ERP / Excel / other):",
-  "Who owns the decision:",
-  "Preferred start date:",
-  "Data-access limits we should know about:",
-].join("\n");
-
-const companyMailto = `${publicContact.mailto}?subject=${encodeURIComponent(
-  "Challenge for a free 90-minute scan",
-)}&body=${encodeURIComponent(intakeBody)}`;
-
-const recruiterMailto = `${publicContact.mailto}?subject=${encodeURIComponent(
-  "CV request: AI & automation transformation role",
-)}`;
+import { companyMailto, recruiterMailto } from "./intake";
 
 export const home = {
   owner: {
@@ -328,6 +308,8 @@ export const home = {
           "A short process map, problems and data, ranked opportunities, a value and cost estimate, and an initial 90-day plan.",
         format: "1–2 weeks, fixed price for an agreed scope",
         price: "Fixed price after the scan", // 👈 غيّر ده
+        href: "/diagnostic",
+        hrefLabel: "Details",
       },
       {
         step: "04",
@@ -337,6 +319,8 @@ export const home = {
           "One working solution with tests, a before/after measurement, a run guide, training and handover.",
         format: "3–6 weeks, defined deliverables",
         price: "Fixed price per scope", // 👈 غيّر ده
+        href: "/pilot",
+        hrefLabel: "Details",
       },
       {
         step: "05",
@@ -346,6 +330,8 @@ export const home = {
           "Shared priorities, automations and analytics, training, access rights and monitoring, with a review and a stop gate.",
         format: "90 days, acceptance gates per phase",
         price: "Quoted per program", // 👈 غيّر ده
+        href: "/program-90",
+        hrefLabel: "Details",
       },
       {
         step: "06",
@@ -355,6 +341,8 @@ export const home = {
           "Leadership meetings, initiative reviews, unblocking, performance measurement and team coaching.",
         format: "Monthly: Advisor ~2 days/month · Lead ~1 day/week · Embedded ~2 days/week",
         price: "Agreed time, authority and scope", // 👈 غيّر ده
+        href: "/fractional",
+        hrefLabel: "Details",
       },
     ],
     extras: [

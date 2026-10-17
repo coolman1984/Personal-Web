@@ -4,7 +4,7 @@ import { site } from "@/content/site";
 import { workshop } from "@/content/workshop";
 import { home } from "@/content/home";
 import { absoluteUrl, siteUrl } from "@/lib/utils";
-import type { Article, Course, Faq } from "@/types";
+import type { Article, Course, Faq, Offer } from "@/types";
 
 /**
  * صورة المشاركة — ملف ثابت مولَّد بـ`node scripts/generate-og.mjs`.
@@ -241,6 +241,41 @@ export function homeJsonLd() {
       ],
     },
   };
+}
+
+/** بيانات منظّمة لصفحة عرض — خدمة بيقدّمها شخص في مصر والخليج */
+export function offerJsonLd(offer: Offer) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: offer.title,
+    description: offer.summary,
+    url: absoluteUrl(`/${offer.slug}`),
+    serviceType: "AI and process automation consulting",
+    areaServed: ["Saudi Arabia", "Gulf Cooperation Council", "Egypt"],
+    provider: {
+      "@type": "Person",
+      name: home.owner.name,
+      url: siteUrl(),
+      sameAs: [home.contact.linkedIn.href],
+    },
+  };
+}
+
+/** الـmetadata المشتركة لصفحات العروض */
+export function offerMetadata(offer: Offer): Metadata {
+  return buildMetadata({
+    title: offer.title,
+    description: offer.summary,
+    path: `/${offer.slug}`,
+    locale: "en_US",
+    ogImage: HOME_OG_IMAGE,
+    authorName: home.owner.name,
+    siteName: home.owner.name,
+    titleSuffix: home.owner.name,
+    mergeSiteKeywords: false,
+    keywords: ["AI transformation", "process automation", "manufacturing", offer.title, "KSA", "GCC", "Egypt"],
+  });
 }
 
 export function breadcrumbJsonLd(items: { label: string; href: string }[]) {
