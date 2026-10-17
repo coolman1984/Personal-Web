@@ -7,7 +7,7 @@ export const mainNav: NavItem[] = [
   {
     label: "الكورسات",
     href: "/courses",
-    description: "١١ كورس على ٣ مستويات",
+    description: "٦ كورسات على ٣ مستويات",
     children: [
       {
         label: "المستوى المبتدئ",
@@ -33,22 +33,10 @@ export const mainNav: NavItem[] = [
         description: "استعرض الكورسات كلها",
         icon: "GraduationCap",
       },
-      {
-        label: "خريطة التعلّم",
-        href: "/roadmap",
-        description: "من مساعد شخصي لفريق رقمي",
-        icon: "Map",
-      },
-      {
-        label: "مخرجات المتدربين",
-        href: "/projects",
-        description: "اللي هتبنيه بإيدك في البرنامج",
-        icon: "FolderKanban",
-      },
     ],
   },
-  { label: "أعمالي", href: "/work" },
-  { label: "الخدمات", href: "/services" },
+  { label: "خريطة التعلّم", href: "/roadmap" },
+  { label: "المشاريع", href: "/projects" },
   { label: "المقالات", href: "/articles" },
   { label: "عني", href: "/about" },
 ];
@@ -69,10 +57,8 @@ export const footerNav: { title: string; links: NavItem[] }[] = [
     title: "الموقع",
     links: [
       { label: "عني", href: "/about" },
-      { label: "أعمالي", href: "/work" },
-      { label: "الخدمات", href: "/services" },
       { label: "خريطة التعلّم", href: "/roadmap" },
-      { label: "مخرجات المتدربين", href: "/projects" },
+      { label: "المشاريع", href: "/projects" },
       { label: "المقالات", href: "/articles" },
       { label: "حدّد مستواك", href: "/quiz" },
     ],

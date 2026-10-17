@@ -1,15 +1,7 @@
 /** صفحة «عني». */
 import { ArrowLeft, Check, Quote } from "lucide-react";
 import { site } from "@/content/site";
-import {
-  getComparison,
-  getFeaturedWork,
-  getMethodPillars,
-  getStats,
-  getTimeline,
-  getTools,
-  githubProfileUrl,
-} from "@/lib/queries";
+import { getComparison, getMethodPillars, getStats, getTimeline, getTools } from "@/lib/queries";
 import { buildMetadata, breadcrumbJsonLd, personJsonLd } from "@/lib/seo";
 import { getIcon } from "@/lib/icon";
 import { publicContact } from "@/lib/public-contact";
@@ -23,7 +15,6 @@ import { Stats } from "@/components/sections/stats";
 import { Method } from "@/components/sections/method";
 import { WhyDifferent } from "@/components/sections/why-different";
 import { FinalCta } from "@/components/sections/final-cta";
-import { Work } from "@/components/sections/work";
 
 export const metadata = buildMetadata({
   title: `عن ${site.name}`,
@@ -47,13 +38,12 @@ const guides = [
 
 export default async function AboutPage() {
   const whatsappOk = !/0{7,}$/.test(site.whatsapp);
-  const [timeline, stats, pillars, comparison, tools, work] = await Promise.all([
+  const [timeline, stats, pillars, comparison, tools] = await Promise.all([
     getTimeline(),
     getStats(),
     getMethodPillars(),
     getComparison(),
     getTools(),
-    getFeaturedWork(3),
   ]);
 
   return (
@@ -68,8 +58,8 @@ export default async function AboutPage() {
       >
         <p className="text-[15px] font-bold text-gold-500">{site.role}</p>
         <div className="flex flex-wrap gap-3">
-          <Button href="/work" size="lg" iconAfter={<ArrowLeft />}>
-            شوف أعمالي
+          <Button href="/quiz" size="lg" iconAfter={<ArrowLeft />}>
+            حدّد مستواك
           </Button>
           <Button
             href={
@@ -133,8 +123,6 @@ export default async function AboutPage() {
           })}
         </ol>
       </section>
-
-      <Work items={work} githubHref={githubProfileUrl()} />
 
       {/* الأدلة الخمسة */}
       <section className="container-x py-14 md:py-20">

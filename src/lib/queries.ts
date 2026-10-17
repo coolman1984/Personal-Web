@@ -13,8 +13,6 @@
 import { courses } from "@/content/courses";
 import { levels } from "@/content/levels";
 import { projects } from "@/content/projects";
-import { work, githubUser } from "@/content/work";
-import { services } from "@/content/services";
 import { articles } from "@/content/articles";
 import { testimonials } from "@/content/testimonials";
 import { faqs } from "@/content/faq";
@@ -41,13 +39,10 @@ import type {
   QuizQuestion,
   QuizResult,
   SearchItem,
-  Service,
   Stat,
   Testimonial,
   TimelineItem,
   Tool,
-  WorkItem,
-  WorkItemView,
 } from "@/types";
 
 // ═══════════════════════════════════════════════════════════
@@ -152,51 +147,6 @@ export async function getProjectsByLevel(level: LevelId): Promise<Project[]> {
 
 export async function getProjectCategories(): Promise<string[]> {
   return [...new Set(projects.map((p) => p.category))];
-}
-
-// ═══════════════════════════════════════════════════════════
-// أعمالي والخدمات
-// ═══════════════════════════════════════════════════════════
-
-/** رابط مستودع GitHub لأي عمل */
-export function repoUrl(item: WorkItem): string {
-  return `https://github.com/${githubUser}/${item.repo}`;
-}
-
-/** رابط حساب GitHub نفسه */
-export function githubProfileUrl(): string {
-  return `https://github.com/${githubUser}`;
-}
-
-const toView = (item: WorkItem): WorkItemView => ({ ...item, repoHref: repoUrl(item) });
-
-/** كل الأعمال — المميّزة الأول، وبعدها الباقي بنفس ترتيب الملف */
-export async function getAllWork(): Promise<WorkItemView[]> {
-  return [...work].sort((a, b) => Number(b.featured) - Number(a.featured)).map(toView);
-}
-
-export async function getFeaturedWork(limit = 6): Promise<WorkItemView[]> {
-  return work.filter((w) => w.featured).slice(0, limit).map(toView);
-}
-
-/** عدد الأعمال المنشورة — بيستخدم في الأرقام */
-export async function getWorkCount(): Promise<number> {
-  return work.length;
-}
-
-export async function getWorkBySlugs(slugs: string[]): Promise<WorkItemView[]> {
-  return slugs
-    .map((s) => work.find((w) => w.slug === s))
-    .filter((w): w is WorkItem => !!w)
-    .map(toView);
-}
-
-export async function getWorkCategories(): Promise<string[]> {
-  return [...new Set(work.map((w) => w.category))];
-}
-
-export async function getServices(): Promise<Service[]> {
-  return services;
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -324,7 +274,7 @@ const staticPages: SearchItem[] = [
   {
     id: "page-courses",
     title: "كل الكورسات",
-    description: `${courses.length} كورس على ٣ مستويات`,
+    description: "٩ كورسات على ٣ مستويات",
     href: "/courses",
     kind: "page",
     icon: "GraduationCap",
@@ -367,27 +317,9 @@ const staticPages: SearchItem[] = [
     keywords: ["عني", "about", "مين"],
   },
   {
-    id: "page-work",
-    title: "أعمالي",
-    description: "أنظمة حقيقية بنيتها بإيدي وكودها على GitHub",
-    href: "/work",
-    kind: "page",
-    icon: "Briefcase",
-    keywords: ["أعمال", "بورتفوليو", "portfolio", "github", "مشاريع"],
-  },
-  {
-    id: "page-services",
-    title: "الخدمات",
-    description: "تدريب، أتمتة، أنظمة إدارة، وكلاء ذكاء اصطناعي",
-    href: "/services",
-    kind: "page",
-    icon: "Handshake",
-    keywords: ["خدمات", "استشارة", "أتمتة", "تدريب شركات", "services"],
-  },
-  {
     id: "page-projects",
-    title: "مخرجات المتدربين",
-    description: "اللي كل متدرّب بيبنيه في البرنامج",
+    title: "المشاريع",
+    description: "مخرجات المتدربين الفعلية",
     href: "/projects",
     kind: "page",
     icon: "FolderKanban",
@@ -454,17 +386,7 @@ export async function getSearchIndex(): Promise<SearchItem[]> {
     keywords: [...p.tech, p.category],
   }));
 
-  const workItems: SearchItem[] = work.map((w) => ({
-    id: `work-${w.slug}`,
-    title: w.title,
-    description: w.summary,
-    href: `/work#${w.slug}`,
-    kind: "project",
-    icon: w.icon,
-    keywords: [...w.tech, w.category, w.repo],
-  }));
-
-  return [...courseItems, ...articleItems, ...workItems, ...projectItems, ...staticPages];
+  return [...courseItems, ...articleItems, ...projectItems, ...staticPages];
 }
 
 /** Workshop landing content — single source via content/workshop.ts */
