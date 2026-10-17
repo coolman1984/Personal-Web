@@ -122,16 +122,18 @@ export function MobileNav({ open, onClose, levels, onOpenSearch }: MobileNavProp
               <Button href="/quiz" size="lg" fullWidth onClick={onClose}>
                 حدّد مستواك
               </Button>
-              <Button
-                href={whatsappLink(site.whatsapp, `السلام عليكم ${site.shortName}،`)}
-                variant="secondary"
-                size="lg"
-                fullWidth
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                كلّمني على واتساب
-              </Button>
+              {!/0{7,}$/.test(site.whatsapp) && (
+                <Button
+                  href={whatsappLink(site.whatsapp, `السلام عليكم ${site.shortName}،`)}
+                  variant="secondary"
+                  size="lg"
+                  fullWidth
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  كلّمني على واتساب
+                </Button>
+              )}
             </div>
           </motion.aside>
         </div>

@@ -6,12 +6,13 @@
  * فبنرسمها بمتصفّح حقيقي — ودي بتطلع مظبوطة ١٠٠٪.
  *
  * التشغيل:  node scripts/generate-og.mjs
- * المخرج:   public/og-default.png  (١٢٠٠×٦٣٠)
+ * المخرج:   public/og-default.png     (١٢٠٠×٦٣٠، الموقع العربي)
+ *           public/og-workshop.png    (١٢٠٠×٦٣٠، عنوان الورشة واسم Mohamed Fawzy فقط)
  *
- * شغّلها تاني بعد أي تغيير في الاسم أو الجملة التعريفية في src/content/site.ts
+ * شغّلها تاني بعد أي تغيير في src/content/site.ts أو عنوان الورشة في src/content/workshop.ts
  */
 import { chromium } from "playwright";
-import { writeFileSync, readFileSync } from "node:fs";
+import { writeFileSync, readFileSync, existsSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -61,14 +62,69 @@ const html = `<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-
   <div class="chips"><span class="chip">مبتدئ</span><span class="chip">متوسط</span><span class="chip">متقدّم</span></div>
 </body></html>`;
 
-const browser = await chromium.launch({
-  executablePath: process.env.PLAYWRIGHT_CHROMIUM ?? "/opt/pw-browsers/chromium",
-});
-const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
-await page.setContent(html, { waitUntil: "networkidle" });
-await page.waitForTimeout(1200); // نستنى الخط يتحمّل
-const buffer = await page.screenshot({ type: "png" });
-writeFileSync(join(root, "public/og-default.png"), buffer);
-await browser.close();
+const workshopSrc = readFileSync(join(root, "src/content/workshop.ts"), "utf8");
+const headline = workshopSrc.match(/headline:\s*"([^"]+)"/)?.[1] ?? "";
+const ownerName = workshopSrc.match(/owner:\s*\{[^}]*name:\s*"([^"]+)"/)?.[1] ?? "";
+if (headline !== "Build your AI agent team" || ownerName !== "Mohamed Fawzy") {
+  throw new Error(`Workshop card must be the headline and Mohamed Fawzy only. Got "${headline}" / "${ownerName}"`);
+}
 
-console.log("✓ اتولّدت public/og-default.png");
+const workshopHtml = `<!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1200px;height:630px;font-family:Geist,ui-sans-serif,system-ui,sans-serif;
+       background:oklch(21.1% 0.017 234);color:oklch(98.5% 0.002 240);
+       display:flex;flex-direction:column;justify-content:center;padding:88px 96px;
+       position:relative;overflow:hidden}
+  .grid{position:absolute;inset:0;
+        background-image:linear-gradient(to right,oklch(1 0 0 / 0.06) 1px,transparent 1px),
+                         linear-gradient(to bottom,oklch(1 0 0 / 0.06) 1px,transparent 1px);
+        background-size:64px 64px}
+  .rule{position:relative;width:2rem;height:1px;background:oklch(62.9% 0.166 293.5);margin-bottom:28px}
+  h1{position:relative;font-size:84px;font-weight:500;line-height:0.95;letter-spacing:-0.045em;max-width:980px}
+  .name{position:relative;margin-top:36px;font-size:32px;font-weight:500;letter-spacing:-0.02em}
+</style></head><body>
+  <div class="grid"></div>
+  <div class="rule"></div>
+  <h1>${headline}</h1>
+  <p class="name">${ownerName}</p>
+</body></html>`;
+
+function findChromium() {
+  const fromEnv = process.env.PLAYWRIGHT_CHROMIUM;
+  if (fromEnv && existsSync(fromEnv)) return fromEnv;
+  for (const candidate of ["/opt/pw-browsers/chromium", "/opt/google/chrome/chrome"]) {
+    if (existsSync(candidate)) return candidate;
+  }
+  const cache = join(process.env.HOME ?? "", ".cache/ms-playwright");
+  if (!existsSync(cache)) return undefined;
+  const dirs = readdirSync(cache).filter((name) => name.startsWith("chromium-")).sort().reverse();
+  for (const dir of dirs) {
+    for (const relative of ["chrome-linux64/chrome", "chrome-linux/chrome"]) {
+      const candidate = join(cache, dir, relative);
+      if (existsSync(candidate)) return candidate;
+    }
+  }
+  return undefined;
+}
+
+const executablePath = findChromium();
+if (!executablePath) throw new Error("Chromium not found for OG generation");
+
+const browser = await chromium.launch({ executablePath });
+const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
+
+async function shoot(markup, outfile) {
+  await page.setContent(markup, { waitUntil: "networkidle" });
+  await page.waitForTimeout(1200);
+  const buffer = await page.screenshot({ type: "png" });
+  writeFileSync(join(root, outfile), buffer);
+  console.log("wrote", outfile, buffer.length);
+}
+
+await shoot(html, "public/og-default.png");
+await shoot(workshopHtml, "public/og-workshop.png");
+await browser.close();

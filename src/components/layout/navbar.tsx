@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { useScrolledPast } from "@/hooks/use-scroll-progress";
 import { mainNav } from "@/content/navigation";
 import { site } from "@/content/site";
+import { publicContact } from "@/lib/public-contact";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./logo";
 import { MegaMenu } from "./mega-menu";
@@ -55,11 +56,11 @@ export function Navbar({
       <div className="hidden bg-brand-900 text-white/70 lg:block">
         <div className="container-x flex h-10 items-center justify-between text-[12.5px]">
           <a
-            href={`mailto:${site.email}`}
+            href={site.email.endsWith("@example.com") ? publicContact.mailto : `mailto:${site.email}`}
             className="transition-colors hover:text-gold-500"
             dir="ltr"
           >
-            {site.email}
+            {site.email.endsWith("@example.com") ? publicContact.email : site.email}
           </a>
           <div className="flex items-center gap-5">
             <span>{site.location}</span>

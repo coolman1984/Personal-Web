@@ -37,3 +37,9 @@ yarn-error.log*
 # supabase
 supabase/.temp/
 supabase/.branches/
+
+# cloudflare / opennext
+.open-next/
+.wrangler/
+.dev.vars*
+!.dev.vars.example

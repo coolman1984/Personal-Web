@@ -27,5 +27,18 @@ jobs:
         run: npm run typecheck
       - name: Build
         run: npm run build
+      - name: Install browser
+        run: npx playwright install --with-deps chromium
+      - name: Start production server
+        run: |
+          npm run start > "$RUNNER_TEMP/personal-web.log" 2>&1 &
+          for attempt in {1..30}; do
+            if curl --fail --silent http://localhost:3000 > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat "$RUNNER_TEMP/personal-web.log"
+          exit 1
       - name: Contrast audit
         run: npm run contrast

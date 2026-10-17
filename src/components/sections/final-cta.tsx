@@ -37,18 +37,20 @@ export function FinalCta() {
               </Button>
             </div>
 
-            <a
-              href={whatsappLink(
-                site.whatsapp,
-                `السلام عليكم ${site.shortName}، حابب أستشيرك في المستوى المناسب ليا.`,
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-white/60 transition-colors hover:text-gold-500"
-            >
-              <MessageCircle className="size-4" aria-hidden />
-              أو كلّمني على واتساب مباشرة
-            </a>
+            {!/0{7,}$/.test(site.whatsapp) && (
+              <a
+                href={whatsappLink(
+                  site.whatsapp,
+                  `السلام عليكم ${site.shortName}، حابب أستشيرك في المستوى المناسب ليا.`,
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-white/60 transition-colors hover:text-gold-500"
+              >
+                <MessageCircle className="size-4" aria-hidden />
+                أو كلّمني على واتساب مباشرة
+              </a>
+            )}
           </div>
         </div>
       </Reveal>

@@ -24,7 +24,9 @@ import { methodPillars, comparison } from "@/content/method";
 import { stats } from "@/content/stats";
 import { timeline } from "@/content/timeline";
 import { quizQuestions, quizResults, maxQuizScore } from "@/content/quiz";
+import { workshop } from "@/content/workshop";
 import { readingTime } from "@/lib/utils";
+import type { WorkshopContent } from "@/content/workshop";
 import type {
   Article,
   ComparisonRow,
@@ -312,12 +314,12 @@ export function resolveQuizResult(score: number): QuizResult {
 const staticPages: SearchItem[] = [
   {
     id: "page-home",
-    title: "الرئيسية",
-    description: "نظرة عامة على الكورسات والمنهج",
+    title: "Build your AI agent team",
+    description: "Executive workshop landing — agenda, outcomes, and contact",
     href: "/",
     kind: "page",
     icon: "Home",
-    keywords: ["رئيسية", "home"],
+    keywords: ["workshop", "executive", "AI agents", "رئيسية", "home"],
   },
   {
     id: "page-courses",
@@ -463,4 +465,9 @@ export async function getSearchIndex(): Promise<SearchItem[]> {
   }));
 
   return [...courseItems, ...articleItems, ...workItems, ...projectItems, ...staticPages];
+}
+
+/** Workshop landing content — single source via content/workshop.ts */
+export async function getWorkshopContent(): Promise<WorkshopContent> {
+  return workshop;
 }

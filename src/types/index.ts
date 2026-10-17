@@ -397,3 +397,5 @@ export interface ApiResponse<T = undefined> {
 export type ValidationResult<T> =
   | { ok: true; data: T }
   | { ok: false; errors: Record<string, string> };
+
+export type { WorkshopContent } from "@/content/workshop";

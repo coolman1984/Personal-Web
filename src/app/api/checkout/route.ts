@@ -5,14 +5,26 @@
  *    ممنوع تمامًا ناخد المبلغ من المتصفّح — ده أسهل طريقة يتسرق بيها الموقع.
  */
 import { NextResponse } from "next/server";
+import { hasPaymentKeys } from "@/lib/features";
 import { validateEnroll } from "@/lib/validation";
 import { clientKey, rateLimit } from "@/lib/rate-limit";
 import { getCourseBySlug } from "@/lib/queries";
 import { getPaymentProvider } from "@/lib/payments";
 import { absoluteUrl } from "@/lib/utils";
+import { unavailable } from "@/lib/unavailable";
 import type { ApiResponse } from "@/types";
 
 export async function POST(req: Request) {
+  if (!hasPaymentKeys()) {
+    return unavailable("الدفع الإلكتروني مش متاح دلوقتي.");
+  }
+
+  const provider = getPaymentProvider();
+  // البوابة الوهمية مش دفع حقيقي. ممنوع نبدأها قبل ما التنفيذ يتفعّل.
+  if (!provider.enabled || provider.id === "mock") {
+    return unavailable("الدفع الإلكتروني مش متاح دلوقتي.");
+  }
+
   const limit = rateLimit(`checkout:${clientKey(req)}`);
   if (!limit.allowed) {
     return NextResponse.json<ApiResponse>(
@@ -53,8 +65,6 @@ export async function POST(req: Request) {
       { status: 409 },
     );
   }
-
-  const provider = getPaymentProvider();
 
   try {
     const checkout = await provider.createCheckout({

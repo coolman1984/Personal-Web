@@ -2,12 +2,13 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { site } from "@/content/site";
+import { publicContact } from "@/lib/public-contact";
 import { footerNav, socialLabels } from "@/content/navigation";
 import { socialIconMap, type SocialKey } from "@/components/shared/social-icons";
 import { NewsletterForm } from "@/components/shared/newsletter-form";
 import { Logo } from "./logo";
 
-export function Footer() {
+export function Footer({ newsletterEnabled }: { newsletterEnabled: boolean }) {
   const year = new Intl.DateTimeFormat("ar-EG", { year: "numeric" }).format(new Date());
 
   return (
@@ -22,11 +23,15 @@ export function Footer() {
             <ul className="flex flex-col gap-2.5 text-[13px] text-white/70">
               <li className="flex items-center gap-2.5">
                 <Mail className="size-4 shrink-0 text-gold-500" aria-hidden />
-                <a href={`mailto:${site.email}`} className="hover:text-gold-500" dir="ltr">
-                  {site.email}
+                <a
+                  href={site.email.endsWith("@example.com") ? publicContact.mailto : `mailto:${site.email}`}
+                  className="hover:text-gold-500"
+                  dir="ltr"
+                >
+                  {site.email.endsWith("@example.com") ? publicContact.email : site.email}
                 </a>
               </li>
-              {site.phoneDisplay && (
+              {!site.phoneDisplay.includes("٠٠٠") && (
                 <li className="flex items-center gap-2.5">
                   <Phone className="size-4 shrink-0 text-gold-500" aria-hidden />
                   <span className="ltr-nums">{site.phoneDisplay}</span>
@@ -41,7 +46,9 @@ export function Footer() {
             <ul className="flex flex-wrap gap-2">
               {Object.entries(site.social).map(([key, href]) => {
                 const Icon = socialIconMap[key as SocialKey];
-                if (!href || !Icon) return null;
+                const placeholder =
+                  !href || href.includes("username") || href.includes("example.com");
+                if (placeholder || !Icon) return null;
                 return (
                   <li key={key}>
                     <a
@@ -80,7 +87,7 @@ export function Footer() {
         </div>
 
         {/* النشرة */}
-        {site.features.newsletter && (
+        {newsletterEnabled && (
           <div className="mt-14 rounded-lg border border-white/12 bg-white/[0.05] p-6 md:p-8">
             <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
               <div className="max-w-md">

@@ -3,9 +3,15 @@
  * بيبدّل الكود بجلسة ويحوّل المستخدم لوجهته.
  */
 import { NextResponse, type NextRequest } from "next/server";
+import { isAuthConfigured } from "@/lib/features";
 import { createClient } from "@/lib/supabase/server";
+import { unavailable } from "@/lib/unavailable";
 
 export async function GET(request: NextRequest) {
+  if (!isAuthConfigured()) {
+    return unavailable("تسجيل الدخول مش متاح دلوقتي.");
+  }
+
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
   const next = searchParams.get("next") ?? "/my";

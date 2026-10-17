@@ -1,6 +1,7 @@
 /** بناء الـmetadata والبيانات المنظّمة. المرجع: docs/PLAN.md §9.2 */
 import type { Metadata } from "next";
 import { site } from "@/content/site";
+import { workshop } from "@/content/workshop";
 import { absoluteUrl, siteUrl } from "@/lib/utils";
 import type { Article, Course, Faq } from "@/types";
 
@@ -9,6 +10,7 @@ import type { Article, Course, Faq } from "@/types";
  * مش ديناميكية لأن محرّك next/og لسه ما بيدعمش تشكيل الحروف العربية.
  */
 const OG_IMAGE = "/og-default.png";
+const WORKSHOP_OG_IMAGE = "/og-workshop.png";
 
 interface MetaInput {
   title: string;
@@ -18,6 +20,16 @@ interface MetaInput {
   type?: "website" | "article";
   publishedAt?: string;
   noIndex?: boolean;
+  /** Override Open Graph locale (e.g. en_US for workshop home). */
+  locale?: string;
+  /** Custom OG image path; pass `null` to omit images. */
+  ogImage?: string | null;
+  /** When false, only `keywords` are used (no Arabic site keywords). */
+  mergeSiteKeywords?: boolean;
+  /** Author and creator. Defaults to the Arabic site name. */
+  authorName?: string;
+  /** Open Graph site name. Defaults to `authorName`, then the Arabic site name. */
+  siteName?: string;
 }
 
 export function buildMetadata({
@@ -28,16 +40,28 @@ export function buildMetadata({
   type = "website",
   publishedAt,
   noIndex,
+  locale = site.locale,
+  ogImage = OG_IMAGE,
+  mergeSiteKeywords = true,
+  authorName,
+  siteName,
 }: MetaInput): Metadata {
   const url = absoluteUrl(path);
   const fullTitle = path === "/" ? title : `${title} — ${site.name}`;
+  const keywordList = mergeSiteKeywords ? [...site.keywords, ...keywords] : keywords;
+  const author = authorName ?? site.name;
+  const ogSiteName = siteName ?? authorName ?? site.name;
+  const ogImages =
+    ogImage === null
+      ? undefined
+      : [{ url: ogImage, width: 1200, height: 630, alt: fullTitle }];
 
   return {
     title: fullTitle,
     description,
-    keywords: [...site.keywords, ...keywords],
-    authors: [{ name: site.name }],
-    creator: site.name,
+    keywords: keywordList.length > 0 ? keywordList : undefined,
+    authors: [{ name: author }],
+    creator: author,
     metadataBase: new URL(siteUrl()),
     alternates: { canonical: url },
     robots: noIndex ? { index: false, follow: false } : { index: true, follow: true },
@@ -46,19 +70,21 @@ export function buildMetadata({
       url,
       title: fullTitle,
       description,
-      siteName: site.name,
-      locale: site.locale,
-      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: site.name }],
+      siteName: ogSiteName,
+      locale,
+      ...(ogImages ? { images: ogImages } : {}),
       ...(publishedAt ? { publishedTime: publishedAt } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
-      images: [OG_IMAGE],
+      ...(ogImage && ogImage !== null ? { images: [ogImage] } : {}),
     },
   };
 }
+
+export { WORKSHOP_OG_IMAGE };
 
 // ═══════════════════════════════════════════════════════════
 // البيانات المنظّمة (JSON-LD)
@@ -74,7 +100,9 @@ export function personJsonLd() {
     url: siteUrl(),
     email: site.email,
     address: { "@type": "PostalAddress", addressLocality: site.location },
-    sameAs: Object.values(site.social).filter(Boolean),
+    sameAs: Object.values(site.social).filter(
+      (href) => href.trim() && !/username|example\.com/i.test(href),
+    ),
     knowsAbout: [
       "الذكاء الاصطناعي",
       "أتمتة المؤسسات",
@@ -159,6 +187,25 @@ export function faqJsonLd(faqs: Faq[]) {
       name: f.question,
       acceptedAnswer: { "@type": "Answer", text: f.answer },
     })),
+  };
+}
+
+/** Workshop home — WebPage until a public event date is confirmed. */
+export function workshopJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Build your AI agent team — Executive workshop",
+    description:
+      "A one-day, hands-on workshop for managers in the Gulf and Egypt on building a practical AI agent team with free or low-cost tools.",
+    inLanguage: "en",
+    url: siteUrl(),
+    about: {
+      "@type": "Person",
+      name: "Mohamed Fawzy",
+      jobTitle: workshop.about.headline,
+      sameAs: [workshop.contact.linkedIn.href],
+    },
   };
 }
 
