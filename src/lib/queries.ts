@@ -266,12 +266,21 @@ export function resolveQuizResult(score: number): QuizResult {
 const staticPages: SearchItem[] = [
   {
     id: "page-home",
-    title: "Build your AI agent team",
-    description: "Executive workshop landing — agenda, outcomes, and contact",
+    title: "Mohamed Fawzy — From scattered files to clear decisions",
+    description: "AI & process automation for manufacturers: services, method, cases and contact",
     href: "/",
     kind: "page",
     icon: "Home",
-    keywords: ["workshop", "executive", "AI agents", "رئيسية", "home"],
+    keywords: ["home", "services", "automation", "manufacturing", "رئيسية", "خدمات"],
+  },
+  {
+    id: "page-workshop",
+    title: "Build your AI agent team",
+    description: "Executive workshop — agenda, outcomes, and contact",
+    href: "/workshop",
+    kind: "page",
+    icon: "Presentation",
+    keywords: ["workshop", "executive", "AI agents", "ورشة"],
   },
   {
     id: "page-courses",

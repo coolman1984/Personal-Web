@@ -8,8 +8,10 @@
  * التشغيل:  node scripts/generate-og.mjs
  * المخرج:   public/og-default.png     (١٢٠٠×٦٣٠، الموقع العربي)
  *           public/og-workshop.png    (١٢٠٠×٦٣٠، عنوان الورشة واسم Mohamed Fawzy فقط)
+ *           public/og-home.png        (١٢٠٠×٦٣٠، عنوان الرئيسية الإنجليزية + Plant-to-P&L)
  *
- * شغّلها تاني بعد أي تغيير في src/content/site.ts أو عنوان الورشة في src/content/workshop.ts
+ * شغّلها تاني بعد أي تغيير في src/content/site.ts أو العناوين في src/content/workshop.ts و home.ts
+ * لتوليد صورة واحدة بس:  node scripts/generate-og.mjs og-home
  */
 import { chromium } from "playwright";
 import { writeFileSync, readFileSync, existsSync, readdirSync } from "node:fs";
@@ -93,6 +95,42 @@ const workshopHtml = `<!doctype html><html lang="en" dir="ltr"><head><meta chars
   <p class="name">${ownerName}</p>
 </body></html>`;
 
+// صورة الرئيسية — نفس ستايل الورشة بالكحلي والتيل (Master Profile v3 §6).
+// الخط Geist بيتحمّل من نسخة محلية جوه next عشان الصورة متعتمدش على Google Fonts.
+const homeSrc = readFileSync(join(root, "src/content/home.ts"), "utf8");
+const homeHeadline = [
+  homeSrc.match(/headline:\s*"([^"]+)"/)?.[1] ?? "",
+  homeSrc.match(/headlineHighlight:\s*"([^"]+)"/)?.[1] ?? "",
+].join(" ");
+const homeTag = homeSrc.match(/brandTag:\s*"([^"]+)"/)?.[1] ?? "";
+const geistPath = join(root, "node_modules/next/dist/next-devtools/server/font/geist-latin.woff2");
+const geistFace = existsSync(geistPath)
+  ? `@font-face{font-family:GeistLocal;src:url(data:font/woff2;base64,${readFileSync(geistPath).toString("base64")}) format("woff2");font-weight:100 900}`
+  : "";
+
+const homeHtml = `<!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8">
+<style>
+  ${geistFace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1200px;height:630px;font-family:GeistLocal,ui-sans-serif,system-ui,sans-serif;
+       background:oklch(26% 0.06 260);color:oklch(98.5% 0.002 240);
+       display:flex;flex-direction:column;justify-content:center;padding:88px 96px;
+       position:relative;overflow:hidden}
+  .grid{position:absolute;inset:0;
+        background-image:linear-gradient(to right,oklch(1 0 0 / 0.06) 1px,transparent 1px),
+                         linear-gradient(to bottom,oklch(1 0 0 / 0.06) 1px,transparent 1px);
+        background-size:64px 64px}
+  .rule{position:relative;width:2rem;height:2px;background:oklch(76% 0.11 186);margin-bottom:28px}
+  h1{position:relative;font-size:84px;font-weight:500;line-height:0.98;letter-spacing:-0.045em;max-width:1000px}
+  .name{position:relative;margin-top:40px;font-size:32px;font-weight:500;letter-spacing:-0.02em}
+  .tag{color:oklch(76% 0.11 186)}
+</style></head><body>
+  <div class="grid"></div>
+  <div class="rule"></div>
+  <h1>${homeHeadline}</h1>
+  <p class="name">${ownerName} · <span class="tag">${homeTag.replace("&", "&amp;")}</span></p>
+</body></html>`;
+
 function findChromium() {
   const fromEnv = process.env.PLAYWRIGHT_CHROMIUM;
   if (fromEnv && existsSync(fromEnv)) return fromEnv;
@@ -125,6 +163,13 @@ async function shoot(markup, outfile) {
   console.log("wrote", outfile, buffer.length);
 }
 
-await shoot(html, "public/og-default.png");
-await shoot(workshopHtml, "public/og-workshop.png");
+const only = process.argv[2];
+const cards = [
+  ["og-default", html],
+  ["og-workshop", workshopHtml],
+  ["og-home", homeHtml],
+];
+for (const [name, markup] of cards) {
+  if (!only || only === name) await shoot(markup, `public/${name}.png`);
+}
 await browser.close();

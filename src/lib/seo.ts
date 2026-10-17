@@ -12,6 +12,7 @@ import type { Article, Course, Faq } from "@/types";
  */
 const OG_IMAGE = "/og-default.png";
 const WORKSHOP_OG_IMAGE = "/og-workshop.png";
+const HOME_OG_IMAGE = "/og-home.png";
 
 interface MetaInput {
   title: string;
@@ -31,6 +32,8 @@ interface MetaInput {
   authorName?: string;
   /** Open Graph site name. Defaults to `authorName`, then the Arabic site name. */
   siteName?: string;
+  /** لاحقة العنوان بعد « — ». الافتراضي اسم الموقع العربي؛ `null` = من غير لاحقة (للصفحات الإنجليزية). */
+  titleSuffix?: string | null;
 }
 
 export function buildMetadata({
@@ -46,9 +49,10 @@ export function buildMetadata({
   mergeSiteKeywords = true,
   authorName,
   siteName,
+  titleSuffix = site.name,
 }: MetaInput): Metadata {
   const url = absoluteUrl(path);
-  const fullTitle = path === "/" ? title : `${title} — ${site.name}`;
+  const fullTitle = path === "/" || !titleSuffix ? title : `${title} — ${titleSuffix}`;
   const keywordList = mergeSiteKeywords ? [...site.keywords, ...keywords] : keywords;
   const author = authorName ?? site.name;
   const ogSiteName = siteName ?? authorName ?? site.name;
@@ -85,7 +89,7 @@ export function buildMetadata({
   };
 }
 
-export { WORKSHOP_OG_IMAGE };
+export { WORKSHOP_OG_IMAGE, HOME_OG_IMAGE };
 
 // ═══════════════════════════════════════════════════════════
 // البيانات المنظّمة (JSON-LD)

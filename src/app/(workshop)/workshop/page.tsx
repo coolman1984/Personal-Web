@@ -18,6 +18,7 @@ export const metadata: Metadata = buildMetadata({
   authorName: workshop.owner.name,
   siteName: workshop.owner.name,
   mergeSiteKeywords: false,
+  titleSuffix: null,
   keywords: [
     "AI workshop",
     "executive training",
