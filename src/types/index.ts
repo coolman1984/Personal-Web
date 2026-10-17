@@ -351,3 +351,17 @@ export type ValidationResult<T> =
   | { ok: false; errors: Record<string, string> };
 
 export type { WorkshopContent } from "@/content/workshop";
+export type { HomeContent } from "@/content/home";
+
+/** الهيدر والفوتر المشتركين بين الرئيسية وصفحة الورشة */
+export interface PageChromeContent {
+  owner: { name: string };
+  nav: {
+    links: readonly { label: string; href: string }[];
+    cta: { label: string; href: string };
+  };
+  footer: {
+    note: string;
+    links: readonly { label: string; href: string }[];
+  };
+}

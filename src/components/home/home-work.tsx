@@ -1,16 +1,19 @@
 /**
- * Work — real systems with public code, hairline card grid on light.
+ * أنظمة مبنية فعلًا وكودها على GitHub — شبكة كروت بخطوط رفيعة على خلفية فاتحة.
+ * المرجع: Master Profile v3 §7 (دليل الشغل بجانب الحالات).
  */
 import { ArrowUpRight } from "lucide-react";
-import type { WorkshopContent } from "@/types";
+import type { HomeContent } from "@/types";
 import { cn } from "@/lib/utils";
-import { WordReveal } from "./motion/word-reveal";
-import { ScrollReveal } from "./motion/scroll-reveal";
-import { WorkshopSection } from "./workshop-section";
-import { WorkshopButton } from "./workshop-button";
+import { Eyebrow } from "@/components/workshop/eyebrow";
+import { WordReveal } from "@/components/workshop/motion/word-reveal";
+import { ScrollReveal } from "@/components/workshop/motion/scroll-reveal";
+import { WorkshopSection } from "@/components/workshop/workshop-section";
+import { WorkshopButton } from "@/components/workshop/workshop-button";
 
-interface WorkshopWorkProps {
-  work: WorkshopContent["work"];
+interface HomeWorkProps {
+  work: HomeContent["work"];
+  className?: string;
 }
 
 const gridCellBorder =
@@ -19,10 +22,11 @@ const gridCellBorder =
 const linkClass =
   "inline-flex items-center gap-1 text-sm font-medium text-fg underline-offset-4 transition-colors duration-200 hover:text-primary hover:underline";
 
-export function WorkshopWork({ work }: WorkshopWorkProps) {
+export function HomeWork({ work, className }: HomeWorkProps) {
   return (
-    <WorkshopSection id={work.id}>
-      <WordReveal as="h2" text={work.title} className="display-md" />
+    <WorkshopSection id={work.id} className={className}>
+      <Eyebrow>{work.eyebrow}</Eyebrow>
+      <WordReveal as="h2" text={work.title} className="display-md mt-6" />
       <ScrollReveal className="mt-6 max-w-3xl">
         <p className="text-lg text-fg-muted">{work.intro}</p>
       </ScrollReveal>

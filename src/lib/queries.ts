@@ -23,8 +23,10 @@ import { stats } from "@/content/stats";
 import { timeline } from "@/content/timeline";
 import { quizQuestions, quizResults, maxQuizScore } from "@/content/quiz";
 import { workshop } from "@/content/workshop";
+import { home } from "@/content/home";
 import { readingTime } from "@/lib/utils";
 import type { WorkshopContent } from "@/content/workshop";
+import type { HomeContent } from "@/content/home";
 import type {
   Article,
   ComparisonRow,
@@ -392,4 +394,8 @@ export async function getSearchIndex(): Promise<SearchItem[]> {
 /** Workshop landing content — single source via content/workshop.ts */
 export async function getWorkshopContent(): Promise<WorkshopContent> {
   return workshop;
+}
+
+export async function getHomeContent(): Promise<HomeContent> {
+  return home;
 }
