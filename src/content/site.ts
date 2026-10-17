@@ -26,6 +26,7 @@ export const site = {
   // الحسابات العامة المؤكّدة فقط
   social: {
     linkedin: "https://www.linkedin.com/in/mohamedfawzy1984/",
+    github: "https://github.com/coolman1984",
   } as Record<string, string>,
 
   // ═══ نصوص الهيرو ══════════════════════════════════════
