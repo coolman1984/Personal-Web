@@ -10,6 +10,8 @@ import { WorkshopAgenda } from "./workshop-agenda";
 import { WorkshopFormat } from "./workshop-format";
 import { WorkshopAbout } from "./workshop-about";
 import { WorkshopProof } from "./workshop-proof";
+import { WorkshopWork } from "./workshop-work";
+import { WorkshopServices } from "./workshop-services";
 import { WorkshopFaq } from "./workshop-faq";
 import { WorkshopContact } from "./workshop-contact";
 import { WorkshopFooter } from "./workshop-footer";
@@ -30,6 +32,8 @@ export function WorkshopLanding({ content }: WorkshopLandingProps) {
         <WorkshopFormat format={content.format} />
         <WorkshopAbout about={content.about} />
         <WorkshopProof proof={content.proof} />
+        <WorkshopWork work={content.work} />
+        <WorkshopServices services={content.services} />
         <WorkshopFaq faq={content.faq} />
         <WorkshopContact contact={content.contact} />
       </main>
