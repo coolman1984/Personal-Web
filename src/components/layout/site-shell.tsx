@@ -1,7 +1,7 @@
 "use client";
 /**
  * الغلاف التفاعلي للموقع — بيربط الهيدر بلوحة الأوامر.
- * البيانات بتيجي من Server Component (layout.tsx) عشان ما نحمّلش المتصفّح.
+ * البيانات بتيجي من Server Component ((site)/layout.tsx) عشان ما نحمّلش المتصفّح.
  */
 import { useCallback, useState, type ReactNode } from "react";
 import { useHotkey } from "@/hooks/use-hotkey";

@@ -162,6 +162,15 @@
 }
 
 @theme inline {
+  --color-background: var(--bg);
+  --color-secondary: var(--secondary);
+  --color-border: var(--border);
+  --color-primary-solid: var(--primary-solid);
+  --color-ink: var(--ink);
+  --color-ink-fg: var(--ink-fg);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-border: var(--ink-border);
+  --radius-DEFAULT: var(--radius);
   --color-bg: var(--bg);
   --color-bg-subtle: var(--bg-subtle);
   --color-surface: var(--surface);
@@ -203,6 +212,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
+    font-synthesis: none;
     font-weight: 900;
     letter-spacing: -0.01em;
     line-height: 1.3;
@@ -253,6 +263,15 @@
   padding-inline: 1.25rem;
   max-width: 80rem;
   @media (min-width: 768px) { padding-inline: 2rem; }
+}
+
+@utility container-ws {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  max-width: 84rem;
+  @media (min-width: 640px) { padding-inline: 2rem; }
+  @media (min-width: 1024px) { padding-inline: 3rem; }
 }
 
 @utility glass {
@@ -386,7 +405,8 @@
   & ol { margin-bottom: 1.25rem; padding-inline-start: 1.5rem; list-style: decimal; }
   & li { margin-bottom: 0.5rem; }
   & strong { color: var(--fg); font-weight: 700; }
-  & a { color: var(--primary); text-decoration: underline; text-underline-offset: 4px; }
+  & a { color: var(--color-gold-700); text-decoration: underline; text-underline-offset: 4px; }
+  .dark & a { color: var(--color-gold-300); }
   & blockquote {
     border-inline-start: 3px solid var(--primary);
     padding-inline-start: 1.25rem;
@@ -481,4 +501,171 @@
   letter-spacing: 0.12em;
   color: var(--color-gold-700);
   text-transform: none;
+}
+
+/* Workshop document tokens override only the English route group. */
+html.workshop-root {
+  --font-display: var(--font-geist), "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-ar: var(--font-plex-ar), "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --radius: 0.25rem;
+  --bg: oklch(0.995 0.001 240);
+  --bg-subtle: oklch(0.97 0.004 240);
+  --surface: oklch(1 0 0);
+  --surface-2: oklch(0.962 0.004 240);
+  --secondary: oklch(0.962 0.004 240);
+  --border: oklch(0.905 0.004 240);
+  --border-strong: oklch(0.83 0.006 240);
+  --fg: oklch(0.211 0.017 234);
+  --fg-muted: oklch(0.495 0.011 240);
+  --fg-subtle: oklch(0.58 0.011 240);
+  --primary: oklch(0.629 0.166 293.5);
+  --primary-solid: oklch(0.5 0.17 293.5);
+  --primary-fg: oklch(0.99 0.002 240);
+  --ring: var(--primary-solid);
+  --ink: oklch(0.211 0.017 234);
+  --ink-fg: oklch(0.985 0.002 240);
+  --ink-muted: oklch(0.708 0.012 240);
+  --ink-border: oklch(1 0 0 / 0.12);
+  --glass: oklch(1 0 0 / 0.72);
+  --glass-border: oklch(1 0 0 / 0.5);
+  --shadow-color: oklch(0.45 0.05 288 / 0.1);
+}
+
+html.workshop-root.dark {
+  --bg: oklch(0.11 0.015 270);
+  --bg-subtle: oklch(0.14 0.017 270);
+  --surface: oklch(0.16 0.018 270);
+  --surface-2: oklch(0.2 0.02 272);
+  --secondary: oklch(0.18 0.018 272);
+  --border: oklch(0.28 0.022 272);
+  --border-strong: oklch(0.38 0.03 274);
+  --fg: oklch(0.96 0.005 90);
+  --fg-muted: oklch(0.73 0.014 270);
+  --fg-subtle: oklch(0.6 0.016 270);
+  --primary: oklch(0.71 0.17 288);
+  --primary-solid: oklch(0.55 0.17 288);
+  --primary-fg: oklch(0.99 0.002 240);
+  --ring: var(--primary-solid);
+  --ink: oklch(0.14 0.017 270);
+  --ink-fg: oklch(0.96 0.005 90);
+  --ink-muted: oklch(0.72 0.014 270);
+  --ink-border: oklch(1 0 0 / 0.14);
+  --glass: oklch(0.18 0.02 270 / 0.6);
+  --glass-border: oklch(1 0 0 / 0.09);
+  --shadow-color: oklch(0 0 0 / 0.5);
+}
+
+@utility section-pad {
+  padding-block: 5rem;
+  @media (min-width: 768px) { padding-block: 7rem; }
+  @media (min-width: 1024px) { padding-block: 9rem; }
+}
+
+@utility ink-grid-bg {
+  background-color: var(--ink);
+  background-image:
+    linear-gradient(to right, oklch(1 0 0 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(1 0 0 / 0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Workshop landing — type scale & scroll motion
+   ═══════════════════════════════════════════════════════════════════ */
+.workshop-root {
+  font-family: var(--font-display);
+}
+
+.workshop-root h1,
+.workshop-root h2,
+.workshop-root h3,
+.workshop-root h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+.display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 7.2vw, 6.5rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+
+.display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5.2vw, 4.25rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.display-md {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.word-reveal .word-reveal-shell {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-block: 0.12em;
+  margin-block: -0.12em;
+}
+
+.word-reveal .word-reveal-inner {
+  display: inline-block;
+  transform: translateY(0);
+}
+
+.scroll-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html.motion-ready .word-reveal.word-reveal-armed:not(.is-in-view) .word-reveal-inner {
+  transform: translateY(110%);
+}
+
+html.motion-ready .word-reveal.is-in-view .word-reveal-inner {
+  transform: translateY(0);
+  transition: transform 0.85s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+html.motion-ready .scroll-reveal.scroll-reveal-armed:not(.is-in-view) {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  visibility: hidden;
+}
+
+html.motion-ready .scroll-reveal.is-in-view {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  transition:
+    opacity 0.75s cubic-bezier(0.23, 1, 0.32, 1),
+    transform 0.75s cubic-bezier(0.23, 1, 0.32, 1),
+    visibility 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.motion-ready .word-reveal .word-reveal-inner,
+  html.motion-ready .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+@layer base {
+  html.workshop-root :is(h1, h2, h3, h4, h5, h6) {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
 }
