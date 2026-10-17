@@ -102,6 +102,7 @@ docs/            الخطط والمواصفات الكاملة
 | [`docs/SOURCE-MATERIAL.md`](./docs/SOURCE-MATERIAL.md) | **المادة المصدرية** — البرنامج والأدلة الخمسة |
 | [`docs/MEMBERSHIP-PLAN.md`](./docs/MEMBERSHIP-PLAN.md) | خطة الحسابات والوصول المدفوع — المرحلة الجاية |
 | [`docs/ROADMAP.md`](./docs/ROADMAP.md) | خطة التوسّع: دفع، قاعدة بيانات، منصة تعلّم |
+| [`docs/deploy-cloudflare.md`](./docs/deploy-cloudflare.md) | النشر على Cloudflare Workers بـOpenNext |
 
 ---
 
@@ -120,18 +121,42 @@ docs/            الخطط والمواصفات الكاملة
 5. **الدفع** — سيب `features.payments` في `src/content/site.ts` على `false`
    لحد ما تربط بوابة دفع حقيقية. من غير مفاتيح، أزرار الحجز والدفع بتختفي.
 
-### الرفع على Vercel (الأسهل والمجاني للبداية)
+### النشر على Cloudflare Workers (مجاني)
 
-1. ارفع الريبو على GitHub.
-2. ادخل [vercel.com](https://vercel.com) → **Add New → Project** → اختار الريبو.
-3. Vercel هيكتشف Next.js لوحده — ما تغيّرش أي إعداد بناء.
-4. في **Environment Variables** ضيف على الأقل:
-   `NEXT_PUBLIC_SITE_URL` = الدومين النهائي بتاعك (من غير `/` في الآخر).
-5. **Deploy**. بعد أول نشر، روح **Settings → Domains** وارْبُط دومينك،
-   وبعدين ارجع عدّل `NEXT_PUBLIC_SITE_URL` بيه واعمل **Redeploy**.
+الموقع بيتبني بـ[OpenNext](https://opennext.js.org/cloudflare) وبيشتغل كـ Worker
+اسمه `personal-web` على حساب Cloudflare المجاني. العنوان الحالي:
+`https://personal-web.mflma2040.workers.dev`
 
-> ⚠️ `NEXT_PUBLIC_SITE_URL` مش رفاهية: خريطة الموقع، الروابط القانونية،
-> وصور المشاركة على السوشيال كلها بتتبني منه. لو غلط، جوجل هيفهرس روابط غلط.
+| الأمر | بيعمل إيه |
+|-------|-----------|
+| `npm run cf:build` | يبني Next.js ويطلّع الـWorker في `.open-next/` (من غير ما يكلّم Cloudflare) |
+| `npm run cf:preview` | يبني ويشغّل نسخة الإنتاج محليًا جوه بيئة Workers |
+| `npm run cf:upload` | يرفع نسخة تجريبية برابط preview من غير ما يغيّر الموقع الحي |
+| `npm run cf:deploy` | ينشر على الموقع الحي (محتاج موافقة صاحب الموقع) |
+
+`cf:upload` و`cf:deploy` ما بيبنوش، فلازم `cf:build` الأول.
+
+**النشر التلقائي من GitHub (Workers Builds):** من لوحة Cloudflare →
+**Workers & Pages → Create → Import a repository** → `coolman1984/Personal-Web`،
+وبعدين:
+
+- Project name: `personal-web` (لازم يطابق `wrangler.jsonc`)
+- Branch: `main`
+- Build command: `npx opennextjs-cloudflare build`
+- Deploy command: `npx opennextjs-cloudflare deploy`
+- Preview command: `npx opennextjs-cloudflare upload`
+- من غير أي secrets في أول نشر.
+
+**المطلوب:** حساب Cloudflare مجاني وربط تطبيق Cloudflare على GitHub. مفيش
+كارت ولا أي خدمة مدفوعة (مفيش R2 ولا KV ولا D1). الخطة المجانية: ١٠٠ ألف طلب في اليوم.
+
+`NEXT_PUBLIC_SITE_URL` موجود في `wrangler.jsonc` وفي الكود كقيمة افتراضية؛ لو
+ربطت دومين خاص، حطه كـ build variable في Workers Builds قبل البناء.
+
+> ⚠️ `wrangler secret put` بينشر على طول — ما تشغّلوش من غير موافقة.
+
+التفاصيل الكاملة (المتغيّرات، النسخ التجريبية، حدود الخطة المجانية) في
+[`docs/deploy-cloudflare.md`](./docs/deploy-cloudflare.md).
 
 ### متغيّرات البيئة
 
@@ -159,8 +184,9 @@ cp .env.example .env.local
 
 ### استضافات تانية
 
-المشروع Next.js عادي، فبيشتغل على أي استضافة بتدعمه (Netlify، Cloudflare
-Pages، أو سيرفر بتاعك بـ`npm run build && npm start`). محتاج Node 20 أو أحدث.
+الاستضافة الأساسية هي Cloudflare Workers (فوق). المشروع لسه Next.js عادي، فممكن
+يشتغل على Vercel أو Netlify أو سيرفر بتاعك بـ`npm run build && npm start`. محتاج
+Node 20 أو أحدث (Workers Builds بيستخدم Node 24 افتراضيًا).
 
 ### بعد النشر
 
