@@ -9,6 +9,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BookMarked, Download, ListChecks, MessageCircle, Play } from "lucide-react";
 import { site } from "@/content/site";
+import { publicContact } from "@/lib/public-contact";
 import { hasAccess } from "@/lib/access";
 import { getCourseBySlug } from "@/lib/queries";
 import { promptsForCourse } from "@/content/prompts";
@@ -45,6 +46,7 @@ export default async function CourseReviewPage({
   const coursePrompts = promptsForCourse(slug);
   const Icon = getIcon(course.icon);
   const accent = accentFor(course.level);
+  const whatsappOk = !/0{7,}$/.test(site.whatsapp);
 
   return (
     <>
@@ -202,21 +204,27 @@ export default async function CourseReviewPage({
             <div className="rounded-lg border border-line bg-surface p-6 shadow-soft">
               <h2 className="mb-3 text-base font-extrabold text-fg">وقفت في حاجة؟</h2>
               <p className="mb-4 text-[13.5px] leading-relaxed text-fg-muted">
-                ابعتلي على واتساب. لو السؤال بيتكرّر، بيتحوّل لنقطة في جلسة العيادة الجاية.
+                {whatsappOk
+                  ? "ابعتلي على واتساب. لو السؤال بيتكرّر، بيتحوّل لنقطة في جلسة العيادة الجاية."
+                  : "راسلني على الإيميل. لو السؤال بيتكرّر، بيتحوّل لنقطة في جلسة العيادة الجاية."}
               </p>
               <Button
-                href={whatsappLink(
-                  site.whatsapp,
-                  `السلام عليكم ${site.shortName}، عندي سؤال في كورس «${course.title}».`,
-                )}
+                href={
+                  whatsappOk
+                    ? whatsappLink(
+                        site.whatsapp,
+                        `السلام عليكم ${site.shortName}، عندي سؤال في كورس «${course.title}».`,
+                      )
+                    : publicContact.mailto
+                }
                 variant="secondary"
                 size="md"
                 fullWidth
-                icon={<MessageCircle />}
-                target="_blank"
-                rel="noopener noreferrer"
+                icon={whatsappOk ? <MessageCircle /> : undefined}
+                target={whatsappOk ? "_blank" : undefined}
+                rel={whatsappOk ? "noopener noreferrer" : undefined}
               >
-                اسأل على واتساب
+                {whatsappOk ? "اسأل على واتساب" : publicContact.email}
               </Button>
             </div>
 

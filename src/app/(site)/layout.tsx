@@ -10,7 +10,7 @@ import { personJsonLd, organizationJsonLd } from "@/lib/seo";
 import { getAllLevels, getCoursesByLevel, getSearchIndex } from "@/lib/queries";
 import { getUserEmail } from "@/lib/supabase/server";
 import { isAdmin } from "@/lib/access";
-import { authEnabled } from "@/lib/supabase/config";
+import { isAuthConfigured, isNewsletterConfigured } from "@/lib/features";
 import { AnalyticsScripts } from "@/components/layout/analytics-scripts";
 import { siteUrl } from "@/lib/utils";
 import { arabicFontClassName } from "@/lib/fonts-ar";
@@ -45,6 +45,9 @@ export const viewport: Viewport = {
 };
 
 export default async function SiteRootLayout({ children }: { children: React.ReactNode }) {
+  // من غير مفاتيح التكامل، الصفحات العامة تفضل ثابتة. كوكيز الحساب بتتقري بس لو متفعّل.
+  const authEnabled = isAuthConfigured();
+  const newsletterEnabled = site.features.newsletter && isNewsletterConfigured();
   const levels = await getAllLevels();
   const [beginner, intermediate, advanced] = await Promise.all([
     getCoursesByLevel("beginner"),
@@ -69,9 +72,10 @@ export default async function SiteRootLayout({ children }: { children: React.Rea
               userEmail={userEmail}
               isAdmin={admin}
               authEnabled={authEnabled}
+              newsletterEnabled={newsletterEnabled}
             >
               <main id="main">{children}</main>
-              <SiteExtras />
+              <SiteExtras newsletterEnabled={newsletterEnabled} />
             </SiteShell>
           </ToastProvider>
         </ThemeProvider>

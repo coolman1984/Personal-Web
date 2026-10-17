@@ -100,7 +100,9 @@ export function personJsonLd() {
     url: siteUrl(),
     email: site.email,
     address: { "@type": "PostalAddress", addressLocality: site.location },
-    sameAs: Object.values(site.social).filter(Boolean),
+    sameAs: Object.values(site.social).filter(
+      (href) => href.trim() && !/username|example\.com/i.test(href),
+    ),
     knowsAbout: [
       "الذكاء الاصطناعي",
       "أتمتة المؤسسات",

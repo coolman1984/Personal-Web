@@ -1,6 +1,9 @@
 /** صفحة التواصل. */
+import type { ComponentType } from "react";
 import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { site } from "@/content/site";
+import { isContactConfigured } from "@/lib/features";
+import { publicContact } from "@/lib/public-contact";
 import { getFaqs } from "@/lib/queries";
 import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { whatsappLink } from "@/lib/utils";
@@ -8,12 +11,14 @@ import { Accordion } from "@/components/ui/accordion";
 import { PageHero } from "@/components/shared/page-hero";
 import { JsonLd } from "@/components/shared/json-ld";
 import { ContactForm } from "@/components/shared/contact-form";
+import { DirectContact } from "@/components/shared/direct-contact";
+import { LinkedInIcon } from "@/components/shared/social-icons";
 import { Reveal } from "@/components/motion/reveal";
 
 export const metadata = buildMetadata({
   title: "تواصل معايا",
   description:
-    "احجز كورس، أو اسأل عن التدريب المؤسسي، أو خُد استشارة. بيتم الرد خلال ٢٤ ساعة، وواتساب أسرع.",
+    "احجز كورس، أو اسأل عن التدريب المؤسسي، أو خُد استشارة. راسلني على الإيميل أو لينكدإن.",
   path: "/contact",
 });
 
@@ -29,21 +34,55 @@ export default async function ContactPage({
 }) {
   const { topic } = await searchParams;
   const faqs = await getFaqs("عام");
+  const contactOn = isContactConfigured();
 
   const defaultSubject = topic === "corporate" ? "تدريب مؤسسي لشركة" : undefined;
 
-  const channels = [
+  const emailIsPlaceholder = site.email.endsWith("@example.com");
+  const linkedinIsPlaceholder =
+    !site.social.linkedin ||
+    site.social.linkedin.includes("username") ||
+    site.social.linkedin.includes("example.com");
+  const phoneIsPlaceholder = site.phoneDisplay.includes("٠٠٠");
+  const whatsappIsPlaceholder = /0{7,}$/.test(site.whatsapp);
+
+  const channels: {
+    icon: ComponentType<{ className?: string }>;
+    label: string;
+    value: string;
+    href?: string;
+    external?: boolean;
+  }[] = [
     {
+      icon: Mail,
+      label: "الإيميل",
+      value: emailIsPlaceholder ? publicContact.email : site.email,
+      href: emailIsPlaceholder ? publicContact.mailto : `mailto:${site.email}`,
+    },
+    {
+      icon: LinkedInIcon,
+      label: "لينكدإن",
+      value: publicContact.linkedinLabel,
+      href: linkedinIsPlaceholder ? publicContact.linkedin : site.social.linkedin,
+      external: true,
+    },
+  ];
+
+  if (!whatsappIsPlaceholder) {
+    channels.push({
       icon: MessageCircle,
       label: "واتساب",
       value: "أسرع طريقة للرد",
       href: whatsappLink(site.whatsapp, `السلام عليكم ${site.shortName}،`),
       external: true,
-    },
-    { icon: Mail, label: "الإيميل", value: site.email, href: `mailto:${site.email}` },
-    { icon: Phone, label: "التليفون", value: site.phoneDisplay, href: undefined },
-    { icon: MapPin, label: "المكان", value: site.location, href: undefined },
-  ];
+    });
+  }
+
+  if (!phoneIsPlaceholder) {
+    channels.push({ icon: Phone, label: "التليفون", value: site.phoneDisplay });
+  }
+
+  channels.push({ icon: MapPin, label: "المكان", value: site.location });
 
   return (
     <>
@@ -53,14 +92,22 @@ export default async function ContactPage({
         crumbs={crumbs}
         eyebrow="تواصل"
         title="قوللي إنت عايز إيه بالظبط"
-        description="كل ما توصف وضعك بدقة أكتر، كل ما ترشيحي يبقى أفيد. الرد خلال ٢٤ ساعة، وواتساب أسرع."
+        description={
+          contactOn
+            ? "كل ما توصف وضعك بدقة أكتر، كل ما ترشيحي يبقى أفيد. الرد خلال ٢٤ ساعة."
+            : "النموذج مش متاح دلوقتي. ابعت على الإيميل أو لينكدإن، وهرد عليك."
+        }
       />
 
       <section className="container-x pb-14 md:pb-20">
         <div className="grid gap-10 lg:grid-cols-[1.3fr_0.7fr] lg:items-start">
           <Reveal>
             <div className="rounded-lg border border-line bg-surface p-6 shadow-soft md:p-8">
-              <ContactForm defaultSubject={defaultSubject} />
+              {contactOn ? (
+                <ContactForm defaultSubject={defaultSubject} />
+              ) : (
+                <DirectContact />
+              )}
             </div>
           </Reveal>
 

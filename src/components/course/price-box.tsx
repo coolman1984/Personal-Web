@@ -1,6 +1,8 @@
 /** صندوق السعر اللاصق في صفحة الكورس. المواصفات: docs/DESIGN.md §9.2 */
 import { ArrowLeft, CalendarDays, Check, Clock, GraduationCap, Users } from "lucide-react";
 import { site } from "@/content/site";
+import { canBook } from "@/lib/booking";
+import { publicContact } from "@/lib/public-contact";
 import { cn, discountPercent, formatNumber, formatPrice, whatsappLink } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -16,6 +18,7 @@ export function PriceBox({
 }) {
   const discount = discountPercent(course.price);
   const soldOut = course.status === "مكتمل";
+  const bookable = canBook();
 
   const facts = [
     { icon: Clock, label: "المدة", value: course.duration },
@@ -112,7 +115,7 @@ export function PriceBox({
         {/* الأزرار */}
         <div className="mt-5 flex flex-col gap-2.5">
           <Button
-            href={soldOut ? "/contact" : `/enroll/${course.slug}`}
+            href={soldOut ? "/contact" : bookable ? `/enroll/${course.slug}` : publicContact.mailto}
             size="lg"
             fullWidth
             variant={soldOut ? "secondary" : "primary"}
@@ -123,19 +126,21 @@ export function PriceBox({
                 ? "احجز مكانك"
                 : site.priceHidden.cta}
           </Button>
-          <Button
-            href={whatsappLink(
-              site.whatsapp,
-              `السلام عليكم ${site.shortName}، حابب أسأل عن كورس «${course.title}».`,
-            )}
-            variant="secondary"
-            size="lg"
-            fullWidth
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            اسأل على واتساب
-          </Button>
+          {!/0{7,}$/.test(site.whatsapp) && (
+            <Button
+              href={whatsappLink(
+                site.whatsapp,
+                `السلام عليكم ${site.shortName}، حابب أسأل عن كورس «${course.title}».`,
+              )}
+              variant="secondary"
+              size="lg"
+              fullWidth
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              اسأل على واتساب
+            </Button>
+          )}
         </div>
 
         {/* الضمانات */}

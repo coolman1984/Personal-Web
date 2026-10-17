@@ -28,16 +28,22 @@ export function WorkshopButton({
   variant = "primary",
   className,
 }: WorkshopButtonProps) {
-  const isHash = href.startsWith("#");
   const classes = cn(
     "inline-flex h-11 items-center justify-center rounded-[var(--radius)] px-6 text-sm font-medium transition-[background-color,border-color,filter] duration-200",
     variants[variant],
     className,
   );
 
-  if (isHash) {
+  // مسارات التطبيق بس تعدّي على next/link. mailto و# والروابط الخارجية
+  // لازم تفضل <a> عادي عشان متتكسرش مع راوتر Next.
+  if (!href.startsWith("/")) {
+    const external = /^https?:\/\//.test(href);
     return (
-      <a href={href} className={classes}>
+      <a
+        href={href}
+        className={classes}
+        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      >
         {children}
       </a>
     );

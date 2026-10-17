@@ -1,10 +1,16 @@
 /** الاشتراك في النشرة البريدية. */
 import { NextResponse } from "next/server";
+import { isNewsletterConfigured } from "@/lib/features";
 import { validateSubscribe } from "@/lib/validation";
 import { clientKey, rateLimit } from "@/lib/rate-limit";
+import { unavailable } from "@/lib/unavailable";
 import type { ApiResponse } from "@/types";
 
 export async function POST(req: Request) {
+  if (!isNewsletterConfigured()) {
+    return unavailable("النشرة البريدية مش متاحة دلوقتي.");
+  }
+
   const limit = rateLimit(`subscribe:${clientKey(req)}`);
   if (!limit.allowed) {
     return NextResponse.json<ApiResponse>(
@@ -35,7 +41,11 @@ export async function POST(req: Request) {
     const apiKey = process.env.MAILCHIMP_API_KEY;
     const audienceId = process.env.MAILCHIMP_AUDIENCE_ID;
 
-    if (apiKey && audienceId) {
+    if (!apiKey || !audienceId) {
+      return unavailable("النشرة البريدية مش متاحة دلوقتي.");
+    }
+
+    {
       // مفتاح Mailchimp بينتهي بـ-usX اللي هي منطقة السيرفر (مثلًا -us21)
       const dc = apiKey.split("-").pop();
       if (!dc || dc === apiKey) {
@@ -63,8 +73,6 @@ export async function POST(req: Request) {
           throw new Error(`Mailchimp رفض الاشتراك (${res.status}): ${detail?.title ?? "?"}`);
         }
       }
-    } else {
-      console.info("[subscribe] اشتراك جديد (القائمة البريدية مش متظبّطة):", result.data.email);
     }
 
     return NextResponse.json<ApiResponse>({

@@ -4,11 +4,12 @@
  */
 import { Gift } from "lucide-react";
 import { site } from "@/content/site";
+import { isNewsletterConfigured } from "@/lib/features";
 import { NewsletterForm } from "@/components/shared/newsletter-form";
 import { Reveal } from "@/components/motion/reveal";
 
 export function Newsletter() {
-  if (!site.features.newsletter) return null;
+  if (!site.features.newsletter || !isNewsletterConfigured()) return null;
 
   return (
     <section className="band-gold">

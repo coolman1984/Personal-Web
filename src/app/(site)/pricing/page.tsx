@@ -1,4 +1,5 @@
 /** الأسعار والباقات. */
+import { canBook } from "@/lib/booking";
 import { getFaqs, getPricingTiers } from "@/lib/queries";
 import { buildMetadata, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
 import { PageHero } from "@/components/shared/page-hero";
@@ -32,7 +33,7 @@ export default async function PricingPage() {
         title="اختار الشكل اللي يناسبك"
         description="تلات طرق تشتغل معايا بيها: كورس واحد، أو البرنامج الشامل، أو تدريب مفصّل على عمليات شركتك. السعر بيتحدّد بعد ما نتكلّم — عشان يبقى مبني على حالتك مش على قايمة."
       />
-      <Pricing tiers={tiers} />
+      <Pricing tiers={tiers} bookingEnabled={canBook()} />
       <section className="container-x pb-14 md:pb-20">
         <h2 className="mb-8 text-2xl font-extrabold text-fg">أي مستوى يناسبك؟</h2>
         <CompareTable />

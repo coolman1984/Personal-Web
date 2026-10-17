@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { Accordion, type AccordionItem } from "@/components/ui/accordion";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { Reveal } from "@/components/motion/reveal";
+import { publicContact } from "@/lib/public-contact";
 import type { Faq } from "@/types";
 
 export function FaqSection({ faqs }: { faqs: Faq[] }) {
@@ -20,7 +21,7 @@ export function FaqSection({ faqs }: { faqs: Faq[] }) {
           align="start"
           eyebrow="أسئلة شائعة"
           title="أكتر حاجات بتتسأل"
-          description="لو سؤالك مش هنا، كلّمني على واتساب وهرد عليك."
+          description={`لو سؤالك مش هنا، ابعتلي على الإيميل ${publicContact.email} أو لينكدإن وهرد عليك.`}
           className="lg:sticky lg:top-28"
         >
           <Link

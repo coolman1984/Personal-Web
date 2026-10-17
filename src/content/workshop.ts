@@ -2,6 +2,7 @@
  * Workshop landing page copy — edit here, not in components.
  * Facts only; no invented clients, numbers, or prices.
  */
+import { publicContact } from "@/lib/public-contact";
 
 export const workshop = {
   owner: {
@@ -276,10 +277,10 @@ export const workshop = {
     title: "Start a conversation",
     body:
       "Tell us about your team, location, and the reporting or ops workflow you want to accelerate. We will follow up with format options and scheduling.",
-    email: "mflma2030@gmail.com",
-    emailHref: "mailto:mflma2030@gmail.com",
-    linkedIn: { label: "LinkedIn", href: "https://www.linkedin.com/in/mohamedfawzy1984/" },
-    primaryCta: { label: "Email Mohamed", href: "mailto:mflma2030@gmail.com" },
+    email: publicContact.email,
+    emailHref: publicContact.mailto,
+    linkedIn: { label: publicContact.linkedinLabel, href: publicContact.linkedin },
+    primaryCta: { label: "Email Mohamed", href: publicContact.mailto },
   },
 
   footer: {

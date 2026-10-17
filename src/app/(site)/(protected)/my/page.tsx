@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { ArrowLeft, BookOpen, MessageCircle } from "lucide-react";
 import { site } from "@/content/site";
+import { publicContact } from "@/lib/public-contact";
 import { getMyCourses } from "@/lib/access";
 import { getUserEmail } from "@/lib/supabase/server";
 import { buildMetadata } from "@/lib/seo";
@@ -22,6 +23,7 @@ export const metadata = buildMetadata({
 
 export default async function MyCoursesPage() {
   const [courses, email] = await Promise.all([getMyCourses(), getUserEmail()]);
+  const whatsappOk = !/0{7,}$/.test(site.whatsapp);
 
   return (
     <>
@@ -51,17 +53,21 @@ export default async function MyCoursesPage() {
                 شوف الكورسات
               </Button>
               <Button
-                href={whatsappLink(
-                  site.whatsapp,
-                  `السلام عليكم ${site.shortName}، دخلت بإيميل ${email ?? ""} ومش لاقي كورساتي.`,
-                )}
+                href={
+                  whatsappOk
+                    ? whatsappLink(
+                        site.whatsapp,
+                        `السلام عليكم ${site.shortName}، دخلت بإيميل ${email ?? ""} ومش لاقي كورساتي.`,
+                      )
+                    : publicContact.mailto
+                }
                 variant="secondary"
                 size="md"
-                icon={<MessageCircle />}
-                target="_blank"
-                rel="noopener noreferrer"
+                icon={whatsappOk ? <MessageCircle /> : undefined}
+                target={whatsappOk ? "_blank" : undefined}
+                rel={whatsappOk ? "noopener noreferrer" : undefined}
               >
-                كلّمني
+                {whatsappOk ? "كلّمني" : publicContact.email}
               </Button>
             </div>
           </div>

@@ -7,10 +7,10 @@ import { BackToTop } from "./back-to-top";
 import { WhatsAppFab } from "./whatsapp-fab";
 import { MobileCtaBar } from "./mobile-cta-bar";
 
-export function SiteExtras() {
+export function SiteExtras({ newsletterEnabled }: { newsletterEnabled: boolean }) {
   return (
     <>
-      <Footer />
+      <Footer newsletterEnabled={newsletterEnabled} />
       <BackToTop />
       <WhatsAppFab />
       <MobileCtaBar />
