@@ -26,10 +26,12 @@ export function Footer() {
                   {site.email}
                 </a>
               </li>
-              <li className="flex items-center gap-2.5">
-                <Phone className="size-4 shrink-0 text-gold-500" aria-hidden />
-                <span className="ltr-nums">{site.phoneDisplay}</span>
-              </li>
+              {site.phoneDisplay && (
+                <li className="flex items-center gap-2.5">
+                  <Phone className="size-4 shrink-0 text-gold-500" aria-hidden />
+                  <span className="ltr-nums">{site.phoneDisplay}</span>
+                </li>
+              )}
               <li className="flex items-center gap-2.5">
                 <MapPin className="size-4 shrink-0 text-gold-500" aria-hidden />
                 <span>{site.location}</span>

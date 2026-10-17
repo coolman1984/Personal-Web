@@ -155,6 +155,54 @@ export interface Project {
 }
 
 // ═══════════════════════════════════════════════════════════
+// أعمالي — أنظمة حقيقية بناها صاحب الموقع بإيده
+// ═══════════════════════════════════════════════════════════
+
+/** حالة المشروع — بنقولها بصراحة عشان الزائر يعرف إيه اللي شغّال فعلًا */
+export type WorkStatus = "شغّال" | "نسخة تجريبية" | "تحت البناء";
+
+export interface WorkItem {
+  slug: string;
+  title: string;
+  /** اسم المستودع على GitHub — بيتبني منه الرابط */
+  repo: string;
+  summary: string;
+  /** المشكلة اللي المشروع بيحلّها */
+  problem: string;
+  /** الحل */
+  solution: string;
+  /** الدليل الموجود فعلًا في الكود (اختبارات، مثبّت، أرقام أداء) */
+  evidence: string;
+  category: string;
+  tech: string[];
+  status: WorkStatus;
+  featured: boolean;
+  icon: string;
+  /** رابط نسخة شغّالة أونلاين لو موجودة */
+  liveUrl?: string;
+}
+
+/** العمل جاهز للعرض — ومعاه رابط المستودع محسوب على السيرفر */
+export type WorkItemView = WorkItem & { repoHref: string };
+
+/** خدمة بيقدّمها صاحب الموقع — من غير أسعار (الأسعار بالتواصل) */
+export interface Service {
+  slug: string;
+  title: string;
+  /** لمين */
+  audience: string;
+  /** الوجع اللي بيحلّه */
+  pain: string;
+  /** العميل بيستلم إيه */
+  deliverables: string[];
+  /** المدة التقريبية */
+  duration: string;
+  /** slugs من أعمالي كدليل */
+  proof: string[];
+  icon: string;
+}
+
+// ═══════════════════════════════════════════════════════════
 // المقالات
 // ═══════════════════════════════════════════════════════════
 

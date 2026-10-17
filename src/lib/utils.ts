@@ -67,6 +67,8 @@ export function truncate(text: string, max: number): string {
 
 /** يبني رابط واتساب برسالة جاهزة */
 export function whatsappLink(phone: string, message: string): string {
+  // لو الرقم لسه ما اتحطّش في site.ts، ودّي الزائر لصفحة التواصل بدل رابط واتساب مكسور
+  if (!phone) return "/contact";
   return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }
 

@@ -13,9 +13,12 @@ import {
   getFeaturedProjects,
   getMethodPillars,
   getPricingTiers,
+  getServices,
   getStats,
   getTestimonials,
   getTools,
+  getFeaturedWork,
+  githubProfileUrl,
 } from "@/lib/queries";
 
 import { Hero } from "@/components/sections/hero";
@@ -28,6 +31,8 @@ import { FeaturedCourses } from "@/components/sections/featured-courses";
 import { MiniCourses } from "@/components/sections/mini-courses";
 import { WhyDifferent } from "@/components/sections/why-different";
 import { Projects } from "@/components/sections/projects";
+import { Work } from "@/components/sections/work";
+import { Services } from "@/components/sections/services";
 import { Testimonials } from "@/components/sections/testimonials";
 import { Pricing } from "@/components/sections/pricing";
 import { Articles } from "@/components/sections/articles";
@@ -51,6 +56,8 @@ export default async function HomePage() {
     tiers,
     articles,
     faqs,
+    work,
+    services,
   ] = await Promise.all([
     getAllLevels(),
     getCourseCountByLevel(),
@@ -65,6 +72,8 @@ export default async function HomePage() {
     getPricingTiers(),
     getFeaturedArticles(3),
     getFaqs(),
+    getFeaturedWork(6),
+    getServices(),
   ]);
 
   return (
@@ -72,11 +81,13 @@ export default async function HomePage() {
       <Hero levels={levels} courseCounts={courseCounts} />
       <TrustBar tools={tools} />
       <Stats stats={stats} />
+      {site.features.work && <Work items={work} githubHref={githubProfileUrl()} />}
       <Ladder />
       <Levels levels={levels} courseCounts={courseCounts} />
       <MiniCourses courses={miniCourses} />
       <Method pillars={pillars} />
       <FeaturedCourses courses={featuredCourses} />
+      {site.features.services && <Services services={services} />}
       <WhyDifferent rows={comparison} />
       {site.features.projects && <Projects projects={projects} />}
       <Testimonials testimonials={testimonials} />

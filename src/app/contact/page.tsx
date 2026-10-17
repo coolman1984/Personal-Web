@@ -32,8 +32,15 @@ export default async function ContactPage({
 
   const defaultSubject = topic === "corporate" ? "تدريب مؤسسي لشركة" : undefined;
 
-  const channels = [
-    {
+  // أي قناة بيانتها لسه فاضية في site.ts بتختفي بدل ما تعرض رقم وهمي
+  const channels: {
+    icon: typeof Mail;
+    label: string;
+    value: string;
+    href: string | undefined;
+    external?: boolean;
+  }[] = [
+    site.whatsapp && {
       icon: MessageCircle,
       label: "واتساب",
       value: "أسرع طريقة للرد",
@@ -41,9 +48,9 @@ export default async function ContactPage({
       external: true,
     },
     { icon: Mail, label: "الإيميل", value: site.email, href: `mailto:${site.email}` },
-    { icon: Phone, label: "التليفون", value: site.phoneDisplay, href: undefined },
+    site.phoneDisplay && { icon: Phone, label: "التليفون", value: site.phoneDisplay, href: undefined },
     { icon: MapPin, label: "المكان", value: site.location, href: undefined },
-  ];
+  ].filter((c) => !!c);
 
   return (
     <>

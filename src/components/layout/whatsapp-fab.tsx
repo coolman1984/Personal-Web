@@ -6,7 +6,7 @@ import { whatsappLink } from "@/lib/utils";
 import { track } from "@/lib/analytics";
 
 export function WhatsAppFab() {
-  if (!site.features.whatsappFab) return null;
+  if (!site.features.whatsappFab || !site.whatsapp) return null;
 
   const href = whatsappLink(
     site.whatsapp,
