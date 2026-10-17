@@ -151,7 +151,7 @@ The click path to keep is **Workers & Pages > Create > Import a repository > coo
 1. Open **Workers & Pages**.
 2. Select **Create**. The current control label is **Create application**.
 3. Select **Import a repository**. The current screen may show **Get started** next to **Import a repository**.
-4. Select the Git account, then select `coolman1984/Personal-Web`. The repo is private: install and authorize the Cloudflare GitHub app so Cloudflare can read it.
+4. Select the Git account, then select `coolman1984/Personal-Web`. Install and authorize the Cloudflare GitHub app so Cloudflare can read the repo and build on every push.
 5. On the project form, set these fields:
    - **Project name** (Worker name): `personal-web`. This must match `"name": "personal-web"` in `wrangler.jsonc`. A mismatch fails the build.
    - **Git branch** (production branch; the default is `main`): `main`. Later this is the dropdown under **Settings → Build → Branch control**.
