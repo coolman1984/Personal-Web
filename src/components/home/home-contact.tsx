@@ -3,7 +3,7 @@
  * المرجع: Master Profile v3 §3.2 (زرارين منفصلين) و§4.4 (أسئلة الفرز).
  */
 import { cn } from "@/lib/utils";
-import type { HomeContent } from "@/types";
+import type { ContactBlockContent } from "@/types";
 import { Eyebrow } from "@/components/workshop/eyebrow";
 import { WordReveal } from "@/components/workshop/motion/word-reveal";
 import { ScrollReveal } from "@/components/workshop/motion/scroll-reveal";
@@ -11,7 +11,7 @@ import { WorkshopSection } from "@/components/workshop/workshop-section";
 import { WorkshopButton } from "@/components/workshop/workshop-button";
 
 interface HomeContactProps {
-  contact: HomeContent["contact"];
+  contact: ContactBlockContent;
   className?: string;
 }
 

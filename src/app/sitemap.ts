@@ -1,14 +1,15 @@
 /** خريطة الموقع — بتتولّد تلقائيًا من المحتوى. */
 import type { MetadataRoute } from "next";
-import { getAllArticles, getAllCourses, getAllLevels, getAllProjects } from "@/lib/queries";
+import { getAllArticles, getAllCourses, getAllLevels, getAllOffers, getAllProjects } from "@/lib/queries";
 import { absoluteUrl } from "@/lib/utils";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [courses, levels, projects, articles] = await Promise.all([
+  const [courses, levels, projects, articles, offers] = await Promise.all([
     getAllCourses(),
     getAllLevels(),
     getAllProjects(),
     getAllArticles(),
+    getAllOffers(),
   ]);
 
   const now = new Date();
@@ -16,6 +17,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     { url: absoluteUrl("/"), lastModified: now, changeFrequency: "weekly", priority: 1 },
     { url: absoluteUrl("/workshop"), lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    ...offers.map((o) => ({
+      url: absoluteUrl(`/${o.slug}`),
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
+    })),
     { url: absoluteUrl("/courses"), lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/roadmap"), lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/pricing"), lastModified: now, changeFrequency: "monthly", priority: 0.8 },
