@@ -23,8 +23,10 @@ import { stats } from "@/content/stats";
 import { timeline } from "@/content/timeline";
 import { quizQuestions, quizResults, maxQuizScore } from "@/content/quiz";
 import { workshop } from "@/content/workshop";
+import { home } from "@/content/home";
 import { readingTime } from "@/lib/utils";
 import type { WorkshopContent } from "@/content/workshop";
+import type { HomeContent } from "@/content/home";
 import type {
   Article,
   ComparisonRow,
@@ -264,12 +266,21 @@ export function resolveQuizResult(score: number): QuizResult {
 const staticPages: SearchItem[] = [
   {
     id: "page-home",
-    title: "Build your AI agent team",
-    description: "Executive workshop landing — agenda, outcomes, and contact",
+    title: "Mohamed Fawzy — From scattered files to clear decisions",
+    description: "AI & process automation for manufacturers: services, method, cases and contact",
     href: "/",
     kind: "page",
     icon: "Home",
-    keywords: ["workshop", "executive", "AI agents", "رئيسية", "home"],
+    keywords: ["home", "services", "automation", "manufacturing", "رئيسية", "خدمات"],
+  },
+  {
+    id: "page-workshop",
+    title: "Build your AI agent team",
+    description: "Executive workshop — agenda, outcomes, and contact",
+    href: "/workshop",
+    kind: "page",
+    icon: "Presentation",
+    keywords: ["workshop", "executive", "AI agents", "ورشة"],
   },
   {
     id: "page-courses",
@@ -392,4 +403,8 @@ export async function getSearchIndex(): Promise<SearchItem[]> {
 /** Workshop landing content — single source via content/workshop.ts */
 export async function getWorkshopContent(): Promise<WorkshopContent> {
   return workshop;
+}
+
+export async function getHomeContent(): Promise<HomeContent> {
+  return home;
 }

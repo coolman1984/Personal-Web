@@ -16,8 +16,8 @@ export const workshop = {
       { label: "Outcomes", href: "#outcomes" },
       { label: "Agenda", href: "#agenda" },
       { label: "About", href: "#about" },
-      { label: "Work", href: "#work" },
-      { label: "Services", href: "#services" },
+      { label: "Work", href: "/#work" },
+      { label: "Services", href: "/#offers" },
       { label: "FAQ", href: "#faq" },
     ],
     cta: { label: "Book a conversation", href: "#contact" },
@@ -238,188 +238,6 @@ export const workshop = {
   // Real systems from public GitHub repos. Evidence = what exists in the code
   // (approximate test counts, measured performance), never client results.
   // Source: Search-Jobs/profile/PROFILE.md (safe evidence list).
-  work: {
-    id: "work",
-    title: "Systems I've built",
-    intro:
-      "I teach what I ship. Each of these is a working system with its code public on GitHub; the line under each one is evidence you can check in the repo.",
-    githubLabel: "All repositories on GitHub",
-    githubHref: "https://github.com/coolman1984",
-    codeLabel: "Code",
-    liveLabel: "Live demo",
-    items: [
-      {
-        title: "AI Academy",
-        category: "Training",
-        status: "Live",
-        summary:
-          "An interactive Arabic/English course on AI at work, in a single HTML file that runs offline with no server, linked to its reference book.",
-        evidence: "Published online — open it now",
-        tech: ["HTML", "JavaScript"],
-        repoHref: "https://github.com/coolman1984/Course",
-        liveHref: "https://coolman1984.github.io/Course/",
-      },
-      {
-        title: "Multi-company delivery platform",
-        category: "Business systems",
-        status: "Pilot",
-        summary:
-          "Order, rider and cash-collection platform for local delivery companies, with a screen for every role and fully isolated data per company.",
-        evidence: "~107 automated tests",
-        tech: ["TypeScript", "React", "PostgreSQL", "PWA"],
-        repoHref: "https://github.com/coolman1984/Delivery-Manager",
-      },
-      {
-        title: "Hessa — tutoring-centre system",
-        category: "Business systems",
-        status: "In build",
-        summary:
-          "Front desk in under three clicks, receipts that are never deleted, early warning for students about to leave, and a read-only link for parents. Works offline across several PCs.",
-        evidence: "~180 automated tests",
-        tech: ["Python", "Offline sync", "AR/EN"],
-        repoHref: "https://github.com/coolman1984/Teachers",
-      },
-      {
-        title: "xl2ai — Excel to AI-ready data",
-        category: "Excel & data",
-        status: "Live",
-        summary:
-          "Turns large Excel files into a verified SQLite database with catalog, quality checks, KPIs and safe query tools, so AI never has to read the raw workbook.",
-        evidence: "~298 tests · 1M rows (57 MB) in ~55 s with full verification",
-        tech: ["Python", "SQLite", "MCP"],
-        repoHref: "https://github.com/coolman1984/Office-Automation",
-      },
-      {
-        title: "Universal Excel automation engine",
-        category: "Excel & data",
-        status: "Live",
-        summary:
-          "One engine an AI agent adapts per department. Staff receive a ZIP: extract, double-click START, use the dashboard. No Python visible to the user.",
-        evidence: "~820 automated tests across two engine versions",
-        tech: ["Python", "Excel", "Agents"],
-        repoHref: "https://github.com/coolman1984/Perfect-Project-Template",
-      },
-      {
-        title: "wad — Windows agent desktop",
-        category: "AI agents",
-        status: "Live",
-        summary:
-          "Lets AI agents operate Windows apps through the accessibility tree instead of pixels, with a stable reference for every element and proof that each action worked.",
-        evidence: "~84 automated tests",
-        tech: ["Python", "UI Automation", "OCR"],
-        repoHref: "https://github.com/coolman1984/win-agent-desktop",
-      },
-      {
-        title: "WinSight",
-        category: "AI agents",
-        status: "Live",
-        summary:
-          "A ~5 MB executable with 34 tools that find and fix what makes Windows slow or broken. Every fix is reversible, and an MCP server hands agents a ready brief.",
-        evidence: "34 tools in one file, no install",
-        tech: ["Go", "MCP", "CLI"],
-        repoHref: "https://github.com/coolman1984/Performance",
-      },
-      {
-        title: "Personal AI investment office",
-        category: "AI agents",
-        status: "In build",
-        summary:
-          "Local system for the Egyptian Exchange: software calculates facts, AI agents research and challenge each other, the human decides.",
-        evidence: "~155 automated tests",
-        tech: ["Python", "SQLite", "Claude Code", "Codex"],
-        repoHref: "https://github.com/coolman1984/Economic",
-      },
-      {
-        title: "Business systems factory",
-        category: "Business systems",
-        status: "Pilot",
-        summary:
-          "One core plus a recipe per business type: a generator builds a complete company system from one profile file and keeps it upgradeable.",
-        evidence: "~170 tests · two working recipes (retail, service centre)",
-        tech: ["React", "Fastify", "PostgreSQL"],
-        repoHref: "https://github.com/coolman1984/Business-Template",
-      },
-      {
-        title: "Space planner (2D/3D)",
-        category: "Business systems",
-        status: "Live",
-        summary:
-          "Plan any hall, line or warehouse in 2D and 3D and check that everything fits before spending on the build-out. One-click start, portable for locked networks.",
-        evidence: "~441 automated tests",
-        tech: ["Node.js", "3D", "SQLite"],
-        repoHref: "https://github.com/coolman1984/3D-Modeling",
-      },
-      {
-        title: "Rondi — ceramics factory system",
-        category: "Business systems",
-        status: "In build",
-        summary:
-          "One Arabic system linking production, quality, sorting, warehouses, maintenance, energy, sales and costing, planned in eight phases.",
-        evidence: "Phase 1 done · ~94 tests",
-        tech: ["Next.js", "React", "TypeScript"],
-        repoHref: "https://github.com/coolman1984/Seramic-Rondi",
-      },
-      {
-        title: "Code-driven film studio",
-        category: "Video",
-        status: "Live",
-        summary:
-          "Short motion-graphics ads generated from code: camera, motion, Arabic typography, original music, and automated loudness and safe-area checks.",
-        evidence: "Finished films in Reels and 16:9 · ~125 tests",
-        tech: ["Node.js", "FFmpeg"],
-        repoHref: "https://github.com/coolman1984/Animation",
-      },
-    ],
-  },
-
-  // What Mohamed offers beyond the workshop. No prices on the page.
-  // Source: Search-Jobs/profile/SERVICES.md
-  services: {
-    id: "services",
-    title: "Other ways to work together",
-    intro:
-      "Beyond the workshop, I train teams and build the tool myself, then hand it over working. Send me the task your team repeats every week; I reply with a short plan and a fixed price.",
-    cta: { label: "Describe your task", href: "#contact" },
-    items: [
-      {
-        title: "Team AI training",
-        description:
-          "Half-day, full-day or an 8-session program. Every participant leaves with a working automation for a task from their own job.",
-        duration: "Half a day to 8 weeks",
-      },
-      {
-        title: "Excel & report automation",
-        description:
-          "A one-click tool that reads your files, reconciles the totals and produces the report, with a run log and a guide. No Python install needed.",
-        duration: "3 days to 2 weeks per workflow",
-      },
-      {
-        title: "Business systems",
-        description:
-          "Bilingual systems for clinics, tutoring centres, delivery and service companies: a screen per role, mobile links without an app, daily reports.",
-        duration: "First working version in 2–3 weeks",
-      },
-      {
-        title: "AI agents & workflow automation",
-        description:
-          "A working agent or workflow (n8n, Python or MCP) with a human-approval gate before anything sensitive and a full log of every step.",
-        duration: "1 to 4 weeks",
-      },
-      {
-        title: "Finance & operations dashboards",
-        description:
-          "Agreed KPIs, one source of truth, automatic refresh, and a plain explanation of how every number is calculated.",
-        duration: "1 to 3 weeks",
-      },
-      {
-        title: "Motion-graphics ads in code",
-        description:
-          "15–60 second videos for Reels or 16:9 with original music, correct Arabic typography, a cover image and two revision rounds.",
-        duration: "3 to 7 days per video",
-      },
-    ],
-  },
-
   faq: {
     id: "faq",
     title: "FAQ",
@@ -471,6 +289,7 @@ export const workshop = {
   footer: {
     note: "AI Executive Workshop · Mohamed Fawzy · Cairo",
     links: [
+      { label: "Home", href: "/" },
       { label: "Courses site", href: "/courses" },
       { label: "Contact", href: "/contact" },
     ],

@@ -6,11 +6,11 @@ import Link from "next/link";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useScrolledPast } from "@/hooks/use-scroll-progress";
-import type { WorkshopContent } from "@/types";
+import type { PageChromeContent } from "@/types";
 import { WorkshopButton } from "./workshop-button";
 
 interface WorkshopNavProps {
-  content: WorkshopContent;
+  content: PageChromeContent;
 }
 
 export function WorkshopNav({ content }: WorkshopNavProps) {

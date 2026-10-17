@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { site } from "@/content/site";
 import { workshop } from "@/content/workshop";
+import { home } from "@/content/home";
 import { absoluteUrl, siteUrl } from "@/lib/utils";
 import type { Article, Course, Faq } from "@/types";
 
@@ -11,6 +12,7 @@ import type { Article, Course, Faq } from "@/types";
  */
 const OG_IMAGE = "/og-default.png";
 const WORKSHOP_OG_IMAGE = "/og-workshop.png";
+const HOME_OG_IMAGE = "/og-home.png";
 
 interface MetaInput {
   title: string;
@@ -30,6 +32,8 @@ interface MetaInput {
   authorName?: string;
   /** Open Graph site name. Defaults to `authorName`, then the Arabic site name. */
   siteName?: string;
+  /** لاحقة العنوان بعد « — ». الافتراضي اسم الموقع العربي؛ `null` = من غير لاحقة (للصفحات الإنجليزية). */
+  titleSuffix?: string | null;
 }
 
 export function buildMetadata({
@@ -45,9 +49,10 @@ export function buildMetadata({
   mergeSiteKeywords = true,
   authorName,
   siteName,
+  titleSuffix = site.name,
 }: MetaInput): Metadata {
   const url = absoluteUrl(path);
-  const fullTitle = path === "/" ? title : `${title} — ${site.name}`;
+  const fullTitle = path === "/" || !titleSuffix ? title : `${title} — ${titleSuffix}`;
   const keywordList = mergeSiteKeywords ? [...site.keywords, ...keywords] : keywords;
   const author = authorName ?? site.name;
   const ogSiteName = siteName ?? authorName ?? site.name;
@@ -84,7 +89,7 @@ export function buildMetadata({
   };
 }
 
-export { WORKSHOP_OG_IMAGE };
+export { WORKSHOP_OG_IMAGE, HOME_OG_IMAGE };
 
 // ═══════════════════════════════════════════════════════════
 // البيانات المنظّمة (JSON-LD)
@@ -199,12 +204,41 @@ export function workshopJsonLd() {
     description:
       "A one-day, hands-on workshop for managers in the Gulf and Egypt on building a practical AI agent team with free or low-cost tools.",
     inLanguage: "en",
-    url: siteUrl(),
+    url: absoluteUrl("/workshop"),
     about: {
       "@type": "Person",
       name: "Mohamed Fawzy",
       jobTitle: workshop.about.headline,
       sameAs: [workshop.contact.linkedIn.href],
+    },
+  };
+}
+
+/** بيانات منظّمة للرئيسية الإنجليزية — شخص بيقدّم خدمات تحوّل للمصانع والشركات */
+export function homeJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    name: `${home.owner.name} — ${home.hero.brandTag}`,
+    inLanguage: "en",
+    url: siteUrl(),
+    mainEntity: {
+      "@type": "Person",
+      name: home.owner.name,
+      jobTitle: "AI & Process Automation Transformation Leader",
+      description: home.hero.subline,
+      address: { "@type": "PostalAddress", addressLocality: home.owner.location },
+      email: home.contact.email,
+      sameAs: [home.contact.linkedIn.href, home.work.githubHref],
+      knowsAbout: [
+        "AI transformation",
+        "Process automation",
+        "Manufacturing finance",
+        "FP&A",
+        "SAP",
+        "Python",
+        "SQL",
+      ],
     },
   };
 }

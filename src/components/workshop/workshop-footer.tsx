@@ -2,10 +2,10 @@
  * Workshop page footer — minimal links.
  */
 import Link from "next/link";
-import type { WorkshopContent } from "@/types";
+import type { PageChromeContent } from "@/types";
 
 interface WorkshopFooterProps {
-  content: WorkshopContent;
+  content: PageChromeContent;
 }
 
 export function WorkshopFooter({ content }: WorkshopFooterProps) {

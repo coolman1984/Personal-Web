@@ -520,17 +520,18 @@ html.workshop-root {
   --fg: oklch(0.211 0.017 234);
   --fg-muted: oklch(0.495 0.011 240);
   --fg-subtle: oklch(0.58 0.011 240);
-  --primary: oklch(0.629 0.166 293.5);
-  --primary-solid: oklch(0.5 0.17 293.5);
+  /* لون التمييز تيل (≈ #087f78) بدل البنفسجي، والشريط كحلي — Master Profile v3 §6 */
+  --primary: oklch(0.53 0.09 186);
+  --primary-solid: oklch(0.53 0.09 186);
   --primary-fg: oklch(0.99 0.002 240);
   --ring: var(--primary-solid);
-  --ink: oklch(0.211 0.017 234);
+  --ink: oklch(0.26 0.06 260);
   --ink-fg: oklch(0.985 0.002 240);
   --ink-muted: oklch(0.708 0.012 240);
   --ink-border: oklch(1 0 0 / 0.12);
   --glass: oklch(1 0 0 / 0.72);
   --glass-border: oklch(1 0 0 / 0.5);
-  --shadow-color: oklch(0.45 0.05 288 / 0.1);
+  --shadow-color: oklch(0.45 0.05 260 / 0.1);
 }
 
 html.workshop-root.dark {
@@ -544,8 +545,8 @@ html.workshop-root.dark {
   --fg: oklch(0.96 0.005 90);
   --fg-muted: oklch(0.73 0.014 270);
   --fg-subtle: oklch(0.6 0.016 270);
-  --primary: oklch(0.71 0.17 288);
-  --primary-solid: oklch(0.55 0.17 288);
+  --primary: oklch(0.76 0.11 186);
+  --primary-solid: oklch(0.53 0.09 186);
   --primary-fg: oklch(0.99 0.002 240);
   --ring: var(--primary-solid);
   --ink: oklch(0.14 0.017 270);
