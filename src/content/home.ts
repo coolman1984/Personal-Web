@@ -436,6 +436,7 @@ export const home = {
     ],
     availability: "Based in Cairo. Open to Egypt and KSA/GCC.", // 👈 غيّر ده — أكّد المواقع
     cta: { label: "Request my CV", href: recruiterMailto },
+    pageCta: { label: "Full experience", href: "/experience" },
   },
 
   contact: {

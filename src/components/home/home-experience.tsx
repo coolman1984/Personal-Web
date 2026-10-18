@@ -49,9 +49,14 @@ export function HomeExperience({ experience, className }: HomeExperienceProps) {
           </ul>
           <p className="mt-4 text-sm text-fg-muted">{experience.availability}</p>
         </div>
-        <WorkshopButton href={experience.cta.href} variant="secondary">
-          {experience.cta.label}
-        </WorkshopButton>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <WorkshopButton href={experience.pageCta.href} variant="secondary">
+            {experience.pageCta.label}
+          </WorkshopButton>
+          <WorkshopButton href={experience.cta.href} variant="ghost">
+            {experience.cta.label}
+          </WorkshopButton>
+        </div>
       </ScrollReveal>
     </WorkshopSection>
   );
