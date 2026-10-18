@@ -6,6 +6,7 @@
  */
 import { publicContact } from "@/lib/public-contact";
 import { companyMailto, recruiterMailto } from "./intake";
+import { cases as caseStudies } from "./cases";
 
 export const home = {
   owner: {
@@ -107,24 +108,14 @@ export const home = {
       "Evidence",
     ],
     statusLabel: "Write-up in preparation",
-    items: [
-      // 👈 غيّر ده — ضيف الأدلة والأرقام لكل حالة لما تبقى جاهزة وموافق على نشرها
-      {
-        title: "Consolidating factory-system reports",
-        problem:
-          "Reports pulled from several plant systems were combined by hand before every review.",
-      },
-      {
-        title: "Waste and scrap tracking dashboard",
-        problem:
-          "Scrap and waste were visible only after month-end, too late to correct the line.",
-      },
-      {
-        title: "Automating a recurring financial report",
-        problem:
-          "A recurring finance report took hours of copy-paste and manual checks every cycle.",
-      },
-    ],
+    readLabel: "Read the case",
+    // الحالات نفسها في content/cases.ts — هنا العنوان والمشكلة ورابط لو اتنشرت
+    items: caseStudies.map((c) => ({
+      title: c.title,
+      problem: c.problem,
+      href: c.status === "published" ? `/cases/${c.slug}` : null,
+    })),
+    indexCta: { label: "How every case is documented", href: "/cases" },
     rules: [
       "Gross time saved is shown separately from net time, after review and running effort.",
       "Hours are never converted to money or headcount unless the client measured it.",
