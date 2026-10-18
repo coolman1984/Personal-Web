@@ -27,6 +27,8 @@ import { home } from "@/content/home";
 import { readingTime } from "@/lib/utils";
 import type { WorkshopContent } from "@/content/workshop";
 import type { HomeContent } from "@/content/home";
+import { offers, offerPage, offerMailto } from "@/content/offers";
+import type { Offer, OfferSlug, OfferPageContent } from "@/content/offers";
 import type {
   Article,
   ComparisonRow,
@@ -282,6 +284,17 @@ const staticPages: SearchItem[] = [
     icon: "Presentation",
     keywords: ["workshop", "executive", "AI agents", "ورشة"],
   },
+  ...offers.map(
+    (o): SearchItem => ({
+      id: `page-${o.slug}`,
+      title: o.title,
+      description: o.summary,
+      href: `/${o.slug}`,
+      kind: "page",
+      icon: "Briefcase",
+      keywords: ["services", "offer", "automation", o.slug, "خدمات"],
+    }),
+  ),
   {
     id: "page-courses",
     title: "كل الكورسات",
@@ -407,4 +420,22 @@ export async function getWorkshopContent(): Promise<WorkshopContent> {
 
 export async function getHomeContent(): Promise<HomeContent> {
   return home;
+}
+
+/** كل العروض اللي ليها صفحة — بالترتيب بتاع السلّم */
+export async function getAllOffers(): Promise<Offer[]> {
+  return offers;
+}
+
+export async function getOfferBySlug(slug: OfferSlug): Promise<Offer | undefined> {
+  return offers.find((o) => o.slug === slug);
+}
+
+export async function getOfferPageContent(): Promise<OfferPageContent> {
+  return offerPage;
+}
+
+/** إيميل التواصل الخاص بالعرض — أسئلة الفرز بعنوان العرض */
+export function getOfferMailto(offer: Offer): string {
+  return offerMailto(offer);
 }

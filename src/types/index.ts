@@ -365,3 +365,20 @@ export interface PageChromeContent {
     links: readonly { label: string; href: string }[];
   };
 }
+
+export type { Offer, OfferSlug, OfferStep, OfferPageContent } from "@/content/offers";
+
+/** بلوك التواصل — مشترك بين الرئيسية وصفحات العروض */
+export interface ContactBlockContent {
+  id: string;
+  eyebrow: string;
+  title: string;
+  body: string;
+  checklistTitle: string;
+  checklist: readonly string[];
+  primaryCta: { label: string; href: string };
+  secondaryCta: { label: string; href: string };
+  email: string;
+  emailHref: string;
+  linkedIn: { label: string; href: string };
+}
