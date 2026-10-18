@@ -262,19 +262,42 @@ export function offerJsonLd(offer: Offer) {
   };
 }
 
-/** الـmetadata المشتركة لصفحات العروض */
-export function offerMetadata(offer: Offer): Metadata {
+/** الـmetadata المشتركة للصفحات الإنجليزية الفرعية (العروض والحالات) */
+export function subpageMetadata({
+  title,
+  description,
+  path,
+  keywords = [],
+  noIndex,
+}: {
+  title: string;
+  description: string;
+  path: string;
+  keywords?: string[];
+  noIndex?: boolean;
+}): Metadata {
   return buildMetadata({
-    title: offer.title,
-    description: offer.summary,
-    path: `/${offer.slug}`,
+    title,
+    description,
+    path,
+    noIndex,
     locale: "en_US",
     ogImage: HOME_OG_IMAGE,
     authorName: home.owner.name,
     siteName: home.owner.name,
     titleSuffix: home.owner.name,
     mergeSiteKeywords: false,
-    keywords: ["AI transformation", "process automation", "manufacturing", offer.title, "KSA", "GCC", "Egypt"],
+    keywords: ["AI transformation", "process automation", "manufacturing", ...keywords, "KSA", "GCC", "Egypt"],
+  });
+}
+
+/** الـmetadata المشتركة لصفحات العروض */
+export function offerMetadata(offer: Offer): Metadata {
+  return subpageMetadata({
+    title: offer.title,
+    description: offer.summary,
+    path: `/${offer.slug}`,
+    keywords: [offer.title],
   });
 }
 

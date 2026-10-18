@@ -27,7 +27,10 @@ import { home } from "@/content/home";
 import { readingTime } from "@/lib/utils";
 import type { WorkshopContent } from "@/content/workshop";
 import type { HomeContent } from "@/content/home";
+import type { PageChromeContent } from "@/types";
 import { offers, offerPage, offerMailto } from "@/content/offers";
+import { cases, casePage } from "@/content/cases";
+import type { CaseStudy, CasePageContent } from "@/content/cases";
 import type { Offer, OfferSlug, OfferPageContent } from "@/content/offers";
 import type {
   Article,
@@ -284,6 +287,15 @@ const staticPages: SearchItem[] = [
     icon: "Presentation",
     keywords: ["workshop", "executive", "AI agents", "ورشة"],
   },
+  {
+    id: "page-cases",
+    title: "Cases: measured the audit-ready way",
+    description: "Proof chain and case files: baseline, role, measured result, limits and evidence",
+    href: "/cases",
+    kind: "page",
+    icon: "FileCheck",
+    keywords: ["cases", "case study", "proof", "evidence", "حالات"],
+  },
   ...offers.map(
     (o): SearchItem => ({
       id: `page-${o.slug}`,
@@ -438,4 +450,39 @@ export async function getOfferPageContent(): Promise<OfferPageContent> {
 /** إيميل التواصل الخاص بالعرض — أسئلة الفرز بعنوان العرض */
 export function getOfferMailto(offer: Offer): string {
   return offerMailto(offer);
+}
+
+// ═══════════════════════════════════════════════════════════
+// دراسات الحالة — المنشور بس، إلا لو CASES_PREVIEW=1 للمراجعة المحلية
+// ═══════════════════════════════════════════════════════════
+
+function isCaseVisible(c: CaseStudy): boolean {
+  return c.status === "published" || process.env.CASES_PREVIEW === "1";
+}
+
+/** كل الحالات (منشورة ومسودّات) — لقايمة /cases اللي بتعرض حالة كل واحدة */
+export async function getAllCases(): Promise<CaseStudy[]> {
+  return cases;
+}
+
+/** الحالات اللي ليها صفحة — بتتولّد منها مسارات /cases/[slug] */
+export async function getPublishedCases(): Promise<CaseStudy[]> {
+  return cases.filter(isCaseVisible);
+}
+
+export async function getCaseBySlug(slug: string): Promise<CaseStudy | undefined> {
+  return cases.find((c) => c.slug === slug && isCaseVisible(c));
+}
+
+export async function getCasePageContent(): Promise<CasePageContent> {
+  return casePage;
+}
+
+/** هيدر وفوتر الصفحات الفرعية (الحالات وغيرها) — زرار التواصل بيودّي لتواصل الرئيسية */
+export async function getSubpageChrome(): Promise<PageChromeContent> {
+  return {
+    owner: offerPage.owner,
+    nav: { links: offerPage.nav.links, cta: { ...offerPage.nav.cta, href: "/#contact" } },
+    footer: offerPage.footer,
+  };
 }
