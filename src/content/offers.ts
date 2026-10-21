@@ -397,7 +397,7 @@ export const offerPage = {
       { label: "Cases", href: "/cases" },
       { label: "Services", href: "/#offers" },
       { label: "Method", href: "/#method" },
-      { label: "Experience", href: "/#experience" },
+      { label: "Experience", href: "/experience" },
       { label: "Workshop", href: "/workshop" },
       { label: "Academy", href: "/courses" },
     ],

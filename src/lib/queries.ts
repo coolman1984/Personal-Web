@@ -30,6 +30,8 @@ import type { HomeContent } from "@/content/home";
 import type { PageChromeContent } from "@/types";
 import { offers, offerPage, offerMailto } from "@/content/offers";
 import { cases, casePage } from "@/content/cases";
+import { experiencePage } from "@/content/experience";
+import type { ExperiencePageContent } from "@/content/experience";
 import type { CaseStudy, CasePageContent } from "@/content/cases";
 import type { Offer, OfferSlug, OfferPageContent } from "@/content/offers";
 import type {
@@ -288,6 +290,15 @@ const staticPages: SearchItem[] = [
     keywords: ["workshop", "executive", "AI agents", "ورشة"],
   },
   {
+    id: "page-experience",
+    title: "Experience and availability",
+    description: "For recruiters: current role, role directions, skills, public work and CV requests",
+    href: "/experience",
+    kind: "page",
+    icon: "BriefcaseBusiness",
+    keywords: ["experience", "CV", "resume", "hiring", "recruiter", "خبرة", "سيرة ذاتية"],
+  },
+  {
     id: "page-cases",
     title: "Cases: measured the audit-ready way",
     description: "Proof chain and case files: baseline, role, measured result, limits and evidence",
@@ -485,4 +496,9 @@ export async function getSubpageChrome(): Promise<PageChromeContent> {
     nav: { links: offerPage.nav.links, cta: { ...offerPage.nav.cta, href: "/#contact" } },
     footer: offerPage.footer,
   };
+}
+
+/** صفحة /experience — مسار التوظيف */
+export async function getExperiencePageContent(): Promise<ExperiencePageContent> {
+  return experiencePage;
 }
