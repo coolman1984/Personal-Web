@@ -11,7 +11,7 @@ cd demo/report-rebuild
 python -m pip install -r requirements.txt   # pandas, openpyxl
 python generate_demo_data.py                # writes ./data (already committed)
 python rebuild.py                           # writes ./out
-python -m unittest test_rebuild.py          # 4 checks that the story still holds
+python -m unittest test_rebuild.py          # 4 checks on the committed inputs
 ```
 
 To refresh the numbers shown on the website's `/demo` page:

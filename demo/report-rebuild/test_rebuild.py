@@ -14,7 +14,7 @@ HERE = Path(__file__).parent
 class RebuildTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        subprocess.run([sys.executable, "generate_demo_data.py"], cwd=HERE, check=True, capture_output=True)
+        # بيشتغل على ملفات data/ المتسجّلة زي ما هي، من غير ما يعيد توليدها فيتغيّر الـxlsx
         subprocess.run([sys.executable, "rebuild.py"], cwd=HERE, check=True, capture_output=True)
         cls.summary = json.loads((HERE / "out" / "summary.json").read_text(encoding="utf-8"))
 
