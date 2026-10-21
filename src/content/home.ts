@@ -348,8 +348,8 @@ export const home = {
         title: "Keynote & live demo",
         description:
           "\"From Scattered Files to Clear Decisions\": a 30–60 minute talk with a live report rebuild on demo data.",
-        href: "#contact",
-        hrefLabel: "Ask about a date",
+        href: "/demo",
+        hrefLabel: "See the demo",
       },
     ],
     startCta: { label: "Start with the free 90-minute scan", href: "#contact" },

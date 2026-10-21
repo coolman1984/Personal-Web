@@ -31,6 +31,8 @@ import type { PageChromeContent } from "@/types";
 import { offers, offerPage, offerMailto } from "@/content/offers";
 import { cases, casePage } from "@/content/cases";
 import { experiencePage } from "@/content/experience";
+import { reportRebuild } from "@/content/report-rebuild";
+import type { ReportRebuildContent } from "@/content/report-rebuild";
 import type { ExperiencePageContent } from "@/content/experience";
 import type { CaseStudy, CasePageContent } from "@/content/cases";
 import type { Offer, OfferSlug, OfferPageContent } from "@/content/offers";
@@ -290,6 +292,15 @@ const staticPages: SearchItem[] = [
     keywords: ["workshop", "executive", "AI agents", "ورشة"],
   },
   {
+    id: "page-demo",
+    title: "The 10-Minute Report Rebuild",
+    description: "Live demo on demo data: a messy plant report rebuilt as a checked Python and SQL pipeline",
+    href: "/demo",
+    kind: "page",
+    icon: "PlayCircle",
+    keywords: ["demo", "report", "automation", "python", "sql", "keynote", "عرض"],
+  },
+  {
     id: "page-experience",
     title: "Experience and availability",
     description: "For recruiters: current role, role directions, skills, public work and CV requests",
@@ -501,4 +512,9 @@ export async function getSubpageChrome(): Promise<PageChromeContent> {
 /** صفحة /experience — مسار التوظيف */
 export async function getExperiencePageContent(): Promise<ExperiencePageContent> {
   return experiencePage;
+}
+
+/** صفحة /demo — عرض «The 10-Minute Report Rebuild» على بيانات تجريبية */
+export async function getReportRebuildContent(): Promise<ReportRebuildContent> {
+  return reportRebuild;
 }

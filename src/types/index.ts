@@ -369,6 +369,7 @@ export interface PageChromeContent {
 export type { Offer, OfferSlug, OfferStep, OfferPageContent } from "@/content/offers";
 export type { CaseStudy, CaseStatus, CasePageContent } from "@/content/cases";
 export type { ExperiencePageContent } from "@/content/experience";
+export type { ReportRebuildContent } from "@/content/report-rebuild";
 
 /** بلوك التواصل — مشترك بين الرئيسية وصفحات العروض */
 export interface ContactBlockContent {
