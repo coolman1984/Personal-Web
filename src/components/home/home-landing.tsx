@@ -6,6 +6,7 @@ import type { HomeContent } from "@/types";
 import { WorkshopNav } from "@/components/workshop/workshop-nav";
 import { WorkshopFooter } from "@/components/workshop/workshop-footer";
 import { HomeHero } from "./home-hero";
+import { HomeFlagship } from "./home-flagship";
 import { HomeCredentials } from "./home-credentials";
 import { HomeProblems } from "./home-problems";
 import { HomeCases } from "./home-cases";
@@ -26,6 +27,7 @@ export function HomeLanding({ content, className }: HomeLandingProps) {
       <WorkshopNav content={content} />
       <main>
         <HomeHero hero={content.hero} />
+        <HomeFlagship />
         <HomeCredentials credentials={content.credentials} />
         <HomeProblems problems={content.problems} />
         <HomeCases cases={content.cases} />
