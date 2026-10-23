@@ -1,0 +1,104 @@
+{
+  "dataLabel": "Demo data: two fictional plants, July to September 2026",
+  "inputs": {
+    "files": 4,
+    "rows": 487
+  },
+  "pipelineMs": 317.0,
+  "steps": [
+    {
+      "step": "Ingest",
+      "detail": "4 files, 487 rows, 4 different layouts",
+      "ms": 214.0
+    },
+    {
+      "step": "Clean",
+      "detail": "474 daily rows on one schema; 1 duplicate and 1 TOTAL row removed",
+      "ms": 18.4
+    },
+    {
+      "step": "Reconcile",
+      "detail": "Detail exceeds the export's TOTAL row by 1,522 good and 164 scrap units; fully explained by the duplicated day.",
+      "ms": 2.0
+    },
+    {
+      "step": "Load",
+      "detail": "SQLite database with 3 tables",
+      "ms": 18.2
+    },
+    {
+      "step": "Report",
+      "detail": "18 line-month rows from one SQL query",
+      "ms": 3.3
+    },
+    {
+      "step": "Check",
+      "detail": "4 of 5 checks passed, 3 findings",
+      "ms": 4.7
+    },
+    {
+      "step": "Review",
+      "detail": "review packet and Excel report written",
+      "ms": 56.1
+    }
+  ],
+  "checks": [
+    {
+      "check": "Plant B control total",
+      "passed": true,
+      "detail": "Detail exceeds the export's TOTAL row by 1,522 good and 164 scrap units; fully explained by the duplicated day."
+    },
+    {
+      "check": "Output equals input",
+      "passed": true,
+      "detail": "1,031,039 good and 19,315 scrap units in both the cleaned input and the report."
+    },
+    {
+      "check": "Every line has a scrap cost",
+      "passed": true,
+      "detail": "All lines costed."
+    },
+    {
+      "check": "Every line has a cost centre",
+      "passed": false,
+      "detail": "B-PACK is missing from the cost-centre map."
+    },
+    {
+      "check": "Scrap-rate outliers",
+      "passed": true,
+      "detail": "1 line-month(s) flagged for review."
+    }
+  ],
+  "findings": [
+    "Removed 1 manual TOTAL row and 1 duplicated day from the plant B export.",
+    "B-PACK has no cost centre. Its scrap cost is reported but cannot be charged to a department.",
+    "B-ASSY in 2026-08: scrap rate 5.7%, more than 1.5x the line's other months."
+  ],
+  "byMonth": [
+    {
+      "month": "2026-07",
+      "goodUnits": 335295,
+      "scrapUnits": 5855,
+      "scrapCost": 5486540.5
+    },
+    {
+      "month": "2026-08",
+      "goodUnits": 355812,
+      "scrapUnits": 7384,
+      "scrapCost": 6599462.75
+    },
+    {
+      "month": "2026-09",
+      "goodUnits": 339932,
+      "scrapUnits": 6076,
+      "scrapCost": 5765519.5
+    }
+  ],
+  "flagged": [
+    {
+      "line": "B-ASSY",
+      "month": "2026-08",
+      "scrapRate": 0.0567
+    }
+  ]
+}
