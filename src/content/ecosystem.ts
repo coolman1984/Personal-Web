@@ -26,6 +26,16 @@ export interface EcosystemSystem {
   inside: readonly string[];
   link: { label: string; href: string };
   image?: { src: string; alt: string; width: number; height: number };
+  /** لقطة تانية للبرامج اللي فيها 3D جنب الـ2D */
+  view3d?: { src: string; alt: string; width: number; height: number };
+}
+
+export interface EcosystemShot {
+  label: string;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
 }
 
 export const ecosystem = {
@@ -34,7 +44,7 @@ export const ecosystem = {
     badge: "Simulated and demo data",
     title: "One connected path from learning AI to running a company on it",
     intro:
-      "Built while leading AI transformation inside a global manufacturer: a company suite for accounts, production and people, a live twin of a whole plant with nine AI agents, an academy for every team, a planner for the floor, an AI agent team, and a film and web studio. Each piece works on its own; together they take a company from first prompt to an automated operation.",
+      "Built while leading AI transformation inside a global manufacturer: a live twin of a whole plant with nine AI agents, a company suite for accounts, production and people, an academy for every team, a planner for the floor, an AI agent team, and a film and web studio. Each piece works on its own; together they take a company from first prompt to an automated operation.",
     primaryCta: walkthrough,
     secondaryCta: { label: "Open the live plant", href: digitalFactory.href },
   },
@@ -46,6 +56,62 @@ export const ecosystem = {
     { label: "Work orders in the 3-month demo", value: "515" },
     { label: "Languages, side by side", value: "2" },
   ],
+
+  flagship: {
+    id: "digital-factory",
+    eyebrow: "The flagship",
+    badge: "Live · simulated plant",
+    title: "Digital Factory: a whole TV plant, live, in 3D and on the boards",
+    intro:
+      "The largest thing I have built. One model of a whole plant runs every second: six main assembly lines and every line that feeds them, the stores, the vehicles and the people. Managers see it in 3D or on command-room boards; nine AI agents simulate each option on the plant before they recommend one, and a person approves.",
+    points: [
+      { title: "See the whole plant", body: "Walk it, fly through it, or present it shot by shot to a customer." },
+      { title: "Decide before the line stops", body: "Agents rank each option by its value in money and show what they simulated." },
+      { title: "One truth from floor to office", body: "SAP and GMES layers, S&OP, MRP, quality, maintenance and energy on the same model." },
+      { title: "Nothing changes silently", body: "Every decision is audited and the time machine replays any moment." },
+    ],
+    hero: {
+      label: "3D · the whole plant",
+      src: "/ecosystem/df-3d-plant.webp",
+      alt: "Digital Factory in 3D: the whole plant from above, six main assembly lines with their feeding lines, stores and offices, in presentation mode",
+      width: 1600,
+      height: 670,
+    } satisfies EcosystemShot,
+    pair: [
+      {
+        label: "2D · the command room",
+        src: "/ecosystem/df-2d-command-room.webp",
+        alt: "Digital Factory command room: plant OEE, units packed, chance to hit plan, first-pass yield, alarms and the live plant mimic of all lines",
+        width: 1280,
+        height: 720,
+      },
+      {
+        label: "3D and 2D together · a decision waiting",
+        src: "/ecosystem/digital-factory.webp",
+        alt: "Digital Factory live plant: stoppages marked on the 3D floor, shift figures across the top and an AI agent's recommended decision on the side",
+        width: 1280,
+        height: 720,
+      },
+    ] satisfies EcosystemShot[],
+    closeups: [
+      {
+        label: "3D · SMD and main boards",
+        src: "/ecosystem/df-3d-smd.webp",
+        alt: "Digital Factory 3D close-up: the SMD hall with printers, mounters and operators at the lines",
+        width: 1280,
+        height: 536,
+      },
+      {
+        label: "3D · robot cells",
+        src: "/ecosystem/df-3d-robots.webp",
+        alt: "Digital Factory 3D close-up: a six-axis robot behind welded-mesh guarding with its station screen",
+        width: 1280,
+        height: 536,
+      },
+    ] satisfies EcosystemShot[],
+    primary: { label: "Open the live plant", href: digitalFactory.href },
+    secondary: walkthrough,
+  },
 
   path: {
     eyebrow: "How it fits together",
@@ -82,6 +148,8 @@ export const ecosystem = {
       "Staffing gap to HR",
     ],
     insideLabel: "Inside",
+    planLabel: "2D · a production line",
+    view3dLabel: "3D · a container load",
     items: [
       {
         id: "mizan",
@@ -146,31 +214,21 @@ export const ecosystem = {
           width: 1280,
           height: 775,
         },
+        view3d: {
+          src: "/ecosystem/planner-3d.webp",
+          alt: "Space Planner 3D view of a 40-foot container loaded with TV and soundbar cartons, with volume, payload and floor use",
+          width: 1280,
+          height: 775,
+        },
       },
     ] satisfies EcosystemSystem[],
   },
 
   systems: {
-    eyebrow: "Run, teach, build and show",
-    title: "Five more systems you can open, not slides about them",
+    eyebrow: "Teach, automate, build and show",
+    title: "Four more systems you can open, not slides about them",
     insideLabel: "Inside",
     items: [
-      {
-        id: "digital-factory",
-        layer: "Run",
-        name: "Digital Factory",
-        status: "Live",
-        oneLine: "A live twin of a whole TV plant, with SAP, GMES and nine AI agents.",
-        body: "Six main assembly lines and every line feeding them, in 3D and on command-room boards. The agents simulate each option on a model of the plant before they recommend one, and a person approves. Every change is audited and can be replayed.",
-        inside: ["3D plant", "Command room", "SAP and data flow", "GMES boards", "S&OP and MRP", "9 AI agents", "Customer show"],
-        link: { label: "Open the live plant", href: digitalFactory.href },
-        image: {
-          src: "/ecosystem/digital-factory.webp",
-          alt: "Digital Factory live plant in 3D with stoppage markers, shift figures across the top and an AI agent's recommended decision on the side",
-          width: 1280,
-          height: 720,
-        },
-      },
       {
         id: "academy",
         layer: "Learn",

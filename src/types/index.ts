@@ -370,7 +370,7 @@ export type { Offer, OfferSlug, OfferStep, OfferPageContent } from "@/content/of
 export type { CaseStudy, CaseStatus, CasePageContent } from "@/content/cases";
 export type { ExperiencePageContent } from "@/content/experience";
 export type { ReportRebuildContent } from "@/content/report-rebuild";
-export type { EcosystemContent, EcosystemSystem } from "@/content/ecosystem";
+export type { EcosystemContent, EcosystemShot, EcosystemSystem } from "@/content/ecosystem";
 
 /** بلوك التواصل — مشترك بين الرئيسية وصفحات العروض */
 export interface ContactBlockContent {

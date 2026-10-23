@@ -23,7 +23,7 @@ export const metadata: Metadata = buildMetadata({
     "AI workshop",
     "executive training",
     "agent team",
-    "Samsung",
+    "electronics manufacturing",
     "manufacturing finance",
     "KSA",
     "Egypt",

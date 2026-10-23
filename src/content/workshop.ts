@@ -107,7 +107,7 @@ export const workshop = {
         number: "04",
         time: "12:30 – 13:30",
         title: "Lunch",
-        detail: "Informal Q&A on Samsung-scale ops and manufacturing finance realities.",
+        detail: "Informal Q&A on global-manufacturer-scale ops and manufacturing finance realities.",
       },
       {
         number: "05",
@@ -147,7 +147,7 @@ export const workshop = {
     headline:
       "AI & Business Transformation Leader | Enterprise Automation | AI Trainer & Lecturer | Finance | Manufacturing | SAP",
     intro:
-      "Mohamed leads AI automation and business transformation initiatives within Samsung Electronics Egypt, connecting AI, automation, finance, manufacturing, supply chain and SAP. He helps organisations turn AI experimentation into measurable business impact: less manual work, better decisions, greater accuracy and measurable value.",
+      "Mohamed leads AI automation and business transformation initiatives within a global electronics manufacturer in Egypt, connecting AI, automation, finance, manufacturing, supply chain and SAP. He helps organisations turn AI experimentation into measurable business impact: less manual work, better decisions, greater accuracy and measurable value.",
     credentials: [
       {
         title: "14+ years in multinational manufacturing",

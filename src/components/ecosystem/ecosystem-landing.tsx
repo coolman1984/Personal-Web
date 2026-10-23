@@ -1,12 +1,12 @@
 /**
- * صفحة /ecosystem — «المنظومة»: الطريق (تعلّم ← خطّط ← أتمت ← شغّل الشركة ← شغّل المصنع ← ابنِ ← اعرض)،
+ * صفحة /ecosystem — «المنظومة»: المصنع الرقمي أولًا (3D جنب 2D)، الطريق (تعلّم ← خطّط ← أتمت ← شغّل الشركة ← شغّل المصنع ← ابنِ ← اعرض)،
  * باقة الشركة (أربع برامج بلقطات حقيقية)، كروت الأنظمة الخمسة التانية،
  * جدول الإدارات، وملاحظة الأمانة. المحتوى في src/content/ecosystem.ts، والشكل على نمط صفحة /demo.
  */
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { EcosystemContent, PageChromeContent } from "@/types";
+import type { EcosystemContent, EcosystemShot, PageChromeContent } from "@/types";
 import { Eyebrow } from "@/components/workshop/eyebrow";
 import { WordReveal } from "@/components/workshop/motion/word-reveal";
 import { ScrollReveal } from "@/components/workshop/motion/scroll-reveal";
@@ -28,7 +28,7 @@ const linkClass =
   "inline-flex items-center gap-1 text-sm font-medium text-fg underline-offset-4 transition-colors duration-200 hover:text-primary hover:underline";
 
 export function EcosystemLanding({ content, chrome, className }: EcosystemLandingProps) {
-  const { hero, path, suite, systems, departments, honesty, next } = content;
+  const { hero, flagship, path, suite, systems, departments, honesty, next } = content;
 
   return (
     <div className={cn("workshop-root min-h-screen bg-background text-fg", className)}>
@@ -80,8 +80,55 @@ export function EcosystemLanding({ content, chrome, className }: EcosystemLandin
           </ScrollReveal>
         </div>
 
+        {/* المصنع الرقمي أولًا: أكبر شغل، 3D جنب 2D */}
+        <WorkshopSection id={flagship.id} className="scroll-mt-24">
+          <div className="flex flex-wrap items-center gap-4">
+            <Eyebrow>{flagship.eyebrow}</Eyebrow>
+            <span className="border border-primary px-2 py-0.5 font-mono text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-primary">
+              {flagship.badge}
+            </span>
+          </div>
+          <WordReveal as="h2" text={flagship.title} className="display-md mt-6 max-w-4xl" />
+          <ScrollReveal className="mt-6 max-w-3xl">
+            <p className="text-lg text-fg-muted">{flagship.intro}</p>
+          </ScrollReveal>
+          <ScrollReveal className="mt-12">
+            <Shot shot={flagship.hero} sizes="(min-width: 1280px) 1200px, 100vw" priority />
+          </ScrollReveal>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            {flagship.pair.map((shot, index) => (
+              <ScrollReveal key={shot.src} delayMs={index * 60}>
+                <Shot shot={shot} sizes="(min-width: 768px) 50vw, 100vw" />
+              </ScrollReveal>
+            ))}
+          </div>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            {flagship.closeups.map((shot, index) => (
+              <ScrollReveal key={shot.src} delayMs={index * 60}>
+                <Shot shot={shot} sizes="(min-width: 768px) 50vw, 100vw" />
+              </ScrollReveal>
+            ))}
+          </div>
+          <dl className="mt-14 grid border-t border-border sm:grid-cols-2 lg:grid-cols-4">
+            {flagship.points.map((point) => (
+              <div key={point.title} className="border-b border-border py-6 sm:pe-6">
+                <dt className="font-display text-lg font-medium text-fg">{point.title}</dt>
+                <dd className="mt-2 text-sm leading-relaxed text-fg-muted">{point.body}</dd>
+              </div>
+            ))}
+          </dl>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <WorkshopButton href={flagship.primary.href} variant="primary">
+              {flagship.primary.label}
+            </WorkshopButton>
+            <WorkshopButton href={flagship.secondary.href} variant="secondary">
+              {flagship.secondary.label}
+            </WorkshopButton>
+          </div>
+        </WorkshopSection>
+
         {/* الطريق */}
-        <WorkshopSection>
+        <WorkshopSection className="border-t border-border">
           <Eyebrow>{path.eyebrow}</Eyebrow>
           <WordReveal as="h2" text={path.title} className="display-md mt-6 max-w-4xl" />
           <ScrollReveal className="mt-6 max-w-3xl">
@@ -148,14 +195,21 @@ export function EcosystemLanding({ content, chrome, className }: EcosystemLandin
               >
                 {item.image && (
                   <ScrollReveal className={cn("min-w-0", index % 2 === 1 && "lg:order-2")}>
-                    <Image
-                      src={item.image.src}
-                      alt={item.image.alt}
-                      width={item.image.width}
-                      height={item.image.height}
-                      sizes="(min-width: 1024px) 58vw, 100vw"
-                      className="w-full border border-border"
-                    />
+                    {"view3d" in item && item.view3d ? (
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <Shot shot={{ ...item.image, label: suite.planLabel }} sizes="(min-width: 1024px) 29vw, (min-width: 640px) 50vw, 100vw" />
+                        <Shot shot={{ ...item.view3d, label: suite.view3dLabel }} sizes="(min-width: 1024px) 29vw, (min-width: 640px) 50vw, 100vw" />
+                      </div>
+                    ) : (
+                      <Image
+                        src={item.image.src}
+                        alt={item.image.alt}
+                        width={item.image.width}
+                        height={item.image.height}
+                        sizes="(min-width: 1024px) 58vw, 100vw"
+                        className="w-full border border-border"
+                      />
+                    )}
                   </ScrollReveal>
                 )}
                 <ScrollReveal className={cn("min-w-0", index % 2 === 1 && "lg:order-1")} delayMs={60}>
@@ -294,5 +348,25 @@ export function EcosystemLanding({ content, chrome, className }: EcosystemLandin
       </main>
       <WorkshopFooter content={chrome} />
     </div>
+  );
+}
+
+/** لقطة شاشة بعنوان صغير تحتها (3D أو 2D) */
+function Shot({ shot, sizes, priority }: { shot: EcosystemShot; sizes: string; priority?: boolean }) {
+  return (
+    <figure className="min-w-0">
+      <Image
+        src={shot.src}
+        alt={shot.alt}
+        width={shot.width}
+        height={shot.height}
+        sizes={sizes}
+        priority={priority}
+        className="w-full border border-border"
+      />
+      <figcaption className="mt-2 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-fg-muted">
+        {shot.label}
+      </figcaption>
+    </figure>
   );
 }

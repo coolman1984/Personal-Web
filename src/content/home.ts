@@ -408,7 +408,7 @@ export const home = {
         label: "Now",
         title: "AI automation & business transformation",
         description:
-          "Leading AI automation and business transformation initiatives within Samsung Electronics Egypt, building Python + SQL pipelines on SAP data and AI-agent workflows.",
+          "Leading AI automation and business transformation initiatives within a global electronics manufacturer in Egypt, building Python + SQL pipelines on SAP data and AI-agent workflows.",
       },
       {
         label: "14+ years",
