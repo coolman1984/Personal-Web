@@ -33,6 +33,8 @@ import { cases, casePage } from "@/content/cases";
 import { experiencePage } from "@/content/experience";
 import { reportRebuild } from "@/content/report-rebuild";
 import type { ReportRebuildContent } from "@/content/report-rebuild";
+import { ecosystem } from "@/content/ecosystem";
+import type { EcosystemContent } from "@/content/ecosystem";
 import type { ExperiencePageContent } from "@/content/experience";
 import type { CaseStudy, CasePageContent } from "@/content/cases";
 import type { Offer, OfferSlug, OfferPageContent } from "@/content/offers";
@@ -292,6 +294,15 @@ const staticPages: SearchItem[] = [
     keywords: ["workshop", "executive", "AI agents", "ورشة"],
   },
   {
+    id: "page-ecosystem",
+    title: "The AI transformation ecosystem",
+    description: "Six connected systems: plant twin with SAP and GMES, academy, planner, automation, agent team, studio",
+    href: "/ecosystem",
+    kind: "page",
+    icon: "Network",
+    keywords: ["ecosystem", "systems", "portfolio", "digital factory", "SAP", "GMES", "منظومة", "أنظمة"],
+  },
+  {
     id: "page-demo",
     title: "The 10-Minute Report Rebuild",
     description: "Live demo on demo data: a messy plant report rebuilt as a checked Python and SQL pipeline",
@@ -517,4 +528,9 @@ export async function getExperiencePageContent(): Promise<ExperiencePageContent>
 /** صفحة /demo — عرض «The 10-Minute Report Rebuild» على بيانات تجريبية */
 export async function getReportRebuildContent(): Promise<ReportRebuildContent> {
   return reportRebuild;
+}
+
+/** صفحة /ecosystem — «المنظومة»: كل الأنظمة على طريق واحد */
+export async function getEcosystemContent(): Promise<EcosystemContent> {
+  return ecosystem;
 }

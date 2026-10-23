@@ -394,6 +394,7 @@ export const offerPage = {
   nav: {
     links: [
       { label: "Problems", href: "/#problems" },
+      { label: "Ecosystem", href: "/ecosystem" },
       { label: "Cases", href: "/cases" },
       { label: "Services", href: "/#offers" },
       { label: "Method", href: "/#method" },
