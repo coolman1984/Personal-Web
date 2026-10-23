@@ -296,11 +296,11 @@ const staticPages: SearchItem[] = [
   {
     id: "page-ecosystem",
     title: "The AI transformation ecosystem",
-    description: "Six connected systems: plant twin with SAP and GMES, academy, planner, automation, agent team, studio",
+    description: "Nine connected systems: accounting, MES, HR, space planning, plant twin, academy, automation, agents, studio",
     href: "/ecosystem",
     kind: "page",
     icon: "Network",
-    keywords: ["ecosystem", "systems", "portfolio", "digital factory", "SAP", "GMES", "منظومة", "أنظمة"],
+    keywords: ["ecosystem", "systems", "portfolio", "digital factory", "accounting", "Mizan", "Itqan", "HR", "MES", "منظومة", "أنظمة"],
   },
   {
     id: "page-demo",

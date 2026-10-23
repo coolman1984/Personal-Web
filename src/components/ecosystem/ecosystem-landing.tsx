@@ -1,7 +1,9 @@
 /**
- * صفحة /ecosystem — «المنظومة»: الطريق (تعلّم ← خطّط ← أتمت ← شغّل ← ابنِ ← اعرض)، كروت الأنظمة الستة،
+ * صفحة /ecosystem — «المنظومة»: الطريق (تعلّم ← خطّط ← أتمت ← شغّل الشركة ← شغّل المصنع ← ابنِ ← اعرض)،
+ * باقة الشركة (أربع برامج بلقطات حقيقية)، كروت الأنظمة الخمسة التانية،
  * جدول الإدارات، وملاحظة الأمانة. المحتوى في src/content/ecosystem.ts، والشكل على نمط صفحة /demo.
  */
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { EcosystemContent, PageChromeContent } from "@/types";
@@ -26,7 +28,7 @@ const linkClass =
   "inline-flex items-center gap-1 text-sm font-medium text-fg underline-offset-4 transition-colors duration-200 hover:text-primary hover:underline";
 
 export function EcosystemLanding({ content, chrome, className }: EcosystemLandingProps) {
-  const { hero, path, systems, departments, honesty, next } = content;
+  const { hero, path, suite, systems, departments, honesty, next } = content;
 
   return (
     <div className={cn("workshop-root min-h-screen bg-background text-fg", className)}>
@@ -108,6 +110,77 @@ export function EcosystemLanding({ content, chrome, className }: EcosystemLandin
           </ol>
         </WorkshopSection>
 
+        {/* باقة الشركة: أربع برامج، صورة كبيرة لكل واحد */}
+        <WorkshopSection id={suite.id} className="scroll-mt-24 border-t border-border">
+          <Eyebrow>{suite.eyebrow}</Eyebrow>
+          <WordReveal as="h2" text={suite.title} className="display-md mt-6 max-w-4xl" />
+          <ScrollReveal className="mt-6 max-w-3xl">
+            <p className="text-lg text-fg-muted">{suite.intro}</p>
+          </ScrollReveal>
+          <ScrollReveal className="mt-10">
+            <p className="font-mono text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-fg-muted">
+              {suite.chainLabel}
+            </p>
+            <ol className="mt-4 flex flex-wrap gap-x-2 gap-y-2 text-sm text-fg">
+              {suite.chain.map((link, index) => (
+                <li key={link} className="flex items-center gap-2">
+                  <span className="border border-border bg-secondary px-2.5 py-1">{link}</span>
+                  {index < suite.chain.length - 1 && (
+                    <span aria-hidden className="text-fg-muted rtl:rotate-180">
+                      →
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </ScrollReveal>
+          <div className="mt-16 space-y-20 md:space-y-28">
+            {suite.items.map((item, index) => (
+              <article
+                key={item.id}
+                id={item.id}
+                className={cn(
+                  "grid scroll-mt-24 items-center gap-8 lg:gap-14",
+                  index % 2 === 0
+                    ? "lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]"
+                    : "lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)]",
+                )}
+              >
+                {item.image && (
+                  <ScrollReveal className={cn("min-w-0", index % 2 === 1 && "lg:order-2")}>
+                    <Image
+                      src={item.image.src}
+                      alt={item.image.alt}
+                      width={item.image.width}
+                      height={item.image.height}
+                      sizes="(min-width: 1024px) 58vw, 100vw"
+                      className="w-full border border-border"
+                    />
+                  </ScrollReveal>
+                )}
+                <ScrollReveal className={cn("min-w-0", index % 2 === 1 && "lg:order-1")} delayMs={60}>
+                  <p className="font-mono text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-fg-muted">
+                    {item.layer} · {item.status}
+                  </p>
+                  <h3 className="mt-3 font-display text-2xl font-medium tracking-tight text-fg md:text-3xl">{item.name}</h3>
+                  <p className="mt-3 text-lg font-medium leading-relaxed text-fg">{item.oneLine}</p>
+                  <p className="mt-3 text-base leading-relaxed text-fg-muted">{item.body}</p>
+                  <p className="mt-5 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-fg-muted">
+                    {suite.insideLabel}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-fg">{item.inside.join(", ")}</p>
+                  <div className="mt-6">
+                    <a href={item.link.href} className={linkClass}>
+                      {item.link.label}
+                      <ArrowUpRight className="size-3.5" aria-hidden />
+                    </a>
+                  </div>
+                </ScrollReveal>
+              </article>
+            ))}
+          </div>
+        </WorkshopSection>
+
         {/* الأنظمة */}
         <WorkshopSection id="systems" className="border-t border-border bg-secondary/30">
           <Eyebrow>{systems.eyebrow}</Eyebrow>
@@ -119,6 +192,16 @@ export function EcosystemLanding({ content, chrome, className }: EcosystemLandin
                   <article className="relative flex h-full flex-col bg-background p-7">
                     {item.status === "Live" && (
                       <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-primary" aria-hidden />
+                    )}
+                    {"image" in item && item.image && (
+                      <Image
+                        src={item.image.src}
+                        alt={item.image.alt}
+                        width={item.image.width}
+                        height={item.image.height}
+                        sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw"
+                        className="mb-6 aspect-[16/10] w-full border border-border object-cover object-left-top"
+                      />
                     )}
                     <p className="font-mono text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-fg-muted">
                       {item.layer} · {item.status}

@@ -10,9 +10,9 @@ import { JsonLd } from "@/components/shared/json-ld";
 export const metadata: Metadata = subpageMetadata({
   title: "The AI transformation ecosystem",
   description:
-    "Six connected systems from learning AI to running a plant on it: a live plant twin with SAP, GMES and AI agents, an academy, a space planner, report automation, an AI agent team and a film and web studio.",
+    "Nine connected systems from learning AI to running a company on it: accounting, manufacturing execution, HR and space planning that work as one company, a live plant twin with AI agents, an academy, report automation, an AI agent team and a film and web studio.",
   path: "/ecosystem",
-  keywords: ["AI transformation", "digital twin", "SAP", "GMES", "AI agents", "academy", "automation"],
+  keywords: ["AI transformation", "digital twin", "accounting", "MES", "HR", "AI agents", "academy", "automation"],
 });
 
 export default async function EcosystemPage() {

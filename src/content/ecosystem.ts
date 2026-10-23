@@ -1,7 +1,9 @@
 /**
  * صفحة /ecosystem — «المنظومة»: كل الأنظمة اللي بنيتها على طريق واحد، من التعلّم للتشغيل للعرض.
  * القاعدة: المكان اسمه «مصنع عالمي»، من غير اسم الشركة. كل البيانات المعروضة تجريبية أو محاكاة.
- * الروابط اللي مش منشورة لسه بتقول «Walk-through on request» لحد ما يبقى ليها رابط عام.
+ * الصور في public/ecosystem/ لقطات حقيقية من البرامج على شركاتها التجريبية (2026-10-23).
+ * الأرقام: «515 أمر شغل» من عرض الشركة الكاملة لتلات شهور (complete-company/README.md).
+ * الأنظمة اللي مالهاش رابط عام بتقول «Book a walk-through» لحد ما يبقى ليها رابط.
  */
 import { publicContact } from "@/lib/public-contact";
 import { digitalFactory } from "./digital-factory";
@@ -10,7 +12,9 @@ const walkthroughMailto = `${publicContact.mailto}?subject=${encodeURIComponent(
   "Walk-through: the AI transformation ecosystem",
 )}`;
 
-export type EcosystemStatus = "Live" | "Desktop app" | "On request";
+const walkthrough = { label: "Book a walk-through", href: walkthroughMailto };
+
+export type EcosystemStatus = "Live" | "Installable" | "On request";
 
 export interface EcosystemSystem {
   id: string;
@@ -21,45 +25,134 @@ export interface EcosystemSystem {
   body: string;
   inside: readonly string[];
   link: { label: string; href: string };
+  image?: { src: string; alt: string; width: number; height: number };
 }
 
 export const ecosystem = {
   hero: {
     eyebrow: "The ecosystem",
     badge: "Simulated and demo data",
-    title: "One connected path from learning AI to running a plant on it",
+    title: "One connected path from learning AI to running a company on it",
     intro:
-      "Built while leading AI transformation inside a global manufacturer: a plant twin with its SAP, GMES and department layers, an academy for every team, a planner for the floor, an AI agent team, a film and web studio, and live demos. Each piece works on its own; together they take a company from first prompt to an automated operation.",
-    primaryCta: { label: "Book a walk-through", href: walkthroughMailto },
+      "Built while leading AI transformation inside a global manufacturer: a company suite for accounts, production and people, a live twin of a whole plant with nine AI agents, an academy for every team, a planner for the floor, an AI agent team, and a film and web studio. Each piece works on its own; together they take a company from first prompt to an automated operation.",
+    primaryCta: walkthrough,
     secondaryCta: { label: "Open the live plant", href: digitalFactory.href },
   },
 
   factsLabel: "The ecosystem in numbers",
   facts: [
-    { label: "Connected systems", value: "6" },
-    { label: "Main lines in the plant twin", value: "6" },
-    { label: "AI agents running the plant", value: "9" },
+    { label: "Connected systems", value: "9" },
+    { label: "Apps that run as one company", value: "4" },
+    { label: "Work orders in the 3-month demo", value: "515" },
     { label: "Languages, side by side", value: "2" },
   ],
 
   path: {
     eyebrow: "How it fits together",
-    title: "Learn, plan, automate, run, show",
+    title: "Learn, plan, automate, operate, run, build, show",
     intro:
       "Most AI programmes stall between a training day and a working system. Here every step has a working tool, and each one hands over to the next.",
     steps: [
-      { step: "Learn", detail: "Every department learns AI on its own work, in Arabic and English.", system: "Academy", target: "academy" },
-      { step: "Plan", detail: "Lay out the floor, the store or the hall with real measures before spending money.", system: "Space Planner", target: "space-planner" },
+      { step: "Learn", detail: "Every department learns AI on its own work, in Arabic and English.", system: "AI Academy", target: "academy" },
+      { step: "Plan", detail: "Lay out the line, the store or the hall with real measures before spending money.", system: "Space Planner", target: "space-planner" },
       { step: "Automate", detail: "Rebuild the recurring reports and workflows as checked pipelines.", system: "Report rebuild", target: "report-rebuild" },
-      { step: "Run", detail: "Operate the plant with SAP, GMES and nine AI agents that simulate before they recommend.", system: "Digital Factory", target: "digital-factory" },
+      { step: "Operate", detail: "Run the company: accounts, purchasing, stock, production, quality and people.", system: "Company suite", target: "suite" },
+      { step: "Run", detail: "See the whole plant live; AI agents simulate each option before they recommend one.", system: "Digital Factory", target: "digital-factory" },
       { step: "Build", detail: "A team of AI agents, led by one, builds and maintains every system.", system: "AI agent team", target: "agent-team" },
       { step: "Show", detail: "Films, sites and presentations that explain the change to people and customers.", system: "Studio", target: "studio" },
     ],
   },
 
+  suite: {
+    id: "suite",
+    eyebrow: "The company suite",
+    title: "Four applications that run a factory, alone or together",
+    intro:
+      "Accounting, manufacturing execution, people and space planning. Each one owns its own data and runs on the factory's own network, without the internet. Connected, they pass every fact to the one that owns it, so one sales order flows all the way to cash and payroll.",
+    chainLabel: "One order, end to end, in the connected demo",
+    chain: [
+      "Sales and operations plan",
+      "Sales order",
+      "Planning",
+      "Purchasing",
+      "Receiving and inspection",
+      "Production",
+      "Packing and dispatch",
+      "Invoice and payment",
+      "Staffing gap to HR",
+    ],
+    insideLabel: "Inside",
+    items: [
+      {
+        id: "mizan",
+        layer: "Accounts and supply",
+        name: "Mizan",
+        status: "Installable",
+        oneLine: "Double-entry accounting with purchasing, stock, costing and planning.",
+        body: "The company's books and its supply side in one place: general ledger and statements, sales and purchasing, warehouses and stock value, production orders with their real cost, fixed assets, cheques, budgets and a monthly sales and operations plan. Payroll totals arrive from HR and are booked here.",
+        inside: ["General ledger", "Sales and purchasing", "Stock and costing", "Production cost", "S&OP", "Fixed assets", "Arabic and English"],
+        link: walkthrough,
+        image: {
+          src: "/ecosystem/mizan.webp",
+          alt: "Mizan dashboard for a demo electronics factory: cash, receivables, payables, profit and a twelve-month revenue and expense chart",
+          width: 1280,
+          height: 613,
+        },
+      },
+      {
+        id: "itqan",
+        layer: "Manufacturing execution",
+        name: "Itqan",
+        status: "Installable",
+        oneLine: "The factory floor as it happens: work orders, quality, OEE and shipping.",
+        body: "Every movement on the floor is a fact in a ledger that is never rewritten: a part entering a station, leaving it, scrap, a hold, a release. Office screens, an operator station and a line board for the big screen show the same truth, and finished goods reach accounting on their own.",
+        inside: ["Work orders", "Operator station", "Line boards", "Quality and holds", "OEE", "Traceability", "Packing and shipping"],
+        link: walkthrough,
+        image: {
+          src: "/ecosystem/itqan.webp",
+          alt: "Itqan plant overview: good output, OEE, scrap rate, lines running and the status of nine production lines with their work orders",
+          width: 1280,
+          height: 666,
+        },
+      },
+      {
+        id: "hr-system",
+        layer: "People",
+        name: "HR-System",
+        status: "Installable",
+        oneLine: "The one source of truth for people, from hiring to pay.",
+        body: "Employees and the organisation, shifts and schedules, attendance, leave, overtime, training that qualifies, recruitment and payroll with four-eyes approval. Manufacturing tells HR the crew it needs; only pay totals leave HR for the books. Installs on Windows in one file.",
+        inside: ["Employees and structure", "Shifts and attendance", "Leave and overtime", "Training and skills", "Payroll", "Audit and backups"],
+        link: walkthrough,
+        image: {
+          src: "/ecosystem/hr.webp",
+          alt: "HR-System home for a demo company: employees, people on leave, departments, positions filled and people by department",
+          width: 1280,
+          height: 560,
+        },
+      },
+      {
+        id: "space-planner",
+        layer: "Space",
+        name: "Space Planner",
+        status: "Installable",
+        oneLine: "Know whether it fits and works before you spend money.",
+        body: "Lay out a production line, a warehouse, an office or a hall with real dimensions. It measures flow length, checks aisles and exits, counts pallet places and containers from a production plan, routes forklifts, and an AI planner can design the layout while you watch.",
+        inside: ["Production lines", "Warehouses and racks", "Containers from the plan", "Forklift routes", "Client report", "AI planner"],
+        link: walkthrough,
+        image: {
+          src: "/ecosystem/planner.webp",
+          alt: "Space Planner plan of a final assembly hall: two mirrored lines of 36 stations with their material flow, flow length and a passed review",
+          width: 1280,
+          height: 775,
+        },
+      },
+    ] satisfies EcosystemSystem[],
+  },
+
   systems: {
-    eyebrow: "The systems",
-    title: "Six systems you can open, not slides about them",
+    eyebrow: "Run, teach, build and show",
+    title: "Five more systems you can open, not slides about them",
     insideLabel: "Inside",
     items: [
       {
@@ -69,17 +162,14 @@ export const ecosystem = {
         status: "Live",
         oneLine: "A live twin of a whole TV plant, with SAP, GMES and nine AI agents.",
         body: "Six main assembly lines and every line feeding them, in 3D and on command-room boards. The agents simulate each option on a model of the plant before they recommend one, and a person approves. Every change is audited and can be replayed.",
-        inside: [
-          "Command room",
-          "SAP and data flow",
-          "GMES boards",
-          "S&OP and MRP",
-          "Quality, maintenance, energy",
-          "Skills matrix",
-          "9 AI agents",
-          "Customer show",
-        ],
+        inside: ["3D plant", "Command room", "SAP and data flow", "GMES boards", "S&OP and MRP", "9 AI agents", "Customer show"],
         link: { label: "Open the live plant", href: digitalFactory.href },
+        image: {
+          src: "/ecosystem/digital-factory.webp",
+          alt: "Digital Factory live plant in 3D with stoppage markers, shift figures across the top and an AI agent's recommended decision on the side",
+          width: 1280,
+          height: 720,
+        },
       },
       {
         id: "academy",
@@ -90,16 +180,12 @@ export const ecosystem = {
         body: "A full course in Arabic and English that runs offline from one file: story decks, hands-on labs, a quiz and Excel projects from a factory's production and purchasing files, one per lesson.",
         inside: ["8 units", "Story decks", "Excel projects", "Prompt library", "Presenter mode", "Works offline"],
         link: { label: "Open the academy", href: "https://coolman1984.github.io/Course/" },
-      },
-      {
-        id: "space-planner",
-        layer: "Plan",
-        name: "Space Planner",
-        status: "Desktop app",
-        oneLine: "Know whether it fits and works before you spend money.",
-        body: "Lay out a warehouse, a production line, an office or a hall with real dimensions. It checks aisles, exits and clearances, counts storage places and containers from a production plan, routes forklifts, and an AI agent can design the layout while you watch.",
-        inside: ["Warehouse and racks", "Production line", "Containers from the plan", "Forklift routes", "Client report", "AI designer"],
-        link: { label: "Book a walk-through", href: walkthroughMailto },
+        image: {
+          src: "/ecosystem/academy.webp",
+          alt: "AI Academy home page in Arabic with the course units, a lesson list and an Excel automation example",
+          width: 1280,
+          height: 800,
+        },
       },
       {
         id: "report-rebuild",
@@ -119,7 +205,7 @@ export const ecosystem = {
         oneLine: "One lead agent directing the others on one workstation.",
         body: "A working setup where a lead coding agent hands tasks to other AI agents from different providers, checks their work and keeps them running in the background. It is how every system on this page is built and kept up to date.",
         inside: ["Lead agent", "Several providers", "Task hand-off", "Review before merge"],
-        link: { label: "Book a walk-through", href: walkthroughMailto },
+        link: walkthrough,
       },
       {
         id: "studio",
@@ -129,7 +215,7 @@ export const ecosystem = {
         oneLine: "Product films, explainers and websites, made in code.",
         body: "A studio where films and sites are written as code: Arabic captions, narration, licensed sound and a quality check before every delivery. It turns a transformation into something people understand and customers remember.",
         inside: ["Product films", "Explainer videos", "Websites", "Arabic captions", "Narration"],
-        link: { label: "Book a walk-through", href: walkthroughMailto },
+        link: walkthrough,
       },
     ] satisfies EcosystemSystem[],
   },
@@ -142,12 +228,12 @@ export const ecosystem = {
     learnLabel: "Learns",
     toolLabel: "Works with",
     rows: [
-      { department: "Finance and FP&A", learn: "Report automation, checks before numbers go up", tool: "Report rebuild, SAP layer" },
-      { department: "Manufacturing", learn: "Reading the line, losses and decisions", tool: "Digital Factory: GMES, OEE, agents" },
-      { department: "Supply chain and logistics", learn: "Plans, materials orders, stock", tool: "S&OP and MRP, Space Planner" },
-      { department: "Quality", learn: "Defects, root cause, 8D", tool: "Digital Factory: SPC, NCR and 8D" },
-      { department: "Maintenance", learn: "Predicting failures before the line stops", tool: "Digital Factory: work orders, risk" },
-      { department: "HR and training", learn: "Skills, training paths, AI at work", tool: "Academy, skills matrix" },
+      { department: "Finance and FP&A", learn: "Report automation, checks before numbers go up", tool: "Mizan, report rebuild" },
+      { department: "Manufacturing", learn: "Reading the line, losses and decisions", tool: "Itqan, Digital Factory" },
+      { department: "Supply chain and logistics", learn: "Plans, materials orders, stock", tool: "Mizan S&OP and purchasing, Space Planner" },
+      { department: "Quality", learn: "Defects, holds, root cause", tool: "Itqan quality, Digital Factory" },
+      { department: "Maintenance", learn: "Predicting failures before the line stops", tool: "Digital Factory" },
+      { department: "HR and training", learn: "Shifts, skills, pay, AI at work", tool: "HR-System, AI Academy" },
       { department: "Marketing and leadership", learn: "Explaining the change and its value", tool: "Studio, live plant show" },
     ],
   },
@@ -155,16 +241,16 @@ export const ecosystem = {
   honesty: {
     title: "What you are looking at",
     items: [
-      "Everything shown runs on simulated or demo data. No employer or client data appears anywhere.",
-      "The plant is fictional. It is modelled on how a large electronics plant works, not copied from one.",
-      "Live means you can open it now. Desktop app and On request mean a guided walk-through.",
+      "Every screen shows simulated or demo data for invented companies. No employer or client data appears anywhere.",
+      "The plants are fictional. They are modelled on how a large electronics plant works, not copied from one.",
+      "Live means you can open it now. Installable means it runs on your own network; On request means a guided walk-through.",
     ],
   },
 
   next: {
     title: "See it on your own operation",
-    body: "A walk-through takes an hour: the live plant, one department's path, and where a first pilot would pay back for you.",
-    primary: { label: "Book a walk-through", href: walkthroughMailto },
+    body: "A walk-through takes an hour: the company suite, the live plant, one department's path, and where a first pilot would pay back for you.",
+    primary: walkthrough,
     secondary: { label: "See the services", href: "/#offers" },
   },
 };
