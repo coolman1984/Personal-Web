@@ -58,8 +58,8 @@ export const experiencePage = {
   history: {
     eyebrow: "Experience",
     title: "One employer, two roles",
-    // 👈 غيّر ده — لو عايز تخفي اسم الشركة اكتب "Multinational electronics manufacturer, Egypt plant"
-    employer: "Samsung Electronics Egypt",
+    // قرار صاحب الموقع (2026-10-23): من غير اسم الشركة في أي مكان
+    employer: "A global electronics manufacturer, Egypt",
     employerPeriod: "Dec 2012 – present",
     roles: [
       {
