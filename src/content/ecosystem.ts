@@ -72,14 +72,8 @@ export const ecosystem = {
       { title: "One truth from floor to office", body: "SAP and GMES layers, S&OP, MRP, quality, maintenance and energy on the same model." },
       { title: "Nothing changes silently", body: "Every decision is audited and the time machine replays any moment." },
     ],
-    hero: {
-      label: "3D · the whole plant",
-      href: digitalFactory.href,
-      src: "/ecosystem/df-3d-plant.webp",
-      alt: "Digital Factory in 3D: the whole plant from above, six main assembly lines with their feeding lines, stores and offices, in presentation mode",
-      width: 1600,
-      height: 670,
-    } satisfies EcosystemShot,
+    /** المصنع الحي نفسه بدل الصورة الثابتة */
+    live: digitalFactory.live,
     pair: [
       {
         label: "2D · the command room",

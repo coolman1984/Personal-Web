@@ -22,6 +22,23 @@ export const digitalFactory = {
   href: "https://coolman1984.github.io/Digital-Factory/plant.html",
   /** غرفة التحكم 2D */
   commandRoomHref: "https://coolman1984.github.io/Digital-Factory/app.html",
+  /** المصنع الحي جوه الصفحة: وضع embed وبيبدأ بالعرض (#present رابط موجود في plant.html) */
+  live: {
+    src: "https://coolman1984.github.io/Digital-Factory/plant.html?embed=1#present",
+    openHref: "https://coolman1984.github.io/Digital-Factory/plant.html",
+    title: "Digital Factory: the live 3D plant, presenting itself",
+    poster: {
+      src: "/ecosystem/df-3d-plant.webp",
+      alt: "Digital Factory in 3D: the whole plant from above, six main assembly lines with their feeding lines, stores and offices",
+      width: 1600,
+      height: 670,
+    },
+    startLabel: "Explore the live plant",
+    loadingLabel: "Loading the plant…",
+    fullscreenLabel: "Full screen",
+    openLabel: "Open the full plant",
+    note: "Live 3D · runs in your browser · all data simulated",
+  },
   image: {
     src: "/ecosystem/df-3d-plant.webp",
     alt: "Digital Factory in 3D: the whole plant from above, six main assembly lines with their feeding lines, stores and offices",

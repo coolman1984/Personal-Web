@@ -14,6 +14,7 @@ import { WorkshopSection } from "@/components/workshop/workshop-section";
 import { WorkshopButton } from "@/components/workshop/workshop-button";
 import { WorkshopNav } from "@/components/workshop/workshop-nav";
 import { WorkshopFooter } from "@/components/workshop/workshop-footer";
+import { LivePlant } from "@/components/shared/live-plant";
 
 interface EcosystemLandingProps {
   content: EcosystemContent;
@@ -92,9 +93,7 @@ export function EcosystemLanding({ content, chrome, className }: EcosystemLandin
           <ScrollReveal className="mt-6 max-w-3xl">
             <p className="text-lg text-fg-muted">{flagship.intro}</p>
           </ScrollReveal>
-          <ScrollReveal className="mt-12">
-            <Shot shot={flagship.hero} sizes="(min-width: 1280px) 1200px, 100vw" priority />
-          </ScrollReveal>
+          <LivePlant content={flagship.live} className="mt-12" />
           <div className="mt-6 grid gap-6 md:grid-cols-2">
             {flagship.pair.map((shot, index) => (
               <ScrollReveal key={shot.src} delayMs={index * 60}>
@@ -352,7 +351,7 @@ export function EcosystemLanding({ content, chrome, className }: EcosystemLandin
 }
 
 /** لقطة شاشة بعنوان صغير تحتها (3D أو 2D) */
-function Shot({ shot, sizes, priority }: { shot: EcosystemShot; sizes: string; priority?: boolean }) {
+function Shot({ shot, sizes }: { shot: EcosystemShot; sizes: string }) {
   const image = (
     <Image
       src={shot.src}
@@ -360,7 +359,6 @@ function Shot({ shot, sizes, priority }: { shot: EcosystemShot; sizes: string; p
       width={shot.width}
       height={shot.height}
       sizes={sizes}
-      priority={priority}
       className="w-full border border-border transition-[filter] duration-200 group-hover:brightness-[1.04]"
     />
   );
