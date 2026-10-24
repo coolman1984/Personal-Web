@@ -120,6 +120,7 @@ export const experiencePage = {
     allLabel: "All twelve systems",
     allHref: "/#work",
     codeLabel: "Code",
+    liveLabel: "Live demo",
     count: 6,
   },
 

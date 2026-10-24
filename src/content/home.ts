@@ -143,7 +143,7 @@ export const home = {
           "An interactive Arabic/English course on AI at work, in a single HTML file that runs offline with no server, linked to its reference book.",
         evidence: "Published online — open it now",
         tech: ["HTML", "JavaScript"],
-        repoHref: "https://github.com/coolman1984/Course",
+        // مستودع الأكاديمية خاص، فمفيش رابط كود (كان بيدّي «الصفحة مش موجودة»)
         liveHref: "https://coolman1984.github.io/Course/",
       },
       {

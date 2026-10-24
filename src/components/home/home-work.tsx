@@ -73,10 +73,12 @@ export function HomeWork({ work, className }: HomeWorkProps) {
                 <p className="mt-4 border-s-2 border-primary ps-3 text-sm text-fg">{item.evidence}</p>
                 <p className="mt-4 font-mono text-xs text-fg-muted">{item.tech.join(" · ")}</p>
                 <div className="mt-auto flex flex-wrap gap-x-5 gap-y-2 pt-6">
-                  <a href={item.repoHref} target="_blank" rel="noopener noreferrer" className={linkClass}>
-                    {work.codeLabel}
-                    <ArrowUpRight className="size-3.5" aria-hidden />
-                  </a>
+                  {"repoHref" in item && item.repoHref && (
+                    <a href={item.repoHref} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                      {work.codeLabel}
+                      <ArrowUpRight className="size-3.5" aria-hidden />
+                    </a>
+                  )}
                   {"liveHref" in item && item.liveHref && (
                     <a href={item.liveHref} target="_blank" rel="noopener noreferrer" className={linkClass}>
                       {work.liveLabel}

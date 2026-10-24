@@ -3,7 +3,7 @@
  * القاعدة: المكان اسمه «مصنع عالمي»، من غير اسم الشركة. كل البيانات المعروضة تجريبية أو محاكاة.
  * الصور في public/ecosystem/ لقطات حقيقية من البرامج على شركاتها التجريبية (2026-10-23).
  * الأرقام: «515 أمر شغل» من عرض الشركة الكاملة لتلات شهور (complete-company/README.md).
- * الأنظمة اللي مالهاش رابط عام بتقول «Book a walk-through» لحد ما يبقى ليها رابط.
+ * الأنظمة اللي مالهاش رابط عام بتقول «Ask for a demo by email» (بيفتح الإيميل) لحد ما يبقى ليها رابط.
  */
 import { publicContact } from "@/lib/public-contact";
 import { digitalFactory } from "./digital-factory";
@@ -12,7 +12,7 @@ const walkthroughMailto = `${publicContact.mailto}?subject=${encodeURIComponent(
   "Walk-through: the AI transformation ecosystem",
 )}`;
 
-const walkthrough = { label: "Book a walk-through", href: walkthroughMailto };
+const walkthrough = { label: "Ask for a demo by email", href: walkthroughMailto };
 
 export type EcosystemStatus = "Live" | "Installable" | "On request";
 
@@ -32,6 +32,8 @@ export interface EcosystemSystem {
 
 export interface EcosystemShot {
   label: string;
+  /** لو موجود، الصورة بتفتح الصفحة دي */
+  href?: string;
   src: string;
   alt: string;
   width: number;
@@ -46,7 +48,7 @@ export const ecosystem = {
     intro:
       "Built while leading AI transformation inside a global manufacturer: a live twin of a whole plant with nine AI agents, a company suite for accounts, production and people, an academy for every team, a planner for the floor, an AI agent team, and a film and web studio. Each piece works on its own; together they take a company from first prompt to an automated operation.",
     primaryCta: walkthrough,
-    secondaryCta: { label: "Open the live plant", href: digitalFactory.href },
+    secondaryCta: { label: "Open the 3D plant", href: digitalFactory.href },
   },
 
   factsLabel: "The ecosystem in numbers",
@@ -72,6 +74,7 @@ export const ecosystem = {
     ],
     hero: {
       label: "3D · the whole plant",
+      href: digitalFactory.href,
       src: "/ecosystem/df-3d-plant.webp",
       alt: "Digital Factory in 3D: the whole plant from above, six main assembly lines with their feeding lines, stores and offices, in presentation mode",
       width: 1600,
@@ -80,6 +83,7 @@ export const ecosystem = {
     pair: [
       {
         label: "2D · the command room",
+        href: digitalFactory.commandRoomHref,
         src: "/ecosystem/df-2d-command-room.webp",
         alt: "Digital Factory command room: plant OEE, units packed, chance to hit plan, first-pass yield, alarms and the live plant mimic of all lines",
         width: 1280,
@@ -87,6 +91,7 @@ export const ecosystem = {
       },
       {
         label: "3D and 2D together · a decision waiting",
+        href: digitalFactory.href,
         src: "/ecosystem/digital-factory.webp",
         alt: "Digital Factory live plant: stoppages marked on the 3D floor, shift figures across the top and an AI agent's recommended decision on the side",
         width: 1280,
@@ -96,6 +101,7 @@ export const ecosystem = {
     closeups: [
       {
         label: "3D · SMD and main boards",
+        href: digitalFactory.href,
         src: "/ecosystem/df-3d-smd.webp",
         alt: "Digital Factory 3D close-up: the SMD hall with printers, mounters and operators at the lines",
         width: 1280,
@@ -103,14 +109,15 @@ export const ecosystem = {
       },
       {
         label: "3D · robot cells",
+        href: digitalFactory.href,
         src: "/ecosystem/df-3d-robots.webp",
         alt: "Digital Factory 3D close-up: a six-axis robot behind welded-mesh guarding with its station screen",
         width: 1280,
         height: 536,
       },
     ] satisfies EcosystemShot[],
-    primary: { label: "Open the live plant", href: digitalFactory.href },
-    secondary: walkthrough,
+    primary: { label: "Open the 3D plant", href: digitalFactory.href },
+    secondary: { label: "Open the command room", href: digitalFactory.commandRoomHref },
   },
 
   path: {
@@ -301,7 +308,7 @@ export const ecosystem = {
     items: [
       "Every screen shows simulated or demo data for invented companies. No employer or client data appears anywhere.",
       "The plants are fictional. They are modelled on how a large electronics plant works, not copied from one.",
-      "Live means you can open it now. Installable means it runs on your own network; On request means a guided walk-through.",
+      "Live means you can open it now. Installable means it runs on your own network; On request means a live demo, booked by email.",
     ],
   },
 

@@ -164,13 +164,14 @@ export function ExperienceLanding({ content, chrome, projects, className }: Expe
                     <h3 className="mt-3 font-display text-lg font-medium tracking-tight text-fg">{project.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-fg-muted">{project.summary}</p>
                     <p className="mt-4 border-s-2 border-primary ps-3 text-sm text-fg">{project.evidence}</p>
+                    {/* مستودع خاص (زي الأكاديمية) → رابط النسخة الحية بدل الكود */}
                     <a
-                      href={project.repoHref}
+                      href={"repoHref" in project && project.repoHref ? project.repoHref : project.liveHref}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={cn(linkClass, "mt-auto pt-6")}
                     >
-                      {content.projects.codeLabel}
+                      {"repoHref" in project && project.repoHref ? content.projects.codeLabel : content.projects.liveLabel}
                       <ArrowUpRight className="size-3.5" aria-hidden />
                     </a>
                   </article>
