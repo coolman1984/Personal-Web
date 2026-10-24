@@ -353,17 +353,26 @@ export function EcosystemLanding({ content, chrome, className }: EcosystemLandin
 
 /** لقطة شاشة بعنوان صغير تحتها (3D أو 2D) */
 function Shot({ shot, sizes, priority }: { shot: EcosystemShot; sizes: string; priority?: boolean }) {
+  const image = (
+    <Image
+      src={shot.src}
+      alt={shot.alt}
+      width={shot.width}
+      height={shot.height}
+      sizes={sizes}
+      priority={priority}
+      className="w-full border border-border transition-[filter] duration-200 group-hover:brightness-[1.04]"
+    />
+  );
   return (
     <figure className="min-w-0">
-      <Image
-        src={shot.src}
-        alt={shot.alt}
-        width={shot.width}
-        height={shot.height}
-        sizes={sizes}
-        priority={priority}
-        className="w-full border border-border"
-      />
+      {shot.href ? (
+        <a href={shot.href} className="group block focus-visible:ring-2 focus-visible:ring-primary">
+          {image}
+        </a>
+      ) : (
+        image
+      )}
       <figcaption className="mt-2 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-fg-muted">
         {shot.label}
       </figcaption>
